@@ -1,0 +1,123 @@
+\documentclass[11pt]{amsart}
+
+
+\usepackage[ibidtracker=false,uniquename=false,giveninits=true,terseinits=true,backend=biber]{biblatex}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{todonotes}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage[foot]{amsaddr}
+\usepackage[misc]{ifsym}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+
+\renewbibmacro{in:}{}
+\addbibresource{rnni_geometry.bib}
+\AtEveryBibitem{
+  \clearlist{language}
+}
+
+\setlist{leftmargin = 0pt}
+\geometry{margin=1in}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{problem}{Problem}
+\newtheorem{conjecture}{Conjecture}
+
+\newcommand{\rnni}{\mathrm{RNNI}}
+\newcommand{\findpath}{\textsc{FindPath}}
+\newcommand{\mrca}{\mathrm{mrca}}
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\nni}{\mathrm{NNI}}
+\newcommand{\spr}{\mathrm{SPR}}
+\newcommand{\tbr}{\mathrm{TBR}}
+\newcommand{\fp}{\mathrm{FP}}
+\newcommand{\np}{\mathbf{NP}}
+\newcommand{\decprob}[1]{\rnni(#1)\text{-}\mathrm{SP}}
+\renewcommand{\O}{\mathcal O}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\thesubfigure}{\Alph{subfigure}}
+
+\newcommand{\summary}[1]{\textbf{#1}} % Print summaries to .pdf
+% \newcommand{\summary}[1]{} % Hide summaries in .pdf
+
+\graphicspath{{figures/}}
+
+\sloppy
+
+
+\title[Geometry of ranked tree spaces]{The Geometry of the Ranked Nearest Neighbour Interchange Space}
+\date{\today}
+\author{Lena Collienne}
+\email{lcollienne@cs.otago.ac.nz}
+\address{Department of Computer Science, University of Otago, New Zealand}
+\author{Alex Gavryushkin\textsuperscript{\Letter}}
+\email{\textsuperscript{\Letter}alex@biods.org}
+\thanks{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\end{abstract}
+
+\section{Introduction}
+
+\summary{Motivation -- ranked trees and tree rearrangements.}
+
+\summary{More motivation, sepcifically for $\rnni$ and $\rho$.}
+
+\summary{Why we want to investigate geometrical properties of $\rnni(\rho)$ for different $\rho$ and that we want to compare properties in spaces for different $\rho$.}
+
+\summary{Structure of the paper.}
+
+\section{Technical Introduction}
+
+\summary{Defining the basics of ranked trees.}
+
+\summary{Briefly introduce $\findpath$ and that it computes $\rnni$ distances.}
+
+\section{Diameter and Radius}
+
+\summary{Diameter in $\rnni$ follows from results in previous paper.}
+
+\summary{Diameter of $\rnni(\rho)$ for other values of $\rho$.}
+
+\summary{Radius of $\rnni$ is equal to it's diameter.}
+
+\summary{Radius of $\rnni(\rho)$ for other values of $\rho$.}
+
+\section{Cluster Property}
+
+\summary{Why the Cluster Property is relevant.}
+
+\summary{$\rnni$ has the cluster property.}
+
+\summary{$\rnni(\rho)$ for $\rho < 1$ do not have cluster property.}
+
+\summary{$\rnni(\rho)$ for $\rho > 1$ do have cluster property.}
+
+\section{Caterpillar Trees}
+
+\summary{The set of caterpillar trees is convex in $\rnni$.}
+
+\summary{The set of caterpillar trees is not convex in $\rnni(\rho)$ for $\rho = 0$}
+
+\summary{Caterpillar trees for $\rho \neq 0,1$?}
+
+
+\section{Generalisation to discrete time-trees}
+
+\summary{All (?) results from $\rnni$ transfer to discrete time-trees.}
+
+\end{document}
