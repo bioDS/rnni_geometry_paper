@@ -90,8 +90,10 @@
 
 Things we need to define:
 \begin{itemize}
-	\item with $\rnni$ we mean $\rnni(1)$.
+	\item with $\rnni$ we mean $\rnni(1)$ -- do we want to use this everywhere?
 	\item $d(T,R)$ is the weight of a shortest path
+	\item $\rnni(\infty)$
+	\item rank interval for Lemma~\ref{lemma:nni_path_to_caterpillar}
 \end{itemize}
 
 \summary{Introduce $\findpath$ and that it computes $\rnni$ distances.}
@@ -108,7 +110,8 @@ Since the $\rnni$ graph, where rank moves have weight one, is the only one for w
 \summary{Diameter in $\rnni$ follows from results in previous paper.}
 The algorithm $\findpath$ of \autocite{collienne2020computing}, which computes distances in $\rnni$, facilitates finding the diameter of the $\rnni$ graph. 
 \begin{corollary}
-	The diameter of the $\rnni$ graph is $\frac{(n-1)(n-2)}{2}$.
+	The diameter of $\rnni$ is $\frac{(n-1)(n-2)}{2}$.
+	\label{cor:diameter_rnni}
 \end{corollary}
 
 \begin{proof}
@@ -117,16 +120,56 @@ The algorithm $\findpath$ of \autocite{collienne2020computing}, which computes d
 	\todo{Explain that this cannot happen by explicitely mention how often while and for loop are executed -- do we want to repeat the pseudo-code in this paper?}
 \end{proof}
 
+From Corollary~\ref{cor:diameter_rnni} it follows that the diameter of any other $\rnni(\rho)$ with $\rho < 1$ is less or equal to $\frac{(n-1)(n-2)}{2}$.
+For $\rho = 0$, however, we can follow the exact diameter from the one of $\nni$.
 As rank moves in $\rnni(0)$ weigh zero, the distance between two trees in this space is the same as the $\nni$ distance between these trees when ignoring ranks.
 Therefore, these graphs have the same diameter.
 
-\summary{Diameter of $\rnni(\rho)$ for other values of $\rho$.}
 \begin{proposition}
 	The diameter of $\rnni(0)$ is $\Theta(n \log(n))$.
 \end{proposition}
 
 \begin{proof}
- This follows from the diameter of the $\nni$ graph, which is known \autocite{Semple2003-nj} to be $\Theta(n \log(n))$.
+	This follows from the diameter of the $\nni$ graph, which is known \autocite{Semple2003-nj} to be $\Theta(n \log(n))$.
+\end{proof}
+
+\summary{Diameter of $\rnni(\rho)$ for $\rho > 1$.}
+So far we considered the diameter of $\rnni(\rho)$ for $0 < \rho < 1$.
+We now consider $\rho > 1$, meaning that rank moves are more expensive than $\nni$ moves.
+Specifically, we give an upper bound for the diameter of $\rnni(\infty)$ from which we can follow that all spaces $\rnni(\rho)$ have a diameter less or equal to this bound.
+The first important observation for $\rnni(\infty)$ is that for any pair of trees there always is a path connecting them that consists of $\nni$ moves only.
+
+\begin{lemma}
+	Every pair tree is connected to a caterpillar tree by a path in $\rnni$ that consists of $\nni$ moves only.
+	\label{lemma:nni_path_to_caterpillar}
+\end{lemma}
+
+\begin{proof}
+	We prove this lemma for a given tree $T$ by induction on the number $k$ of rank intervals of $T$.
+	In the base case $k = 0$ the tree $T$ is a caterpillar tree and the statement is true.
+	For the induction step we assume that $T$ has $i+1$ rank intervals and all trees with less than $i+1$ rank intervals are connected to a caterpillar trees through a sequence of $\nni$ moves.
+	We now construct a series of $\nni$ moves that, starting at $T$, result in a tree that has $i$ rank intervals.
+	Consider the rank interval $[(T)_k, (T)_{k +1}]$ of $T$ such that $k+1$ is the highest rank of a node incident to a rank interval.
+	It follows that all intervals above $(T)_{k+1}$ are edges.
+	Let $(T)_l$ be the parent of $(T)_k$.
+	Hence $l > k+1$, and $[(T)_{l-1}, (T)_{l}]$ is an edge.
+	On this edge an $\nni$ move can be performed which results in a tree $T'$ in which the rank of the parent of $(T')_k$ is $l-1$.
+	By iteratively repeating this until $l = k+1$, in the resulting tree $R$ the parent of $(R)_k$ has rank $k+1$, and hence the rank interval bounded by nodes of rank $k$ and $k+1$ turned into an edge while all intervals above $k+1$ remain edges.
+	As $R$ has less than $i+1$ rank interval, the induction hypothesis can be applied and we can conclude that there is a sequence from $T$ to a caterpillar that consists of $\nni$ moves only.
+	\begin{figure}
+		\includegraphics[width=0.8\textwidth]{nni_path_caterpillar.eps}
+		\caption{Example of a tree $T$ with two rank intervals and a sequence of $\nni$ moves that results in a tree $R$ with one rank interval as described in the proof of Lemma~\ref{lemma:nni_path_to_caterpillar}.}
+	\end{figure}
+\end{proof}
+
+With this lemma we are able to prove that the diameter of $\rnni(\infty)$ is quadratic in $n$.
+\begin{corollary}
+	The diameter of $\rnni(\infty)$ is less or equal to $3 \frac{(n-1)(n-2)}{2}$.
+\end{corollary}
+
+\begin{proof}
+	Let $T$ and $R$ be two trees in $\rnni(\infty)$.
+	\todo{How do we get from an arbitrary tree to a caterpillar tree in $\Delta(\rnni)$ moves?}
 \end{proof}
 
 \summary{Radius of $\rnni$ is equal to its diameter.}
