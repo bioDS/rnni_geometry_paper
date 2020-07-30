@@ -100,13 +100,13 @@ Things we need to define:
 \section{Diameter and Radius}
 
 \summary{Definition of Diameter and that we consider it depending on $\rho$.}
-The first geometrical property of the tree graphs $\rnni(\rho)$ that we want to investigate is their diameter.
-The diameter of a graph is the greatest distance between any pair of vertices in the graph, i.e. for our graph $\rnni(\rho)$ it is $\max\limits_{\text{trees }T,R}d(T,R)$.
-As it is natural to assume, we can prove that the diameter of $\rnni(\rho)$ depends on the value of $\rho$.
-Since the $\rnni$ graph, where rank moves have weight one, is the only one for which a polynomial time algorithm for computing distances is known, we start considering the diameter for this graph before turning to $\rnni(\rho)$ for different values of $\rho$.
+The first geometrical property of the graphs $\rnni(\rho)$ that we want to investigate is the diameter, which is the greatest distance between any pair of vertices in a graph.
+For our graph $\rnni(\rho)$ the diameter is formally defined as $\max\limits_{\text{trees }T,R}d(T,R)$.
+We will show that the diameter of $\rnni(\rho)$ depends on $\rho$.
+Since the $\rnni$ graph, where rank moves have weight one, is the only one for which a polynomial time algorithm for computing distances is known, we start considering the diameter of this graph before turning to $\rnni(\rho)$ for different values of $\rho$.
 
 \summary{Diameter in $\rnni$ follows from results in previous paper.}
-The algorithm $\findpath$ of \autocite{collienne2020computing} facilitates finding the diameter of the $\rnni$ graph. 
+The algorithm $\findpath$ of \autocite{collienne2020computing}, which computes distances in $\rnni$, facilitates finding the diameter of the $\rnni$ graph. 
 \begin{corollary}
 	The diameter of the $\rnni$ graph is $\frac{(n-1)(n-2)}{2}$.
 \end{corollary}
@@ -114,11 +114,11 @@ The algorithm $\findpath$ of \autocite{collienne2020computing} facilitates findi
 \begin{proof}
 	The the proof of Corollary 1 in \autocite{collienne2020computing} gives an example of trees for which the length of the path computed by $\findpath$ is $\frac{(n-1)(n-2)}{2}$.
 	For proving this corollary it remains to show that $\findpath$ cannot compute paths longer than $\frac{(n-1)(n-2)}{2}$.
-	\todo{Explain that this cannot happen by explicitely mentin how often while and for loop are executed}
+	\todo{Explain that this cannot happen by explicitely mention how often while and for loop are executed -- do we want to repeat the pseudo-code in this paper?}
 \end{proof}
 
-As rank moves in $\rnni(0)$ weigh zero, the distance between two trees in this space is the same as the $\nni$ distance between their unranked versions.
-Therefore, the diameters of these two tree spaces coincide as well.
+As rank moves in $\rnni(0)$ weigh zero, the distance between two trees in this space is the same as the $\nni$ distance between these trees when ignoring ranks.
+Therefore, these graphs have the same diameter.
 
 \summary{Diameter of $\rnni(\rho)$ for other values of $\rho$.}
 \begin{proposition}
