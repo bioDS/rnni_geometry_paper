@@ -102,8 +102,7 @@ Things we need to define:
 \section{Diameter and Radius}
 
 \summary{Definition of Diameter and that we consider it depending on $\rho$.}
-The first geometrical property of the graphs $\rnni(\rho)$ that we want to investigate is the diameter, which is the greatest distance between any pair of vertices in a graph.
-For our graph $\rnni(\rho)$ the diameter is formally defined as $\max\limits_{\text{trees }T,R}d(T,R)$.
+In this section we want to investigate the diameter of $\rnni(\rho)$, which is the greatest distance between any pair of vertices (trees) in this graph, i.e. $\max\limits_{\text{trees }T,R}d(T,R)$.
 We will show that the diameter of $\rnni(\rho)$ depends on $\rho$.
 Since the $\rnni$ graph, where rank moves have weight one, is the only one for which a polynomial time algorithm for computing distances is known, we start considering the diameter of this graph before turning to $\rnni(\rho)$ for different values of $\rho$.
 
@@ -148,7 +147,7 @@ The first important observation for $\rnni(\infty)$ is that for any pair of tree
 	We prove this lemma for a given tree $T$ by induction on the number $k$ of rank intervals of $T$.
 	In the base case $k = 0$ the tree $T$ is a caterpillar tree and the statement is true.
 	For the induction step we assume that $T$ has $i+1$ rank intervals and all trees with less than $i+1$ rank intervals are connected to a caterpillar trees through a sequence of $\nni$ moves.
-	We now construct a series of $\nni$ moves that, starting at $T$, result in a tree that has $i$ rank intervals.
+	We now construct a series of $\nni$ moves that, starting at $T$, results in a tree that has $i$ rank intervals.
 	Consider the rank interval $[(T)_k, (T)_{k +1}]$ of $T$ such that $k+1$ is the highest rank of a node incident to a rank interval.
 	It follows that all intervals above $(T)_{k+1}$ are edges.
 	Let $(T)_l$ be the parent of $(T)_k$.
@@ -172,7 +171,7 @@ With this lemma we are able to prove that the diameter of $\rnni(\infty)$ is qua
 	With Lemma~\ref{lemma:nni_path_to_caterpillar} we know that any tree can be connected to a caterpillar tree by a sequence of $\nni$ moves.
 	Moreover, the proof of the lemma implicitly proposes an algorithm to convert a tree into a caterpillar tree by removing rank intervals by a top-down approach.
 	We show that the paths from a tree to a caterpillar tree that are given by this algorithm have at most length $\frac{(n-1)(n-1)}{2}$.
-	Since we also know that the set of caterpillar trees is convex in $\rnni$ \todo{reference}, and hence the maximum distance between caterpillar trees is bounded by the diameter $\frac{(n-1)(n-2)}{2}$ of $\rnni$ (Corollary~\ref{cor:diameter_rnni}), this corollary follows.
+	Since we also know that the set of caterpillar trees is convex in $\rnni$ \todo{reference -- maybe we should have the caterpillar section before this one?}, and hence the maximum distance between caterpillar trees is bounded by the diameter $\frac{(n-1)(n-2)}{2}$ of $\rnni$ (Corollary~\ref{cor:diameter_rnni}), this corollary follows.
 
 	For finding the maximum length of a path computed by the algorithm suggested in the proof of Lemma~\ref{lemma:nni_path_to_caterpillar}, we consider every iteration (induction step).
 	In each of these, at least one rank interval turns into an edge.
