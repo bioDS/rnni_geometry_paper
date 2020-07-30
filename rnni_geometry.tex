@@ -20,7 +20,7 @@
 \renewbibmacro{in:}{}
 \addbibresource{rnni_geometry.bib}
 \AtEveryBibitem{
-  \clearlist{language}
+	\clearlist{language}
 }
 
 \setlist{leftmargin = 0pt}
@@ -43,6 +43,7 @@
 \newcommand{\fp}{\mathrm{FP}}
 \newcommand{\np}{\mathbf{NP}}
 \newcommand{\decprob}[1]{\rnni(#1)\text{-}\mathrm{SP}}
+\newcommand{\rad}{\mathit{rad}}
 \renewcommand{\O}{\mathcal O}
 \renewcommand{\epsilon}{\varepsilon}
 \renewcommand{\thesubfigure}{\Alph{subfigure}}
@@ -66,10 +67,11 @@
 
 \begin{document}
 
-\maketitle
-
 \begin{abstract}
 \end{abstract}
+
+\maketitle
+
 
 \section{Introduction}
 
@@ -81,43 +83,94 @@
 
 \summary{Structure of the paper.}
 
+
 \section{Technical Introduction}
 
 \summary{Defining the basics of ranked trees.}
 
-\summary{Briefly introduce $\findpath$ and that it computes $\rnni$ distances.}
+Things we need to define:
+\begin{itemize}
+	\item with $\rnni$ we mean $\rnni(1)$.
+	\item $d(T,R)$ is the weight of a shortest path
+\end{itemize}
+
+\summary{Introduce $\findpath$ and that it computes $\rnni$ distances.}
+
 
 \section{Diameter and Radius}
 
+\summary{Definition of Diameter and that we consider it depending on $\rho$.}
+The first geometrical property of the tree graphs $\rnni(\rho)$ that we want to investigate is their diameter.
+The diameter of a graph is the greatest distance between any pair of vertices in the graph, i.e. for our graph $\rnni(\rho)$ it is $\max\limits_{\text{trees }T,R}d(T,R)$.
+As it is natural to assume, we can prove that the diameter of $\rnni(\rho)$ depends on the value of $\rho$.
+Since the $\rnni$ graph, where rank moves have weight one, is the only one for which a polynomial time algorithm for computing distances is known, we start considering the diameter for this graph before turning to $\rnni(\rho)$ for different values of $\rho$.
+
 \summary{Diameter in $\rnni$ follows from results in previous paper.}
+The algorithm $\findpath$ of \autocite{collienne2020computing} facilitates finding the diameter of the $\rnni$ graph. 
+\begin{corollary}
+	The diameter of the $\rnni$ graph is $\frac{(n-1)(n-2)}{2}$.
+\end{corollary}
+
+\begin{proof}
+	The the proof of Corollary 1 in \autocite{collienne2020computing} gives an example of trees for which the length of the path computed by $\findpath$ is $\frac{(n-1)(n-2)}{2}$.
+	For proving this corollary it remains to show that $\findpath$ cannot compute paths longer than $\frac{(n-1)(n-2)}{2}$.
+	\todo{Explain that this cannot happen by explicitely mentin how often while and for loop are executed}
+\end{proof}
+
+As rank moves in $\rnni(0)$ weigh zero, the distance between two trees in this space is the same as the $\nni$ distance between their unranked versions.
+Therefore, the diameters of these two tree spaces coincide as well.
 
 \summary{Diameter of $\rnni(\rho)$ for other values of $\rho$.}
+\begin{proposition}
+	The diameter of $\rnni(0)$ is $\Theta(n \log(n))$.
+\end{proposition}
+
+\begin{proof}
+ This follows from the diameter of the $\nni$ graph, which is known \autocite{Semple2003-nj} to be $\Theta(n \log(n))$.
+\end{proof}
 
 \summary{Radius of $\rnni$ is equal to its diameter.}
+\begin{proposition}
+	The radius of the $\rnni$ graph equals its diameter, i.e. $\rad(\rnni) = \frac{(n-1)(n-2)}{2}$.
+\end{proposition}
 
 \summary{Radius of $\rnni(\rho)$ for other values of $\rho$.}
+
 
 \section{Cluster Property}
 
 \summary{Why the Cluster Property is relevant.}
 
 \summary{$\rnni$ has the cluster property.}
+\begin{theorem}
+	The $\rnni$ graph has the cluster property.
+\end{theorem}
 
 \summary{$\rnni(0)$ does not have cluster property.}
+\begin{proposition}
+	$\rnni(0)$ does not have the cluster property.
+\end{proposition}
 
-\summary{Clluster Property of $\rnni(\rho)$ for $\rho \neq 0, 1$?}
+\summary{Cluster Property of $\rnni(\rho)$ for $\rho \neq 0, 1$?}
+
 
 \section{Caterpillar Trees}
 
 \summary{The set of caterpillar trees is convex in $\rnni$.}
+\begin{theorem}
+	The set of caterpillar trees is convex in $\rnni$.
+\end{theorem}
 
-\summary{The set of caterpillar trees is not convex in $\rnni(\rho)$ for $\rho = 0$}
+\summary{The set of caterpillar trees is convex in $\rnni(\rho)$ for $\rho > 1$.}
+\begin{corollary}
+	The set of caterpillar trees is convex in $\rnni(\rho)$ if and ony if $\rho \geq 1$.
+\end{corollary}
 
-\summary{Caterpillar trees for $\rho \neq 0,1$?}
 
-
-\section{Generalisation to discrete time-trees}
+\section{Generalisation}
 
 \summary{All (?) results from $\rnni$ transfer to discrete time-trees.}
+
+\summary{How partition lattices correspond to $\rnni$.}
 
 \end{document}
