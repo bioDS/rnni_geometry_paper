@@ -157,31 +157,34 @@ Therefore, the length of such a path is bounded from below by the length of the 
 With Corollary~\ref{cor:diameter_rnni} and Proposition~\ref{prop:diameter_nni} it follows that the diameter of $\rnni(\rho)$ with $\rho < 1$ is bounded from below by $\Theta(n \log(n))$ and from above by $\frac{(n-1)(n-2)}{2}$.
 
 \summary{Diameter of $\rnni(\rho)$ for $\rho > 1$.}
-So far we established diameters or their upper bounds of $\rnni(\rho)$ for $0 < \rho < 1$.
+So far $\rnni(\rho)$ for $0 \leq \rho \leq 1$ has been the centre of our investigation of diameters.
 We now continue by considering spaces $\rnni(\rho)$ for $\rho > 1$, where rank moves are more expensive than $\nni$ moves.
 Specifically, we give an upper bound for the diameter of $\rnni(\infty)$ from which we can follow that all spaces $\rnni(\rho)$ have a diameter less or equal to this bound.
-The first important observation for $\rnni(\infty)$ is that for any pair of trees there always is a path connecting them that consists of $\nni$ moves only.
+Before this, however, we need to observe that for $\rnni(\infty)$ every pair of trees is connected by a path consisting of $\nni$ moves only.
 
 \begin{lemma}
-	Every pair tree is connected to a caterpillar tree by a path in $\rnni$ that consists of $\nni$ moves only.
+	In $\rnni$ every tree is connected to a caterpillar tree by a path that consists of $\nni$ moves only.
 	\label{lemma:nni_path_to_caterpillar}
 \end{lemma}
 
 \begin{proof}
-	We prove this lemma for a given tree $T$ by induction on the number $k$ of rank intervals of $T$.
+	We prove this lemma for a given tree $T$ by induction on the number $i$ of rank intervals of $T$.
 	In the base case $k = 0$ the tree $T$ is a caterpillar tree and the statement is true.
 	For the induction step we assume that $T$ has $i+1$ rank intervals and all trees with less than $i+1$ rank intervals are connected to a caterpillar trees through a sequence of $\nni$ moves.
-	We now construct a series of $\nni$ moves that, starting at $T$, results in a tree that has $i$ rank intervals.
-	Consider the rank interval $[(T)_k, (T)_{k +1}]$ of $T$ such that $k+1$ is the highest rank of a node incident to a rank interval.
-	It follows that all intervals above $(T)_{k+1}$ are edges.
+	We now construct a series of $\nni$ moves that, starting at $T$, ends in a tree that has less than $i+1$ rank intervals.
+	Let the node of rank $k+1$ in $T$ be the highest ranked node incident to a rank interval.
+	This means that the interval given by nodes of rank $k$ and $k+1$ is a rank interval and all intervals above $(T)_{k+1}$ are edges.
 	Let $(T)_l$ be the parent of $(T)_k$.
 	Hence $l > k+1$, and $[(T)_{l-1}, (T)_{l}]$ is an edge.
-	On this edge an $\nni$ move can be performed which results in a tree $T'$ in which the rank of the parent of $(T')_k$ is $l-1$.
-	By iteratively repeating this until $l = k+1$, in the resulting tree $R$ the parent of $(R)_k$ has rank $k+1$, and hence the rank interval bounded by nodes of rank $k$ and $k+1$ turned into an edge while all intervals above $k+1$ remain edges.
-	As $R$ has less than $i+1$ rank interval, the induction hypothesis can be applied and we can conclude that there is a sequence from $T$ to a caterpillar that consists of $\nni$ moves only.
+	On this edge an $\nni$ move can be performed that results in a tree $T'$ in which the rank of the parent of $(T')_k$ is $l-1$, as depicted in Figure~\ref{fig:nni_path_caterpillar}.
+	In the tree $R$ resulting from iteratively repeating this until $l = k+1$ the parent $(R)_k$ has rank $k+1$.
+	Hence the rank interval bounded by nodes of rank $k$ and $k+1$ in $T$ turned into an edge while all intervals above $k+1$ remain edges in $R$.
+	As $R$ has one rank interval less than the $i+1$ rank intervals of $T$, the induction hypothesis can be applied to $R$.
+	This gives a sequence from $T$ to a caterpillar via $R$ that consists of $\nni$ moves only.
 	\begin{figure}[ht]
 		\includegraphics[width=0.8\textwidth]{nni_path_caterpillar.eps}
 		\caption{Example of a tree $T$ with two rank intervals and a sequence of $\nni$ moves that results in a tree $R$ with one rank interval as described in the proof of Lemma~\ref{lemma:nni_path_to_caterpillar}.}
+		\label{fig:nni_path_caterpillar}
 	\end{figure}
 \end{proof}
 
