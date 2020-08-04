@@ -102,11 +102,28 @@ Things we need to define:
 
 \section{Caterpillar Trees}
 
+\todo{define convexity}
+
 \summary{The set of caterpillar trees is convex in $\rnni$.}
 \begin{theorem}
 	The set of caterpillar trees is convex in $\rnni$.
 	\label{thm:caterpillar_convex_rnni}
 \end{theorem}
+
+\begin{proof}
+	Let $T$ and $R$ be two caterpillar trees.
+	For proving the lemma, we show that there is a tree caterpillar tree $T'$ in the one-neighbourhood
+	\todo{define one-neighbourhood}
+	 with distance $d(T',R) = d(T,R) - 1$ to $R$.
+	The existence of a path between $T$ and $R$ that only consists of caterpillar trees then follows inductively.
+	If there is a leaf that is part of the cherry in both trees $T$ and $R$, then the first tree on $\fp(T,R)$ is a caterpillar tree, which proves the statement.
+	So we only need to consider the case that $T$ and $R$ have different cherries.
+	Let $a_1$ and $a_2$ be the leaves of the cherry of $T$ and $a_3$ the leaf which has parent of rank two in $T$.
+	Since neither $a_1$ nor $a_2$ are in the cherry of $R$, their parents must be different and therefore have different ranks in $R$.
+	For the same reason, the parents of $a_1$ and $a_2$ also have a rank different to the parent os $a_3$ in $R$.
+	% Two cases: $a_3$ above $a_1$ and $a_2$ in $R$ or one of $\{a_1,a_2\}$ is above $a_3$.
+	\todo{Finish this proof!} 
+\end{proof}
 
 \summary{The set of caterpillar trees is convex in $\rnni(\rho)$ for $\rho > 1$.}
 \begin{corollary}
