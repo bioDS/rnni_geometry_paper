@@ -105,6 +105,7 @@ Things we need to define:
 \summary{The set of caterpillar trees is convex in $\rnni$.}
 \begin{theorem}
 	The set of caterpillar trees is convex in $\rnni$.
+	\label{thm:caterpillar_convex_rnni}
 \end{theorem}
 
 \summary{The set of caterpillar trees is convex in $\rnni(\rho)$ for $\rho > 1$.}
@@ -113,12 +114,33 @@ Things we need to define:
 \end{corollary}
 
 \begin{proof}
+	We start with proving that if the set of caterpillar trees is convex, then it is $\rho \geq 1$.
+	More specifically, we show that if $\rho < 1$, then the set of caterpillar trees is not convex, from which the previous statement follows.
+	Therefore we consider the following example of trees with four leaves.
+	Let
+	\begin{align*}
+		T &= [\{1,2\},\{1,2,3\},\{1,2,3,4\}]\text{ and }\\
+		R &= [\{3,4\},\{1,3,4\},\{1,2,3,4\}].
+	\end{align*}
+	The shortest among all caterpillar paths between $T$ and $R$ has length three and is depicted at the bottom of Figure~\ref{fig:caterpillar_non_convex}.
+	However, there is a path that is shorter than this path and has length $2 + \rho$, which is smaller than three for $\rho < 1$.
+	This path is depicted at the top of Figure~\ref{fig:caterpillar_non_convex}.
+	Hence, the set of caterpillar trees is not convex if $\rho < 1$.
 	\begin{figure}[ht]
 		\includegraphics[width=0.5\textwidth]{caterpillar_non_convex.eps}
 		\caption{A shortest caterpillar path between caterpillar trees $T$ and $R$ at the bottom and a path consisting of non-caterpillar trees at the top.
 		The path at the top is shorter than the one at the bottom for all $\rho<1$.}
 		\label{fig:caterpillar_non_convex}
 	\end{figure}
+
+	It remains to prove that if $\rho \geq 1$, then the set of caterpillar trees is convex.
+	With Theorem~\ref{thm:caterpillar_convex_rnni} we know that this is true for $\rho = 1$.
+	Moreover, the statement for $\rho > 1$ follows from the same theorem as described in the following, where we assume that $\rho > 1$.
+	All paths between any two trees in $\rnni(\rho)$ are longer or have equal length to the path containing the same moves in $\rnni$, as the weights of the moves in $\rnni(\rho)$ are greater or equal to the weights of the same moves in $\rnni$.
+	Specifically, the only paths that have the same length in $\rnni$ and $\rnni(\rho)$ are paths that contain only $\nni$ moves.
+	It follows that caterpillar paths of $\rnni$ have the same length in $\rnni(\rho)$, while other paths might be longer in $\rnni(\rho)$, but cannot be shorter than the same path in $\rnni$.s
+	And as there is a shortest caterpillar path between all caterpillar trees in $\rnni$, this path is shortest path in $\rnni(\rho)$ as well.
+	This proves that the set of caterpillar trees is convex in $\rnni(\rho)$ for $\rho \geq 1$, which completes the proof.
 \end{proof}
 
 
