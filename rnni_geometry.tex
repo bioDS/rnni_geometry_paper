@@ -92,6 +92,7 @@ Things we need to define:
 \begin{itemize}
 	\item with $\rnni$ we mean $\rnni(1)$ -- do we want to use this everywhere?
 	\item $d(T,R)$ is the weight of a shortest path
+	\item caterpillar path and shortest caterpillar path (do we want to define caterpillar trees here or in the caterpillar tree section?)
 	\item $\rnni(\infty)$
 	\item rank interval for Lemma~\ref{lemma:nni_path_to_caterpillar}
 	\item cherry (for lemma~\ref{lemma:max_dist_ctree})
@@ -120,7 +121,7 @@ Things we need to define:
 	So we only need to consider the case that $T$ and $R$ have different cherries.
 	Let $a_1$ and $a_2$ be the leaves of the cherry of $T$ and $a_3$ the leaf which has parent of rank two in $T$.
 	Since neither $a_1$ nor $a_2$ are in the cherry of $R$, their parents must be different and therefore have different ranks in $R$.
-	For the same reason, the parents of $a_1$ and $a_2$ also have a rank different to the parent os $a_3$ in $R$.
+	For the same reason, the parents of $a_1$ and $a_2$ also have a rank different to the parent of $a_3$ in $R$.
 	% Two cases: $a_3$ above $a_1$ and $a_2$ in $R$ or one of $\{a_1,a_2\}$ is above $a_3$.
 	\todo{Finish this proof!} 
 \end{proof}
@@ -242,7 +243,7 @@ With this lemma we are able to prove that the diameter of $\rnni(\infty)$ is qua
 	With Lemma~\ref{lemma:nni_path_to_caterpillar} we know that any tree can be connected to a caterpillar tree by a sequence of $\nni$ moves.
 	Moreover, the proof of the lemma implicitly proposes an algorithm to convert a tree into a caterpillar tree by removing rank intervals by a top-down approach.
 	We show that the paths from a tree to a caterpillar tree that are given by this algorithm have at most length $\frac{(n-1)(n-1)}{2}$.
-	Since we also know that the set of caterpillar trees is convex in $\rnni$ \todo{reference -- maybe we should have the caterpillar section before this one?}, and hence the maximum distance between caterpillar trees is bounded by the diameter $\frac{(n-1)(n-2)}{2}$ of $\rnni$ (Corollary~\ref{cor:diameter_rnni}), this corollary follows.
+	Since we also know that the set of caterpillar trees is convex in $\rnni$ (Theorem~\ref{thm:caterpillar_convex_rnni}), and hence the maximum distance between caterpillar trees is bounded by the diameter $\frac{(n-1)(n-2)}{2}$ of $\rnni$ (Corollary~\ref{cor:diameter_rnni}), this corollary follows.
 
 	For finding the maximum length of a path computed by the algorithm suggested in the proof of Lemma~\ref{lemma:nni_path_to_caterpillar}, we consider every iteration (induction step).
 	In each of these, at least one rank interval turns into an edge.
