@@ -41,6 +41,7 @@
 \newcommand{\spr}{\mathrm{SPR}}
 \newcommand{\tbr}{\mathrm{TBR}}
 \newcommand{\fp}{\mathrm{FP}}
+\newcommand{\dtt}{\mathrm{DtT}}
 \newcommand{\np}{\mathbf{NP}}
 \newcommand{\decprob}[1]{\rnni(#1)\text{-}\mathrm{SP}}
 \newcommand{\rad}{\mathit{rad}}
@@ -77,7 +78,7 @@
 
 \summary{Motivation -- ranked trees and tree rearrangements.}
 
-\summary{More motivation, sepcifically for $\rnni$ and $\rho$.}
+\summary{More motivation, sepcifically for $\rnni$, $\rnni(\rho)$, and DtT}
 
 \summary{Why we want to investigate geometrical properties of $\rnni(\rho)$ for different $\rho$ and that we want to compare properties in spaces for different $\rho$.}
 
@@ -93,17 +94,20 @@ Things we need to define:
 	\item with $\rnni$ we mean $\rnni(1)$ -- do we want to use this everywhere?
 	\item $d(T,R)$ is the weight of a shortest path
 	\item caterpillar path and shortest caterpillar path (do we want to define caterpillar trees here or in the caterpillar tree section?)
+	\item convexity
 	\item $\rnni(\infty)$
 	\item rank interval for Lemma~\ref{lemma:nni_path_to_caterpillar}
 	\item cherry (for lemma~\ref{lemma:max_dist_ctree})
+	\item one-neighbourhood (for Theorem~\ref{thm:caterpillar_convex_rnni})
+	\item Discrete time trees, length moves, and that this is different from how it is used in previous paper
 \end{itemize}
 
 \summary{Introduce $\findpath$ and that it computes $\rnni$ distances.}
 
 
-\section{Caterpillar Trees}
+\section{$\rnni$}
 
-\todo{define convexity}
+\subsection{Caterpillar Trees}
 
 \summary{The set of caterpillar trees is convex in $\rnni$.}
 \begin{theorem}
@@ -113,9 +117,7 @@ Things we need to define:
 
 \begin{proof}
 	Let $T$ and $R$ be two caterpillar trees.
-	For proving the lemma, we show that there is a tree caterpillar tree $T'$ in the one-neighbourhood
-	\todo{define one-neighbourhood}
-	 with distance $d(T',R) = d(T,R) - 1$ to $R$.
+	For proving the lemma, we show that there is a tree caterpillar tree $T'$ in the one-neighbourhood with distance $d(T',R) = d(T,R) - 1$ to $R$.
 	The existence of a path between $T$ and $R$ that only consists of caterpillar trees then follows inductively.
 	If there is a leaf that is part of the cherry in both trees $T$ and $R$, then the first tree on $\fp(T,R)$ is a caterpillar tree, which proves the statement.
 	So we only need to consider the case that $T$ and $R$ have different cherries.
@@ -126,44 +128,10 @@ Things we need to define:
 	\todo{Finish this proof!} 
 \end{proof}
 
-\summary{The set of caterpillar trees is convex in $\rnni(\rho)$ for $\rho > 1$.}
-\begin{corollary}
-	The set of caterpillar trees is convex in $\rnni(\rho)$ if and ony if $\rho \geq 1$.
-\end{corollary}
 
-\begin{proof}
-	We start with proving that if the set of caterpillar trees is convex, then it is $\rho \geq 1$.
-	More specifically, we show that if $\rho < 1$, then the set of caterpillar trees is not convex, from which the previous statement follows.
-	Therefore we consider the following example of trees with four leaves.
-	Let
-	\begin{align*}
-		T &= [\{1,2\},\{1,2,3\},\{1,2,3,4\}]\text{ and }\\
-		R &= [\{3,4\},\{1,3,4\},\{1,2,3,4\}].
-	\end{align*}
-	The shortest among all caterpillar paths between $T$ and $R$ has length three and is depicted at the bottom of Figure~\ref{fig:caterpillar_non_convex}.
-	However, there is a path that is shorter than this path and has length $2 + \rho$, which is smaller than three for $\rho < 1$.
-	This path is depicted at the top of Figure~\ref{fig:caterpillar_non_convex}.
-	Hence, the set of caterpillar trees is not convex if $\rho < 1$.
-	\begin{figure}[ht]
-		\includegraphics[width=0.5\textwidth]{caterpillar_non_convex.eps}
-		\caption{A shortest caterpillar path between caterpillar trees $T$ and $R$ at the bottom and a path consisting of non-caterpillar trees at the top.
-		The path at the top is shorter than the one at the bottom for all $\rho<1$.}
-		\label{fig:caterpillar_non_convex}
-	\end{figure}
+\subsection{Diameter and Radius}
 
-	It remains to prove that if $\rho \geq 1$, then the set of caterpillar trees is convex.
-	With Theorem~\ref{thm:caterpillar_convex_rnni} we know that this is true for $\rho = 1$.
-	Moreover, the statement for $\rho > 1$ follows from the same theorem as described in the following, where we assume that $\rho > 1$.
-	All paths between any two trees in $\rnni(\rho)$ are longer or have equal length to the path containing the same moves in $\rnni$, as the weights of the moves in $\rnni(\rho)$ are greater or equal to the weights of the same moves in $\rnni$.
-	Specifically, the only paths that have the same length in $\rnni$ and $\rnni(\rho)$ are paths that contain only $\nni$ moves.
-	It follows that caterpillar paths of $\rnni$ have the same length in $\rnni(\rho)$, while other paths might be longer in $\rnni(\rho)$, but cannot be shorter than the same path in $\rnni$.s
-	And as there is a shortest caterpillar path between all caterpillar trees in $\rnni$, this path is shortest path in $\rnni(\rho)$ as well.
-	This proves that the set of caterpillar trees is convex in $\rnni(\rho)$ for $\rho \geq 1$, which completes the proof.
-\end{proof}
-
-
-\section{Diameter and Radius}
-
+%TODO: Make this independent of rho
 \summary{Definition of Diameter and that we consider it depending on $\rho$.}
 In this section we want to investigate the diameter of $\rnni(\rho)$, which is the greatest distance between any pair of vertices (trees) in this graph, i.e. $\max\limits_{\text{trees }T,R}d(T,R)$.
 We will show that the diameter of $\rnni(\rho)$ depends on $\rho$.
@@ -182,31 +150,7 @@ The algorithm $\findpath$ of \autocite{collienne2020computing}, which computes d
 	\todo{Explain that this cannot happen by explicitely mention how often while and for loop are executed -- do we want to repeat the pseudo-code in this paper?}
 \end{proof}
 
-Not only for $\rnni$, but also for $\rnni(0)$, we know the diameter from previous results.
-As rank moves in $\rnni(0)$ weigh zero, the distance between two trees in this space is the same as the $\nni$ distance between these trees when ignoring ranks.
-Therefore, these graphs have the same diameter.
-
-\begin{proposition}
-	The diameter of $\rnni(0)$ is $\Theta(n \log(n))$.
-	\label{prop:diameter_nni}
-\end{proposition}
-
-\begin{proof}
-	This follows from the diameter of the $\nni$ graph, which is known \autocite{Semple2003-nj} to be $\Theta(n \log(n))$.
-\end{proof}
-
-\summary{Results for $\rnni$ and $\rnni(0)$ give us bounds for the diameters of all spaces with $0 < \rho < 1$.}
-With the previous results in Corollary~\ref{cor:diameter_rnni} and Proposition~\ref{prop:diameter_nni} we can infer bounds for diameters of spaces $\rnni(\rho)$ with $0 < \rho < 1$.
-A path in $\rnni(\rho)$ between two trees corresponds to paths in $\rnni(0)$ and $\rnni(1)$ that contain the same moves, but have different total length, due to the different weighing of rank moves.
-Therefore, the length of such a path is bounded from below by the length of the corresponding path in $\rnni(0)$ and from above by the corresponding path in $\rnni(1)$.
-With Corollary~\ref{cor:diameter_rnni} and Proposition~\ref{prop:diameter_nni} it follows that the diameter of $\rnni(\rho)$ with $\rho < 1$ is bounded from below by $\Theta(n \log(n))$ and from above by $\frac{(n-1)(n-2)}{2}$.
-
-\summary{Diameter of $\rnni(\rho)$ for $\rho > 1$.}
-So far $\rnni(\rho)$ for $0 \leq \rho \leq 1$ has been the centre of our investigation of diameters.
-We now continue by considering spaces $\rnni(\rho)$ for $\rho > 1$, where rank moves are more expensive than $\nni$ moves.
-Specifically, we give an upper bound for the diameter of $\rnni(\infty)$ from which we can follow that all spaces $\rnni(\rho)$ have a diameter less or equal to this bound.
-Before this, however, we need to observe that for $\rnni(\infty)$ every pair of trees is connected by a path consisting of $\nni$ moves only.
-
+%TODO: This is mainly relevant for RNNI(\infty). As it is a statement about RNNI, we could still keep it here, if needed
 \begin{lemma}
 	In $\rnni$ every tree is connected to a caterpillar tree by a path that consists of $\nni$ moves only.
 	\label{lemma:nni_path_to_caterpillar}
@@ -293,17 +237,87 @@ For proving that the radius of $\rnni$, which is defined $\min\limits_{\text{tre
 	Hence the radius equals the diameter of $\rnni$.
 \end{proof}
 
-\summary{Radius of $\rnni(\rho)$ for other values of $\rho$.}
 
+\subsection{Cluster Property}
 
-\section{Cluster Property}
-
-\summary{Why the Cluster Property is relevant.}
+\summary{Definition of Cluster Property and why it is relevant.}
 
 \summary{$\rnni$ has the cluster property.}
 \begin{theorem}
 	The $\rnni$ graph has the cluster property.
 \end{theorem}
+
+
+\section{$\rnni(\rho)$}
+
+\subsection{Caterpillar Trees}
+
+\summary{The set of caterpillar trees is convex in $\rnni(\rho)$ for $\rho > 1$.}
+\begin{corollary}
+	The set of caterpillar trees is convex in $\rnni(\rho)$ if and ony if $\rho \geq 1$.
+\end{corollary}
+
+\begin{proof}
+	We start with proving that if the set of caterpillar trees is convex, then it is $\rho \geq 1$.
+	More specifically, we show that if $\rho < 1$, then the set of caterpillar trees is not convex, from which the previous statement follows.
+	Therefore we consider the following example of trees with four leaves.
+	Let
+	\begin{align*}
+		T &= [\{1,2\},\{1,2,3\},\{1,2,3,4\}]\text{ and }\\
+		R &= [\{3,4\},\{1,3,4\},\{1,2,3,4\}].
+	\end{align*}
+	The shortest among all caterpillar paths between $T$ and $R$ has length three and is depicted at the bottom of Figure~\ref{fig:caterpillar_non_convex}.
+	However, there is a path that is shorter than this path and has length $2 + \rho$, which is smaller than three for $\rho < 1$.
+	This path is depicted at the top of Figure~\ref{fig:caterpillar_non_convex}.
+	Hence, the set of caterpillar trees is not convex if $\rho < 1$.
+	\begin{figure}[ht]
+		\includegraphics[width=0.5\textwidth]{caterpillar_non_convex.eps}
+		\caption{A shortest caterpillar path between caterpillar trees $T$ and $R$ at the bottom and a path consisting of non-caterpillar trees at the top.
+		The path at the top is shorter than the one at the bottom for all $\rho<1$.}
+		\label{fig:caterpillar_non_convex}
+	\end{figure}
+
+	It remains to prove that if $\rho \geq 1$, then the set of caterpillar trees is convex.
+	With Theorem~\ref{thm:caterpillar_convex_rnni} we know that this is true for $\rho = 1$.
+	Moreover, the statement for $\rho > 1$ follows from the same theorem as described in the following, where we assume that $\rho > 1$.
+	All paths between any two trees in $\rnni(\rho)$ are longer or have equal length to the path containing the same moves in $\rnni$, as the weights of the moves in $\rnni(\rho)$ are greater or equal to the weights of the same moves in $\rnni$.
+	Specifically, the only paths that have the same length in $\rnni$ and $\rnni(\rho)$ are paths that contain only $\nni$ moves.
+	It follows that caterpillar paths of $\rnni$ have the same length in $\rnni(\rho)$, while other paths might be longer in $\rnni(\rho)$, but cannot be shorter than the same path in $\rnni$.s
+	And as there is a shortest caterpillar path between all caterpillar trees in $\rnni$, this path is shortest path in $\rnni(\rho)$ as well.
+	This proves that the set of caterpillar trees is convex in $\rnni(\rho)$ for $\rho \geq 1$, which completes the proof.
+\end{proof}
+
+\subsection{Diameter and Radius}
+
+\summary{Diameter for $\rnni(0)$ follows from $\nni$}
+Not only for $\rnni$, but also for $\rnni(0)$, we know the diameter from previous results.
+As rank moves in $\rnni(0)$ weigh zero, the distance between two trees in this space is the same as the $\nni$ distance between these trees when ignoring ranks.
+Therefore, these graphs have the same diameter.
+
+\begin{proposition}
+	The diameter of $\rnni(0)$ is $\Theta(n \log(n))$.
+	\label{prop:diameter_nni}
+\end{proposition}
+
+\begin{proof}
+	This follows from the diameter of the $\nni$ graph, which is known \autocite{Semple2003-nj} to be $\Theta(n \log(n))$.
+\end{proof}
+
+\summary{Results for $\rnni$ and $\rnni(0)$ give us bounds for the diameters of all spaces with $0 < \rho < 1$.}
+With the previous results in Corollary~\ref{cor:diameter_rnni} and Proposition~\ref{prop:diameter_nni} we can infer bounds for diameters of spaces $\rnni(\rho)$ with $0 < \rho < 1$.
+A path in $\rnni(\rho)$ between two trees corresponds to paths in $\rnni(0)$ and $\rnni(1)$ that contain the same moves, but have different total length, due to the different weighing of rank moves.
+Therefore, the length of such a path is bounded from below by the length of the corresponding path in $\rnni(0)$ and from above by the corresponding path in $\rnni(1)$.
+With Corollary~\ref{cor:diameter_rnni} and Proposition~\ref{prop:diameter_nni} it follows that the diameter of $\rnni(\rho)$ with $\rho < 1$ is bounded from below by $\Theta(n \log(n))$ and from above by $\frac{(n-1)(n-2)}{2}$.
+
+\summary{Diameter of $\rnni(\rho)$ for $\rho > 1$.}
+So far $\rnni(\rho)$ for $0 \leq \rho \leq 1$ has been the centre of our investigation of diameters.
+We now continue by considering spaces $\rnni(\rho)$ for $\rho > 1$, where rank moves are more expensive than $\nni$ moves.
+Specifically, we give an upper bound for the diameter of $\rnni(\infty)$ from which we can follow that all spaces $\rnni(\rho)$ have a diameter less or equal to this bound.
+Before this, however, we need to observe that for $\rnni(\infty)$ every pair of trees is connected by a path consisting of $\nni$ moves only.
+
+\summary{Radius of $\rnni(\rho)$ for other values of $\rho$.}
+
+\subsection{Cluster Property}
 
 \summary{$\rnni(0)$ does not have cluster property.}
 \begin{proposition}
@@ -313,10 +327,13 @@ For proving that the radius of $\rnni$, which is defined $\min\limits_{\text{tre
 \summary{Cluster Property of $\rnni(\rho)$ for $\rho \neq 0, 1$?}
 
 
+%TODO: Leave this as a section or do we want a section (not just subsection) for DtT?
 \section{Generalisation}
 
 \summary{All (?) results from $\rnni$ transfer to discrete time-trees.}
 
 \summary{How partition lattices correspond to $\rnni$.}
+
+\summary{Implementation of FP}
 
 \end{document}
