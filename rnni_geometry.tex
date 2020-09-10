@@ -33,6 +33,7 @@
 \newtheorem{problem}{Problem}
 \newtheorem{conjecture}{Conjecture}
 
+\newcommand{\tocite}{ {\color{red}\fbox{CITATION}} }
 \newcommand{\rnni}{\mathrm{RNNI}}
 \newcommand{\findpath}{\textsc{FindPath}}
 \newcommand{\mrca}{\mathrm{mrca}}
@@ -95,6 +96,7 @@ Things we need to define:
 	\item $d(T,R)$ is the weight of a shortest path
 	\item caterpillar path and shortest caterpillar path (do we want to define caterpillar trees here or in the caterpillar tree section?)
 	\item convexity
+	\item representation of caterpillar trees as lists of leaves instead of cluster representation
 	\item $\rnni(\infty)$
 	\item rank interval for Lemma~\ref{lemma:nni_path_to_caterpillar}
 	\item cherry (for lemma~\ref{lemma:max_dist_ctree})
@@ -128,6 +130,23 @@ Things we need to define:
 	\todo{Finish this proof!} 
 \end{proof}
 
+
+\summary{With Theorem~\ref{thm:caterpillar_convex_rnni} we can find a more efficient way to compute distances between caterpillar trees.}
+
+\begin{theorem}
+	Let $T$ be an arbitrary caterpillar tree and $R$ the caterpillar tree $[1,2, \ldots, n]$.
+	\todo{Note somewhere that we refer to the list representations of caterpillar trees by $T$, for example}
+	Then it is
+	\[d(T,R) = p_T - m_T,\]
+	where $p_T$ is the number of transpositions in $T$ (Kendall-tau distance\tocite) and
+	\[m_T := |\{i \in \{1, \ldots, n\}| (i < k\ \forall k \preceq i) \text{ and } i \preceq 1 \text{ and } i \preceq 2\}|\]
+	\todo{define the partial order $\preceq$}
+	\label{thm:caterpillar_distance_formula}
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
 
 \subsection{Diameter and Radius}
 
