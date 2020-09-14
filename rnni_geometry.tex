@@ -98,7 +98,7 @@ Things we need to define:
 \begin{itemize}
 	\item Discrete time trees, length moves, and that this is different from how it is used in previous paper
 	\item $\rnni$ and $dtt$ (with additional parameter $m$)
-	\item $d(T,R)$ is the length of a shortest path
+	\item $d(T,R)$ is the length of a shortest path, index $\dtt$ or $\rnni$ for the space we are currently in
 	\item caterpillar path and shortest caterpillar path (do we want to define caterpillar trees here or in the caterpillar tree section?)
 	\item convexity
 	\item representation of caterpillar trees as lists of leaves instead of cluster representation (?)
@@ -110,7 +110,21 @@ Things we need to define:
 
 \summary{Introduce $\findpath$ for $\dtt$ and prove that it computes shortest paths}
 
-\section{Caterpillar Trees}
+
+\section{$\dtt$}
+
+\summary{How distances in $\dtt$ and $\rnni$ are related}
+
+\begin{lemma}
+	\todo{How do we want to phrase this? Underlying or corresponding? -- or even only use the index  $d_{\rnni}$ to emphasise that we consider the corresponding trees in $\rnni$}
+	Let $T$ and $R$ be discrete time-trees and $T'$ and $R'$ the underlying ranked trees.
+	Then the distance between $T$ and $R$ in $\dtt$ is:
+	\[d_{\dtt}(T,R) = d_{\rnni}(T,R) + l_{T,R},\]
+	\todo{Maybe we introduce these moves so that we can still call them length moves, even if on $\findpath$ they actually are rank moves?}
+	where $l_{T,R}$ is the number of rank moves on $\fp(T,R)$ that involve a node of the additional caterpillar tree.
+\end{lemma}
+
+\subsection{Caterpillar Trees}
 
 \summary{The set of caterpillar trees is convex in $\rnni$.}
 \begin{theorem}
@@ -120,7 +134,7 @@ Things we need to define:
 
 \begin{proof}
 	Let $T$ and $R$ be two caterpillar trees.
-	For proving the lemma, we show that there is a tree caterpillar tree $T'$ in the one-neighbourhood with distance $d(T',R) = d(T,R) - 1$ to $R$.
+	For proving the lemma, we show that there is a tree caterpillar tree $T'$ in the one-neighbourhood of $T$ with distance $d(T',R) = d(T,R) - 1$ to $R$.
 	The existence of a path between $T$ and $R$ that only consists of caterpillar trees then follows inductively.
 	If there is a leaf that is part of the cherry in both trees $T$ and $R$, then the first tree on $\fp(T,R)$ is a caterpillar tree, which proves the statement.
 	So we only need to consider the case that $T$ and $R$ have different cherries.
@@ -196,7 +210,7 @@ Things we need to define:
 
 \end{proof}
 
-\section{Diameter and Radius}
+\subsection{Diameter and Radius}
 
 %TODO: Make this independent of rho
 \summary{Definition of Diameter and that we consider it depending on $\rho$.}
@@ -304,8 +318,7 @@ For proving that the radius of $\rnni$, which is defined $\min\limits_{\text{tre
 	Hence the radius equals the diameter of $\rnni$.
 \end{proof}
 
-
-\section{Cluster Property}
+\subsection{Cluster Property}
 
 \summary{Definition of Cluster Property and why it is relevant.}
 
