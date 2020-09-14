@@ -53,6 +53,8 @@
 \newcommand{\summary}[1]{\textbf{#1}} % Print summaries to .pdf
 % \newcommand{\summary}[1]{} % Hide summaries in .pdf
 
+\DeclareMathOperator*{\argmin}{argmin}
+
 \graphicspath{{figures/}}
 
 \sloppy
@@ -140,7 +142,7 @@ Things we need to define:
 	Then it is
 	\[d(T,R) = p_T - m_T,\]
 	where $p_T$ is the number of transpositions in $T$ (Kendall-tau distance \tocite) and $m_T = |M_T|$ for
-	\[{M_T} := \{i| (\forall k \text{ with } \rank(k)_T \leq \rank(i)_T: i < k) \text{ and } \rank(i)_T \leq \min\{\rank(1)_T, \rank(2)_T\}\}\]
+	\[{M_T} := \{i| (\forall k \text{ with } \rank(k)_T \leq \rank(i)_T: i < k) \text{ and } \rank(i)_T < \min\{\rank(1)_T, \rank(2)_T\}\}\]
 	\todo{define the partial order $\preceq$}
 	\label{thm:caterpillar_distance_formula}
 \end{theorem}
@@ -156,27 +158,42 @@ Things we need to define:
 	Then it follows by induction that $\hat d$ and $d$ coincide.
 	It is sufficient to show that \autoref{eq:distance_proof} holds for a caterpillar tree $T'$, as we know that there is a shortest path between $T$ and $R$ that only consists of caterpillar trees (\autoref{thm:caterpillar_convex_rnni}).
 
-	To proof the correctness of \autoref{eq:distance_proof}, we assume to the contrary that there are is a neighbour $T'$ of $T$ such that $\hat d(T',R) < \hat d(T,R) - 1$.
-	As an $\nni$ move between caterpillar trees $T$ and $T'$ only exchanges two leaves, at most one transposition of $T$ can be resolved in $T'$, resulting in $p_{T'} \geq p_T - 1$.
+	In order to show the correctness of Inequality~\ref{eq:distance_proof}, we first prove $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$.
+	So the only case in which Inequality!\ref{eq:distance_proof} does not hold is $p_{T'} = p_T - 1$ and $m_{T'} = m_t + 1$, which we will show is not possible.
+
+	As an $\nni$ move between caterpillar trees $T$ and $T'$ exchanges two leaves, at most one transposition of $T$ can be resolved in $T'$, resulting in $p_{T'} \geq p_T - 1$.
 	Furthermore, it is $m_{T'} \leq m_T + 1$, as we explain in the following.
-	Since the only change between $T$ and $T'$ is that two leaves $a_k, a_{k+1}$ exchange their position, these are the only elements that could be added to $M_T$ to receive $M_{T'}$.
-	This however is not possible.
-	\todo{Define the notion $(a_k)_T$ and $\rank$}
-	If neither of these leaves is in $M_T$, then there exists a leaf $a_j$ with $\rank(a_j)_T < \rank(a_k)_T < \rank(a_{k+1})_T$ such that $a_j > \min{a_k,a_{k+1}}$.
-	Since the position of $a_j$ does not change between $T$ and $T'$, it follows that $a_k$ and $a_{k+1}$ can not be members of $M_{T'}$.
-	Hence it is $m_{T'} \leq m_T + 1$.
+	Let $a_k, a_{k+1}$ be the labels of leaves that exchange their position between $T$ and $T'$, such that $\rank(a_k)_R < \rank(a_{k+1})_T$.
+	These are the only elements that could be in $M_{T'} \setminus M_T$.
+	It remains to show that it cannot be $(M_{T'} \setminus M_T) = \{a_k, a_{k+1}\}$, from which we can follow $m_{T'} \leq m_T - 1$.
 
-	As $p_{T'} \geq p_T - 1$ and $m_{T'} \leq m_T + 1$, the only case where Inequality~\ref{eq:distance_proof} can be violated is if $p_{T'} = p_T - 1$ and $m_{T'} = m_T + 1$.
-	This means that $a_k, a_{k+1}$ is a transposition in $T$, meaning that $a_k > a{k+1}$.
-	We now consider how resolving this transposition changes the set $M_T$.
-	If $a_k \notin M_T$, then it will not be in $M_T$ after the move either.
-	If in this case also $a_{k+1} \notin M_T$, then it also is not in $M_{T'}$.
-	Therefore, $m_{T'}$ cannot be greater than $m_T$ if $a_k \notin M_T$.
-	If on the other side $a_k \in M_T$, it follows that $a_k \notin M_{T'}$, as $a_{k+1} > a_k$ and $\rank(a_{k+1})_{T'} < \rank(a_k)_{T'}$, which again results in $m_{T'}$ being less or equal to $m_T$.
+	To prove $(M_{T'} \setminus M_T) \neq \{a_k, a_{k+1}\}$, we assume the contrary.
+	Then $a_k$ and $a_{k+1}$ are not in $M_T$, which means that each of them ($i \in \{a_k,a_{k+1}\}$) violates one of the conditions:
+	\todo{do we want to say $a_k$ \emph{violates} Condition $x$? Or does another leaf $k$ violate Condition $x$ for $a_k$?}
+	\begin{align}
+		\forall k \text{ with } \rank(k)_T \leq \rank(i)_T: i < k \label{condition1}\\
+		\rank(i)_T < \min\{\rank(1)_T, \rank(2)_T\}.
+		\label{condition2}
+	\end{align}
 
-	We can conclude that if $p_{T'} \geq p_T - 1$, it is $m_{T'} < m_T + 1$, and with $p_{T'} \geq p_T - 1$ and $m_{T'} \leq m_T + 1$ it follows
-	\[\hat d(T',R) = p_{T'} - m_{T'} \geq p_T - 1 - m_T = \hat d(T,R) - 1\].
-	\todo{What happens if the transposition happens 'above' $1$ or $2$?}
+	If both $a_k$ and $a_{k+1}$ violate Condition~\ref{condition2}, then at least one of them will violate the same condition in $T'$ as well, as they cannot both swap rank with $\argmin\{\rank(1)_T, \rank(2)_T\}$ within one $\nni$ move.
+	If on the other hand only one $a_j$ with $j \in \{k, k+1\}$ violates Condition~\ref{condition2}, it is $j = k+1$ and $a_{k+1} \in \{1,2\}$, due to the positioning of $a_k$ and $a_{k+1}$ as neighbouring leaves in $T$.
+	And in this case it is $a_{k+1} \notin M_{T'}$, as the leaves $1$ and $2$ always violate Condition~\ref{condition2}.
+
+	Hence the only case in which it could be $(M_{T'} \setminus M_T) = \{a_k, a_{k+1}\}$ is if $a_k$ and $a_{k+1}$ violate Condition~\ref{condition1} in $T$, but not in $T'$.
+	Assuming that $a_k$ and $a_{k+1}$ violate Condition~\ref{condition1}, there exists a leaf $a_j$ with $\rank(a_j)_T < \rank(a_k)_T < \rank(a_{k+1})_T$ such that $a_j > \min\{a_k,a_{k+1}\}$.
+	Since the position of $a_j$ does not change between $T$ and $T'$, it follows $\rank(a_j)_{T'} < \rank(a_{k+1})_{T'} < \rank(a_{k})_{T'}$ and hence $a_k$ and $a_{k+1}$ cannot be members of $M_{T'}$.
+	We can conclude $m_{T'} \leq m_T + 1$.
+
+	It remains to show that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, in order to prove Inequality~\ref{eq:distance_proof}.
+	We assume $p_{T'} = p_T - 1$ and show $m_{T'} < m_T + 1$ by assuming the contrary, that is, $m_{T'} = m_T + 1$.
+	If $p_{T'} = p_T - 1$, $(a_k, a_{k+1})$ is a transposition in $T$, meaning that $a_k > a_{k+1}$.
+	As $a_k$ and $a_{k+1}$ are the only leaves whose membership can change between $M_T$ and $M_{T'}$, it suffices to show that if one of them is in $M_{T'} \setminus M_T$, then the other one is in $M_T \setminus M_{T'}$.
+
+	With $a_k > a_{k+1}$ it follows that $a_k \notin M_{T'}$.
+	Furthermore, we can follow from $a_{k+1} \in (M_{T'} \setminus M_T)$ that $a_k$ is in $M_T$, as Condition~\ref{condition1} being true results from this condition being true for $a_{k+1}$ in $M_{T'}$, and Condition~\ref{condition2} being true results from $\rank(a_k)_T < \rank(a_{k+1})_T$ and Condition~\ref{condition2} being true for $a_k$ in $T'$.
+	Hence, it is $a_k \in M_T \setminus M_{T'})$, if $a_{k+1} \in (M_{T'} \setminus M_T)$ and we can follow that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, which concludes this proof.
+
 
 \end{proof}
 
