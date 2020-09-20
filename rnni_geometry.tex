@@ -97,27 +97,33 @@
 A binary rooted phylogenetic tree is a binary tree on a fixed number $n$ of leaves, which are uniquely labelled by elements of the set $\{a_1, \ldots, a_n\}$.
 The main objective of study in this paper, \emph{discrete time-trees}, are such binary rooted phylogenetic trees, where leaves are assigned time $0$, and internal nodes are uniquely assigned integer-valued times, such that an internal node always has time greater than its children.
 If not stated otherwise, we will refer to discrete time-trees simply as \emph{trees}.
-The number of discrete time-trees with root time less or equal to $m$ is $\frac{(n-1)!n!m^{n-1}}{2^{n-1}}$.
-Discrete time-trees with root time $n-1$ are called \emph{ranked trees}.
+The number of discrete time-trees with root time less or equal to $m$ is $\frac{(n-1)!n!m^{n-1}}{2^{n-1}}$ \autocite{Gavryushkin2018-ol}.
+Discrete time-trees with root time $n-1$ are called \emph{ranked trees}, and we say ranks to mean times of nodes in ranked trees to be consistent with notations used in \autocite{Collienne2020-iu}.
 
-\summary{Defining the tree space $\dtt$}
+Every internal node $v$ of a tree $T$ can be referred to by the set $C$ of leaves that are descending from this node.
+We call such a set $C$ \emph{cluster} and say that the cluster $C$ is \emph{induced} by $v$.
+A ranked tree can then be seen as a list of clusters $[C_1, \ldots, C_{n-1}]$, where cluster $C_i$ is induced by the internal node with time $i$ for $i \in \{1, \ldots, n-1\}$.
+For each subset $S \subseteq \{a_1, \ldots, a_n\}$ we call the internal node of a tree $T$ with lowest time that is ancestral to all elements of $S$ the \emph{most recent common ancestor} of $S$ and denote it by $(S)_T$.
 
-As a generalisation to the graph $\rnni$ of ranked trees (\autocite{Collienne2020-iu}), we define the graph $\dtt_m$ of discrete time-trees as follows.
-The nodes of $\dtt_m$ are discrete time-trees with root time less pr equal to $m$.
-A tree $R$ is connected to a tree $T$ by an edge, if performing one of the following operations on $T$ results in $R$:
+\summary{Defining the tree space $\dtt_m$ and $\rnni = \dtt_{n-1}$}
+The main objective of this paper is to study the graph $\dtt_m$ of discrete time-trees, which is defined as follows.
+The nodes of $\dtt_m$ are trees with root time less pr equal to $m$.
+Trees $T$ and $R$ are connected by an edge if performing one of the following (reversible) operations on $T$ results in $R$:
 \begin{enumerate}
 	\item An \emph{$\nni$ move} connects trees $T$ and $R$ if there is an edge $e$ in $T$ and an edge $f$ in $R$, both of length one, such that shrinking $e$ and $f$ to nodes results in isomorphic trees. \todo{define isomorphic!}
 	\item A \emph{rank move} on $T$ exchanges the times of two internal nodes, if the difference of their times is one.
 	\item A \emph{length move} on $T$ changes the time of an internal node by one.
 \end{enumerate}
-\todo{This could be explained a bit better. Maybe we want to speek about intervals?}
-Note that a length move in $T$ on a node $v$ can only happen if the time of $v$ after the length move is not already assigned to an internal node in $T$.
-It is also important to see that our definition of $\dtt_m$ differs from the definition in \tocite.
-As the $\rnni$ graph is the graph $\dtt_m$ for $m= n-1$, length moves are not possible in this graph.
+\todo{Is this clear? Maybe using intervals (if we are going to define them)}
+Note that length move can only change the time of a node in a tree $T$ if there is no node with this new time in $T$ already.
+It is also important to see that our definition of $\dtt_m$ differs from the definition in \autocite{Gavryushkin2018-ol}.
+
+The ranked nearest neighbour interchange ($\rnni$) graph of \textcite{Collienne2020-iu} is the graph $\dtt_m$ for $m=n-1$, and hence is a graph of ranked trees.
+Hence, length moves are not possible in this graph, and we use the notion $\rnni$ \emph{move} to mean either a rank move or an $\nni$ move.
 
 Things we need to define:
 \begin{itemize}
-	\item intervals, to make explanation of length move and how they are replaced in order to use FP easier?
+	\item ??intervals, to make explanation of length move and how they are replaced in order to use FP easier??
 	\item $(S)_T$, also for one-element sets $S$
 	\item Discrete time trees, length moves, and that this is different from how it is used in previous paper
 	\item $\rnni$ and $\dtt$ (with additional parameter $m$)
