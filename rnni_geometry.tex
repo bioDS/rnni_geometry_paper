@@ -94,13 +94,13 @@
 \section{Technical Introduction}
 
 \summary{Introducing discrete time-trees and ranked trees}
-\todo{cite Gavryushkin, Whidden, Matsen paper on discrete time-trees}
 A binary rooted phylogenetic tree is a binary tree on a fixed number $n$ of leaves, which are uniquely labelled by elements of the set $\{a_1, \ldots, a_n\}$.
 The main objective of study in this paper, \emph{discrete time-trees}, are such binary rooted phylogenetic trees, where leaves are assigned time $0$, and internal nodes are uniquely assigned integer-valued times, such that an internal node always has time greater than its children.
 We refer to the time of an internal node $v$ by $\ntime(v)$.
 If not stated otherwise, we will refer to discrete time-trees simply as \emph{trees}.
 The number of discrete time-trees with root time less or equal to $m$ is $\frac{(n-1)!n!m^{n-1}}{2^{n-1}}$ \autocite{Gavryushkin2018-ol}.
 Discrete time-trees with root time $n-1$ are called \emph{ranked trees}, and we say ranks to mean times of nodes in ranked trees to be consistent with notations used in \autocite{Collienne2020-iu}.
+Two trees are \emph{identical} if there is a graph isomorphism between them preserving leaf labels and times.
 
 Every internal node $v$ of a tree $T$ can be referred to by the set $C$ of leaves that are descending from this node.
 We call such a set $C$ \emph{cluster} and say that the cluster $C$ is \emph{induced} by $v$.
@@ -112,7 +112,7 @@ The main objective of this paper is to study the graph $\dtt_m$ of discrete time
 The nodes of $\dtt_m$ are trees with root time less pr equal to $m$.
 Trees $T$ and $R$ are connected by an edge if performing one of the following (reversible) operations on $T$ results in $R$:
 \begin{enumerate}
-	\item An \emph{$\nni$ move} connects trees $T$ and $R$ if there is an edge $e$ in $T$ and an edge $f$ in $R$, both of length one, such that shrinking $e$ and $f$ to nodes results in isomorphic trees. \todo{define isomorphic!}
+	\item An \emph{$\nni$ move} connects trees $T$ and $R$ if there is an edge $e$ in $T$ and an edge $f$ in $R$, both of length one, such that shrinking $e$ and $f$ to nodes results in isomorphic trees.
 	\item A \emph{rank move} on $T$ exchanges the times of two internal nodes, if the difference of their times is one.
 	\item A \emph{length move} on $T$ changes the time of an internal node by one.
 \end{enumerate}
@@ -176,7 +176,6 @@ Things we need to define:
 	\todo{Finish this proof!} 
 \end{proof}
 
-
 \summary{With Theorem~\ref{thm:caterpillar_convex_rnni} we can find a more efficient way to compute distances between caterpillar trees.}
 
 \begin{theorem}
@@ -237,8 +236,6 @@ Things we need to define:
 	With $a_k > a_{k+1}$ it follows that $a_k \notin M_{T'}$.
 	Furthermore, we can follow from $a_{k+1} \in (M_{T'} \setminus M_T)$ that $a_k$ is in $M_T$, as Condition~\ref{condition1} being true results from this condition being true for $a_{k+1}$ in $M_{T'}$, and Condition~\ref{condition2} being true results from $\rank(a_k)_T < \rank(a_{k+1})_T$ and Condition~\ref{condition2} being true for $a_k$ in $T'$.
 	Hence, it is $a_k \in M_T \setminus M_{T'})$, if $a_{k+1} \in (M_{T'} \setminus M_T)$ and we can follow that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, which concludes this proof.
-
-
 \end{proof}
 
 \subsection{Diameter and Radius}
