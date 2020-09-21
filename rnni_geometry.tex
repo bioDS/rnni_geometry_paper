@@ -38,6 +38,7 @@
 \newcommand{\findpath}{\textsc{FindPath}}
 \newcommand{\mrca}{\mathrm{mrca}}
 \newcommand{\rank}{\mathrm{rank}}
+\newcommand{\ntime}{\mathrm{time}}
 \newcommand{\nni}{\mathrm{NNI}}
 \newcommand{\spr}{\mathrm{SPR}}
 \newcommand{\tbr}{\mathrm{TBR}}
@@ -96,6 +97,7 @@
 \todo{cite Gavryushkin, Whidden, Matsen paper on discrete time-trees}
 A binary rooted phylogenetic tree is a binary tree on a fixed number $n$ of leaves, which are uniquely labelled by elements of the set $\{a_1, \ldots, a_n\}$.
 The main objective of study in this paper, \emph{discrete time-trees}, are such binary rooted phylogenetic trees, where leaves are assigned time $0$, and internal nodes are uniquely assigned integer-valued times, such that an internal node always has time greater than its children.
+We refer to the time of an internal node $v$ by $\ntime(v)$.
 If not stated otherwise, we will refer to discrete time-trees simply as \emph{trees}.
 The number of discrete time-trees with root time less or equal to $m$ is $\frac{(n-1)!n!m^{n-1}}{2^{n-1}}$ \autocite{Gavryushkin2018-ol}.
 Discrete time-trees with root time $n-1$ are called \emph{ranked trees}, and we say ranks to mean times of nodes in ranked trees to be consistent with notations used in \autocite{Collienne2020-iu}.
