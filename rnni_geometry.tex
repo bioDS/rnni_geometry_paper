@@ -127,18 +127,6 @@ As natural definition, we consider distances between two trees $T$ and $R$ in th
 The ranked nearest neighbour interchange ($\rnni$) graph of \textcite{Collienne2020-iu} is the graph $\dtt_m$ for $m=n-1$, and hence is a graph of ranked trees.
 Hence, length moves are not possible in this graph, and we use the notion $\rnni$ \emph{move} to mean either a rank move or an $\nni$ move.
 
-\subsection{$\findpath$ in $\dtt_m$}
-
-Distances between trees in $\rnni$ can be computed in quadratic running time with the algorithm $\findpath$, introduced by \textcite{Collienne2020-iu}.
-As $\rnni$ is a special case of $\dtt_m$ for $m = n-1$, the question whether this algorithm can be generalised to compute distances in $\dtt_m$ arises.
-Indeed, there is a way to use $\findpath$ to compute distances between trees in $\dtt_m$.
-
-\summary{Introduce how we can use $\findpath$ to compute $\dtt$ distances}
-Distances between trees $T$ and $R$ in $\dtt_m$ are computed in two steps.
-At first, leaves are added to both trees $T$ and $R$ in order to get two ranked trees $T_r$ and $R_r$ on with the same number of leaves.
-Afterwards, we apply $\findpath$ to the pair of trees $T_r,R_r$.
-With Theorem~\ref{thm:dtt_findpath} we see that this computes the distance $d(T,R)$ in $\dtt_m$ indeed.
-
 \todefine{
 	\begin{itemize}
 		\item ??intervals, to make explanation of length move and how they are replaced in order to use FP easier??
@@ -153,7 +141,19 @@ With Theorem~\ref{thm:dtt_findpath} we see that this computes the distance $d(T,
 }
 
 
-\section{$\dtt$}
+\section{Geometrical Properties of $\dtt$}
+
+\subsection{$\findpath$ in $\dtt_m$}
+
+Distances between trees in $\rnni$ can be computed in quadratic running time with the algorithm $\findpath$, introduced by \textcite{Collienne2020-iu}.
+As $\rnni$ is a special case of $\dtt_m$ for $m = n-1$, the question whether this algorithm can be generalised to compute distances in $\dtt_m$ arises.
+Indeed, there is a way to use $\findpath$ to compute distances between trees in $\dtt_m$.
+
+\summary{Introduce how we can use $\findpath$ to compute $\dtt$ distances}
+Distances between trees $T$ and $R$ in $\dtt_m$ are computed in two steps.
+At first, leaves are added to both trees $T$ and $R$ in order to get two ranked trees $T_r$ and $R_r$ on with the same number of leaves.
+Afterwards, we apply $\findpath$ to the pair of trees $T_r,R_r$.
+With Theorem~\ref{thm:dtt_findpath} we see that this computes the distance $d(T,R)$ in $\dtt_m$ indeed.
 
 \summary{How distances in $\dtt$ and $\rnni$ are related}
 
