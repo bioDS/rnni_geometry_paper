@@ -26,12 +26,15 @@
 \setlist{leftmargin = 0pt}
 \geometry{margin=1in}
 
+
 \newtheorem{proposition}{Proposition}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{corollary}{Corollary}
 \newtheorem{problem}{Problem}
 \newtheorem{conjecture}{Conjecture}
+
+% \renewcommand{\theoremautorefname}{Theorem}
 
 \newcommand{\tocite}{ {\color{red}\fbox{CITATION}} }
 \newcommand{\rnni}{\mathrm{RNNI}}
@@ -143,19 +146,54 @@ Hence, length moves are not possible in this graph, and we use the notion $\rnni
 
 \section{Geometrical Properties of $\dtt$}
 
-\subsection{$\findpath$ in $\dtt_m$}
+\todo{Do we want to keep this as subsection? Maybe rather a separate section as this is crucial for the whole paper}
+\subsection{$\findpath$ in $\dtt$}
 
+\summary{Introduce how we can use $\findpath$ to compute $\dtt$ distances}
 Distances between trees in $\rnni$ can be computed in quadratic running time with the algorithm $\findpath$, introduced by \textcite{Collienne2020-iu}.
 As $\rnni$ is a special case of $\dtt_m$ for $m = n-1$, the question whether this algorithm can be generalised to compute distances in $\dtt_m$ arises.
 Indeed, there is a way to use $\findpath$ to compute distances between trees in $\dtt_m$.
-
-\summary{Introduce how we can use $\findpath$ to compute $\dtt$ distances}
-Distances between trees $T$ and $R$ in $\dtt_m$ are computed in two steps.
+This works in two steps as it is briefly explained in the following, before we consider each of these steps in greater detail.
 At first, leaves are added to both trees $T$ and $R$ in order to get two ranked trees $T_r$ and $R_r$ on with the same number of leaves.
 Afterwards, we apply $\findpath$ to the pair of trees $T_r,R_r$.
 With Theorem~\ref{thm:dtt_findpath} we see that this computes the distance $d(T,R)$ in $\dtt_m$ indeed.
+To explain how ranked trees $T_r$ and $R_r$ can be received from adding leaves to trees $T$ and $R$, we assume that $T$ and $R$ are not ranked trees, as $\findpath$ could otherwise be applied to these trees directly.
 
-\summary{How distances in $\dtt$ and $\rnni$ are related}
+\summary{How to add leaves to a $\dtt_m$ tree to transform it into a ranked tree}
+Let $m$ to be the maximum time of the roots of $T$ and $R$.
+To receive a ranked tree $T_r$ on $m+2$ leaves from $T$, we add leaves to $T$ as follows.
+Note that the same can be done for $R$ to get a ranked tree $R_r$.
+The root of $T_r$ is assigned time $m + 1$ and is connected to the root of $T$, such that one child of the root of $T_r$ is the subtree $T$.
+\todo{Is this sentence sufficient to understand what's happening?}
+The other subtree that is child of the root of $T_r$ is a caterpillar tree with leaves $\{a_{n+1}, a_{n+2}, \ldots, a_{m+2}\}$, such that $\ntime(a_{n+1}) = \ntime(a_{n+2}) < \ntime(a_{n+3}) < \ldots < \ntime(a_{m+2})$ and the resulting tree is a ranked tree with $m+2$ leaves.
+An example of this extension of a tree $T$ to a ranked tree $T_r$ is depicted in \autoref{fig:dtt_to_ranked_tree}.
+
+\begin{figure}[ht]
+	\includegraphics[width=0.75\textwidth]{dtt_to_ranked_tree.eps}
+	\caption{Extending a tree $T$ on $n$ leaves in $\dtt_6$ (left) to a ranked tree with $m+2=8$ leaves (right) by adding a caterpillar subtree with three leaves.}
+	\label{fig:dtt_to_ranked_tree}
+\end{figure}
+
+\summary{How to compute shortest $\dtt$-paths between trees with $\findpath$}
+After extending both trees $T$ and $R$ to ranked trees $T_r$ and $R_r$ on $m+2$ leaves, $\findpath$ can compute a shortest path between $T_r$ and $R_r$ in the $\rnni$ graph on $m+2$ leaves.
+As we know that $\findpath$ preserves clusters, there are no $\nni$ moves in the newly added caterpillar tree with leaves in $\{a_{n+1}, \ldots, a_{m+2}\}$ on $\findpath$.
+Therefore, the only moves involving internal nodes of this caterpillar subtree are rank moves.
+Each of these rank moves can be seen as a length move in the subtree that is rooted in $\{a_1, \ldots, a_n\}$, when ignoring the rest of the tree.
+This way, every move on the path $\fp(T_r,R_r)$ can be seen as a move on a path between $T$ and $R$.
+\todo{Do we want to use $\fp(T,R)$ for discrete time-trees $T$ and $R$?}
+We denote this path in $\dtt_m$, which results from $\fp(T_r, R_r)$, by $\fp(T,R)$.
+In \autoref{thm:dtt_findpath} we see that the $\fp(T,R)$ is a shortest path in $\dtt_m$ indeed.
+
+\begin{theorem}
+	The path $\fp(T,R)$ between two discrete time-trees $T$ and $R$ is a shortest path between these trees in $\dtt_m$, where $m$ is the maximum time of the root of $T$ and $R$.
+	\label{thm:dtt_findpath}
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\summary{$\findpath$ distance in $\dtt$ is sum of $\fp(T,R)$ in $\rnni$ and length moves -- essential for later proofs}
 
 \begin{lemma}
 	\todo{How do we want to phrase this? Underlying or corresponding? -- or even only use the index  $d_{\rnni}$ to emphasise that we consider the corresponding trees in $\rnni$}
