@@ -54,6 +54,8 @@
 \newcommand{\summary}[1]{\textbf{#1}} % Print summaries to .pdf
 % \newcommand{\summary}[1]{} % Hide summaries in .pdf
 
+\newcommand{\todefine}[1]{{\color{blue}{We need to define:#1}}} % Print summaries to .pdf
+
 \DeclareMathOperator*{\argmin}{argmin}
 
 \graphicspath{{figures/}}
@@ -119,26 +121,24 @@ Trees $T$ and $R$ are connected by an edge if performing one of the following (r
 \end{enumerate}
 \todo{Is this clear? Maybe using intervals (if we are going to define them)}
 Note that length move can only change the time of a node in a tree $T$ if there is no node with this new time in $T$ already.
-It is also important to see that our definition of $\dtt_m$ differs from the definition in \autocite{Gavryushkin2018-ol}.
+It is also important to see that our definition of $\dtt_m$ differs from the definition of \textcite{Gavryushkin2018-ol}, as length move are defined differently in their paper.
+As natural definition, we consider distances between two trees $T$ and $R$ in this graph $\dtt_m$ to be the length of a shortest paths between these trees, and denote it by $d(T,R)$.
 
 The ranked nearest neighbour interchange ($\rnni$) graph of \textcite{Collienne2020-iu} is the graph $\dtt_m$ for $m=n-1$, and hence is a graph of ranked trees.
 Hence, length moves are not possible in this graph, and we use the notion $\rnni$ \emph{move} to mean either a rank move or an $\nni$ move.
 
-Things we need to define:
-\begin{itemize}
-	\item ??intervals, to make explanation of length move and how they are replaced in order to use FP easier??
-	\item $(S)_T$, also for one-element sets $S$
-	\item Discrete time trees, length moves, and that this is different from how it is used in previous paper
-	\item $\rnni$ and $\dtt$ (with additional parameter $m$)
-	\item $d(T,R)$ is the length of a shortest path, index $\dtt$ or $\rnni$ for the space we are currently in
-	\item caterpillar path and shortest caterpillar path (do we want to define caterpillar trees here or in the caterpillar tree section?)
-	\item convexity
-	\item representation of caterpillar trees as lists of leaves instead of cluster representation (?)
-	\item Define $\rnni(\rho)$ at the beginning of the corresponding section to avoid confusion
-	\item rank interval for Lemma~\ref{lemma:nni_path_to_caterpillar}
-	\item cherry (for lemma~\ref{lemma:max_dist_ctree})
-	\item one-neighbourhood (for Theorem~\ref{thm:caterpillar_convex_rnni})
-\end{itemize}
+\todefine{
+	\begin{itemize}
+		\item ??intervals, to make explanation of length move and how they are replaced in order to use FP easier??
+		\item caterpillar path and shortest caterpillar path -> in caterpillar section
+		\item convexity -> in caterpillar section
+		\item representation of caterpillar trees as lists of leaves instead of cluster representation (?)
+		\item $\rnni(\rho)$ -> in corresponding section
+		\item rank interval for Lemma~\ref{lemma:nni_path_to_caterpillar} -> if we needed, in corresponding section
+		\item cherry (for lemma~\ref{lemma:max_dist_ctree}) -> in caterpillar section (if needed)
+		\item one-neighbourhood (for Theorem~\ref{thm:caterpillar_convex_rnni}) -> in corresponding section, if needed
+	\end{itemize}
+}
 
 \summary{Introduce $\findpath$ for $\dtt$ and prove that it computes shortest paths}
 
