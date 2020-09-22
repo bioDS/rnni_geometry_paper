@@ -154,7 +154,7 @@ As $\rnni$ is a special case of $\dtt_m$ for $m = n-1$, the question whether thi
 Indeed, there is a way to use $\findpath$ to compute distances between trees in $\dtt_m$.
 This works in two steps as it is briefly explained in the following, before we consider each of these steps in greater detail.
 At first, leaves are added to both trees $T$ and $R$ in order to get two ranked trees $T_r$ and $R_r$ on with the same number of leaves.
-Afterwards, we apply $\findpath$ to the pair of trees $T_r,R_r$.
+Afterwards, we apply $\findpath$ to the pair of trees $T_r,R_r$, receiving the path $\fp(T_r,R_r)$.
 With Theorem~\ref{thm:dtt_findpath} we see that this computes the distance $d(T,R)$ in $\dtt_m$ indeed.
 To explain how ranked trees $T_r$ and $R_r$ can be received from adding leaves to trees $T$ and $R$, we assume that $T$ and $R$ are not ranked trees, as $\findpath$ could otherwise be applied to these trees directly.
 
@@ -178,7 +178,7 @@ After extending both trees $T$ and $R$ to ranked trees $T_r$ and $R_r$ on $m+2$ 
 As we know that $\findpath$ preserves clusters, there are no $\nni$ moves in the newly added caterpillar tree with leaves in $\{a_{n+1}, \ldots, a_{m+2}\}$ on $\findpath$.
 Therefore, the only moves involving internal nodes of this caterpillar subtree are rank moves.
 Each of these rank moves can be seen as a length move in the subtree that is rooted in $\{a_1, \ldots, a_n\}$, when ignoring the rest of the tree.
-This way, every move on the path $\fp(T_r,R_r)$ can be seen as a move on a path between $T$ and $R$.
+Hence the path $\fp(T_r,R_r)$ provides a path between $T$ and $R$, when only considering the subtrees induced by $\{a_1, \ldots, a_n\}$ in all trees on $\fp(T_r, R_r)$.
 \todo{Do we want to use $\fp(T,R)$ for discrete time-trees $T$ and $R$?}
 We denote this path in $\dtt_m$, which results from $\fp(T_r, R_r)$, by $\fp(T,R)$.
 In \autoref{thm:dtt_findpath} we see that the $\fp(T,R)$ is a shortest path in $\dtt_m$ indeed.
@@ -193,15 +193,15 @@ In \autoref{thm:dtt_findpath} we see that the $\fp(T,R)$ is a shortest path in $
 \end{proof}
 
 \summary{$\findpath$ distance in $\dtt$ is sum of $\fp(T,R)$ in $\rnni$ and length moves -- essential for later proofs}
+With \autoref{thm:dtt_findpath} we can compute shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in time $\O(m^2)$.
+It furthermore follows that the distance between trees $T$ and $R$ in $\dtt_m$ is the sum of $\rnni$ moves and length moves on $\fp(T,R)$.
 
-\begin{lemma}
-	\todo{How do we want to phrase this? Underlying or corresponding? -- or even only use the index  $d_{\rnni}$ to emphasise that we consider the corresponding trees in $\rnni$}
-	Let $T$ and $R$ be discrete time-trees and $T'$ and $R'$ the underlying ranked trees.
+\begin{corollary}
+	Let $T$ and $R$ be discrete time-trees.
 	Then the distance between $T$ and $R$ in $\dtt$ is:
-	\[d_{\dtt}(T,R) = d_{\rnni}(T,R) + l_{T,R},\]
-	\todo{Maybe we introduce these moves so that we can still call them length moves, even if on $\findpath$ they actually are rank moves?}
-	where $l_{T,R}$ is the number of rank moves on $\fp(T,R)$ that involve a node of the additional caterpillar tree.
-\end{lemma}
+	\[d(T,R) = r(T,R) + l(T,R),\]
+	where $l(T,R)$ is the number of length moves, and $r(T,R)$ the number of rank and $\nni$ moves on $\fp(T,R)$.
+\end{corollary}
 
 
 \section{Geometrical Properties of $\dtt$}
