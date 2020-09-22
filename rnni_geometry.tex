@@ -206,7 +206,13 @@ In \autoref{thm:dtt_findpath} we see that the $\fp(T,R)$ is a shortest path in $
 \end{theorem}
 
 \begin{proof}
-
+	To prove this theorem we assume to the contrary that there is a shortest path between discrete time-trees $T$ and $R$ in $\dtt_m$ that is shorter than $\fp(T,R)$.
+	We furthermore assume that $T_r$ and $R_r$ are the extended ranked versions of $T$ and $R$, computed with \autoref{alg:ranked_tree}.
+	An important observation about length moves in $\dtt_m$ is that they correspond to rank moves between nodes of the two different subtrees rooted in the children of the root.
+	As the leaves in the caterpillar subtrees added to $T$ and $R$ in order to receive $T_r$ and $R_r$ are ordered identically, it follows that any path in $\dtt$ from $T$ to $R$ gives a path between $T_r$ and $R_r$ in the $\rnni$ space on $m+2$ leaves.
+	Moreover, the path between $T_r$ and $R_r$ has the same length as the one between $T$ and $R$ in $\dtt_m$.
+	If there is a path between $T$ and $R$ that is shorter than $\fp(T,R)$, there is a corresponding path between $T_r$ and $R_r$ in $\rnni$ that is shorter than the one computed by $\findpath$ in this space.
+	This however contradicts \autocite[Theorem 1]{Collienne2020-iu}, proving that $\findpath$ computes shortest paths in $\rnni$.
 \end{proof}
 
 \summary{$\findpath$ distance in $\dtt$ is sum of $\fp(T,R)$ in $\rnni$ and length moves -- essential for later proofs}
