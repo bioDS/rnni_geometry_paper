@@ -144,10 +144,9 @@ Hence, length moves are not possible in this graph, and we use the notion $\rnni
 }
 
 
-\section{Geometrical Properties of $\dtt$}
+\section{Computing Shortest Paths in $\dtt$}
 
-\todo{Do we want to keep this as subsection? Maybe rather a separate section as this is crucial for the whole paper}
-\subsection{$\findpath$ in $\dtt$}
+\todo{Do we want $\dtt$ or $\dtt_m$ in the titles of sections?}
 
 \summary{Introduce how we can use $\findpath$ to compute $\dtt$ distances}
 Distances between trees in $\rnni$ can be computed in quadratic running time with the algorithm $\findpath$, introduced by \textcite{Collienne2020-iu}.
@@ -203,6 +202,9 @@ In \autoref{thm:dtt_findpath} we see that the $\fp(T,R)$ is a shortest path in $
 	\todo{Maybe we introduce these moves so that we can still call them length moves, even if on $\findpath$ they actually are rank moves?}
 	where $l_{T,R}$ is the number of rank moves on $\fp(T,R)$ that involve a node of the additional caterpillar tree.
 \end{lemma}
+
+
+\section{Geometrical Properties of $\dtt$}
 
 \subsection{Caterpillar Trees}
 
