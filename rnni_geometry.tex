@@ -62,6 +62,7 @@
 \newcommand{\todefine}[1]{{\color{blue}{We need to define:#1}}} % Print summaries to .pdf
 
 \DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
 
 \graphicspath{{figures/}}
 
@@ -254,16 +255,28 @@ For such a set of trees for which there is a shortest path in a graph that stays
 \end{theorem}
 
 \begin{proof}
-	Let $T$ and $R$ be two caterpillar trees.
-	For proving the lemma, we show that there is a tree caterpillar tree $T'$ in the one-neighbourhood of $T$ with distance $d(T',R) = d(T,R) - 1$ to $R$.
-	The existence of a path between $T$ and $R$ that only consists of caterpillar trees then follows inductively.
-	If there is a leaf that is part of the cherry in both trees $T$ and $R$, then the first tree on $\fp(T,R)$ is a caterpillar tree, which proves the statement.
-	So we only need to consider the case that $T$ and $R$ have different cherries.
-	Let $a_1$ and $a_2$ be the leaves of the cherry of $T$ and $a_3$ the leaf which has parent of rank two in $T$.
-	Since neither $a_1$ nor $a_2$ are in the cherry of $R$, their parents must be different and therefore have different ranks in $R$.
-	For the same reason, the parents of $a_1$ and $a_2$ also have a rank different to the parent of $a_3$ in $R$.
-	% Two cases: $a_3$ above $a_1$ and $a_2$ in $R$ or one of $\{a_1,a_2\}$ is above $a_3$.
-	\todo{Finish this proof!} 
+	\todo{Do we need the contradiction assumption here?}
+	For proving the theorem we assume to the contrary that there are caterpillar trees $T$ and $R$ in $\rnni$ such that there is no shortest path between them that is a caterpillar path.
+	\todo{Do we need to define $\rank(a_k)_T$?}
+	We consider the leaf $a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_R | \rank(a_i)_R \neq \rank(a_i)_T\}$ to be the leaf with parent with maximum rank that is not in the same position in $T$ and $R$.
+	Let $T'$ be the caterpillar tree resulting from $T$ by performing an $\nni$ move exchanging $a_k$ and $a_j$, where $\rank(a_j)_T = \rank(a_k)_T + 1$.
+	By using som properties of shortest paths computed by $\findpath$, we now show that $|\fp(R,T')| = |\fp(R,T)| - 1$, and therefore prove the theorem.
+
+	Since all clusters of $T$ and $T'$ induced by nodes of rank less than $\rank(a_k)_T$ coincide, the paths $\fp(T,R)$ and $\fp(T',R)$ coincide up to a tree $R'$, which contains all these clusters.
+	\todo{Do we really need this notation? If so, define it somewhere!}
+	In the next step of $\findpath(R,T)$, the rank of $(S \cup \{a_k\})_{R'}$ decreases, while on $\findpath(R,T')$, $S \cup \{a_j\}$ is the next cluster to be considered, where $S := (T)_{\rank(a_k)_T}$.
+	Since $\rank(a_k)_R > \rank(a_j)_R$, the same holds in $R'$.
+	It follows that on $\fp(R,T)$ the number of moves to move $(S \cup \{a_k\})_{R'}$ down is $\rank(S \cup \{a_k\})_{R'} - \rank(S)_{R'}$.
+	Since $\rank(a_j)_{R'} < \rank(a_k)_{R'}$, there is a move on $\fp(R,T)$ where the ranks of the parents of $a_j$ and $a_k$ swap, which increases the rank of the most recent common ancestor of $S\cup\{a_j\}$, and hence decreasing the most recent common ancestor of $S \cup \{a_j,a_k\}$ in the next iteration needs $\rank(S\cup\{a_k\})_{R'} - (\rank(S)_{R'} + 1) + 1$ moves.
+	The moves on $\fp(R,T')$ in the two iterations following $R'$ are $\rank(S\cup\{a_k\})_{R'} - \rank(S)_{R'}$ for the cluster $S\cup\{a_k\}$ and $\rank(S\cup\{a_k\})_{R'} - (\rank(S)_{R'} + 1)$.
+	Note that all moves decreasing the most recent common ancestors mentioned above can be seen as moving the parent of a single leaf $(a_k)_{R'}$ or $(a_j)_{R'}$ down, as the set $S$ already is present in $R'$
+
+	Let $Q$ and $Q'$ be the trees on $\fp(R,T)$ and $\fp(R,T')$, respectively, after the two iterations following $R'$ as described above.
+	To receive $Q$ and $Q'$ from $R'$ only the parents of the same leaves $a_k$ and $a_j$ are moved down, just in different orders.
+	Therefore, $Q$ and $Q'$ coincide everywhere, but in the positions of $a_k$ and $a_j$.
+	In fact, exchanging the positions of $a_k$ and $a_j$ in the pair of trees $Q$ and $T$ results in the trees $Q'$ and $T'$, respectively.
+	Hence the distances between these pairs of trees coincide: $d(Q,T) = d(Q',T')$, and $|\fp(Q,T)| = |\fp(Q',T')|$ follows.
+	With our observation above we can conclude $|\fp(R,T)| = |\fp(R,R')| + \rank(S\cup\{a_k\})_{R'} - (\rank(S)_{R'} + 1) + 1 + |\fp(Q,T)| = |\fp(R,R')| + \rank(S\cup\{a_k\})_{R'} - (\rank(S)_{R'} + 1) + |\fp(Q',T')| + 1 = |\fp(R,T')|$
 \end{proof}
 
 \begin{corollary}
