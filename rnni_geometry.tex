@@ -308,20 +308,20 @@ For such a set of trees for which there is a shortest path in a graph that stays
 \todo{Cite TSP paper -- caterpillar trees as special instance of TSP (lollipop graph)}
 
 \begin{theorem}
-	\todo{Do we want to use the represenation of caterpillar trees as sequence of leaves?}
-	Let $T$ be an arbitrary caterpillar tree and $R$ the caterpillar tree $[1,2, \ldots, n]$.
-	\todo{Note somewhere that we refer to the list representations of caterpillar trees by $T$, for example}
+	Let $T$ be an arbitrary caterpillar tree and $R$ the caterpillar tree with
+	\[1 = \rank(a_1)_R = \rank(a_2)_r < \rank(a_3)_R < \ldots < \rank(a_n)_R = n-1.\]
 	Then it is
 	\[d(T,R) = p_T - m_T,\]
 	where $p_T$ is the number of transpositions in $T$ (Kendall-tau distance \tocite) and $m_T = |M_T|$ for
-	\[{M_T} := \{i| (\forall k \text{ with } \rank(k)_T \leq \rank(i)_T: i < k) \text{ and } \rank(i)_T < \min\{\rank(1)_T, \rank(2)_T\}\}\]
-	\todo{define the partial order $\preceq$}
+	\begin{align*}
+		M_T := &\{a_i| (\forall k \textnormal{ with } \rank(a_k)_T \leq \rank(a_i)_T: \rank(a_i)_R < \rank(a_k)_r)\} \\
+		& \cap \{a_i | \rank(a_i)_T < \min\{\rank(a_1)_T, \rank(a_2)_T\}\}
+	\end{align*}
 	\label{thm:caterpillar_distance_formula}
 \end{theorem}
 
 \begin{proof}
-	To prove the Theorem, we assume that $T$ and $R$ are caterpillar trees as described in the Theorem.
-	We denote $\hat d(T,R) = p_T - m_T$ and prove $\hat d(T,R) = d(T,R)$.
+	For $\hat d(T,R) = p_T - m_T$ we prove $\hat d(T,R) = d(T,R)$.
 	Similar to the proof of \autocite[Theorem 1]{Collienne2020-iu}, we only need to prove that for any caterpillar tree $T'$ in the one-neighbourhood of $T$ it is
 	\begin{align}
 		\hat d(T',R) \geq \hat d(T,R) - 1.
@@ -343,7 +343,7 @@ For such a set of trees for which there is a shortest path in a graph that stays
 	Then $a_k$ and $a_{k+1}$ are not in $M_T$, which means that each of them ($i \in \{a_k,a_{k+1}\}$) violates one of the conditions:
 	\todo{do we want to say $a_k$ \emph{violates} Condition $x$? Or does another leaf $k$ violate Condition $x$ for $a_k$?}
 	\begin{align}
-		\forall k \text{ with } \rank(k)_T \leq \rank(i)_T: i < k \label{condition1}\\
+		\forall k \text{ with } \rank(a_k)_T \leq \rank(a_i)_T: \rank(a_i)_R < \rank(a_k)_r \label{condition1}\\
 		\rank(i)_T < \min\{\rank(1)_T, \rank(2)_T\}.
 		\label{condition2}
 	\end{align}
