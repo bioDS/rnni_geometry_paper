@@ -390,6 +390,7 @@ Since the $\rnni$ graph is the graph $\dtt_{n-1}$, the diameter of $\rnni$ is a 
 	\label{cor:diameter_rnni}
 \end{corollary}
 
+\summary{Every tree in $\rnni$ can be connected to a caterpillar tree by $\nni$ moves only, hence there is a path between very pair of trees that consists of $\nni$ moves only}
 \todo{This is mainly relevant for $RNNI(\infty)$. As it is a statement about $\rnni$, we could still keep it here, if needed}
 \begin{lemma}
 	In $\rnni$ every tree is connected to a caterpillar tree by a path that consists of $\nni$ moves only.
@@ -418,8 +419,8 @@ Since the $\rnni$ graph is the graph $\dtt_{n-1}$, the diameter of $\rnni$ is a 
 \end{proof}
 
 \summary{Radius of $\rnni$ is equal to its diameter.}
-For proving that the radius of $\rnni$, which is defined $\min\limits_{\text{tree } T}\max\limits_{\text{tree }R} d(T,R)$, equals its diameter, we need the following lemma.
-\todo{Can we come up with a more intuitive description of what the radius of a graph is?}
+\todo{This needs to be expanded. Can we come up with a more intuitive description of what the radius of a graph is?}
+The radius of $\rnni$, which is defined $\min\limits_{\text{tree } T}\max\limits_{\text{tree }R} d(T,R)$, equals its diameter, results from the following lemma.
 
 \begin{lemma}
 	For every tree on $n$ leaves exists a caterpillar tree with distance $\frac{(n-1)(n-2)}{2}$ from it in $\rnni$.
@@ -449,6 +450,7 @@ For proving that the radius of $\rnni$, which is defined $\min\limits_{\text{tre
 \end{proof}
 
 \begin{proposition}
+	\todo{Can we get rid of $\rad$?}
 	The radius of the $\rnni$ graph equals its diameter, i.e. $\rad(\rnni) = \frac{(n-1)(n-2)}{2}$.
 \end{proposition}
 
@@ -456,6 +458,8 @@ For proving that the radius of $\rnni$, which is defined $\min\limits_{\text{tre
 	From Lemma~\ref{lemma:max_dist_ctree} we know that there is a tree with distance $\frac{(n-1)(n-2)}{2}$ from any given tree.
 	Hence the radius equals the diameter of $\rnni$.
 \end{proof}
+
+\todo{What about the diameter of $\dtt$?}
 
 
 \section{$\rnni(\rho)$}
