@@ -304,7 +304,7 @@ For such a set of trees for which there is a shortest path in a graph that stays
 \end{proof}
 
 \summary{With Theorem~\ref{thm:caterpillar_convex_rnni} we can find a more efficient way to compute distances between caterpillar trees.}
-
+\todo{writing}
 \todo{Cite TSP paper -- caterpillar trees as special instance of TSP (lollipop graph)}
 
 \begin{theorem}
@@ -369,24 +369,26 @@ For such a set of trees for which there is a shortest path in a graph that stays
 
 \subsection{Diameter and Radius}
 
-%TODO: Make this independent of rho
 \summary{Definition of Diameter and that we consider it depending on $\rho$.}
-In this section we want to investigate the diameter of $\rnni(\rho)$, which is the greatest distance between any pair of vertices (trees) in this graph, i.e. $\max\limits_{\text{trees }T,R}d(T,R)$.
-We will show that the diameter of $\rnni(\rho)$ depends on $\rho$.
-Since the $\rnni$ graph, where rank moves have weight one, is the only one for which a polynomial time algorithm for computing distances is known, we start considering the diameter of this graph before turning to $\rnni(\rho)$ for different values of $\rho$.
+In this section we want to investigate the diameters of $\rnni$ and $\dtt$, which is the greatest distance between any pair of vertices (trees) in each of these graphs, respectively, i.e. $\max\limits_{\text{trees }T,R}d(T,R)$.
+We prove the diameter dor $\dtt$ before finding the diameter of $\rnni$ as a special case of $\dtt$.
 
-\summary{Diameter in $\rnni$ follows from results in previous paper.}
-The algorithm $\findpath$ of \autocite{Collienne2020-iu}, which computes distances in $\rnni$, facilitates finding the diameter of the $\rnni$ graph.
+
+\begin{theorem}
+	The diameter of $\dtt_m$ is $m(n-1) - \frac{n(n-1)}{2}$.
+	\label{thm:dtt_diameter}
+\end{theorem}
+
+\begin{proof}
+	\todo{Use $\findpath$ on $T_r$ and $R_r$ to prove this}
+\end{proof}
+
+Since the $\rnni$ graph is the graph $\dtt_{n-1}$, the diameter of $\rnni$ is a direct result of \autoref{thm:dtt_diameter}.
+
 \begin{corollary}
 	The diameter of $\rnni$ is $\frac{(n-1)(n-2)}{2}$.
 	\label{cor:diameter_rnni}
 \end{corollary}
-
-\begin{proof}
-	The proof of Corollary 1 in \autocite{Collienne2020-iu} gives an example of trees for which the length of the path computed by $\findpath$, and therefore the distance, is $\frac{(n-1)(n-2)}{2}$.
-	It remains to show that $\findpath$ cannot computes paths longer than $\frac{(n-1)(n-2)}{2}$.
-	\todo{Explain that this cannot happen by explicitely mention how often while and for loop are executed -- do we want to repeat the pseudo-code in this paper?}
-\end{proof}
 
 %TODO: This is mainly relevant for RNNI(\infty). As it is a statement about RNNI, we could still keep it here, if needed
 \begin{lemma}
