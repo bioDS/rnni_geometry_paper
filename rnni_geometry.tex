@@ -241,6 +241,19 @@ It furthermore follows that the distance between trees $T$ and $R$ in $\dtt_m$ i
 	\label{thm:cluster_property_rnni}
 \end{theorem}
 
+\begin{proof}
+	For proving the theorem we assume the contrary, that is, there are two trees sharing a cluster that is not present in all trees on a shortest path.
+	Let $T$ and $R$ be two trees with a shortest path $p$ with this property such that the distance between them is minimal among all pairs of trees violating the cluster property.
+	We assume that $C$ is the cluster present in both $T$ and $R$, but not in all trees on $p$.
+	By the minimality assumption on the length of $p$ we know that the first tree $T'$ after $T$ on $p$ does not contain $C$.
+	Therefore, all nodes with rank below $(C)_T$ induce the same clusters in $T$ and $T'$.
+	\todo{Is this obvious?}
+	When running $\findpath$ for computing a shortest path between $T'$ and $R$ we can assume that $C$ is the first cluster that is considered, due to the minimality assumption on the length of $p$ as in the proof Theorem 1 of \textcite{Collienne2020-iu}.
+	Since $C$ is the first cluster that will be constructed in $T'$ on $\findpath$ in order to compute a path to $R$, the tree following $T'$ on this path is $T$, which contains $C$ as a cluster.
+	This however contradicts the assumption that $T'$ is on a shortest path from $T$ to $R$.
+	It follows that there is no shortest path between $T$ and $R$ that does not preserve $C$ and hence, the $\rnni$ graph has the cluster property.
+\end{proof}
+
 \subsection{Caterpillar Trees}
 
 \summary{Defining Caterpillar trees. Why are they interesting?}
