@@ -406,7 +406,13 @@ We prove the diameter dor $\dtt$ before finding the diameter of $\rnni$ as a spe
 \end{theorem}
 
 \begin{proof}
-	\todo{Use $\findpath$ on $T_r$ and $R_r$ to prove this}
+	Let $T$ and $R$ be two trees in $\dtt_m$ and $T_r$ and $R_r$ their ranked versions on $m+2$ leaves.
+	In every iteration $i$ of $\findpath$ the maximum number of moves is $m-i$, due to the following.
+	The maximum rank of the most recent common ancestor of the cluster $(R)_i$ in $T$ is $m$, as this is the rank of the root of the subtree containing all elements of that cluster.
+	And since the most recent common ancestor moves down until it reaches rank $i$, the maximum number of moves in each iteration id $m-i$.
+	Hence the sum of all moves need for  all most recent common ancestors of clusters in $R$ is
+	\[\sum\limits_{i = 1}^{n-1} (m - i) = m(n-1) + \frac{n(n-1)}{2}.\]
+	The trees in \todo{figure} provide an example where the path computed by $\findpath$ actually has length $m(n-1) - \frac{n(n-1)}{2}$, proving that this upper bound for distances is tight and hence the diameter of $\dtt_m$.
 \end{proof}
 
 Since the $\rnni$ graph is the graph $\dtt_{n-1}$, the diameter of $\rnni$ is a direct result of \autoref{thm:dtt_diameter}.
