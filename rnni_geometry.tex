@@ -411,7 +411,7 @@ We prove the diameter dor $\dtt$ before finding the diameter of $\rnni$ as a spe
 	The maximum rank of the most recent common ancestor of the cluster $(R)_i$ in $T$ is $m$, as this is the rank of the root of the subtree containing all elements of that cluster.
 	And since the most recent common ancestor moves down until it reaches rank $i$, the maximum number of moves in each iteration id $m-i$.
 	Hence the sum of all moves need for  all most recent common ancestors of clusters in $R$ is
-	\[\sum\limits_{i = 1}^{n-1} (m - i) = m(n-1) + \frac{n(n-1)}{2}.\]
+	\[\sum\limits_{i = 1}^{n-1} (m - i) = m(n-1) - \frac{n(n-1)}{2}.\]
 	The trees in \todo{figure} provide an example where the path computed by $\findpath$ actually has length $m(n-1) - \frac{n(n-1)}{2}$, proving that this upper bound for distances is tight and hence the diameter of $\dtt_m$.
 \end{proof}
 
