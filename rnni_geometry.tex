@@ -412,9 +412,16 @@ We prove the diameter dor $\dtt$ before finding the diameter of $\rnni$ as a spe
 	And since the most recent common ancestor moves down until it reaches rank $i$, the maximum number of moves in each iteration id $m-i$.
 	Hence the sum of all moves need for  all most recent common ancestors of clusters in $R$ is
 	\[\sum\limits_{i = 1}^{n-1} (m - i) = m(n-1) - \frac{n(n-1)}{2}.\]
-	The trees in \todo{figure} provide an example where the path computed by $\findpath$ actually has length $m(n-1) - \frac{n(n-1)}{2}$, proving that this upper bound for distances is tight and hence the diameter of $\dtt_m$.
+	The trees in \autoref{fig:cat_max_dist_dtt} provide an example where the path computed by $\findpath$ actually has length $m(n-1) - \frac{n(n-1)}{2}$, proving that this upper bound for distances is tight and hence the diameter of $\dtt_m$.
+
+	\begin{figure}[ht]
+		\includegraphics[width=0.4\textwidth]{cat_max_dist_dtt.eps}
+		\caption{Trees with distance $m(n-1) - \frac{n(n-1)}{2} = 9$ for $m = 5,\ n = 4$.}
+		\label{fig:cat_max_dist_dtt}
+	\end{figure}
 \end{proof}
 
+\todo{graphs are isomorphic?!}
 Since the $\rnni$ graph is the graph $\dtt_{n-1}$, the diameter of $\rnni$ is a direct result of \autoref{thm:dtt_diameter}.
 
 \begin{corollary}
@@ -451,7 +458,7 @@ Since the $\rnni$ graph is the graph $\dtt_{n-1}$, the diameter of $\rnni$ is a 
 \end{proof}
 
 \summary{Radius of $\rnni$ is equal to its diameter.}
-\todo{This needs to be expanded. Can we come up with a more intuitive description of what the radius of a graph is?}
+\todo{This intro needs to be expanded. Can we come up with a more intuitive description of what the radius of a graph is?}
 The radius of $\rnni$, which is defined $\min\limits_{\text{tree } T}\max\limits_{\text{tree }R} d(T,R)$, equals its diameter, results from the following lemma.
 
 \begin{lemma}
