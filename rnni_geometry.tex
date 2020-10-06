@@ -322,20 +322,8 @@ For such a set of trees for which there is a shortest path in a graph that stays
 \end{corollary}
 
 \begin{proof}
-	Let $T$ and $R$ be trees in $\dtt_m$ and $p$ a path that is shortest among all caterpillar paths between these trees, consisting of $r(T,R)$ $\rnni$ moves and $l(T,R)$ length moves.
-	The path $p$ can also be interpreted as a path between $T_r$ and $R_r$, where $T_r$ and $R_r$ are the ranked trees computed with \autoref{alg:ranked_tree} for $T$ and $R$, respectively.
-	For proving that $p$ is a shortest path between $T$ and $R$, we assume to the contrary that there is a path $p'$ between $T$ and $R$ that is shorter than $p$.
-	Let $r'(T,R)$ be the number of $\rnni$ moves on $p'$ and $l'(T,R)$ the number of its length moves.
-	By \autoref{thm:caterpillar_convex_rnni} $r(T,R) \leq r'(T,R)$, and hence $l(T,R) > l'(T,R)$.
-
-	The caterpillar subtrees $T_c$ and $R_c$ on the leaf subset $\{a_{n+1}, \ldots, a_{m+2}\}$, that are added to $T$ and $R$ by \autoref{alg:ranked_tree}, respectively, contain exactly the same clusters.
-	Since clusters are preserved on shortest paths in $\rnni$ (\autoref{thm:cluster_property_rnni}), the only moves on a shortest path between such trees are length moves.
-	The distance between these trees $T_c$ and $R_C$ in $\dtt_m$ is therefore $\sum_{i = n+1}^{m+2} |\rank(a_{i})_{T_c} - \rank(a_{i})_{R_c}|$.
-	Note that on $\fp(T_r,R_r)$ the number of rank moves $l(T,R)$ involving nodes of the caterpillar subtree on $\{a_{n+1}, \ldots, a_{m+2}\}$ is equivalent to this sum.
-	Furthermore, the number of $\rnni$ moves $r(T,R)$ on the subtree on $\{a_1, \ldots, a_n\}$ is equivalent to the length of $\fp(T',R')$ where $T'$ and $R'$ are ranked trees on $n$ leaves received from $T$ and $R$ by ignoring times of internal nodes and just keeping their order in time as ranking.
-	There is a shortest path between $T'$ and $R'$ that only consists of caterpillar trees (\autoref{thm:caterpillar_convex_rnni}).
-	\todo{Why $l(T,R)$ moves?}
-	This path can be extended to a path from $T$ to $R$ by adding $l(T,R)$ length moves.
+	With \autoref{lemma:dtt_path_sum} it is sufficient to show that there is a caterpillar path between two caterpillar trees $T$ and $R$ that minimises the number of $\rnni$ moves $r(T,R)$ needed on any path between these two trees.
+	This however follows immediately from the convexity of the set of caterpillar trees in $\rnni$ (\autoref{thm:caterpillar_convex_rnni}), which proves this corollary.
 \end{proof}
 
 \summary{With Theorem~\ref{thm:caterpillar_convex_rnni} we can find a more efficient way to compute distances between caterpillar trees.}
