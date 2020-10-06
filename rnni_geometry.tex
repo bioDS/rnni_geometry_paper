@@ -34,7 +34,7 @@
 \newtheorem{problem}{Problem}
 \newtheorem{conjecture}{Conjecture}
 
-% \renewcommand{\theoremautorefname}{Theorem}
+\newcommand{\lemmaautorefname}{Lemma}
 
 \newcommand{\tocite}{ {\color{red}\fbox{CITATION}} }
 \newcommand{\rnni}{\mathrm{RNNI}}
@@ -217,15 +217,6 @@ In \autoref{thm:dtt_findpath} we see that the $\fp(T,R)$ is a shortest path in $
 
 \summary{$\findpath$ distance in $\dtt$ is sum of $\fp(T,R)$ in $\rnni$ and length moves -- essential for later proofs}
 With \autoref{thm:dtt_findpath} we can compute shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in time $\O(m^2)$.
-It furthermore follows that the distance between trees $T$ and $R$ in $\dtt_m$ is the sum of $\rnni$ moves and length moves on $\fp(T,R)$.
-
-\begin{corollary}
-	\todo{Do actually need this corollary?}
-	Let $T$ and $R$ be discrete time-trees.
-	Then the distance between $T$ and $R$ in $\dtt$ is:
-	\[d(T,R) = r(T,R) + l(T,R),\]
-	where $l(T,R)$ is the number of length moves, and $r(T,R)$ the number of rank and $\nni$ moves on $\fp(T,R)$.
-\end{corollary}
 
 
 \section{Geometrical Properties of $\dtt$}
@@ -259,11 +250,34 @@ The question, whether $\rnni$ has the cluster property is hence natural, and wil
 	Hence, there is no shortest path between $T$ and $R$ that does not preserve $C$ which shows that the $\rnni$ graph has the cluster property.
 \end{proof}
 
+\todo{motivate the following lemma}
+
+\begin{lemma}
+	Any shortest path between two trees $T$ and $R$ in $\dtt_m$ minimises both the number of $\rnni$ moves $r(T,R)$ and the number of length moves $l(T,R)$ between these trees.
+	\label{lemma:dtt_path_sum}
+\end{lemma}
+
+\begin{proof}
+	Let $T$ and $R$ be trees in $\dtt_m$.
+	Every shortest path between $T$ and $R$ can be interpreted as a path between $T_r$ and $R_r$, where $T_r$ and $R_r$ are the ranked trees computed with \autoref{alg:ranked_tree} for $T$ and $R$, respectively.
+
+	The caterpillar subtrees $T_c$ and $R_c$ on the leaf subset $\{a_{n+1}, \ldots, a_{m+2}\}$, that are added to $T$ and $R$ by \autoref{alg:ranked_tree}, respectively, contain exactly the same clusters.
+	Since clusters are preserved on shortest paths in $\rnni$ (\autoref{thm:cluster_property_rnni}), the only moves on any shortest path between $T_r$ and $R_r$ that effect internal nodes of the added caterpillar trees are rank moves.
+	Therefore, the minimum number of moves needed to transform $T_c$ and $R_C$ is $\sum_{i = n+1}^{m+2} |\rank(a_{i})_{T_c} - \rank(a_{i})_{R_c}|$, which is the number rank of moves that $\findpath$ takes for these subtrees.
+
+	The number of $\rnni$ moves is also minimal on $\fp(T,R)$, which we will see in the following.
+	Assume that there was a path $p$ with less than $r(T,R)$ $\rnni$ moves between $T$ and $R$, where $r(T,R)$ is the number of $\rnni$ moves on $\fp(T,R)$.
+	Then there is a path in $\rnni$ between ranked trees $\hat T$ and $\hat R$, which result from $T$ and $R$ by ignoring times of internal nodes and only keeping their ranks, with length $|p| < \fp(\hat T, \hat R)$, contradicting that $\findpath$ computes shortest paths in $\rnni$.
+
+	It follows that $\findpath$ computes a shortest paths minimising both the number $r(T,R)$ of $\rnni$ moves and the number of length moves $l(T,R)$.
+	Hence every shortest path in $\dtt_m$ has this property.
+\end{proof}
+
+With \autoref{lemma:dtt_path_sum} the cluster property in $\dtt_m$ follows from \autoref{thm:cluster_property_rnni}.
+
 \begin{corollary}
 	The graph $\dtt_m$ has the cluster property.
 \end{corollary}
-
-\todo{prove this}
 
 \subsection{Caterpillar Trees}
 
@@ -308,14 +322,13 @@ For such a set of trees for which there is a shortest path in a graph that stays
 \end{corollary}
 
 \begin{proof}
-	Let $T$ and $R$ be trees and $p$ a path that is shortest among all caterpillar paths between these trees.
-	We furthermore assume that $p$ consists of $r(T,R)$ $\rnni$ moves and $l(T,R)$ length moves.
+	Let $T$ and $R$ be trees in $\dtt_m$ and $p$ a path that is shortest among all caterpillar paths between these trees, consisting of $r(T,R)$ $\rnni$ moves and $l(T,R)$ length moves.
 	The path $p$ can also be interpreted as a path between $T_r$ and $R_r$, where $T_r$ and $R_r$ are the ranked trees computed with \autoref{alg:ranked_tree} for $T$ and $R$, respectively.
 	For proving that $p$ is a shortest path between $T$ and $R$, we assume to the contrary that there is a path $p'$ between $T$ and $R$ that is shorter than $p$.
 	Let $r'(T,R)$ be the number of $\rnni$ moves on $p'$ and $l'(T,R)$ the number of its length moves.
 	By \autoref{thm:caterpillar_convex_rnni} $r(T,R) \leq r'(T,R)$, and hence $l(T,R) > l'(T,R)$.
 
-	The caterpillar subtrees $T_c$ and $R_c$ on the leaf subset $\{a_{n+1}, \ldots, a_{m+2}\}$, that are added to $T$ and $R$, respectively, contain exactly the same clusters.
+	The caterpillar subtrees $T_c$ and $R_c$ on the leaf subset $\{a_{n+1}, \ldots, a_{m+2}\}$, that are added to $T$ and $R$ by \autoref{alg:ranked_tree}, respectively, contain exactly the same clusters.
 	Since clusters are preserved on shortest paths in $\rnni$ (\autoref{thm:cluster_property_rnni}), the only moves on a shortest path between such trees are length moves.
 	The distance between these trees $T_c$ and $R_C$ in $\dtt_m$ is therefore $\sum_{i = n+1}^{m+2} |\rank(a_{i})_{T_c} - \rank(a_{i})_{R_c}|$.
 	Note that on $\fp(T_r,R_r)$ the number of rank moves $l(T,R)$ involving nodes of the caterpillar subtree on $\{a_{n+1}, \ldots, a_{m+2}\}$ is equivalent to this sum.
