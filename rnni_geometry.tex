@@ -329,64 +329,75 @@ For such a set of trees for which there is a shortest path in a graph that stays
 \todo{writing}
 \todo{Cite TSP paper -- caterpillar trees as special instance of TSP (lollipop graph)}
 
+\todo{idea: this could be a lemma followed by a thm: caterpillar distances can be computed in $n \log$}
 \begin{theorem}
-	Let $T$ and $R$ be caterpillar trees in $\rnni$ such that $T$ is arbitrary caterpillar tree and
-	\[1 = \rank(a_1)_R = \rank(a_2)_r < \rank(a_3)_R < \ldots < \rank(a_n)_R = n-1.\]
+	Let $T$ and $R$ be caterpillar trees in $\rnni$ such that \[1 = \rank(a_1)_R = \rank(a_2)_r < \rank(a_3)_R < \ldots < \rank(a_n)_R = n-1.\]
 	Then it is
 	\[d(T,R) = p_T - m_T,\]
-	where $p_T$ is the number of transpositions in $T$ (Kendall-tau distance \tocite) and $m_T = |M_T|$ for
+	where $p_T$ is the number of transpositions in $T$ (Kendall-tau distance between $T$ and $R$) and $m_T = |M_T|$ for
 	\begin{align*}
-		M_T := &\{a_i| (\forall k \textnormal{ with } \rank(a_k)_T \leq \rank(a_i)_T: \rank(a_i)_R < \rank(a_k)_r)\} \\
+		M_T := &\{a_i| (\forall k \textnormal{ with } \rank(a_k)_T \leq \rank(a_i)_T: \rank(a_k)_R > \rank(a_i)_r)\} \\
 		& \cap \{a_i | \rank(a_i)_T < \min\{\rank(a_1)_T, \rank(a_2)_T\}\}
 	\end{align*}
 	\label{thm:caterpillar_distance_formula}
 \end{theorem}
 
 \begin{proof}
-	For $\hat d(T,R) = p_T - m_T$ we prove $\hat d(T,R) = d(T,R)$.
-	Similar to the proof of \autocite[Theorem 1]{Collienne2020-iu}, we only need to prove that for any caterpillar tree $T'$ in the one-neighbourhood of $T$ it is
+	\todo{Do we need this assumption on $R$ anywhere?}
+	Let $\hat d(T,R) = p_T - m_T$, so we need to prove $\hat d(T,R) = d(T,R)$ for trees $T$ and $R$ as described above.
+	It is sufficient to prove that for any caterpillar tree $T'$ with distance one to $T$ it is
 	\begin{align}
 		\hat d(T',R) \geq \hat d(T,R) - 1.
 		\label{eq:distance_proof}
 	\end{align}
-	Then it follows by induction that $\hat d$ and $d$ coincide.
-	It is sufficient to show that \autoref{eq:distance_proof} holds for a caterpillar tree $T'$, as we know that there is a shortest path between $T$ and $R$ that only consists of caterpillar trees (\autoref{thm:caterpillar_convex_rnni}).
+	With this it follows by induction that $\hat d$ and $d$ coincide, using the \autoref{thm:caterpillar_convex_rnni}, the existence of a shortest path consisting only of caterpillar trees.
 
-	In order to show the correctness of Inequality~\ref{eq:distance_proof}, we first prove $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$.
-	So the only case in which Inequality!\ref{eq:distance_proof} does not hold is $p_{T'} = p_T - 1$ and $m_{T'} = m_t + 1$, which we will show is not possible.
+	To prove the correctness of Inequality~\ref{eq:distance_proof}, we first prove $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$.
+	Then the only case in which Inequality~\ref{eq:distance_proof} does not hold is $p_{T'} = p_T - 1$ and $m_{T'} = m_t + 1$, which we will show to be impossible.
 
-	As an $\nni$ move between caterpillar trees $T$ and $T'$ exchanges two leaves, at most one transposition of $T$ can be resolved in $T'$, resulting in $p_{T'} \geq p_T - 1$.
-	Furthermore, it is $m_{T'} \leq m_T + 1$, as we explain in the following.
-	Let $a_k, a_{k+1}$ be the labels of leaves that exchange their position between $T$ and $T'$, such that $\rank(a_k)_R < \rank(a_{k+1})_T$.
-	These are the only elements that could be in $M_{T'} \setminus M_T$.
-	It remains to show that it cannot be $(M_{T'} \setminus M_T) = \{a_k, a_{k+1}\}$, from which we can follow $m_{T'} \leq m_T - 1$.
+	As the only move possible between caterpillar trees $T$ and $T'$ is an $\nni$ move exchanging two leaves, at most one transposition of $T$ can be resolved in $T'$, resulting in $p_{T'} \geq p_T - 1$.
+	\todo{don't use $a_k$ and $a_{k+1}$, they don't need to be neighbours in $R$}
+	Let $a_k, a_{k+1}$ be the labels of leaves that exchange their position between $T$ and $T'$, such that $\rank(a_k)_T < \rank(a_{k+1})_T$.
+	Since these are the only leaves that change positions between $T$ and $T'$, they are the only elements that could be in $M_{T'} \setminus M_T$.
+	It remains to show $(M_{T'} \setminus M_T) \neq \{a_k, a_{k+1}\}$, from which we can follow $m_{T'} \leq m_T - 1$.
 
-	To prove $(M_{T'} \setminus M_T) \neq \{a_k, a_{k+1}\}$, we assume the contrary.
-	Then $a_k$ and $a_{k+1}$ are not in $M_T$, which means that each of them ($i \in \{a_k,a_{k+1}\}$) violates one of the conditions:
-	\todo{do we want to say $a_k$ \emph{violates} Condition $x$? Or does another leaf $k$ violate Condition $x$ for $a_k$?}
+	To prove this, by showing that if $a_k \notin M_T$, it follows $a_k \notin M_{T'}$.
+	If $a_k \notin M_T$, at least one of the following conditions must be violated for $i = k$:
+	% Set counter for equation to get C1 and C2 for conditions
+	\setcounter{equation}{0}
+	\renewcommand{\theequation}{C\arabic{equation}}
 	\begin{align}
-		\forall k \text{ with } \rank(a_k)_T \leq \rank(a_i)_T: \rank(a_i)_R < \rank(a_k)_r \label{condition1}\\
-		\rank(i)_T < \min\{\rank(1)_T, \rank(2)_T\}.
+		\forall j \text{ with } \rank(a_j)_T \leq \rank(a_i)_T: \rank(a_j)_R > \rank(a_i)_R \label{condition1}\\
+		\rank(a_i)_T < \min\{\rank(a_1)_T, \rank(a_2)_T\}.
 		\label{condition2}
 	\end{align}
+	% reset counter for future uses
+	\setcounter{equation}{1}
+	\renewcommand{\theequation}{\arabic{equation}}
 
-	If both $a_k$ and $a_{k+1}$ violate Condition~\ref{condition2}, then at least one of them will violate the same condition in $T'$ as well, as they cannot both swap rank with $\argmin\{\rank(1)_T, \rank(2)_T\}$ within one $\nni$ move.
-	If on the other hand only one $a_j$ with $j \in \{k, k+1\}$ violates Condition~\ref{condition2}, it is $j = k+1$ and $a_{k+1} \in \{1,2\}$, due to the positioning of $a_k$ and $a_{k+1}$ as neighbouring leaves in $T$.
-	And in this case it is $a_{k+1} \notin M_{T'}$, as the leaves $1$ and $2$ always violate Condition~\ref{condition2}.
+	At first we consider the case that for $a_k$ Condition~\ref{condition1} is violated in $T$.
+	It follows that there is a $j$ such that $\rank(a_j)_T < rank(a_k)_T$ and $\rank(a_k)_R > \rank(a_j)_R$.
+	It immediately follows that the same condition is violated for $a_k$ in $T'$, because the $\nni$ move exchanging $a_k$ and $a_{k+1}$ preserves the relationship of $a_k$ and $a_j$.
+	Therefore, it is $a_k \notin M_{T'}$.
 
-	Hence the only case in which it could be $(M_{T'} \setminus M_T) = \{a_k, a_{k+1}\}$ is if $a_k$ and $a_{k+1}$ violate Condition~\ref{condition1} in $T$, but not in $T'$.
-	Assuming that $a_k$ and $a_{k+1}$ violate Condition~\ref{condition1}, there exists a leaf $a_j$ with $\rank(a_j)_T < \rank(a_k)_T < \rank(a_{k+1})_T$ such that $a_j > \min\{a_k,a_{k+1}\}$.
-	Since the position of $a_j$ does not change between $T$ and $T'$, it follows $\rank(a_j)_{T'} < \rank(a_{k+1})_{T'} < \rank(a_{k})_{T'}$ and hence $a_k$ and $a_{k+1}$ cannot be members of $M_{T'}$.
-	We can conclude $m_{T'} \leq m_T + 1$.
+	Let us now assume that Condition~\ref{condition2} is violated for $a_k$ to not be in $M_T$.
+	It follows $\rank(a_k)_T \geq \min\{\rank(1)_T, \rank(2)_T\}$.
+	As only $a_k$ and $a_{k+1}$ exchange between $T$ and $T'$, the same inequality holds for $a_k$ in $T'$, resulting in a violation of Condition~\ref{condition2} for $a_k$ in $T'$ and hence a contradiction to $(M_{T'} \setminus M_T) = \{a_k, a_{k+1}\}$.
+	We can conclude that if $a_k \notin M_T$, it follows $a_k \notin M_{T'}$.
+	Therefore, it is $a_k \notin (M_{T'} \setminus M_T)$, showing that $(M_{T'} \setminus M_T) \neq \{a_k, a_{k+1}\}$, and hence $m_{T'} \leq m_T + 1$.
 
-	It remains to show that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, in order to prove Inequality~\ref{eq:distance_proof}.
-	We assume $p_{T'} = p_T - 1$ and show $m_{T'} < m_T + 1$ by assuming the contrary, that is, $m_{T'} = m_T + 1$.
-	If $p_{T'} = p_T - 1$, $(a_k, a_{k+1})$ is a transposition in $T$, meaning that $a_k > a_{k+1}$.
-	As $a_k$ and $a_{k+1}$ are the only leaves whose membership can change between $M_T$ and $M_{T'}$, it suffices to show that if one of them is in $M_{T'} \setminus M_T$, then the other one is in $M_T \setminus M_{T'}$.
+	It remains to show that if $p_{T'} = p_T - 1$, it cannot be $m_{T'} = m_T + 1$, in order to prove Inequality~\ref{eq:distance_proof}.
+	We assume $p_{T'} = p_T - 1$, hence $(a_k, a_{k+1})$ is a transposition in $T$, meaning that $\rank(a_k)_R > \rank(a_{k+1})_R$.
+	As $a_k$ and $a_{k+1}$ are the only leaves whose membership can change between $M_T$ and $M_{T'}$, it suffices to show that none of them can be in $M_{T'} \setminus M_T$.
 
-	With $a_k > a_{k+1}$ it follows that $a_k \notin M_{T'}$.
-	Furthermore, we can follow from $a_{k+1} \in (M_{T'} \setminus M_T)$ that $a_k$ is in $M_T$, as Condition~\ref{condition1} being true results from this condition being true for $a_{k+1}$ in $M_{T'}$, and Condition~\ref{condition2} being true results from $\rank(a_k)_T < \rank(a_{k+1})_T$ and Condition~\ref{condition2} being true for $a_k$ in $T'$.
-	Hence, it is $a_k \in M_T \setminus M_{T'})$, if $a_{k+1} \in (M_{T'} \setminus M_T)$ and we can follow that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, which concludes this proof.
+	We already saw above that it cannot be $a_k \in (M_{T'} \setminus M_{T})$.
+	We hence assume $a_{k+1} \in (M_{T'} \setminus M_T)$.
+	Since $a_{k+1} \notin M_T$ it follows that one of the two conditions is not fulfilled for $a_{k+1}$ in $T$.
+	If this is the first one, it also is violated in $M_T$, as $a_k$ cannot be the reason it is violated in $T$ since $\rank(a_k)_R > \rank(a_{k+1})_R$.
+	If Condition~\ref{condition2} is violated for $a_{k+1}$ in $T$, but not in $M_{T'}$ (as $a_{k+1} \in M_{T'}$), it follows again that $a_k$ is not the reason this inequality is violated as $\rank(a_k)_{T'} > \rank(a_{k+1})_{T'}$.
+	It hence follows that Condition~\ref{condition2} is also violated for $a_{k+1}$ in $T$, and therefore, $a_{k+1} \notin (M_{T'} \setminus M_T)$.
+
+	Concluding, it is $a_k, a_{k+1} \notin (M_{T'} \setminus M_T)$, and we can follow that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, which concludes this proof.
 \end{proof}
 
 \subsection{Diameter and Radius}
