@@ -356,18 +356,17 @@ For such a set of trees for which there is a shortest path in a graph that stays
 	Then the only case in which Inequality~\ref{eq:distance_proof} does not hold is $p_{T'} = p_T - 1$ and $m_{T'} = m_t + 1$, which we will show to be impossible.
 
 	As the only move possible between caterpillar trees $T$ and $T'$ is an $\nni$ move exchanging two leaves, at most one transposition of $T$ can be resolved in $T'$, resulting in $p_{T'} \geq p_T - 1$.
-	\todo{don't use $a_k$ and $a_{k+1}$, they don't need to be neighbours in $R$}
-	Let $a_k, a_{k+1}$ be the labels of leaves that exchange their position between $T$ and $T'$, such that $\rank(a_k)_T < \rank(a_{k+1})_T$.
+	Let $a_k, a_j$ be the labels of leaves that exchange their position between $T$ and $T'$, such that $\rank(a_k)_T < \rank(a_j)_T$.
 	Since these are the only leaves that change positions between $T$ and $T'$, they are the only elements that could be in $M_{T'} \setminus M_T$.
-	It remains to show $(M_{T'} \setminus M_T) \neq \{a_k, a_{k+1}\}$, from which we can follow $m_{T'} \leq m_T - 1$.
+	It remains to show $(M_{T'} \setminus M_T) \neq \{a_k, a_j\}$, from which we can follow $m_{T'} \leq m_T - 1$.
 
-	To prove this, by showing that if $a_k \notin M_T$, it follows $a_k \notin M_{T'}$.
+	We prove this by showing that if $a_k \notin M_T$, it follows either $a_k \notin M_{T'}$, or $a_j \notin M_{T'}$.
 	If $a_k \notin M_T$, at least one of the following conditions must be violated for $i = k$:
 	% Set counter for equation to get C1 and C2 for conditions
 	\setcounter{equation}{0}
 	\renewcommand{\theequation}{C\arabic{equation}}
 	\begin{align}
-		\forall j \text{ with } \rank(a_j)_T \leq \rank(a_i)_T: \rank(a_j)_R > \rank(a_i)_R \label{condition1}\\
+		\forall l \text{ with } \rank(a_l)_T \leq \rank(a_i)_T: \rank(a_l)_R > \rank(a_i)_R \label{condition1}\\
 		\rank(a_i)_T < \min\{\rank(a_1)_T, \rank(a_2)_T\}.
 		\label{condition2}
 	\end{align}
@@ -376,28 +375,25 @@ For such a set of trees for which there is a shortest path in a graph that stays
 	\renewcommand{\theequation}{\arabic{equation}}
 
 	At first we consider the case that for $a_k$ Condition~\ref{condition1} is violated in $T$.
-	It follows that there is a $j$ such that $\rank(a_j)_T < rank(a_k)_T$ and $\rank(a_k)_R > \rank(a_j)_R$.
-	It immediately follows that the same condition is violated for $a_k$ in $T'$, because the $\nni$ move exchanging $a_k$ and $a_{k+1}$ preserves the relationship of $a_k$ and $a_j$.
+	It follows that there is a $l$ such that $\rank(a_l)_T < rank(a_k)_T$ and $\rank(a_k)_R > \rank(a_l)_R$.
+	It immediately follows that the same condition is violated for $a_k$ in $T'$, because the $\nni$ move exchanging $a_k$ and $a_j$ preserves the relationship of $a_k$ and $a_l$.
 	Therefore, it is $a_k \notin M_{T'}$.
 
 	Let us now assume that Condition~\ref{condition2} is violated for $a_k$ to not be in $M_T$.
-	It follows $\rank(a_k)_T \geq \min\{\rank(1)_T, \rank(2)_T\}$.
-	As only $a_k$ and $a_{k+1}$ exchange between $T$ and $T'$, the same inequality holds for $a_k$ in $T'$, resulting in a violation of Condition~\ref{condition2} for $a_k$ in $T'$ and hence a contradiction to $(M_{T'} \setminus M_T) = \{a_k, a_{k+1}\}$.
-	We can conclude that if $a_k \notin M_T$, it follows $a_k \notin M_{T'}$.
-	Therefore, it is $a_k \notin (M_{T'} \setminus M_T)$, showing that $(M_{T'} \setminus M_T) \neq \{a_k, a_{k+1}\}$, and hence $m_{T'} \leq m_T + 1$.
+	It follows $\rank(a_k)_T \geq \min\{\rank(a_1)_T, \rank(a_2)_T\}$.
+	As only $a_k$ and $a_j$ exchange between $T$ and $T'$, it follows $a_j \in \{a_1, a_2\}$, resulting in a violation of Condition~\ref{condition2} for $a_j$ in $T'$ and hence $a_j \notin M_{T'}$.
+	We can conclude $(M_{T'} \setminus M_T) \neq \{a_k, a_j\}$, and hence $m_{T'} \leq m_T + 1$.
 
 	It remains to show that if $p_{T'} = p_T - 1$, it cannot be $m_{T'} = m_T + 1$, in order to prove Inequality~\ref{eq:distance_proof}.
-	We assume $p_{T'} = p_T - 1$, hence $(a_k, a_{k+1})$ is a transposition in $T$, meaning that $\rank(a_k)_R > \rank(a_{k+1})_R$.
-	As $a_k$ and $a_{k+1}$ are the only leaves whose membership can change between $M_T$ and $M_{T'}$, it suffices to show that none of them can be in $M_{T'} \setminus M_T$.
+	We assume $p_{T'} = p_T - 1$, hence $(a_k, a_j)$ is a transposition in $T$, meaning that $\rank(a_k)_T < \rank(a_j)_T$ and $\rank(a_k)_R > \rank(a_j)_R$.
+	As $a_k$ and $a_j$ are the only leaves whose membership can change between $M_T$ and $M_{T'}$, it suffices to show that none of them can be in $M_{T'} \setminus M_T$.
 
-	We already saw above that it cannot be $a_k \in (M_{T'} \setminus M_{T})$.
-	We hence assume $a_{k+1} \in (M_{T'} \setminus M_T)$.
-	Since $a_{k+1} \notin M_T$ it follows that one of the two conditions is not fulfilled for $a_{k+1}$ in $T$.
-	If this is the first one, it also is violated in $M_T$, as $a_k$ cannot be the reason it is violated in $T$ since $\rank(a_k)_R > \rank(a_{k+1})_R$.
-	If Condition~\ref{condition2} is violated for $a_{k+1}$ in $T$, but not in $M_{T'}$ (as $a_{k+1} \in M_{T'}$), it follows again that $a_k$ is not the reason this inequality is violated as $\rank(a_k)_{T'} > \rank(a_{k+1})_{T'}$.
-	It hence follows that Condition~\ref{condition2} is also violated for $a_{k+1}$ in $T$, and therefore, $a_{k+1} \notin (M_{T'} \setminus M_T)$.
+	That $a_k$ is not in $M_{T'}$ follows from $\rank(a_j)_{T'} < \rank(a_k)_{T'}$ and $\rank(a_j)_R < \rank(a_k)_R$, and hence $a_k \notin M_{T'} \setminus M_T$.
+	Moreover, if $a_j \in M_{T'}$, it follows $a_j \in M_{T'}$, which yields $a_j \notin M_{T'} \setminus M_T$, as explained in the following.
+	If $a_j \in M_{T'}$, both conditions \ref{condition1} and \ref{condition2} are met by $a_j$ in $T'$.
+	With $\rank(a_k)_T < \rank(a_j)_T$ and $\rank(a_k)_R > \rank(a_j)_R$ it immediately follows that these conditions are also met in $T$, and hence $a_k \notin M_{T'} \setminus M_T$.
 
-	Concluding, it is $a_k, a_{k+1} \notin (M_{T'} \setminus M_T)$, and we can follow that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, which concludes this proof.
+	Concluding, it is $M_{T'} \setminus M_T = \emptyset$, and we can follow that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, which concludes this proof.
 \end{proof}
 
 \subsection{Diameter and Radius}
