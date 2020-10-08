@@ -409,13 +409,15 @@ We prove the diameter dor $\dtt$ before finding the diameter of $\rnni$ as a spe
 
 \begin{proof}
 	Let $T$ and $R$ be two trees in $\dtt_m$ and $T_r$ and $R_r$ their ranked versions on $m+2$ leaves.
-	In every iteration $i$ of $\findpath$ the maximum number of moves is $m-i$, due to the following.
+	In every iteration $i$ of $\findpath$ the maximum number of moves is $m-i$, as described following.
+	\todo{Do we need the notion $(T)_i$ anywhere else? If so, we need to deifne it in the introduction}
 	The maximum rank of the most recent common ancestor of the cluster $(R)_i$ in $T$ is $m$, as this is the rank of the root of the subtree containing all elements of that cluster.
-	And since the most recent common ancestor moves down until it reaches rank $i$, the maximum number of moves in each iteration id $m-i$.
-	Hence the sum of all moves need for  all most recent common ancestors of clusters in $R$ is
+	And since the rank of thw most recent common ancestor decreases when running $\findpath$ until it reaches $i$, the maximum number of moves in each iteration $i$ is $m-i$.
+	Hence the sum of all moves needed over all iterations of $\findpath$ is
 	\[\sum\limits_{i = 1}^{n-1} (m - i) = m(n-1) - \frac{n(n-1)}{2}.\]
-	The trees in \autoref{fig:cat_max_dist_dtt} provide an example where the path computed by $\findpath$ actually has length $m(n-1) - \frac{n(n-1)}{2}$, proving that this upper bound for distances is tight and hence the diameter of $\dtt_m$.
-
+	This formula is not only an upper bound of the diameter of $\dtt_m$, there are trees with this distance.
+	An example of such trees is provided in \autoref{fig:cat_max_dist_dtt} where the path computed by $\findpath$ has length $m(n-1) - \frac{n(n-1)}{2}$.
+	\todo{briefly describe the example in words}
 	\begin{figure}[ht]
 		\includegraphics[width=0.4\textwidth]{cat_max_dist_dtt.eps}
 		\caption{Trees with distance $m(n-1) - \frac{n(n-1)}{2} = 9$ for $m = 5,\ n = 4$.}
