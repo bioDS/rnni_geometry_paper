@@ -141,7 +141,7 @@ Hence, length moves are not possible in this graph, and we use the notion $\rnni
 		\item $\rnni(\rho)$ -- in corresponding section
 		\item rank interval for Lemma~\ref{lemma:nni_path_to_caterpillar} -- if needed, in corresponding section
 		\item cherry (for lemma~\ref{lemma:max_dist_ctree}) -- in caterpillar section (if needed)
-		\item one-neighbourhood (for Theorem~\ref{thm:caterpillar_convex_rnni}) -- in corresponding section, if needed
+		\item $(T)_i$ for cluster induced by node of rank $i$ in $T$ -- this is only needed for proofs around $\rnni(\rho)$ and in the proof that every tree is connected to a caterpillar tree in $\rnni$ by a sequence of $\nni$ moves
 	\end{itemize}
 }
 
@@ -410,9 +410,9 @@ We prove the diameter dor $\dtt$ before finding the diameter of $\rnni$ as a spe
 \begin{proof}
 	Let $T$ and $R$ be two trees in $\dtt_m$ and $T_r$ and $R_r$ their ranked versions on $m+2$ leaves.
 	In every iteration $i$ of $\findpath$ the maximum number of moves is $m-i$, as described following.
-	\todo{Do we need the notion $(T)_i$ anywhere else? If so, we need to deifne it in the introduction}
-	The maximum rank of the most recent common ancestor of the cluster $(R)_i$ in $T$ is $m$, as this is the rank of the root of the subtree containing all elements of that cluster.
-	And since the rank of thw most recent common ancestor decreases when running $\findpath$ until it reaches $i$, the maximum number of moves in each iteration $i$ is $m-i$.
+	Let $C$ be the cluster induced by the node of rank $i$ of $R$, and hence the cluster who's most recent common ancestor gets moved down in iteration $i$ of $\findpath$.
+	The maximum rank of $(C)_T$ is $m$, as this is the rank of the root of the subtree containing all elements of $C$.
+	And since the rank of the most recent common ancestor of $C$ decreases when running $\findpath$ until it reaches $i$, the maximum number of moves in iteration $i$ is $m-i$.
 	Hence the sum of all moves needed over all iterations of $\findpath$ is
 	\[\sum\limits_{i = 1}^{n-1} (m - i) = m(n-1) - \frac{n(n-1)}{2}.\]
 	This formula is not only an upper bound of the diameter of $\dtt_m$, there are trees with this distance.
