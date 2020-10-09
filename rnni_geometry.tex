@@ -140,7 +140,7 @@ Hence, length moves are not possible in this graph, and we use the notion $\rnni
 		\item representation of caterpillar trees as lists of leaves instead of cluster representation (?)
 		\item $\rnni(\rho)$ -- in corresponding section
 		\item rank interval for Lemma~\ref{lemma:nni_path_to_caterpillar} -- if needed, in corresponding section
-		\item cherry (for lemma~\ref{lemma:max_dist_ctree}) -- in caterpillar section (if needed)
+		\item cherry (for lemma~\ref{lemma:max_dist_tree_rnni}) -- in caterpillar section (if needed)
 		\item $(T)_i$ for cluster induced by node of rank $i$ in $T$ -- this is only needed for proofs around $\rnni(\rho)$ and in the proof that every tree is connected to a caterpillar tree in $\rnni$ by a sequence of $\nni$ moves
 	\end{itemize}
 }
@@ -438,14 +438,14 @@ Since the $\rnni$ graph is the graph $\dtt_{n-1}$, the diameter of $\rnni$ is a 
 The radius of $\rnni$, which is defined $\min\limits_{\text{tree } T}\max\limits_{\text{tree }R} d(T,R)$, equals its diameter, results from the following lemma.
 
 \begin{lemma}
-	For every tree on $n$ leaves exists a caterpillar tree with distance $\frac{(n-1)(n-2)}{2}$ from it in $\rnni$.
-	\label{lemma:max_dist_ctree}
+	For every tree in $\rnni$ exists a caterpillar tree with distance $\frac{(n-1)(n-2)}{2}$ from it.
+	\label{lemma:max_dist_tree_rnni}
 \end{lemma}
 
 \begin{proof}
 	We prove this lemma by induction on the number of leaves $n$.
-	The base case $n=3$ is trivial, as all three trees in this space are caterpillar trees with distance one.
-	For the induction step we consider an arbitrary tree $T$ with $n + 1$ leaves.
+	The base case $n=3$ is trivial, as all three trees in this space are caterpillar trees with distance one from every other tree.
+	For the induction step we consider an arbitrary tree $T$ with $n+1$ leaves.
 	Let $T'$ be the tree on $n$ leaves resulting from deleting one of the cherry leaves, which we denote by $x$, of $T$.
 	By applying the induction hypothesis on $T'$ we can find a caterpillar tree $R'$ that has distance $\frac{(n-1)(n-2)}{2}$ to $T'$.
 	Now consider the tree $R$ resulting from adding the leaf $x$ at the top of $R'$ such that the root of $R$ has $x$ and $R'$ as children.
@@ -458,7 +458,7 @@ The radius of $\rnni$, which is defined $\min\limits_{\text{tree } T}\max\limits
 	Therefore it is $d(T,R) = \frac{(n-1)(n-2)}{2} + n-1 = \frac{n(n-1)}{2}$, which proves the lemma.
 	\begin{figure}[ht]
 		\includegraphics[width=0.8\textwidth]{max_dist_ctree.eps}
-		\caption{Initial $n - 1$ $\rnni$ moves of $\fp(R,T)$ as described in the proof of Lemma~\ref{lemma:max_dist_ctree}.
+		\caption{Initial $n - 1$ $\rnni$ moves of $\fp(R,T)$ as described in the proof of Lemma~\ref{lemma:max_dist_tree_rnni}.
 		Removing the leaf $x$ and suppressing the non-root node of degree two from the tree on the right results in $R'$ as described in the lemma.}
 		\label{fig:max_dist_ctree}
 	\end{figure}
@@ -470,11 +470,11 @@ The radius of $\rnni$, which is defined $\min\limits_{\text{tree } T}\max\limits
 \end{proposition}
 
 \begin{proof}
-	From Lemma~\ref{lemma:max_dist_ctree} we know that there is a tree with distance $\frac{(n-1)(n-2)}{2}$ from any given tree.
+	From Lemma~\ref{lemma:max_dist_tree_rnni} we know that there is a tree with distance $\frac{(n-1)(n-2)}{2}$ from any given tree.
 	Hence the radius equals the diameter of $\rnni$.
 \end{proof}
 
-\todo{What about the diameter of $\dtt$?}
+\todo{The radius of $\dtt$ is not equal to its diameter -- tree on 3 leaves with internal nodes ranked $2$ and $4$ gives counterexampleb}
 
 
 \section{$\rnni(\rho)$}
