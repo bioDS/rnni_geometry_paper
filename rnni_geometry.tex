@@ -417,10 +417,10 @@ We prove the diameter dor $\dtt$ before finding the diameter of $\rnni$ as a spe
 	\[\sum\limits_{i = 1}^{n-1} (m - i) = m(n-1) - \frac{n(n-1)}{2}.\]
 	This formula is not only an upper bound of the diameter of $\dtt_m$, there are trees with this distance.
 	An example of such trees is provided in \autoref{fig:cat_max_dist_dtt} where the path computed by $\findpath$ has length $m(n-1) - \frac{n(n-1)}{2}$.
-	\todo{briefly describe the example in words}
+	These trees have maximum distance from each other as the maximum number of moves $m-i$ is reached in each iteration $i = 1, \ldots, n$.
 	\begin{figure}[ht]
-		\includegraphics[width=0.4\textwidth]{cat_max_dist_dtt.eps}
-		\caption{Trees with distance $m(n-1) - \frac{n(n-1)}{2} = 9$ for $m = 5,\ n = 4$.}
+		\includegraphics[width=0.65\textwidth]{cat_max_dist_dtt.eps}
+		\caption{Trees with distance $m(n-1) - \frac{n(n-1)}{2}$}
 		\label{fig:cat_max_dist_dtt}
 	\end{figure}
 \end{proof}
