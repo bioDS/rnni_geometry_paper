@@ -118,7 +118,7 @@ We denote the parent of a leaf $a_i$ in $T$ by $(a_i)_T$.
 
 \summary{Defining the tree space $\dtt_m$ and $\rnni = \dtt_{n-1}$}
 The main objective of this paper is to study the graph $\dtt_m$ of discrete time-trees, which is defined as follows.
-The nodes of $\dtt_m$ are trees with root time less pr equal to $m$.
+The nodes of $\dtt_m$ are trees with root time less or equal to $m$.
 Trees $T$ and $R$ are connected by an edge if performing one of the following (reversible) operations on $T$ results in $R$:
 \begin{enumerate}
 	\item An \emph{$\nni$ move} connects trees $T$ and $R$ if there is an edge $e$ in $T$ and an edge $f$ in $R$, both of length one, such that shrinking $e$ and $f$ to nodes results in isomorphic trees.
@@ -446,15 +446,15 @@ The radius of $\rnni$, which is defined $\min\limits_{\text{tree } T}\max\limits
 	We prove this lemma by induction on the number of leaves $n$.
 	The base case $n=3$ is trivial, as all three trees in this space are caterpillar trees with distance one from every other tree.
 	For the induction step we consider an arbitrary tree $T$ with $n+1$ leaves.
-	Let $T'$ be the tree on $n$ leaves resulting from deleting one of the cherry leaves, which we denote by $x$, of $T$.
-	By applying the induction hypothesis on $T'$ we can find a caterpillar tree $R'$ that has distance $\frac{(n-1)(n-2)}{2}$ to $T'$.
-	Now consider the tree $R$ resulting from adding the leaf $x$ at the top of $R'$ such that the root of $R$ has $x$ and $R'$ as children.
+	Let $x$ and $y$ be the leaved of $T$ that have the internal node of rank $1$ as parent in $T$, and let $T'$ be the tree on $n$ leaves resulting from deleting one of the leaves, say $x$, of $T$.
+	By the induction hypothesis there is a caterpillar tree $R'$ with distance $\frac{(n-1)(n-2)}{2}$ to $T'$.
+	Now consider the tree $R$ resulting from adding $x$ at the top of $R'$ such that the root of $R$ has $x$ and $R'$ as children.
 
-	In the first iteration of $\findpath$ the leaf $x$ moves down by $\nni$ moves until it reaches the second cherry leaf $y$ of $T$ and builds a cherry with it, which then is moved down by rank swaps as depicted in Figure~\ref{fig:max_dist_ctree}.
-	There are $n-1$ $\rnni$ moves needed for this as $(x,y)_R$ moves down from the root with rank $n$ to the cherry of rank one.
-	The tree at the end of this first iteration on $\fp(T,R)$ is equals $R'$ when ignoring the leaf $x$ and its parent.
-	Since the cluster $\{x,y\}$ is not considered again in $\findpath$, the remaining part of $\fp(T,R)$ contains the same moves as $\fp(T',R')$ from which we can follow that $|\fp(T,R)| = |\fp(T',R')| + n-1$.
-	\todo{Is it OK to phrase it like this?}
+	To compute a path from $R$ to $T$, in the first iteration of $\findpath$ the leaf $x$ moves down by $\nni$ moves until it reaches $y$.
+	A further $\nni$ moves creates an internal node with children $x$ and $y$, which is then moved down by rank swaps as depicted in Figure~\ref{fig:max_dist_ctree}.
+	Altogether, there are $n-1$ $\rnni$ moves needed to build the cluster $\{x,y\}$ and decrease the rank of the node inducing this cluster until it reaches rank one, as the rank of the parent of $x$ decreases by one within every move, starting at the root with rank $n$ and ending at the internal node of rank one.
+	The tree at the end of this first iteration on $\fp(T,R)$ is identical to $R'$ when removing the leaf $x$ and suppressing its parent.
+	Since the cluster $\{x,y\}$ is not considered again in $\findpath$, the remaining part of $\fp(T,R)$ contains the same moves as $\fp(T',R')$, and hence $|\fp(T,R)| = |\fp(T',R')| + n-1$.
 	Therefore it is $d(T,R) = \frac{(n-1)(n-2)}{2} + n-1 = \frac{n(n-1)}{2}$, which proves the lemma.
 	\begin{figure}[ht]
 		\includegraphics[width=0.8\textwidth]{max_dist_ctree.eps}
