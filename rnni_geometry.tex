@@ -103,7 +103,7 @@
 
 \summary{Introducing discrete time-trees and ranked trees}
 A binary rooted phylogenetic tree is a binary tree on a fixed number $n$ of leaves, which are uniquely labelled by elements of the set $\{a_1, \ldots, a_n\}$.
-The main objective of study in this paper, \emph{discrete time-trees}, are such binary rooted phylogenetic trees, where leaves are assigned time $0$, and internal nodes are uniquely assigned integer-valued times, such that an internal node always has time greater than its children.
+The main objective of study in this paper, \emph{discrete time-trees}, are such binary rooted phylogenetic trees, where leaves are assigned time $0$, and internal nodes are assigned unique integer-valued times, such that an internal node always has time greater than its children.
 We refer to the time of an internal node $v$ by $\ntime(v)$.
 If not stated otherwise, we will refer to discrete time-trees simply as \emph{trees}.
 The number of discrete time-trees with root time less or equal to $m$ is $\frac{(n-1)!n!m^{n-1}}{2^{n-1}}$ \autocite{Gavryushkin2018-ol}.
@@ -117,25 +117,24 @@ For each subset $S \subseteq \{a_1, \ldots, a_n\}$ we call the internal node of 
 We denote the parent of a leaf $a_i$ in $T$ by $(a_i)_T$.
 
 \summary{Defining the tree space $\dtt_m$ and $\rnni = \dtt_{n-1}$}
-The main objective of this paper is to study the graph $\dtt_m$ of discrete time-trees, which is defined as follows.
-The nodes of $\dtt_m$ are trees with root time less or equal to $m$.
+We are now ready to introduce the centre of study in this paper, $\dtt_m$, the graph (or space) of discrete time-trees, defined as follows.
+The set of trees with root time less or equal to $m$ is the vertex set of $\dtt_m$ for a fixed integer $m$.
 Trees $T$ and $R$ are connected by an edge if performing one of the following (reversible) operations on $T$ results in $R$:
 \begin{enumerate}
-	\item An \emph{$\nni$ move} connects trees $T$ and $R$ if there is an edge $e$ in $T$ and an edge $f$ in $R$, both of length one, such that shrinking $e$ and $f$ to nodes results in isomorphic trees.
-	\item A \emph{rank move} on $T$ exchanges the times of two internal nodes, if the difference of their times is one.
+	\item An \emph{$\nni$ move} connects trees $T$ and $R$ if there is an edge $e$ in $T$ and an edge $f$ in $R$, both of length one, such that shrinking $e$ and $f$ to nodes results in identical trees.
+	\item A \emph{rank move} on $T$ exchanges the times of two internal nodes with time difference one.
 	\item A \emph{length move} on $T$ changes the time of an internal node by one.
 \end{enumerate}
-\todo{Is this clear? Maybe using intervals (if we are going to define them)}
-Note that length move can only change the time of a node in a tree $T$ if there is no node with this new time in $T$ already.
-It is also important to see that our definition of $\dtt_m$ differs from the definition of \textcite{Gavryushkin2018-ol}, as length move are defined differently in their paper.
-As natural definition, we consider distances between two trees $T$ and $R$ in this graph $\dtt_m$ to be the length of a shortest paths between these trees, and denote it by $d(T,R)$.
+Note that a length move can only change the time of a node to $t$ if there is no node with time $t$ already.
+Furthermore, our definition of $\dtt_m$ differs from the definition of \textcite{Gavryushkin2018-ol}, as length move are defined differently in their paper.
 
-The ranked nearest neighbour interchange ($\rnni$) graph of \textcite{Collienne2020-iu} is the graph $\dtt_m$ for $m=n-1$, and hence is a graph of ranked trees.
-Hence, length moves are not possible in this graph, and we use the notion $\rnni$ \emph{move} to mean either a rank move or an $\nni$ move.
+The definition of $\dtt_m$ leads to a natural definition of the \emph{distance} between two trees $T$ and $R$ in this graph as the length of a shortest paths between these trees, denoted by $d(T,R)$.
+We also consider the ranked nearest neighbour interchange ($\rnni$) graph of \textcite{Collienne2020-iu}, which is the graph $\dtt_m$ for $m=n-1$, and hence a graph of ranked trees.
+In this graph length moves are not possible, so we use the notion $\rnni$ \emph{move} to mean either a rank move or an $\nni$ move to distinguish these moves from length moves, even in $\dtt_m$.
 
 \todefine{
 	\begin{itemize}
-		\item We need to mention that $m$ is ficed when we compute distances between two trees
+		\item We need to mention that $m$ is fixed when we compute distances between two trees
 		\item ??intervals, to make explanation of length move and how they are replaced in order to use FP easier??
 		\item representation of caterpillar trees as lists of leaves instead of cluster representation (?)
 		\item $\rnni(\rho)$ -- in corresponding section
@@ -221,10 +220,9 @@ With \autoref{thm:dtt_findpath} we can compute shortest path between two trees i
 
 \section{Geometrical Properties of $\dtt$}
 
-\subsection{Cluster Property}
-
+\subsection{Cluster Property}`
 \summary{Definition of Cluster Property and why it is relevant.}
-\todo{Do we want to use the notion 'tree space' -- define it!}
+\todo{Do we want to use the notion 'tree space' -- YES! define it!}
 In this section we consider a property of tree spaces that seems to be connected to the computability of distances in these spaces.
 We say that a tree space has the \emph{cluster property}, if all trees on every shortest paths between two trees sharing a cluster $C$ also contain this cluster.
 It is known that the $\nni$ graph does not have the cluster property \autocite{Li1996-zw}, which has been used to prove that computing distances is $\np$-hard in $\nni$ \autocite{Dasgupta2000-xa}.
