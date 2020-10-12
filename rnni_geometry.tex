@@ -295,8 +295,15 @@ For such a set of trees for which there is a shortest path in a graph that stays
 	By using properties of shortest paths computed by $\findpath$, we now show that $|\fp(R,T')| = |\fp(R,T)| - 1$, which proves the theorem.
 
 	Since all clusters of $T$ and $T'$ induced by nodes of rank less than $\rank(a_k)_T$ coincide, the paths $\fp(T,R)$ and $\fp(T',R)$ coincide up to a tree $R'$, which contains all these clusters.
-	\todo{figure!}
 	Let $S$ be the largest cluster that is shared between $R', T,$ and $T'$ (see \autoref{fig:proof_caterpillar_convex_rnni}).
+
+	\begin{figure}[ht]
+		\includegraphics[width=0.3\textwidth]{proof_caterpillar_convex_rnni.eps}
+		\caption{Trees $T$ and $T'$ as described in the proof of \autoref{thm:caterpillar_convex_rnni}.
+		Both trees share the subtree induced by subset $S$ of leaves, only leaves $a_j$ and $a_k$ are exchanged between the two trees.
+		Dashed lines represent remaining part of trees, which again are equal in $T$ and $T'$.}
+		\label{fig:proof_caterpillar_convex_rnni}
+	\end{figure}
 
 	Since all these trees are caterpillar trees, the two next clusters considered on $\findpath(R,T)$ following $R'$ are $S \cup \{a_k\}$ and $S \cup \{a_k, a_j\}$.
 	Decreasing the rank of $(S \cup \{a_k\})_{R'}$ takes $\rank(S \cup \{a_k\})_{R'} - (\rank(S)_{R'} + 1)$ $\rnni$ moves, the following iteration for $S \cup \{a_k, a_j\}$ takes $\rank(S \cup \{a_j\})_{R'} + 1 - (\rank(S)_{R'} + 2)$.
