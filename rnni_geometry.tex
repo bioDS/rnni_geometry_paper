@@ -212,7 +212,7 @@ In \autoref{thm:dtt_findpath} we see that the $\fp(T,R)$ is a shortest path in $
 \end{proof}
 
 \summary{$\findpath$ distance in $\dtt$ is sum of $\fp(T,R)$ in $\rnni$ and length moves -- essential for later proofs}
-With \autoref{thm:dtt_findpath} we can compute shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in time $\O(m^2)$.
+With \autoref{thm:dtt_findpath} we can compute shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in time $\O(mn)$, as we will see in \autoref{thm:dtt_diameter}.
 
 \begin{algorithm}[h]
 	\caption{$\findpath$($T,R$)}
