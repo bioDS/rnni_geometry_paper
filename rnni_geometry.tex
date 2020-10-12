@@ -114,7 +114,8 @@ Every internal node $v$ of a tree $T$ can be referred to by the set $C$ of leave
 We call such a set $C$ \emph{cluster} and say that the cluster $C$ is \emph{induced} by $v$.
 A ranked tree can then be seen as a list of clusters $[C_1, \ldots, C_{n-1}]$, where cluster $C_i$ is induced by the internal node with time $i$ for $i \in \{1, \ldots, n-1\}$.
 For each subset $S \subseteq \{a_1, \ldots, a_n\}$ we call the internal node of a tree $T$ with lowest time that is ancestral to all elements of $S$ the \emph{most recent common ancestor} of $S$ and denote it by $(S)_T$.
-We denote the parent of a leaf $a_i$ in $T$ by $(a_i)_T$.
+\todo{Do we need the definition of $(T)_i$? It currently only appears in the FP pseudo-code}
+We denote the parent of a leaf $a_i$ in $T$ by $(a_i)_T$, and the cluster induced by the node with time $i$ in $T$ by $(T)_i$.
 
 \summary{Defining the tree space $\dtt_m$ and $\rnni = \dtt_{n-1}$}
 We are now ready to introduce the centre of study in this paper, $\dtt_m$, the graph (or space) of discrete time-trees, defined as follows.
