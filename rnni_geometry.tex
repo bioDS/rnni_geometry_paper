@@ -211,7 +211,7 @@ In \autoref{thm:dtt_findpath} we see that the $\fp(T,R)$ is a shortest path in $
 	Since this contradicts \autocite[Theorem 1]{Collienne2020-iu}, it follows that $\fp(T,R)$ is a shortest path in $\dtt_m$.
 \end{proof}
 
-\summary{Running time of $\findpath$ + we don't need to add subtree in practise}
+\summary{Running time of $\findpath$ + we don't need to add subtree in practice}
 \autoref{thm:dtt_findpath} shows that $\findpath$ (\autoref{alg:fp_dtt}) computes shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in $\O(mn)$ as we will see in \autoref{thm:dtt_diameter}.
 It is not even necessary to add a caterpillar tree to a trees in $\dtt_m$ to compute their distance.
 Instead of rank moves involving a node of the added caterpillar tree, equivalent rank moves can be performed as described in the \textbf{for} loop in Line~\ref{line:length_move} of \autoref{alg:fp_dtt}.
