@@ -468,7 +468,13 @@ The radius of $\rnni$, which is defined $\min\limits_{\text{tree } T}\max\limits
 
 Unlike in $\rnni$, the radius of $\dtt_m$ does not equal its diameter.
 \todo{Do we want to keep this and if so, do we want this notation or rather a figure? -- we did not introduce this notation anywhere}
-A counterexample is given by the tree $[\{a_1, a_2\}: 2, \{a_1, a_2, a_3\}:4]$ on three leaves in $dtt_4$.
+A counterexample is given by the tree depicted in \autoref{fig:dtt_radius_counterexample} on three leaves in $dtt_4$.There is no tree in $\dtt_4$ that has distance $m(n-1) - \frac{n(n-1)}{2}$, which is the diameter of $\dtt_m$, from that tree.
+
+\begin{figure}[ht]
+	\includegraphics[width=0.15\textwidth]{dtt_radius_counterexample.eps}
+	\caption{Tree in $\dtt_4$ on three leaves for which there is not tree with distance $5 = m(n-1) - \frac{n(n-1)}{2}$ (diameter) from it}
+	\label{fig:dtt_radius_counterexample}
+\end{figure}
 
 
 \section{$\rnni(\rho)$}
