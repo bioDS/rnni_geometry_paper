@@ -35,6 +35,7 @@
 \newtheorem{conjecture}{Conjecture}
 
 \newcommand{\lemmaautorefname}{Lemma}
+\renewcommand{\sectionautorefname}{Section}
 
 \newcommand{\tocite}{ {\color{red}\fbox{CITATION}} }
 \newcommand{\rnni}{\mathrm{RNNI}}
@@ -139,11 +140,13 @@ In this graph length moves are not possible, so we use the notion $\rnni$ \emph{
 		\item $\rnni(\rho)$ -- in corresponding section
 		\item intervals -- only needed in $\rnni(\rho)$ section (e.g. for Lemma~\ref{lemma:nni_path_to_caterpillar})
 		\item $(T)_i$ for cluster induced by node of rank $i$ in $T$ -- this is only needed for proofs around $\rnni(\rho)$ and in the proof that every tree is connected to a caterpillar tree in $\rnni$ by a sequence of $\nni$ moves
+		\item We sometimes say $\rnni$ instead of $\rnni$ space. If we keep that, we might want to mention that we do it? -- We use just '$\rnni$' in polynomial paper as well!
 	\end{itemize}
 }
 
 
 \section{Computing Shortest Paths in $\dtt$}
+\label{section:fp_dtt}
 
 \todo{Do we want $\dtt$ or $\dtt_m$ in the titles of sections?}
 
@@ -277,6 +280,8 @@ The question whether $\rnni$ has the cluster property is hence natural, and will
 \end{proof}
 
 \todo{motivate the following lemma}
+The following lemma gives further insights into the connection of shortest paths in $\rnni$ and $\dtt_m$ space.
+It will be important for generalising geometrical properties of $\rnni$ to $\dtt_m$.
 
 \begin{lemma}
 	Any shortest path between two trees $T$ and $R$ in $\dtt_m$ minimises both the number of $\rnni$ moves $r(T,R)$ and the number of length moves $l(T,R)$ between these trees.
