@@ -249,12 +249,14 @@ Throughout this paper we will however assume that a caterpillar tree is added in
 
 \subsection{Cluster Property}
 \summary{Definition of Cluster Property and why it is relevant.}
-In this section we consider a property of tree spaces that seems to be connected to the computability of distances in these spaces.
+In this section we consider a property of tree spaces that is motivated by its biological meaning and seems to be connected to the complexity of computing distances in these spaces.
 We say that a tree space has the \emph{cluster property}, if all trees on every shortest paths between two trees sharing a cluster $C$ also contain this cluster.
-It is known that the $\nni$ graph does not have the cluster property \autocite{Li1996-zw}, which has been used to prove that computing distances is $\np$-hard in $\nni$ \autocite{Dasgupta2000-xa}.
+\todo{Do we want the biological motivation here as well or shall only have this in the introduction?}
+This is desirable biological property as for example for a given sample of trees supporting the same evolutionary hypothesis in form of a common subtree, it is expected that the same hypothesis is supported by a summary or mean tree of the sample.
 
+The classical $\nni$ graph does not have the cluster property \autocite{Li1996-zw}, which has been used to prove that computing distances is $\np$-hard in $\nni$ \autocite{Dasgupta2000-xa}.
 Computing distances in the $\rnni$ graph, however, can be done in polynomial time and the algorithm $\findpath$ for this \autocite{Collienne2020-iu} preserves common clusters.
-The question, whether $\rnni$ has the cluster property is hence natural, and will be settled in \autoref{thm:cluster_property_rnni}.
+The question whether $\rnni$ has the cluster property is hence natural, and will be settled in \autoref{thm:cluster_property_rnni}.
 
 \summary{$\rnni$ has the cluster property.}
 \begin{theorem}
