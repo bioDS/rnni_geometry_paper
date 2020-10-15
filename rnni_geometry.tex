@@ -35,9 +35,11 @@
 \newtheorem{conjecture}{Conjecture}
 
 \newcommand{\lemmaautorefname}{Lemma}
+\newcommand{\corollaryautorefname}{Corollary}
 \renewcommand{\sectionautorefname}{Section}
 
 \newcommand{\tocite}{ {\color{red}\fbox{CITATION}} }
+\newcommand{\toref}{ {\color{blue}\fbox{Reference}} }
 \newcommand{\rnni}{\mathrm{RNNI}}
 \newcommand{\findpath}{\textsc{FindPath}}
 \newcommand{\mrca}{\mathrm{mrca}}
@@ -315,8 +317,10 @@ With \autoref{lemma:dtt_path_sum} the cluster property in $\dtt_m$ follows from 
 In this subsection we focus on trees of a specific shape.
 A \emph{caterpillar tree} is a tree where each internal node has at least one child that is a leaf.
 If a path between two caterpillar trees only consists of caterpillar trees, we call this path a \emph{caterpillar path}.
-The reason for caterpillar trees being an interesting objective of study is the fact that for any two caterpillar trees there always exists a shortest paths between them that is a caterpillar path.
+In \autoref{thm:caterpillar_convex_rnni} and \autoref{cor:caterpillar_convex_dtt} we will see that for any two caterpillar trees there always exists a shortest paths between them that is a caterpillar path in both $\rnni$ and $\dtt_m$.
 For such a set of trees for which there is a shortest path in a graph that stays within this set we say that the set is \emph{convex} in $\rnni$.
+This is another property besides the cluster property of $\rnni$ that the $\nni$ space of unranked trees does not have \autocite{Gavryushkin2018-ol}.
+Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a way to compute distances between caterpillar trees in this space in time $\O(n\log n)$ \toref, and hence better worst-time complexity than $\findpath$.
 
 \begin{theorem}
 	The set of caterpillar trees is convex in $\rnni$.
@@ -356,6 +360,7 @@ For such a set of trees for which there is a shortest path in a graph that stays
 
 \begin{corollary}
 	The set of caterpillar trees is convex in $\dtt_m$.
+	\label{cor:caterpillar_convex_dtt}
 \end{corollary}
 
 \begin{proof}
