@@ -447,7 +447,7 @@ We see in \autoref{thm:caterpillar_distance_formula} that there is a formula to 
 
 \begin{corollary}
 	The distance between two caterpillar trees can be computed in $\O(n \log n)$ in $\rnni$.
-	\label{cor:distance_caterpillars_rnni_nlogn}
+	\label{cor:caterpillar_distance_rnni_nlogn}
 \end{corollary}
 
 \begin{proof}
@@ -466,7 +466,7 @@ We see in \autoref{thm:caterpillar_distance_formula} that there is a formula to 
 	With \autoref{lemma:dtt_path_sum} we know that the distance between two caterpillar trees $T$ and $R$ in $\dtt_m$ is the sum of minimal $\rnni$ moves and the minimal number of length moves between $T$ and $R$.
 	As we already saw in the proof of \autoref{lemma:dtt_path_sum}, the minimum number of length moves is $\sum_{i = n+1}^{m+2} |\rank(a_{i})_{T_c} - \rank(a_{i})_{R_c}|$.
 	Furthermore, the minimum number of $\rnni$ moves is equivalent to the $\rnni$ distance between the trees $\hat T$ and $\hat R$ that result from $T$ and $R$ by ignoring times and only keeping ranks, respectively.
-	Since the sum that gives the number of length moves can be computed in time linear in $m$ and the $\rnni$ distance between $\hat T$ and $\hat R$ in $\O(n \log n)$ (\autoref{cor:distance_caterpillars_rnni_nlogn}), the distance between $T$ and $R$ in $\dtt_m$ can be computed in $\O(m + n \log n)$.
+	Since the sum that gives the number of length moves can be computed in time linear in $m$ and the $\rnni$ distance between $\hat T$ and $\hat R$ in $\O(n \log n)$ (\autoref{cor:caterpillar_distance_rnni_nlogn}), the distance between $T$ and $R$ in $\dtt_m$ can be computed in $\O(m + n \log n)$.
 \end{proof}
 
 \subsection{Diameter and Radius}
