@@ -508,8 +508,11 @@ Since the $\rnni$ graph is the graph $\dtt_{n-1}$, the diameter of $\rnni$ is a 
 \end{corollary}
 
 \summary{Radius of $\rnni$ is equal to its diameter.}
-\todo{This intro needs to be expanded. Can we come up with a more intuitive description of what the radius of a graph is?}
-The radius of $\rnni$, which is defined $\min\limits_{\text{tree } T}\max\limits_{\text{tree }R} d(T,R)$, equals its diameter, results from the following lemma.
+The \emph{radius} of a graph is defined $\min\limits_{\text{tree } T}\max\limits_{\text{tree }R} d(T,R)$, where $d$ is a distance measure of the graph.
+In other words, it is the minimum distance of any vertex in the graph to the vertex with maximum distance from it.
+\todo{Radius of $\dtt_m$?}
+In the following we see that the radius of $\rnni$ equals its diameter.
+For proving this, we need the following lemma.
 
 \begin{lemma}
 	For every tree in $\rnni$ exists a caterpillar tree with distance $\frac{(n-1)(n-2)}{2}$ from it.
