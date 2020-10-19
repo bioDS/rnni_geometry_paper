@@ -91,6 +91,7 @@
 
 \section{Introduction}
 
+\todo{Include Alex's idea from github issue \#1}
 \summary{Why we want time-trees}
 
 \summary{Why discrete time-trees -- Summarising for example}
@@ -106,42 +107,49 @@
 
 \summary{Introducing discrete time-trees and ranked trees}
 A binary rooted phylogenetic tree is a binary tree on a fixed number $n$ of leaves, which are uniquely labelled by elements of the set $\{a_1, \ldots, a_n\}$.
-The main objective of study in this paper, \emph{discrete time-trees}, are such binary rooted phylogenetic trees, where leaves are assigned time $0$, and internal nodes are assigned unique integer-valued times, such that an internal node always has time greater than its children.
-We refer to the time of an internal node $v$ by $\ntime(v)$.
-If not stated otherwise, we will refer to discrete time-trees simply as \emph{trees}.
+The main objective of study in this paper, \emph{discrete time-trees}, are such binary rooted phylogenetic trees, where nodes are assigned \emph{times}, which are positive integers.
+More specifically, all leaves are assigned time $0$, and every internal nodes is assigned a unique time, such that it always has time greater than its children.
+We denote the time of an internal node $v$ by $\ntime(v)$.
+If not stated otherwise, we refer to discrete time-trees simply as \emph{trees}.
+We furthermore call two trees 
+\todo{We need 'identical' for non-binary trees in the definition of the $\nni$ move. Is this confusing here or can we keep it like this?}
+(not necessarily binary) \emph{identical} if there is a graph isomorphism between them preserving leaf labels and times.
 The number of discrete time-trees with root time less or equal to $m$ is $\frac{(n-1)!n!m^{n-1}}{2^{n-1}}$ \autocite{Gavryushkin2018-ol}.
-Discrete time-trees with root time $n-1$ are called \emph{ranked trees}, and we say \emph{rank} of $v$ to mean its time ($\rank(v) = \ntime(v)$) in a ranked tree to be consistent with notations used in \autocite{Collienne2020-iu}.
-Two trees are \emph{identical} if there is a graph isomorphism between them preserving leaf labels and times.
+
+As special case of discrete time-trees are \emph{ranked trees} where the root has time $n-1$.
+Then internal nodes are uniquely labelled by times in $\{1, \ldots, n\}$, and hence this definition of ranked trees coincides with the one of \textcite{Collienne2020-iu}.
+In the case of ranked trees we say \emph{rank} of a node $v$ to mean its time ($\rank(v) = \ntime(v)$) to be consistent with notations used in \autocite{Collienne2020-iu}.
 
 Every internal node $v$ of a tree $T$ can be referred to by the set $C$ of leaves that are descending from this node.
 We call such a set $C$ \emph{cluster} and say that the cluster $C$ is \emph{induced} by $v$.
-A ranked tree can then be seen as a list of clusters $[C_1, \ldots, C_{n-1}]$, where cluster $C_i$ is induced by the internal node with time $i$ for $i \in \{1, \ldots, n-1\}$.
+A list of clusters $[C_1, \ldots, C_{n-1}]$ uniquely defines a ranked tree, where cluster $C_i$ is induced by the internal node with rank $i$ for $i \in \{1, \ldots, n-1\}$.
 For each subset $S \subseteq \{a_1, \ldots, a_n\}$ we call the internal node of a tree $T$ with lowest time that is ancestral to all elements of $S$ the \emph{most recent common ancestor} of $S$ and denote it by $(S)_T$.
 \todo{Do we need the definition of $(T)_i$? It currently only appears in the FP pseudo-code}
 We denote the parent of a leaf $a_i$ in $T$ by $(a_i)_T$, and the cluster induced by the node with time $i$ in $T$ by $(T)_i$.
 
 \summary{Defining the tree space $\dtt_m$ and $\rnni = \dtt_{n-1}$}
-We are now ready to introduce the centre of study in this paper, $\dtt_m$, the graph (or space) of discrete time-trees, defined as follows.
-The set of trees with root time less or equal to $m$ is the vertex set of $\dtt_m$ for a fixed integer $m$.
-Trees $T$ and $R$ are connected by an edge if performing one of the following (reversible) operations on $T$ results in $R$:
+We are now ready to introduce the centre of study in this paper, the graph (or space) of discrete time-trees.
+This graph is called $\dtt_m$ for a fixed positive integer $m$.
+The vertex set of $\dtt_m$ is the set of trees with root time less or equal to $m$.
+Trees $T$ and $R$ are connected by an edge in this graph if performing one of the following (reversible) operations on $T$ results in $R$:
 \begin{enumerate}
 	\item An \emph{$\nni$ move} connects trees $T$ and $R$ if there is an edge $e$ in $T$ and an edge $f$ in $R$, both of length one, such that shrinking $e$ and $f$ to nodes results in identical trees.
 	\item A \emph{rank move} on $T$ exchanges the times of two internal nodes with time difference one.
 	\item A \emph{length move} on $T$ changes the time of an internal node by one.
 \end{enumerate}
-Note that a length move can only change the time of a node to $t$ if there is no node with time $t$ already.
-Furthermore, our definition of $\dtt_m$ differs from the definition of \textcite{Gavryushkin2018-ol}, as length move are defined differently in their paper.
+A length move can only change the time of a node to become $t$ if there is no node with time $t$ already.
+Note that our definition of $\dtt_m$ differs from the definition of \textcite{Gavryushkin2018-ol}, as length move are defined differently in their paper.
 
 The definition of $\dtt_m$ leads to a natural definition of the \emph{distance} between two trees $T$ and $R$ in this graph as the length of a shortest paths between these trees, denoted by $d(T,R)$.
 We also consider the ranked nearest neighbour interchange ($\rnni$) graph of \textcite{Collienne2020-iu}, which is the graph $\dtt_m$ for $m=n-1$, and hence a graph of ranked trees.
-In this graph length moves are not possible, so we use the notion $\rnni$ \emph{move} to mean either a rank move or an $\nni$ move to distinguish these moves from length moves, even in $\dtt_m$.
+In this graph length moves are not possible, so we use the notion $\rnni$ \emph{move} to mean either a rank move or an $\nni$ move to distinguish these moves from length moves.
 
 \todefine{
 	\begin{itemize}
 		\item We need to mention that $m$ is fixed when we compute distances between two trees
 		\item $\rnni(\rho)$ -- in corresponding section
 		\item intervals -- only needed in $\rnni(\rho)$ section (e.g. for Lemma~\ref{lemma:nni_path_to_caterpillar})
-		\item $(T)_i$ for cluster induced by node of rank $i$ in $T$ -- this is only needed for proofs around $\rnni(\rho)$ and in the proof that every tree is connected to a caterpillar tree in $\rnni$ by a sequence of $\nni$ moves
+		\item $(T)_i$ for cluster induced by node of rank $i$ in $T$ -- this is only needed for proofs around $\rnni(\rho)$ and in the proof that every tree is connected to a caterpillar tree in $\rnni$ by a sequence of $\nni$ moves AND $\findpath$ pseudo-code (!)
 		\item We sometimes say $\rnni$ instead of $\rnni$ space. If we keep that, we might want to mention that we do it? -- We use just '$\rnni$' in polynomial paper as well!
 		\item distinguish the shortest path problem from the distance problem! -- maybe mention that $\findpath$ is optimal algorithm for shortest path problem
 	\end{itemize}
