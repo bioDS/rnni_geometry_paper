@@ -96,9 +96,9 @@
 
 \summary{Why discrete time-trees -- Summarising for example}
 
-\summary{How recent results about $\rnni$ make this space interesting and that it is strongly connected to $\dtt$}
+\summary{How recent results about $\rnni$ make this space interesting and that it is strongly connected to $\dtt_m$}
 
-\summary{Why we want to investigate geometrical properties of $\dtt$ and $\rnni$, and also $\rnni(\rho)$}
+\summary{Why we want to investigate geometrical properties of $\dtt_m$ and $\rnni$, and also $\rnni(\rho)$}
 
 \summary{Structure of the paper.}
 
@@ -156,12 +156,10 @@ In this graph length moves are not possible, so we use the notion $\rnni$ \emph{
 }
 
 
-\section{Computing Shortest Paths in $\dtt$}
+\section{Computing Shortest Paths in $\dtt_m$}
 \label{section:fp_dtt}
 
-\todo{Do we want $\dtt$ or $\dtt_m$ in the titles of sections?}
-
-\summary{Introduce how we can use $\findpath$ to compute $\dtt$ distances}
+\summary{Introduce how we can use $\findpath$ to compute $\dtt_m$ distances}
 Distances between trees in $\rnni$ can be computed in quadratic running time with the algorithm $\findpath$, introduced by \textcite{Collienne2020-iu}.
 As $\rnni$ is a special case of $\dtt_m$ for $m = n-1$, the question whether this algorithm can be generalised to compute distances in $\dtt_m$ arises.
 Indeed, there is a way to use $\findpath$ to compute distances between trees in $\dtt_m$.
@@ -201,7 +199,7 @@ An example of this extension of a tree $T$ to a ranked tree $T_r$ is depicted in
 	\label{fig:dtt_to_ranked_tree}
 \end{figure}
 
-\summary{How to compute shortest $\dtt$-paths between trees with $\findpath$}
+\summary{How to compute shortest $\dtt_m$-paths between trees with $\findpath$}
 After extending both trees $T$ and $R$ to ranked trees $T_r$ and $R_r$ on $m+2$ leaves, $\findpath$ can compute a shortest path between $T_r$ and $R_r$ in the $\rnni$ graph on $m+2$ leaves.
 As we know that $\findpath$ preserves clusters, there are no $\nni$ moves in the newly added caterpillar tree with leaves in $\{a_{n+1}, \ldots, a_{m+2}\}$ on $\findpath$.
 Therefore, the only moves involving internal nodes of this caterpillar subtree are rank moves.
@@ -259,7 +257,7 @@ Throughout this paper we will however assume that a caterpillar tree is added in
 \end{algorithm}
 
 
-\section{Geometrical Properties of $\dtt$}
+\section{Geometrical Properties of $\dtt_m$}
 
 \subsection{Cluster Property}
 \summary{Definition of Cluster Property and why it is relevant.}
@@ -481,8 +479,8 @@ Using the results for caterpillar trees in $\rnni$, distances between caterpilla
 \subsection{Diameter and Radius}
 
 \summary{Definition of Diameter.}
-In this section we  investigate the \emph{diameter} of $\rnni$ and $\dtt$, which is the greatest distance between any pair of vertices (trees) in each of these graphs, respectively, i.e. $\max\limits_{\text{trees }T,R}d(T,R)$.
-We establish the exact diameter for $\dtt$ and the diameter of $\rnni$ as a special case of it, improving the upper bound $n^2 - 3n - \frac{5}{8}$ for the diameter of $\rnni$ given by \textcite{Gavryushkin2018-ol}.
+In this section we  investigate the \emph{diameter} of $\rnni$ and $\dtt_m$, which is the greatest distance between any pair of vertices (trees) in each of these graphs, respectively, i.e. $\max\limits_{\text{trees }T,R}d(T,R)$.
+We establish the exact diameter for $\dtt_m$ and the diameter of $\rnni$ as a special case of it, improving the upper bound $n^2 - 3n - \frac{5}{8}$ for the diameter of $\rnni$ given by \textcite{Gavryushkin2018-ol}.
 
 
 \begin{theorem}
@@ -565,7 +563,7 @@ A counterexample is given by the tree depicted in \autoref{fig:dtt_radius_counte
 
 \section{$\rnni(\rho)$}
 
-\todo{How can we connect $\rnni(\rho)$ to $\dtt$?}
+\todo{How can we connect $\rnni(\rho)$ to $\dtt_m$?}
 
 \subsection{Caterpillar Trees}
 
