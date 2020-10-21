@@ -223,10 +223,13 @@ Note that for any given pair of trees $T$ and $R$ we always assume $m$ to be the
 \end{proof}
 
 \summary{Running time of $\findpath$ + we don't need to add subtree in practice}
-\autoref{thm:dtt_findpath} shows that $\findpath$ (\autoref{alg:fp_dtt}) computes shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in $\O(mn)$ as we will see in more detail in \autoref{thm:dtt_diameter}.
-It is not even necessary to add a caterpillar tree to a trees in $\dtt_m$ to compute their distance.
-Instead of rank moves involving a node of the added caterpillar tree, equivalent rank moves can be performed as described in the \textbf{for} loop in Line~\ref{line:length_move} of \autoref{alg:fp_dtt}.
-Throughout this paper we will however assume that a caterpillar tree is added in order to perform $\findpath$ on ranked trees, as this simplifies some proofs.
+\autoref{thm:dtt_findpath} shows that $\findpath$ (\autoref{alg:fp_dtt}) computes shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in $\O(mn)$, more details on this are provided following \autoref{thm:dtt_diameter}.
+It is not even necessary to convert a given pair of discrete time-trees to ranked trees to apply $\findpath$ on them.
+Instead, we can define a modified version of $\findpath$ for trees in $\dtt_m$.
+Therefore, iterations of $\findpath$ on the ranked trees that consider clusters in the added caterpillar trees are replaced by length moves increasing the time of internal nodes as described in the \textbf{for} loop in Line~\ref{line:length_move} of \autoref{alg:fp_dtt}.
+The benefit of this modified version of the algorithm, compared to using $\findpath$ on the extended ranked versions of the trees, is a reduced use of memory, which is especially of practical relevance for $m >> n$.
+
+Throughout this paper we will however consider $\findpath$ applied to the extended ranked versions of discrete time-trees, as this simplifies some proofs.
 
 \begin{algorithm}[h]
 	\caption{$\findpath$($T,R$)}
