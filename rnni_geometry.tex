@@ -198,10 +198,10 @@ An example of this extension of a tree $T$ to a ranked tree $T_r$ is depicted in
 \end{figure}
 
 \summary{How to compute shortest $\dtt_m$-paths between trees with $\findpath$}
-After extending both trees $T$ and $R$ to ranked trees $T_r$ and $R_r$ on $m+2$ leaves, respectively, we can compute shortest paths between these trees in $\rnni$, using $\findpath$.
-As we know that $\findpath$ preserves clusters, there are no $\nni$ moves in the newly added caterpillar tree with leaves in $\{a_{n+1}, \ldots, a_{m+2}\}$ on $\findpath$.
-Therefore, the only moves involving internal nodes of this caterpillar subtree are rank moves.
-Each of these rank moves can be seen as a length move in the subtree induced by $\{a_1, \ldots, a_n\}$.
+After extending both trees $T$ and $R$ to ranked trees $T_r$ and $R_r$ on $m+2$ leaves, respectively, we can compute shortest paths between $T_r$ and $R_r$ in $\rnni$, using $\findpath$.
+A path computed by $\findpath$ preserves clusters \autocite{Collienne2020-iu}, hence there are no $\nni$ moves in the newly added caterpillar tree with leaves in $\{a_{n+1}, \ldots, a_{m+2}\}$ on such a path.
+The only moves involving internal nodes of this caterpillar subtree are rank moves.
+Each of these rank moves can be seen as a length move, if only considering the changes such a move does to the (discrete time-) subtree induced by $\{a_1, \ldots, a_n\}$.
 Hence the path $\fp(T_r,R_r)$ provides a path between $T$ and $R$ in $\dtt_m$, when only considering the subtrees induced by $\{a_1, \ldots, a_n\}$ in all trees on $\fp(T_r, R_r)$.
 We denote this path in $\dtt_m$, which results from $\fp(T_r, R_r)$, by $\fp(T,R)$.
 In \autoref{thm:dtt_findpath} we establish that $\fp(T,R)$ is a shortest path in $\dtt_m$ indeed.
@@ -213,11 +213,10 @@ Note that for any given pair of trees $T$ and $R$ we always assume $m$ to be the
 \end{theorem}
 
 \begin{proof}
-	We assume to the contrary that $T$ and $R$ are discrete time-trees in $\dtt_m$ with a shortest path between them that is shorter than $\fp(T,R)$.
-	Let $T_r$ and $R_r$ be the extended ranked versions of $T$ and $R$, computed with \autoref{alg:ranked_tree}.
-	We have already seen above that length moves on $\fp(T,R)$ correspond to rank moves between nodes of the two subtrees directly descending from the roots of the ranked trees on this path.
-	Furthermore, the order of leaves in the caterpillar subtrees that are added to $T$ and $R$ to receive $T_r$ and $R_r$ is identical.
-	Therefore, any path in $\dtt_m$ from $T$ to $R$ gives a path between $T_r$ and $R_r$ in the $\rnni$ space on $m+2$ leaves, preserving the length of the path.
+	Let $T$ and $R$ be discrete time-trees and $T_r$ and $R_r$ their extended ranked versions, respectively, computed with \autoref{alg:ranked_tree}.
+	We have already seen above that, if interpreting some rank moves on the extended ranked versions of trees as length moves, a path computed by $\findpath$ can be seen as a path between discrete time-trees.
+	It is also possible to convert a path between discrete time-trees to a path between their extended ranked versions by replacing length moves with rank moves, analogous to how it is described above, while all other moves stay the same.
+	Therefore, any path in $\dtt_m$ from $T$ to $R$ gives a path of equal length between $T_r$ and $R_r$ in the $\rnni$ space on $m+2$ leaves.
 	If there was a path between $T$ and $R$ shorter than $\fp(T,R)$, the corresponding path between $T_r$ and $R_r$ in $\rnni$ would be shorter than the one computed by $\findpath$ in this space.
 	Since this contradicts \autocite[Theorem 1]{Collienne2020-iu}, it follows that $\fp(T,R)$ is a shortest path in $\dtt_m$.
 \end{proof}
