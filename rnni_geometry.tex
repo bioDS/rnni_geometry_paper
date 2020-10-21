@@ -223,7 +223,7 @@ Note that for any given pair of trees $T$ and $R$ we always assume $m$ to be the
 \end{proof}
 
 \summary{Running time of $\findpath$ + we don't need to add subtree in practice}
-\autoref{thm:dtt_findpath} shows that $\findpath$ (\autoref{alg:fp_dtt}) computes shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in $\O(mn)$ as we will see in \autoref{thm:dtt_diameter}.
+\autoref{thm:dtt_findpath} shows that $\findpath$ (\autoref{alg:fp_dtt}) computes shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in $\O(mn)$ as we will see in more detail in \autoref{thm:dtt_diameter}.
 It is not even necessary to add a caterpillar tree to a trees in $\dtt_m$ to compute their distance.
 Instead of rank moves involving a node of the added caterpillar tree, equivalent rank moves can be performed as described in the \textbf{for} loop in Line~\ref{line:length_move} of \autoref{alg:fp_dtt}.
 Throughout this paper we will however assume that a caterpillar tree is added in order to perform $\findpath$ on ranked trees, as this simplifies some proofs.
@@ -505,6 +505,7 @@ We establish the exact diameter for $\dtt_m$ and the diameter of $\rnni$ as a sp
 	\end{figure}
 \end{proof}
 
+\todo{Mention that the running time of $\findpath$ follows from the diameter!}
 Since the $\rnni$ graph is the graph $\dtt_{n-1}$, the diameter of $\rnni$ is a direct result of \autoref{thm:dtt_diameter}.
 
 \begin{corollary}
