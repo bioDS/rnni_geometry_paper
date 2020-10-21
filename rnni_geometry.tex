@@ -209,12 +209,12 @@ In \autoref{thm:dtt_findpath} we establish that $\fp(T,R)$ is a shortest path in
 Note that for any given pair of trees $T$ and $R$ we always assume $m$ to be the maximum root time of these trees in and aim to compute a shortest path between them in $\dtt_m$. 
 
 \begin{theorem}
-	The path $\fp(T,R)$ between two discrete time-trees $T$ and $R$ is a shortest path in $\dtt_m$, where $m$ is the maximum time of the root of $T$ and $R$.
+	The path $\fp(T,R)$ between two discrete time-trees $T$ and $R$ is a shortest path in $\dtt_m$, where $m$ is the maximum root time of $T$ and $R$.
 	\label{thm:dtt_findpath}
 \end{theorem}
 
 \begin{proof}
-	Let $T$ and $R$ be discrete time-trees and $T_r$ and $R_r$ their extended ranked versions, respectively, computed with \autoref{alg:ranked_tree}.
+	Let $T$ and $R$ be discrete time-trees and $T_r$ and $R_r$ their extended ranked versions computed with \autoref{alg:ranked_tree}, respectively.
 	We have already seen above that, if interpreting some rank moves on the extended ranked versions of trees as length moves, a path computed by $\findpath$ can be seen as a path between discrete time-trees.
 	It is also possible to convert a path between discrete time-trees to a path between their extended ranked versions by replacing length moves with rank moves, analogous to how it is described above, while all other moves stay the same.
 	Therefore, any path in $\dtt_m$ from $T$ to $R$ gives a path of equal length between $T_r$ and $R_r$ in the $\rnni$ space on $m+2$ leaves.
