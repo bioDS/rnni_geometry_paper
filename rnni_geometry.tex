@@ -282,11 +282,12 @@ Note that even though it seems like distances can be computed in polynomial time
 \end{theorem}
 
 \begin{proof}
-	We assume the contrary, that is, there are two trees $T$ and $R$ sharing a cluster $C$ that is not present in all trees on a shortest path $p$.
-	We furthermore assume that these trees have minimal distance among all pairs of trees violating the cluster property.
-	Because of this minimality assumption on the length of $p$, the first tree $T'$ after $T$ on $p$ cannot contain $C$.
+	We assume to the contrary that there are two ranked trees sharing a cluster that are connected by a shortest path that does not preserve this cluster.
+	Let $T$ and $R$ be ranked trees with minimal distance among those, with shared cluster $C$ that is not present in every tree on a shortest path $p$ between $T$ and $R$.
+	Because of this minimality assumption on the length of $p$, the first tree $T'$ after $T$ on $p$ does not contain $C$.
 	Therefore, all nodes with rank below $(C)_T$ induce the same clusters in $T$ and $T'$.
-	\todo{Is this obvious?}
+	We now consider the first step of $\findpath$ applied to compute a shortest path from $T'$ to $R$.
+	\todo{This does not need to be true (?)}
 	When running $\findpath$ on $T'$ and $R$ we can assume that the first cluster that is considered is $C$, also following from the minimality assumption on the length of $p$.
 	If $C$ is the first cluster constructed on $\findpath$ starting it $T'$ to compute a path to $R$, the tree following $T'$ on this path is $T$, as it contains $C$ as a cluster.
 	This however contradicts the assumption that $T'$ is on a shortest path from $T$ to $R$.
