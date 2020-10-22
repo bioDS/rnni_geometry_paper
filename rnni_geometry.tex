@@ -286,16 +286,18 @@ Note that even though it seems like distances can be computed in polynomial time
 	Let $T$ and $R$ be ranked trees with minimal distance among those, with shared cluster $C$ that is not present in every tree on a shortest path $p$ between $T$ and $R$.
 	Because of this minimality assumption on the length of $p$, the first tree $T'$ after $T$ on $p$ does not contain $C$.
 	Therefore, all nodes with rank below $(C)_T$ induce the same clusters in $T$ and $T'$.
-	We now consider the first step of $\findpath$ applied to compute a shortest path from $T'$ to $R$.
+	We now compare the distances $d(T,R)$ and $d(T',R)$ by comparing paths $\findpath$ computes between $T$ and $R$ with those computed between $T'$ and $R$.
 
 	All trees on $\fp(R,T)$ and $\fp(R, T')$ coincide until the point is reached where the cluster that is considered by $\findpath$ on $R$ and $T$ is $C$.
 	Let $\hat T$ denote the tree right before cluster $C$ is considered.
 	Then $\fp(R,T)$ and $\fp(R,T')$ coincide up to this tree $\hat T$.
-	As $\findpath$ preserves clusters, $C$ is present in every tree on $\fp(T,R)$, and hence $\fp(T',R)$, up to $\hat T$.
 	It follows $d(T,R) = d(R,\hat T) + d(\hat T, T)$ and $d(T',R) = d(R,\hat T) + d(\hat T, T')$.
-	Now consider $\fp(T', \hat T)$.
-	The fist iteration of $\findpath$ on $T'$ and $\hat T$ considers the cluster $C$, as all cluster induced by nodes below $(C)_{T'}$ coincide in $\hat T$ and $T'$.
-	To construct this cluster in $T'$, there is just one $\nni$ move needed, which results in the tree $T$.
+
+	Now consider $\fp(T', \hat T)$, which has length $d(\hat T, T')$.
+	As $\findpath$ preserves clusters, $C$ is present in every tree on $\fp(T,R)$ up to and including $\hat T$.
+	The fist iteration of $\findpath$ applied to the pair of trees $(T',\hat T)$ considers the cluster $C$, as all cluster induced by nodes below $(C)_{T'}$ coincide in $\hat T$ and $T'$.
+	\todo{Do we need a figure here?}
+	To construct the cluster $C$ in $T'$, there is just one $\nni$ move needed, which results in the tree $T$, as $T$ and $T'$ are $\nni$ neighbours such that $T$ contains $C$ and $T'$ does not.
 	We can therefore conclude that $d(T,R) = d(T',R) - 1$, which contradicts the assumption that $T'$ is the first tree on a shortest path from $T$ to $R$.
 	Hence, there is no shortest path between $T$ and $R$ that does not preserve $C$ which shows that the $\rnni$ graph has the cluster property.
 \end{proof}
