@@ -302,8 +302,9 @@ Note that even though it seems like distances can be computed in polynomial time
 	Hence, there is no shortest path between $T$ and $R$ that does not preserve $C$ which shows that the $\rnni$ graph has the cluster property.
 \end{proof}
 
-The following lemma gives further insights into the connection of shortest paths in $\rnni$ and $\dtt_m$ space.
-It will be important for generalising geometrical properties of $\rnni$ to $\dtt_m$.
+The fact that a slightly modified version of $\findpath$ computes shortest paths $\dtt_m$ already suggest that there is a close relation between shortest path in $\rnni$ and $\dtt_m$.
+With the following lemma we see that any shortest path in $\dtt_m$ provides a shortest path in $\rnni$.
+In the remainder of the paper, this lemma will be an essential tool for generalising geometrical properties of $\rnni$ to $\dtt_m$.
 
 \begin{lemma}
 	Any distance between two trees $T$ and $R$ in $\dtt_m$ is the sum of the minimum number of $\rnni$ moves $r(T,R)$ and the minimum number of length moves $l(T,R)$ between these trees.
