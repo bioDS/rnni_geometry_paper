@@ -385,15 +385,12 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 	We can conclude $d(R,T) = d(R,T') + 1$, and hence $T'$ is on a shortest path from $T$ to $R$.
 \end{proof}
 
+The convexity of the set of caterpillar trees in $\dtt_m$ follows from \autoref{thm:caterpillar_convex_rnni} with \autoref{lemma:dtt_path_sum}.
+
 \begin{corollary}
 	The set of caterpillar trees is convex in $\dtt_m$.
 	\label{cor:caterpillar_convex_dtt}
 \end{corollary}
-
-\begin{proof}
-	With \autoref{lemma:dtt_path_sum} it is sufficient to show that there is a caterpillar path between two caterpillar trees $T$ and $R$ that minimises the number of $\rnni$ moves needed on any path between these two trees.
-	This however follows immediately from the convexity of the set of caterpillar trees in $\rnni$ (\autoref{thm:caterpillar_convex_rnni}), which proves this corollary.
-\end{proof}
 
 \summary{With Theorem~\ref{thm:caterpillar_convex_rnni} we can find a more efficient way to compute distances between caterpillar trees.}
 Using the convexity of the set of caterpillar trees (\autoref{thm:caterpillar_convex_rnni}), we can find several new ways of computing the distance between two caterpillar trees.
