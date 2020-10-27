@@ -421,17 +421,19 @@ Using this, distances between caterpillar trees in $\dtt_m$ can be computed in $
 \end{theorem}
 
 \begin{proof}
-	Let $\hat d(T,R) = p_T - m_T$, so we need to prove $\hat d(T,R) = d(T,R)$ for trees $T$ and $R$ as described above.
-	It is sufficient to prove that for any caterpillar tree $T'$ with distance one to $T$ it is
+	Let $T$ and $R$ be caterpillar trees as described above and $\hat d(T,R) = p_T - m_T$.
+	We hence need to prove $\hat d(T,R) = d(T,R)$.
+	It is sufficient to show that for any caterpillar tree $T'$ that is neighbour of $T$ it is
 	\begin{align}
 		\hat d(T',R) \geq \hat d(T,R) - 1.
 		\label{eq:distance_proof}
 	\end{align}
-	With this it follows by induction that $\hat d$ and $d$ coincide, using the \autoref{thm:caterpillar_convex_rnni}, the existence of a shortest path consisting only of caterpillar trees.
+	Then it follows by induction that $\hat d$ and $d$ coincide, using the existence of a shortest path consisting only of caterpillar trees (\autoref{thm:caterpillar_convex_rnni}).
 
-	To prove the correctness of Inequality~\ref{eq:distance_proof}, we first prove $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$.
+	For proving Inequality~\ref{eq:distance_proof}, we first prove $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$.
 	Then the only case in which Inequality~\ref{eq:distance_proof} does not hold is $p_{T'} = p_T - 1$ and $m_{T'} = m_t + 1$, which we will show to be impossible.
-	Throughout this proof we call pairs $(i,j) \in P_T$ transpositions, as the order of leaves in the caterpillar tree $T$ can be seen as a permutation of their order in $R$. 
+	Throughout this proof we call pairs $(i,j) \in P_T$ transpositions, as the order of leaves in the caterpillar trees $T$ and $T
+	$ can be seen as a permutation of their order in $R$.
 
 	As the only move possible between caterpillar trees $T$ and $T'$ is an $\nni$ move exchanging two leaves, at most one transposition of $T$ can be resolved in $T'$, resulting in $p_{T'} \geq p_T - 1$.
 	Let $a_k, a_j$ be the labels of leaves that exchange their position between $T$ and $T'$, such that $\rank(a_k)_T < \rank(a_j)_T$.
@@ -440,6 +442,7 @@ Using this, distances between caterpillar trees in $\dtt_m$ can be computed in $
 
 	We prove this by showing that if $a_k \notin M_T$, it follows either $a_k \notin M_{T'}$, or $a_j \notin M_{T'}$.
 	If $a_k \notin M_T$, at least one of the following conditions must be violated for $i = k$:
+	\todo{indices in sets should coincide in definition of $M_T$ and down here in the conditions!}
 	% Set counter for equation to get C1 and C2 for conditions
 	\setcounter{equation}{0}
 	\renewcommand{\theequation}{C\arabic{equation}}
