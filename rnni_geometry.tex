@@ -146,6 +146,7 @@ In this graph length moves are not possible, so we use the notion $\rnni$ \emph{
 
 \todefine{
 	\begin{itemize}
+		\item 'neighbour' ?
 		\item We need to mention that $m$ is fixed when we compute distances between two trees
 		\item $\rnni(\rho)$ -- in corresponding section
 		\item intervals -- only needed in $\rnni(\rho)$ section (e.g. for Lemma~\ref{lemma:nni_path_to_caterpillar})
@@ -350,28 +351,33 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 
 \begin{proof}
 	Let $T$ and $R$ be two caterpillar trees in $\rnni$.
-	We show that there is always a tree with distance one to $T$ that is closer to $R$ than $T$, such that the existence of a caterpillar path that is a shortest path between $T$ and $R$ follows inductively.
+	We prove the theorem by showing that there is a tree that is neighbour of $T$ and closer to $R$ than $T$.
+	The existence of a caterpillar path that is a shortest path between $T$ and $R$ follows inductively.
 
-	We consider the leaf $a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_R | \rank(a_i)_R \neq \rank(a_i)_T\}$ to be the leaf with parent with maximum rank in $R$ that is not in the same position in $T$.
+	We consider the leaf $a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_R | \rank(a_i)_R \neq \rank(a_i)_T\}$ to be the leaf with parent with maximum rank in $R$ among those that are not in the same position in $T$ and $R$.
 	Let $T'$ be the caterpillar tree resulting from $T$ by performing an $\nni$ move exchanging leaves $a_k$ and $a_j$, where $\rank(a_j)_T = \rank(a_k)_T + 1$.
-	By using properties of shortest paths computed by $\findpath$, we now show that $|\fp(R,T')| = |\fp(R,T)| - 1$, which proves the theorem.
+	By using properties of shortest paths computed by $\findpath$, we now show that $|\fp(R,T')| = |\fp(R,T)| - 1$, proving the theorem.
 
 	Since all clusters of $T$ and $T'$ induced by nodes of rank less than $\rank(a_k)_T$ coincide, the paths $\fp(T,R)$ and $\fp(T',R)$ coincide up to a tree $R'$, which contains all these clusters.
+	\todo{Is this obvious?}
+	Moreover, it is $\rank(a_k)_{R'}  > \rank(a_j)_{R'}$, as this relation does not change on the path computed by $\findpath$ between $R$ and $R'$.
 	Let $S$ be the largest cluster that is shared between $R', T,$ and $T'$ (see \autoref{fig:proof_caterpillar_convex_rnni}).
 
 	\begin{figure}[ht]
-		\includegraphics[width=0.3\textwidth]{proof_caterpillar_convex_rnni.eps}
-		\caption{Trees $T$ and $T'$ as described in the proof of \autoref{thm:caterpillar_convex_rnni}.
-		Both trees share the subtree induced by subset $S$ of leaves, only leaves $a_j$ and $a_k$ are exchanged between the two trees.
-		Dashed lines represent remaining part of trees, which again are equal in $T$ and $T'$.}
+		\includegraphics[width=0.66\textwidth]{proof_caterpillar_convex_rnni.eps}
+		\caption{Trees $T$, $T'$, and $R'$ as described in the proof of \autoref{thm:caterpillar_convex_rnni}.
+		All three trees share the subtree induced by subset $S$ of leaves.
+		Between $T$ and $T'$ only leaves $a_j$ and $a_k$ are exchanged.
+		Dashed lines represent remaining part of trees, which are equal in $T$ and $T'$.}
 		\label{fig:proof_caterpillar_convex_rnni}
 	\end{figure}
 
-	Since all these trees are caterpillar trees, the two next clusters considered on $\findpath(R,T)$ following $R'$ are $S \cup \{a_k\}$ and $S \cup \{a_k, a_j\}$.
+	We now compare the lengths of $\fp(R',T)$ and $\fp(R',T')$.
+	By our assumptions on $T$, the clusters considered on $\fp(R,T)$ in the two iterations following $R'$ are $S \cup \{a_k\}$ and $S \cup \{a_k, a_j\}$.
 	Decreasing the rank of $(S \cup \{a_k\})_{R'}$ takes $\rank(S \cup \{a_k\})_{R'} - (\rank(S)_{R'} + 1)$ $\rnni$ moves, the following iteration for $S \cup \{a_k, a_j\}$ takes $\rank(S \cup \{a_j\})_{R'} + 1 - (\rank(S)_{R'} + 2)$.
 	In particular, the rank of the most recent common ancestor of $S \cup \{a_k, a_j\}$ equals the rank of the most recent common ancestor of $S \cup \{a_j\}$ after the first iteration following $R'$, as $a_j$ has parent with rank higher than $a_k$ at that point.
 	Since the parents of $a_k$ and $a_j$ exchange while the rank of $(S \cup \{a_k\})_{R'}$ decreases, the rank of $(S \cup \{a_j\}$ decreases by one during that iteration, compared to $R'$.
-	On $\findpath(R,T')$ first $\rank(S \cup \{a_j\})_{R'} - (\rank(S)_{R'} + 1)$ $\rnni$ moves are used to decrease the rank of $(S \cup \{a_j\})_{R'}$, and then $\rank(S \cup \{a_j, a_k\})_{R'} - (\rank(S)_{R'} + 2)$ for $S \cup \{a_k, a_j\}$.
+	On $\fp(R,T')$ first $\rank(S \cup \{a_j\})_{R'} - (\rank(S)_{R'} + 1)$ $\rnni$ moves decrease the rank of $(S \cup \{a_j\})_{R'}$, and then $\rank(S \cup \{a_j, a_k\})_{R'} - (\rank(S)_{R'} + 2)$ are needed for $S \cup \{a_k, a_j\}$.
 
 	Let $Q$ and $Q'$ be the trees on $\fp(R,T)$ and $\fp(R,T')$, respectively, after the two iterations following $R'$.
 	By the above the number of moves on $\fp(R,T)$ between $R'$ and $Q$ is one higher than the number of moves on $\fp(R,T')$ between $R'$ and $Q'$.
