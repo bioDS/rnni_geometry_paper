@@ -408,14 +408,14 @@ Using this, distances between caterpillar trees in $\dtt_m$ can be computed in $
 \begin{theorem}
 	Let $T$ and $R$ be caterpillar trees in $\rnni$ such that \[1 = \rank(a_1)_R = \rank(a_2)_r < \rank(a_3)_R < \ldots < \rank(a_n)_R = n-1.\]
 	and
-	\[p_T := \{(i,j)| \rank(a_i)_T < \rank(a_j)_T \text{ and } \rank(a_i)_R > \rank(a_j)_R\},\]
+	\[P_T := \{(i,j)| \rank(a_i)_T < \rank(a_j)_T \text{ and } \rank(a_i)_R > \rank(a_j)_R\},\]
 	\begin{align*}
 		M_T := &\{a_i| (\forall k \textnormal{ with } \rank(a_k)_T \leq \rank(a_i)_T: \rank(a_k)_R > \rank(a_i)_r)\} \\
 		& \cap \{a_i | \rank(a_i)_T < \min\{\rank(a_1)_T, \rank(a_2)_T\}\}
 	\end{align*}
 	Then it is
 	\[d(T,R) = p_T - m_T,\]
-	for ${m_T = |M_T|}$.
+	for ${m_T = |M_T|}$ and ${p_T = |P_T|}$.
 
 	\label{thm:caterpillar_distance_formula}
 \end{theorem}
@@ -431,6 +431,7 @@ Using this, distances between caterpillar trees in $\dtt_m$ can be computed in $
 
 	To prove the correctness of Inequality~\ref{eq:distance_proof}, we first prove $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$.
 	Then the only case in which Inequality~\ref{eq:distance_proof} does not hold is $p_{T'} = p_T - 1$ and $m_{T'} = m_t + 1$, which we will show to be impossible.
+	Throughout this proof we call pairs $(i,j) \in P_T$ transpositions, as the order of leaves in the caterpillar tree $T$ can be seen as a permutation of their order in $R$. 
 
 	As the only move possible between caterpillar trees $T$ and $T'$ is an $\nni$ move exchanging two leaves, at most one transposition of $T$ can be resolved in $T'$, resulting in $p_{T'} \geq p_T - 1$.
 	Let $a_k, a_j$ be the labels of leaves that exchange their position between $T$ and $T'$, such that $\rank(a_k)_T < \rank(a_j)_T$.
