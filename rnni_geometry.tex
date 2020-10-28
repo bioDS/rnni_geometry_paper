@@ -491,7 +491,8 @@ Therefore, the two pairs that share parents in $T$ and $R$, respectively, are no
 	By \autoref{thm:caterpillar_distance_formula} the distance between two caterpillar trees is the number of transpositions between two sequences of length $n$ minus the variable $m_T$ as defined in \autoref{thm:caterpillar_distance_formula}.
 	The value $m_T$ can be computed time linear in $n$ for any caterpillar tree $T$ by considering the leaves of the tree ordered according to increasing rank of their parents.
 	The number of transpositions of a sequence of length $n$ (Kendall-tau distance) can be computed in time $\O(n \log n)$ \autocite{Knight1966-hx}.
-	The worst-case running time for computing the distance between caterpillar trees in $\rnni$ is therefore $\O(n \log n)$.
+	This number is equivalent to $p_t$, as defined in \autoref{thm:caterpillar_distance_formula}, when ignoring the potential transpositions for the pairs of leaves sharing a parent in $T$ and $R$, respectively.
+	The worst-case running time for computing the $\rnni$ distance between caterpillar trees is therefore $\O(n \log n)$.
 \end{proof}
 
 \begin{corollary}
