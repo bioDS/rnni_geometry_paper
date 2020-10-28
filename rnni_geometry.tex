@@ -147,7 +147,7 @@ In this graph length moves are not possible, so we use the notion $\rnni$ \emph{
 \todefine{
 	\begin{itemize}
 		\item we refer to leaves by their label (necessary?)
-		\item 'neighbour' ?
+		\item ($\rnni$) neighbour
 		\item We need to mention that $m$ is fixed when we compute distances between two trees
 		\item $\rnni(\rho)$ -- in corresponding section
 		\item intervals -- only needed in $\rnni(\rho)$ section (e.g. for Lemma~\ref{lemma:nni_path_to_caterpillar})
@@ -420,28 +420,34 @@ Using this, distances between caterpillar trees in $\dtt_m$ can be computed in $
 	\label{thm:caterpillar_distance_formula}
 \end{theorem}
 
+Throughout this proof we refer to pairs $(i,j) \in P_T$, as defined in \autoref{thm:caterpillar_distance_formula}, as transpositions.
+The reason for this is that the caterpillar trees can be seen as permutations of the set $\{a_1, \ldots, a_n\}$, ordered according to increasing rank of their parents.
+The tree $R$ then corresponds to the identity permutation $(a_1, a_2, a_3, \ldots, a_n)$.
+We therefore call elements in $P_T$ transpositions.
+Note that there is no one-to-one correspondence between permutations and caterpillar trees.
+For example the permutation $(a_2, a_1, a_3, \ldots, a_n)$ corresponds to the tree $R$ as well, as the first two elements share a parent in the caterpillar tree.
+Therefore, the two pairs that share parents in $T$ and $R$, respectively, are not in the set $P_T$.
+
 \begin{proof}
 	Let $T$ and $R$ be caterpillar trees as described above and $\hat d(T,R) = p_T - m_T$.
-	We hence need to prove $\hat d(T,R) = d(T,R)$.
-	It is sufficient to show that for any caterpillar tree $T'$ that is neighbour of $T$ it is
+	For proving $\hat d(T,R) = d(T,R)$, it is sufficient to show that for all caterpillar trees $T'$ that are neighbour of $T$ it is
 	\begin{align}
 		\hat d(T',R) \geq \hat d(T,R) - 1.
 		\label{eq:distance_proof}
 	\end{align}
-	Then it follows by induction that $\hat d$ and $d$ coincide.
+	That $\hat d$ and $d$ coincide follows by induction.
 
-	For proving Inequality~\ref{eq:distance_proof} we first establish $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$.
-	Then the only case in which Inequality~\ref{eq:distance_proof} does not hold is $p_{T'} = p_T - 1$ and $m_{T'} = m_t + 1$, which we will show to be impossible.
-	Throughout this proof we call pairs $(i,j) \in P_T$ transpositions, as the order of leaves in the caterpillar trees $T$ and $T'
-	$ can be seen as a permutation of their order in $R$.
+	For proving Inequality~\ref{eq:distance_proof} we first establish $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$, assuming that $T'$ is a caterpillar tree that is $\rnni$ neighbour of $T$.
+	We then show that it cannot be $p_{T'} = p_T - 1$ and $m_{T'} = m_t + 1$, which proves Inequality~\ref{eq:distance_proof}.
+	Throughout this proof we call pairs $(i,j) \in P_T$ transpositions, as the order of ranks of parents of leaves in the caterpillar trees $T$ and $T'$ can be seen as a permutation of their order in $R$.
 
-	The only move possible between caterpillar trees $T$ and $T'$ is an $\nni$ move exchanging two leaves, and hence at most one transposition of $T$ can be resolved in $T'$, resulting in $p_{T'} \geq p_T - 1$.
+	It is $p_{T'} \geq p_T - 1$, because the only move possible between caterpillar trees $T$ and $T'$ is an $\nni$ move exchanging two leaves, and hence at most one transposition of $T$ can be resolved in $T'$.
 	Let $a_k, a_j$ be the leaves that exchange their position between $T$ and $T'$, such that $\rank(a_k)_T < \rank(a_j)_T$.
 	Since these are the only leaves that change positions between $T$ and $T'$, they are the only elements that could be in $M_{T'} \setminus M_T$.
 	It remains to show $(M_{T'} \setminus M_T) \neq \{a_k, a_j\}$, from which we can follow that $m_{T'} \leq m_T - 1$.
-	We prove this by showing that if $a_k \notin M_T$, it follows either $a_k \notin M_{T'}$, or $a_j \notin M_{T'}$.
+	We prove this by showing that if $a_k \in (M_{T'} \setminus M_T)$, it follows $a_j \notin M_{T'}$.
 
-	If $a_k \notin M_T$, at least one of the following conditions must be violated for $i = k$:
+	We assume that $a_k \in (M_{T'} \setminus M_T)$, implying $a_k \notin M_T$, so at least one of the following conditions must be violated for $i = k$:
 	\setcounter{equation}{0} % Set counter for equation to get C1 and C2 for conditions
 	\renewcommand{\theequation}{C\arabic{equation}}
 	\begin{align}
@@ -454,23 +460,24 @@ Using this, distances between caterpillar trees in $\dtt_m$ can be computed in $
 	\renewcommand{\theequation}{\arabic{equation}}
 
 	At first we consider the case that (\ref{condition1}) is violated for $a_k$ in $T$.
-	It follows that there is a $l$ such that $\rank(a_l)_T < rank(a_k)_T$ and $\rank(a_k)_R > \rank(a_l)_R$.
-	It immediately follows that the same condition is violated for $a_k$ in $T'$, because the $\nni$ move exchanging $a_k$ and $a_j$ preserves the relationship of $a_k$ and $a_l$.
-	Therefore, it is $a_k \notin M_{T'}$.
+	Then there is an $l$ such that $\rank(a_l)_T \leq rank(a_k)_T$ and $\rank(a_k)_R > \rank(a_l)_R$.
+	It immediately follows that the same condition is violated for $a_k$ in $T'$, because the $\nni$ move exchanging $a_k$ and $a_j$ preserves the relationship of $a_k$ and $a_l$, as $l \neq j$.
+	It hence is $a_k \notin M_{T'}$, contradicting our assumption $a_k \in (M_{T'} \setminus M_T)$.
 
-	Let us now assume that (\ref{condition2}) is violated for $a_k$ to not be in $M_T$.
+	We can therefore assume that (\ref{condition2}) is violated for $a_k$ to not be in $M_T$.
 	It follows $\rank(a_k)_T \geq \min\{\rank(a_1)_T, \rank(a_2)_T\}$.
-	As only $a_k$ and $a_j$ exchange between $T$ and $T'$, it follows $a_j \in \{a_1, a_2\}$, resulting in a violation of (\ref{condition2}) for $a_j$ in $T'$ and hence $a_j \notin M_{T'}$.
+	As only $a_k$ and $a_j$ exchange between $T$ and $T'$ and $a_k \in M_{T'}$, it follows $a_j \in \{a_1, a_2\}$.
+	This however results in a violation of (\ref{condition2}) for $a_j$ in $T'$ and hence $a_j \notin M_{T'}$.
 	We can conclude $(M_{T'} \setminus M_T) \neq \{a_k, a_j\}$, and hence $m_{T'} \leq m_T + 1$.
 
-	It remains to show that if $p_{T'} = p_T - 1$, it cannot be $m_{T'} = m_T + 1$, in order to prove Inequality~\ref{eq:distance_proof}.
-	We assume $p_{T'} = p_T - 1$, hence $(a_k, a_j)$ is a transposition in $T$, meaning that $\rank(a_k)_T < \rank(a_j)_T$ and $\rank(a_k)_R > \rank(a_j)_R$.
-	As $a_k$ and $a_j$ are the only leaves whose membership can change between $M_T$ and $M_{T'}$, it suffices to show that none of them can be in $M_{T'} \setminus M_T$.
+	It remains to show that it cannot be $p_{T'} = p_T - 1$ and $m_{T'} = m_T + 1$ at the same time, in order to prove Inequality~\ref{eq:distance_proof}.
+	We assume $p_{T'} = p_T - 1$, hence $(k,j)$ is a transposition in $T$, meaning that $\rank(a_k)_T < \rank(a_j)_T$ and $\rank(a_k)_R > \rank(a_j)_R$.
+	As $a_k$ and $a_j$ are the only leaves that could be in $M_T \setminus M_{T'}$, it suffices to show that none of them actually are in $M_{T'} \setminus M_T$, resulting in $m_{T'} < m_T + 1$.
 
-	That $a_k$ is not in $M_{T'}$ follows from $\rank(a_j)_{T'} < \rank(a_k)_{T'}$ and $\rank(a_j)_R < \rank(a_k)_R$, and hence $a_k \notin M_{T'} \setminus M_T$.
-	Moreover, if $a_j \in M_{T'}$, it follows $a_j \in M_{T'}$, which yields $a_j \notin M_{T'} \setminus M_T$, as explained in the following.
-	If $a_j \in M_{T'}$, both conditions \ref{condition1} and \ref{condition2} are met by $a_j$ in $T'$.
-	With $\rank(a_k)_T < \rank(a_j)_T$ and $\rank(a_k)_R > \rank(a_j)_R$ it immediately follows that these conditions are also met in $T$, and hence $a_k \notin M_{T'} \setminus M_T$.
+	That $a_k$ is not in $M_{T'}$ follows from a violation of (\ref{condition2}) by $\rank(a_j)_{T'} < \rank(a_k)_{T'}$ and $\rank(a_j)_R < \rank(a_k)_R$, and hence it is $a_k \notin M_{T'} \setminus M_T$.
+	Moreover, if $a_j \in M_{T'}$, it follows $a_j \in M_{T'}$ as explained in the following, which yields $a_j \notin M_{T'} \setminus M_T$.
+	If $a_j \in M_{T'}$, both conditions (\ref{condition1}) and (\ref{condition2}) are met by $a_j$ in $T'$.
+	With $\rank(a_k)_T < \rank(a_j)_T$ and $\rank(a_k)_R > \rank(a_j)_R$ it immediately follows that these conditions are also met in $T$, and hence $a_k \in M_T$, and therefore $a_k \notin M_{T'} \setminus M_T$.
 
 	Concluding, it is $M_{T'} \setminus M_T = \emptyset$, and we can follow that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, which concludes this proof.
 \end{proof}
