@@ -146,6 +146,7 @@ In this graph length moves are not possible, so we use the notion $\rnni$ \emph{
 
 \todefine{
 	\begin{itemize}
+		\item we refer to leaves by their label (necessary?)
 		\item 'neighbour' ?
 		\item We need to mention that $m$ is fixed when we compute distances between two trees
 		\item $\rnni(\rho)$ -- in corresponding section
@@ -416,7 +417,6 @@ Using this, distances between caterpillar trees in $\dtt_m$ can be computed in $
 	Then it is
 	\[d(T,R) = p_T - m_T,\]
 	for ${m_T = |M_T|}$ and ${p_T = |P_T|}$.
-
 	\label{thm:caterpillar_distance_formula}
 \end{theorem}
 
@@ -428,23 +428,21 @@ Using this, distances between caterpillar trees in $\dtt_m$ can be computed in $
 		\hat d(T',R) \geq \hat d(T,R) - 1.
 		\label{eq:distance_proof}
 	\end{align}
-	Then it follows by induction that $\hat d$ and $d$ coincide, using the existence of a shortest path consisting only of caterpillar trees (\autoref{thm:caterpillar_convex_rnni}).
+	Then it follows by induction that $\hat d$ and $d$ coincide.
 
-	For proving Inequality~\ref{eq:distance_proof}, we first prove $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$.
+	For proving Inequality~\ref{eq:distance_proof} we first establish $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$.
 	Then the only case in which Inequality~\ref{eq:distance_proof} does not hold is $p_{T'} = p_T - 1$ and $m_{T'} = m_t + 1$, which we will show to be impossible.
-	Throughout this proof we call pairs $(i,j) \in P_T$ transpositions, as the order of leaves in the caterpillar trees $T$ and $T
+	Throughout this proof we call pairs $(i,j) \in P_T$ transpositions, as the order of leaves in the caterpillar trees $T$ and $T'
 	$ can be seen as a permutation of their order in $R$.
 
-	As the only move possible between caterpillar trees $T$ and $T'$ is an $\nni$ move exchanging two leaves, at most one transposition of $T$ can be resolved in $T'$, resulting in $p_{T'} \geq p_T - 1$.
-	Let $a_k, a_j$ be the labels of leaves that exchange their position between $T$ and $T'$, such that $\rank(a_k)_T < \rank(a_j)_T$.
+	The only move possible between caterpillar trees $T$ and $T'$ is an $\nni$ move exchanging two leaves, and hence at most one transposition of $T$ can be resolved in $T'$, resulting in $p_{T'} \geq p_T - 1$.
+	Let $a_k, a_j$ be the leaves that exchange their position between $T$ and $T'$, such that $\rank(a_k)_T < \rank(a_j)_T$.
 	Since these are the only leaves that change positions between $T$ and $T'$, they are the only elements that could be in $M_{T'} \setminus M_T$.
-	It remains to show $(M_{T'} \setminus M_T) \neq \{a_k, a_j\}$, from which we can follow $m_{T'} \leq m_T - 1$.
-
+	It remains to show $(M_{T'} \setminus M_T) \neq \{a_k, a_j\}$, from which we can follow that $m_{T'} \leq m_T - 1$.
 	We prove this by showing that if $a_k \notin M_T$, it follows either $a_k \notin M_{T'}$, or $a_j \notin M_{T'}$.
+
 	If $a_k \notin M_T$, at least one of the following conditions must be violated for $i = k$:
-	\todo{indices in sets should coincide in definition of $M_T$ and down here in the conditions!}
-	% Set counter for equation to get C1 and C2 for conditions
-	\setcounter{equation}{0}
+	\setcounter{equation}{0} % Set counter for equation to get C1 and C2 for conditions
 	\renewcommand{\theequation}{C\arabic{equation}}
 	\begin{align}
 		\forall l \text{ with } \rank(a_l)_T \leq \rank(a_i)_T: \rank(a_l)_R > \rank(a_i)_R \label{condition1}\\
@@ -455,14 +453,14 @@ Using this, distances between caterpillar trees in $\dtt_m$ can be computed in $
 	\setcounter{equation}{1}
 	\renewcommand{\theequation}{\arabic{equation}}
 
-	At first we consider the case that for $a_k$ Condition~\ref{condition1} is violated in $T$.
+	At first we consider the case that (\ref{condition1}) is violated for $a_k$ in $T$.
 	It follows that there is a $l$ such that $\rank(a_l)_T < rank(a_k)_T$ and $\rank(a_k)_R > \rank(a_l)_R$.
 	It immediately follows that the same condition is violated for $a_k$ in $T'$, because the $\nni$ move exchanging $a_k$ and $a_j$ preserves the relationship of $a_k$ and $a_l$.
 	Therefore, it is $a_k \notin M_{T'}$.
 
-	Let us now assume that Condition~\ref{condition2} is violated for $a_k$ to not be in $M_T$.
+	Let us now assume that (\ref{condition2}) is violated for $a_k$ to not be in $M_T$.
 	It follows $\rank(a_k)_T \geq \min\{\rank(a_1)_T, \rank(a_2)_T\}$.
-	As only $a_k$ and $a_j$ exchange between $T$ and $T'$, it follows $a_j \in \{a_1, a_2\}$, resulting in a violation of Condition~\ref{condition2} for $a_j$ in $T'$ and hence $a_j \notin M_{T'}$.
+	As only $a_k$ and $a_j$ exchange between $T$ and $T'$, it follows $a_j \in \{a_1, a_2\}$, resulting in a violation of (\ref{condition2}) for $a_j$ in $T'$ and hence $a_j \notin M_{T'}$.
 	We can conclude $(M_{T'} \setminus M_T) \neq \{a_k, a_j\}$, and hence $m_{T'} \leq m_T + 1$.
 
 	It remains to show that if $p_{T'} = p_T - 1$, it cannot be $m_{T'} = m_T + 1$, in order to prove Inequality~\ref{eq:distance_proof}.
