@@ -537,8 +537,9 @@ We establish the exact diameter for $\dtt_m$ and the diameter of $\rnni$ as a sp
 	\end{figure}
 \end{proof}
 
-\todo{Mention that the running time of $\findpath$ follows from the diameter!}
 Since the $\rnni$ graph is the graph $\dtt_{n-1}$, the diameter of $\rnni$ is a direct result of \autoref{thm:dtt_diameter}.
+Note that the worst-case running time of $\findpath$ is $\O(n^2)$ and $\O(nm)$ in $\rnni$ and $\dtt_m$, respectively, and only depends on the diameter of the corresponding tree spaces.
+For computing a shortest path, there is no algorithm with better worst-case running time than this, as the running time for algorithms computing shortest paths is bounded from below by the diameter of the corresponding space.
 
 \begin{corollary}
 	The diameter of $\rnni$ is $\frac{(n-1)(n-2)}{2}$.
