@@ -511,8 +511,22 @@ Therefore, the two pairs that share parents in $T$ and $R$, respectively, are no
 
 \summary{Definition of Diameter.}
 In this section we  investigate the \emph{diameter} of $\rnni$ and $\dtt_m$, which is the greatest distance between any pair of vertices (trees) in each of these graphs, respectively, i.e. $\max\limits_{\text{trees }T,R}d(T,R)$.
-We establish the exact diameter for $\dtt_m$ and the diameter of $\rnni$ as a special case of it, improving the upper bound $n^2 - 3n - \frac{5}{8}$ for the diameter of $\rnni$ given by \textcite{Gavryushkin2018-ol}.
+We first establish the exact diameter of $\rnni$, improving the upper bound $n^2 - 3n - \frac{5}{8}$ given by \textcite{Gavryushkin2018-ol}.
+Afterwards, we generalise this result to $\dtt_m$.
 
+\begin{theorem}
+	The diameter of $\rnni$ is $\frac{(n-1)(n-2)}{2}$.
+	\label{thm:diameter_rnni}
+\end{theorem}
+
+\begin{proof}
+	For proving this theorem we use the fact that $\findpath$ computes shortest paths in $\rnni$.
+	Each iteration $i$ of $\findpath$, applied to two trees $T$ and $R$ in $\rnni$, decreases the rank of the most recent common ancestor of a cluster $C$ of $R$ in the currently last tree $T'$ on the already computed path (starting wth $T' = T$).
+	The maximum rank of $(C)_{T'}$ at the beginning of iteration $i$ is $n-1$, the rank of the root.
+	As every move decreases the rank of $(C)_{T'}$ by one, there are at most $m-i$ moves needed in iteration $i$.
+	The maximum length of a shortest path in $\rnni$ is hence $\sum \limits_{i = 1}^{n-1} i = \frac{(n-1)(n-2)}{2}$.
+	Note that the caterpillar trees $[\{a_1, a_2\}, \{a_1, a_2, a_3\}, \ldots, \{a_1, \ldots, a_n\}]$ and $[\{a_n, a_{n-1}\}, \{a_n, a_{n-1}, a_{n-2}\}, \ldots, \{a_n, \ldots, a_1\}]$ provide an example of trees that have distance $\frac{(n-1)(n-2)}{2}$, as already pointed out in \autocite[Corollary 1]{Collienne2020-iu}, proving that this upper bound for the length of a shortest path is tight.
+\end{proof}
 
 \begin{theorem}
 	The diameter of $\dtt_m$ is $m(n-1) - \frac{n(n-1)}{2}$.
@@ -540,11 +554,6 @@ We establish the exact diameter for $\dtt_m$ and the diameter of $\rnni$ as a sp
 Since the $\rnni$ graph is the graph $\dtt_{n-1}$, the diameter of $\rnni$ is a direct result of \autoref{thm:dtt_diameter}.
 Note that the worst-case running time of $\findpath$ is $\O(n^2)$ and $\O(nm)$ in $\rnni$ and $\dtt_m$, respectively, and only depends on the diameter of the corresponding tree spaces.
 For computing a shortest path, there is no algorithm with better worst-case running time than this, as the running time for algorithms computing shortest paths is bounded from below by the diameter of the corresponding space.
-
-\begin{corollary}
-	The diameter of $\rnni$ is $\frac{(n-1)(n-2)}{2}$.
-	\label{cor:diameter_rnni}
-\end{corollary}
 
 \summary{Radius of $\rnni$ is equal to its diameter.}
 The \emph{radius} of a graph is defined as he minimum distance of any vertex in the graph to the vertex with maximum distance from it.
