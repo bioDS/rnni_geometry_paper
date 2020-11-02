@@ -308,6 +308,7 @@ The fact that a slightly modified version of $\findpath$ computes shortest paths
 With the following lemma we see that any shortest path in $\dtt_m$ provides a shortest path in $\rnni$.
 In the remainder of the paper, this lemma will be an essential tool for generalising geometrical properties of $\rnni$ to $\dtt_m$.
 
+\todo{Only number of $\rnni$ moves is minimised!}
 \begin{lemma}
 	The distance between two trees $T$ and $R$ in $\dtt_m$ is the sum of the minimum number of $\rnni$ moves and the minimum number of length moves on any shortest path between these trees.
 	\label{lemma:dtt_path_sum}
@@ -321,6 +322,7 @@ In the remainder of the paper, this lemma will be an essential tool for generali
 
 	The caterpillar subtrees $T_c$ and $R_c$ on the leaf subset $\{a_{n+1}, \ldots, a_{m+2}\}$ that are added to $T$ and $R$ by \autoref{alg:ranked_tree}, respectively, contain the same clusters.
 	Since clusters are preserved on shortest paths in $\rnni$ (\autoref{thm:cluster_property_rnni}), the only moves on any shortest path between $T_r$ and $R_r$ that effect internal nodes of the added caterpillar trees are rank moves.
+	\todo{the forumla for the number of length moves is not correct (counterexample in my lab seminar talk nov2020)}
 	Therefore, the minimum number of moves needed to transform $T_c$ to $R_c$ on any path is $\sum_{i = n+1}^{m+2} |\rank(a_{i})_{T_c} - \rank(a_{i})_{R_c}|$, which is the number rank of moves that $\findpath$ takes for these subtrees.
 
 	To prove that the number of $\rnni$ moves on $\fp(T,R)$ is minimal as well, we assume to the contrary that there is a path $p$ between $T$ and $R$ in $\dtt_m$ with less $\rnni$ moves.
@@ -528,6 +530,8 @@ Afterwards, we generalise this result to $\dtt_m$.
 	Note that the caterpillar trees $[\{a_1, a_2\}, \{a_1, a_2, a_3\}, \ldots, \{a_1, \ldots, a_n\}]$ and $[\{a_n, a_{n-1}\}, \{a_n, a_{n-1}, a_{n-2}\}, \ldots, \{a_n, \ldots, a_1\}]$ provide an example of trees that have distance $\frac{(n-1)(n-2)}{2}$, as already pointed out in \autocite[Corollary 1]{Collienne2020-iu}, proving that this upper bound for the length of a shortest path is tight.
 \end{proof}
 
+\todo{The order of this and the previous theorem needs to change again, we can't rely on the formula for $l(T,R)$.
+Instead, use $\findpath$ and what we know about the extended ranked versions of the trees}
 \begin{theorem}
 	The diameter of $\dtt_m$ is $m(n-1) - \frac{n(n-1)}{2}$.
 	\label{thm:dtt_diameter}
