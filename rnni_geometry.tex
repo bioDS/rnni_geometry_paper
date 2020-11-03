@@ -315,6 +315,11 @@ The cluster property in $\dtt_m$ follows from \autoref{thm:cluster_property_rnni
 	The graph $\dtt_m$ has the cluster property.
 \end{corollary}
 
+\begin{proof}
+	If there was a shortest path between two trees $T$ and $R$ in $\dtt_m$ that did not preserve a common cluster, this path can be seen as a path between $T_r$ and $R_r$, the extended ranked versions of $T$ and $R$ in $\rnni$.
+	Since this path has the same length as the one between $T_r$ and $R_r$, it is a shortest path in $\rnni$ as well, which leads to a contradiction to \autoref{thm:cluster_property_rnni}
+\end{proof}
+
 \subsection{Caterpillar Trees}
 
 \summary{Defining Caterpillar trees. Why are they interesting?}
