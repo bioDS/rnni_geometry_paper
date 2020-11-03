@@ -308,7 +308,6 @@ The fact that a slightly modified version of $\findpath$ computes shortest paths
 With the following lemma we see that any shortest path in $\dtt_m$ provides a shortest path in $\rnni$.
 In the remainder of the paper, this lemma will be an essential tool for generalising geometrical properties of $\rnni$ to $\dtt_m$.
 
-\todo{Only number of $\rnni$ moves is minimised!}
 \begin{lemma}
 	Let $T$ and $R$ be discrete time-trees and $T'$ and $R'$ the ranked trees resulting from these by ignoring times and only keeping ranks.
 	The sequence of $\rnni$ moves on $\fp(T,R)$ (in $\dtt_m$) results in the path $\fp(T',R')$ (in $\rnni$).
@@ -491,6 +490,7 @@ Therefore, the two pairs that share parents in $T$ and $R$, respectively, are no
 \end{corollary}
 
 \begin{proof}
+	\todo{Needs to be re-written with new Lemma 1}
 	With \autoref{lemma:dtt_fp_path_rnni} we know that the distance between two caterpillar trees $T$ and $R$ in $\dtt_m$ is the sum of minimal $\rnni$ moves and the minimal number of length moves between $T$ and $R$.
 	As we already saw in the proof of \autoref{lemma:dtt_fp_path_rnni}, the minimum number of length moves is $\sum_{i = n+1}^{m+2} |\rank(a_{i})_{T_c} - \rank(a_{i})_{R_c}|$, and can be computed in time linear in $m$.
 	Furthermore, the minimum number of $\rnni$ moves is equivalent to the $\rnni$ distance between the trees $\hat T$ and $\hat R$ that result from $T$ and $R$ by ignoring times and only keeping ranks.
