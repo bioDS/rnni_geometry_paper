@@ -329,6 +329,12 @@ For a set of trees for which there is a shortest path that stays within this set
 This is another property of $\rnni$ that the $\nni$ space of unranked trees does not have \autocite{Gavryushkin2018-ol}.
 Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a way to compute distances between caterpillar trees in this space in time $\O(n\log n)$ \autoref{cor:caterpillar_distance_rnni_nlogn}, and hence better worst-time complexity than $\findpath$.
 
+% TODO:
+% Re-write this Theorem for $\dtt_m$ and have $\rnni$ as a special case of it.
+% Therefore, we just need to distinguish the case that the edge above $a_k$ has length one (which is the case in the current proof) from the case that it is longer.
+% If it is longer, a length move (rank move with caterpillar tree) is needed.
+% This case is completely analogous to the first one, resulting in the same contradiction.
+
 \begin{theorem}
 	The set of caterpillar trees is convex in $\rnni$.
 	\label{thm:caterpillar_convex_rnni}
