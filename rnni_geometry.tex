@@ -310,28 +310,16 @@ In the remainder of the paper, this lemma will be an essential tool for generali
 
 \todo{Only number of $\rnni$ moves is minimised!}
 \begin{lemma}
-	The distance between two trees $T$ and $R$ in $\dtt_m$ is the sum of the minimum number of $\rnni$ moves and the minimum number of length moves on any shortest path between these trees.
-	\label{lemma:dtt_path_sum}
+	Let $T$ and $R$ be discrete time-trees and $T'$ and $R'$ the ranked trees resulting from these by ignoring times and only keeping ranks.
+	The sequence of $\rnni$ moves on $\fp(T,R)$ (in $\dtt_m$) results in the path $\fp(T',R')$ (in $\rnni$).
+	\label{lemma:dtt_fp_path_rnni}
 \end{lemma}
 
 \begin{proof}
-	Let $T$ and $R$ be trees in $\dtt_m$.
-	We prove the lemma by showing that $\findpath$ minimises both the number of length moves and the number of $\rnni$ moves.
-	As $\fp(T,R)$ is a shortest path (\autoref{thm:dtt_findpath}), it follows that all shortest paths have this property.
-	Let $T_r$ and $R_r$ be the extended ranked versions of $T$ and $R$, respectively, computed with \autoref{alg:ranked_tree}.
-
-	The caterpillar subtrees $T_c$ and $R_c$ on the leaf subset $\{a_{n+1}, \ldots, a_{m+2}\}$ that are added to $T$ and $R$ by \autoref{alg:ranked_tree}, respectively, contain the same clusters.
-	Since clusters are preserved on shortest paths in $\rnni$ (\autoref{thm:cluster_property_rnni}), the only moves on any shortest path between $T_r$ and $R_r$ that effect internal nodes of the added caterpillar trees are rank moves.
-	\todo{the forumla for the number of length moves is not correct (counterexample in my lab seminar talk nov2020)}
-	Therefore, the minimum number of moves needed to transform $T_c$ to $R_c$ on any path is $\sum_{i = n+1}^{m+2} |\rank(a_{i})_{T_c} - \rank(a_{i})_{R_c}|$, which is the number rank of moves that $\findpath$ takes for these subtrees.
-
-	To prove that the number of $\rnni$ moves on $\fp(T,R)$ is minimal as well, we assume to the contrary that there is a path $p$ between $T$ and $R$ in $\dtt_m$ with less $\rnni$ moves.
-	This path provides a path in $\rnni$ between ranked trees $\hat T$ and $\hat R$, which result from $T$ and $R$ by ignoring times of internal nodes and only keeping their ranks, with length $|p| < \fp(\hat T, \hat R)$, contradicting that $\findpath$ computes shortest paths in $\rnni$.
-
-	It follows that $\findpath$ computes a shortest paths minimising both the number of $\rnni$ moves and the number of length moves in $\dtt_m$ and hence every shortest path in this space has this property.
+	% TODO (trivial?)
 \end{proof}
 
-With \autoref{lemma:dtt_path_sum} the cluster property in $\dtt_m$ follows from \autoref{thm:cluster_property_rnni}.
+With \autoref{lemma:dtt_fp_path_rnni} the cluster property in $\dtt_m$ follows from \autoref{thm:cluster_property_rnni}.
 
 \begin{corollary}
 	The graph $\dtt_m$ has the cluster property.
@@ -388,7 +376,7 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 	We can conclude $d(R,T) = d(R,T') + 1$, and hence $T'$ is on a shortest path from $T$ to $R$.
 \end{proof}
 
-The convexity of the set of caterpillar trees in $\dtt_m$ follows from \autoref{thm:caterpillar_convex_rnni} with \autoref{lemma:dtt_path_sum}.
+The convexity of the set of caterpillar trees in $\dtt_m$ follows from \autoref{thm:caterpillar_convex_rnni} with \autoref{lemma:dtt_fp_path_rnni}.
 
 \begin{corollary}
 	The set of caterpillar trees is convex in $\dtt_m$.
@@ -503,8 +491,8 @@ Therefore, the two pairs that share parents in $T$ and $R$, respectively, are no
 \end{corollary}
 
 \begin{proof}
-	With \autoref{lemma:dtt_path_sum} we know that the distance between two caterpillar trees $T$ and $R$ in $\dtt_m$ is the sum of minimal $\rnni$ moves and the minimal number of length moves between $T$ and $R$.
-	As we already saw in the proof of \autoref{lemma:dtt_path_sum}, the minimum number of length moves is $\sum_{i = n+1}^{m+2} |\rank(a_{i})_{T_c} - \rank(a_{i})_{R_c}|$, and can be computed in time linear in $m$.
+	With \autoref{lemma:dtt_fp_path_rnni} we know that the distance between two caterpillar trees $T$ and $R$ in $\dtt_m$ is the sum of minimal $\rnni$ moves and the minimal number of length moves between $T$ and $R$.
+	As we already saw in the proof of \autoref{lemma:dtt_fp_path_rnni}, the minimum number of length moves is $\sum_{i = n+1}^{m+2} |\rank(a_{i})_{T_c} - \rank(a_{i})_{R_c}|$, and can be computed in time linear in $m$.
 	Furthermore, the minimum number of $\rnni$ moves is equivalent to the $\rnni$ distance between the trees $\hat T$ and $\hat R$ that result from $T$ and $R$ by ignoring times and only keeping ranks.
 	Since the $\rnni$ distance between $\hat T$ and $\hat R$ can be computed in time $\O(n \log n)$ (\autoref{cor:caterpillar_distance_rnni_nlogn}), the time complexity of computing distance trees in $\dtt_m$ is $\O(m + n \log n)$.
 \end{proof}
@@ -538,11 +526,11 @@ Instead, use $\findpath$ and what we know about the extended ranked versions of 
 \end{theorem}
 
 \begin{proof}
-	With \autoref{lemma:dtt_path_sum} we know that the distance between two trees $T$ and $R$ in $\dtt_m$ is the sum of the minimum number $r(T,R)$ of $\rnni$ moves and the minimum number $l(T,R)$ of length moves on any shortest path between them.
+	With \autoref{lemma:dtt_fp_path_rnni} we know that the distance between two trees $T$ and $R$ in $\dtt_m$ is the sum of the minimum number $r(T,R)$ of $\rnni$ moves and the minimum number $l(T,R)$ of length moves on any shortest path between them.
 	We furthermore have seen (\autoref{thm:diameter_rnni}), that the diameter of $\rnni$ is $\frac{(n-1)(n-2)}{2}$, which is the maximum number that $r(T,R)$ can be for trees $T$ and $R$ in $\dtt_m$.
 	We now establish the maximum of $l(T,R)$ for two trees $T$ and $R$ and will see afterwards, that there are actually trees which reach maxima for both $r(T,R)$ and $l(T,R)$.
 
-	We have already seen in the proof of \autoref{lemma:dtt_path_sum} that it is $l(T,R) = \sum_{i = n+1}^{m+2} |\rank(a_{i})_{T_c} - \rank(a_{i})_{R_c}|$, where $T_c$ and $R_c$ are the caterpillar trees added to $T$ and $R$ when applying \autoref{alg:ranked_tree}, respectively.
+	We have already seen in the proof of \autoref{lemma:dtt_fp_path_rnni} that it is $l(T,R) = \sum_{i = n+1}^{m+2} |\rank(a_{i})_{T_c} - \rank(a_{i})_{R_c}|$, where $T_c$ and $R_c$ are the caterpillar trees added to $T$ and $R$ when applying \autoref{alg:ranked_tree}, respectively.
 	The maximum number of length moves is reached when on $\findpath$ between $T_r$ and $R_r$ all internal nodes of the newly added caterpillar tree swap rank with all internal nodes of the subtree on the original leaf set $\{a_1, \ldots, a_n\}$.
 	Since these two subtrees have $m-n+1$ and $n-1$ internal nodes, respectively, the maximum number for $l(T,R)$ between any two trees in $\dtt_m$ is $(n-1)(m-n+1)$.
 
