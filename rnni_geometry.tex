@@ -473,7 +473,7 @@ Therefore, the two pairs that share parents in $T$ and $R$, respectively, are no
 	Concluding, it is $M_{T'} \setminus M_T = \emptyset$, and we can follow that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, which concludes this proof.
 \end{proof}
 
-\todo{Order of these corollaries needs to change (or they could become one)}
+\todo{Can this somehow be used in $\dtt_m$?}
 
 \begin{corollary}
 	The distance between two caterpillar trees can be computed in $\O(n \log n)$ in $\rnni$.
@@ -486,19 +486,6 @@ Therefore, the two pairs that share parents in $T$ and $R$, respectively, are no
 	The number of transpositions of a sequence of length $n$ (Kendall-tau distance) can be computed in time $\O(n \log n)$ \autocite{Knight1966-hx}.
 	This number is equivalent to $p_t$, as defined in \autoref{thm:caterpillar_distance_formula}, when ignoring the potential transpositions for the pairs of leaves sharing a parent in $T$ and $R$, respectively.
 	The worst-case running time for computing the $\rnni$ distance between caterpillar trees is therefore $\O(n \log n)$.
-\end{proof}
-
-\begin{corollary}
-	The distance between two caterpillar trees can be computed in $\O(m + n \log n)$ in $\dtt_m$.
-	\label{cor:caterpillar_distance_dtt_m_nlogn}
-\end{corollary}
-
-\begin{proof}
-	\todo{Needs to be re-written without Lemma 1}
-	With \autoref{lemma:dtt_fp_path_rnni} we know that the distance between two caterpillar trees $T$ and $R$ in $\dtt_m$ is the sum of minimal $\rnni$ moves and the minimal number of length moves between $T$ and $R$.
-	As we already saw in the proof of \autoref{lemma:dtt_fp_path_rnni}, the minimum number of length moves is $\sum_{i = n+1}^{m+2} |\rank(a_{i})_{T_c} - \rank(a_{i})_{R_c}|$, and can be computed in time linear in $m$.
-	Furthermore, the minimum number of $\rnni$ moves is equivalent to the $\rnni$ distance between the trees $\hat T$ and $\hat R$ that result from $T$ and $R$ by ignoring times and only keeping ranks.
-	Since the $\rnni$ distance between $\hat T$ and $\hat R$ can be computed in time $\O(n \log n)$ (\autoref{cor:caterpillar_distance_rnni_nlogn}), the time complexity of computing distance trees in $\dtt_m$ is $\O(m + n \log n)$.
 \end{proof}
 
 \subsection{Diameter and Radius}
