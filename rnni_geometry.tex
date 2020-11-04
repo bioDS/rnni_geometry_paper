@@ -247,7 +247,7 @@ Throughout this paper we will however consider $\findpath$ applied to the extend
 				\STATE $p = p+T_1$
 			\ENDWHILE
 			\ELSE
-				\STATE $i := \min\{l | l>k \text{ and no node in} T_1 \text{ has time }l\}$
+				\STATE $i := \min\{l | l>k \text{ and no node in } T_1 \text{ has time }l\}$
 				\FOR {$j = i-1, \dots, k$}
 					\label{line:length_move}
 					\STATE $T_2$ is $T_1$ where the time of $(T_1)_j$ is increased by one (length move)
