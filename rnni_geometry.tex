@@ -37,6 +37,7 @@
 \newcommand{\lemmaautorefname}{Lemma}
 \newcommand{\corollaryautorefname}{Corollary}
 \renewcommand{\sectionautorefname}{Section}
+\renewcommand{\subsectionautorefname}{Subsection}
 
 \newcommand{\tocite}{ {\color{red}\fbox{CITATION}} }
 \newcommand{\toref}{ {\color{blue}\fbox{Reference}} }
@@ -157,16 +158,14 @@ In this graph length moves are not possible, so we use the notion $\rnni$ \emph{
 \label{section:fp_dtt}
 
 \summary{Introduce how we can use $\findpath$ to compute $\dtt_m$ distances}
-Distances between trees in $\rnni$ can be computed in quadratic running time with the algorithm $\findpath$, introduced by \textcite{Collienne2020-iu}.
-As $\rnni$ is a special case of $\dtt_m$ for $m = n-1$, the question whether this algorithm can also be used to compute distances in $\dtt_m$ arises.
+Shortest paths, and therefore distances, between trees in $\rnni$ can be computed in quadratic running time with the algorithm $\findpath$, introduced by \textcite{Collienne2020-iu}.
+As $\rnni$ is a special case of $\dtt_m$ for $m = n-1$, the question whether this algorithm can also be used to compute shortest paths in $\dtt_m$ arises.
 In this section we present a generalisation of $\findpath$ that computes distances between trees in $\dtt_m$.
 Before introducing the version of $\findpath$ for $\dtt_m$, we introduce a way to convert trees in $\dtt_m$ into ranked trees, such that the $\rnni$ distance between those ranked trees equals their distance in $\dtt_m$ (\autoref{thm:dtt_findpath}).
 
 \summary{How to add leaves to a $\dtt_m$ tree to transform it into a ranked tree}
-Therefore, we consider trees $T$ and $R$ and construct ranked trees $T_r$ and $R_r$ as follows (\autoref{alg:ranked_tree}).
-Let $m$ be the maximum root time of $T$ and $R$.
-To receive a ranked tree $T_r$ on $m+2$ leaves from $T$, we add leaves to $T$ as described in the following (analogously for $R$).
-First a new root with time $m + 1$ is added and becomes parent of the root of $T$.
+A tree $T$ in $\dtt_m$ can be converted into a ranked tree in $\rnni$ on $m+2$ in the following way (\autoref{alg:ranked_tree}).
+First add a new root with time $m + 1$ that becomes parent of the root of $T$.
 The second child of this new root is the root of a caterpillar tree on leaf set $\{a_{n+1}, a_{n+2}, \ldots, a_{m+2}\}$, such that $\ntime(a_{n+1}) = \ntime(a_{n+2}) < \ntime(a_{n+3}) < \ldots < \ntime(a_{m+2})$.
 The resulting tree $T_r$ is hence a uniquely defined ranked tree with $m+2$ leaves.
 An example of this extension of a tree $T$ to a ranked tree $T_r$ is depicted in \autoref{fig:dtt_to_ranked_tree}.
@@ -175,15 +174,16 @@ Throughout this paper we use the index $r$ for $T_r$ to refer to this extended r
 Moreover, we denote the subtree of $T_r$ that is identical to $T$ by $T_r^d$ ($d$ for discrete time-tree) and the caterpillar subtree on leaf set $\{a_{n+1}, \ldots, a_{m+2}\}$ by $T_r^c$.
 
 \begin{algorithm}[ht]
-	\caption{RankedTree($T$)}
+	\caption{RankedTree($T$, $m$)}
 	\label{alg:ranked_tree}
 	\begin{algorithmic}[1]
 		\STATE $S:= \{1 \leq i \leq m | \text{ no internal node in } T \text{ has time } i\}$
 		\STATE $[i_1, \ldots, i_{m-n+1}] = sort(S)$
-		\STATE $T_r := T$ with additional internal node $v_1$ with children $a_{n+1}, a_{n+2}$ and time $i_1$
+		\STATE $T_r^d =$ copy of $T$
+		\STATE $T_r^c =$ tree consisting of just one internal node $v_1$ with rank $i_1$ and children $a_{n+1}, a_{n+2}$
 		\FOR {$k = 2, \dots, m-n+1$}
-			\STATE Add internal node $v_k$ with with children $v_{k-1}$ and $a_{n+k+1}$ and time $i_k$ to $T_r$
-		\STATE add internal node $\rho$ with children $v_{m-n}$ and $(\{a_1, \ldots, a_n\})_{T_r}$ to $T_r$
+			\STATE Add internal node $v_k$ with with time $i_k$ and children $v_{k-1}$ and $a_{n+1+k}$ to $T_r^c$
+		\STATE $T_r = $ tree with root with time $m+1$ and children of root are roots of $T_r^d$ and $T_r^c$.
 		\ENDFOR
 		\RETURN $T_r$
 	\end{algorithmic}
@@ -197,19 +197,20 @@ Moreover, we denote the subtree of $T_r$ that is identical to $T$ by $T_r^d$ ($d
 \end{figure}
 
 \summary{Moves on the extended ranked versions of trees -- $\rnni$ vs length moves}
-In the following we distinguish not only rank moves and $\nni$ moves on the extended ranked version $T_r$ of a tree $T$, but we will also distinguish different types of rank moves.
-Rank moves between one node of $T_c$ and one node of $T_r^d$ can be interpreted as length moves, as such rank moves can be seen as length moves in the subtree $T_r^d$ (\autoref{fig:dtt_to_ranked_tree}).
+In the following we distinguish not only rank moves and $\nni$ moves on the extended ranked version $T_r$ of a tree $T$, but we will also distinguish two different types of rank moves.
+Rank moves between one node of $T_r^c$ and one node of $T_r^d$ can be interpreted as length moves in $T_r^d$ (\autoref{fig:dtt_to_ranked_tree}).
+Therefore, we will refer to such rank moves as \emph{rank moves corresponding to length moves}.
 All remaining rank moves will still be called rank moves.
 Note that the correspondence of rank moves between $T_r^c$ and $T_r^d$ to length moves in $T$ shows that any path between $T$ and $R$ in $\dtt_m$ can be interpreted as a path between $T_r$ and $R_r$ in $\rnni$.
 
 \summary{How to compute shortest $\dtt_m$-paths between trees with $\findpath$}
-After extending both trees $T$ and $R$ to ranked trees $T_r$ and $R_r$ on $m+2$ leaves, respectively, we can compute shortest paths between $T_r$ and $R_r$ in $\rnni$, using $\findpath$.
-A path computed by $\findpath$ preserves clusters \autocite{Collienne2020-iu}, hence there are no $\nni$ moves in the newly added caterpillar tree with leaves in $\{a_{n+1}, \ldots, a_{m+2}\}$ on such a path.
+After extending both trees $T$ and $R$ in $\dtt_m$ to ranked trees $T_r$ and $R_r$ on $m+2$ leaves, respectively, we can compute shortest paths between $T_r$ and $R_r$ in $\rnni$, using $\findpath$.
+A path computed by $\findpath$ preserves clusters \autocite{Collienne2020-iu}, hence there are no $\nni$ moves in the newly added caterpillar subtree on the leaf set $\{a_{n+1}, \ldots, a_{m+2}\}$ on such a path.
 The only moves involving internal nodes of this caterpillar subtree are rank moves that correspond to length moves, as described above.
-Hence the path $\fp(T_r,R_r)$ provides a path between $T$ and $R$ in $\dtt_m$, when only considering the subtrees induced by $\{a_1, \ldots, a_n\}$ in all trees on $\fp(T_r, R_r)$, and interpreting some rank moves between $T_r$ and $R_r$ as length moves.
+Hence the path $\fp(T_r,R_r)$ provides a path between $T$ and $R$ in $\dtt_m$, when only considering the subtrees induced by $\{a_1, \ldots, a_n\}$ in all trees on $\fp(T_r, R_r)$, interpreting some rank moves between $T_r$ and $R_r$ as length moves.
 We denote this path in $\dtt_m$, which results from $\fp(T_r, R_r)$, by $\fp(T,R)$.
 In \autoref{thm:dtt_findpath} we establish that $\fp(T,R)$ is a shortest path in $\dtt_m$ indeed.
-Note that for any given pair of trees $T$ and $R$ we always assume $m$ to be the maximum root time of these trees in and aim to compute a shortest path between them in $\dtt_m$. 
+Note that for any given pair of trees $T$ and $R$, if not specified otherwise, we always assume $m$ to be the maximum root time of these trees in and aim to compute a shortest path between them in $\dtt_m$. 
 
 \begin{theorem}
 	The path $\fp(T,R)$ between two discrete time-trees $T$ and $R$ is a shortest path in $\dtt_m$, where $m$ is the maximum root time of $T$ and $R$.
@@ -218,21 +219,19 @@ Note that for any given pair of trees $T$ and $R$ we always assume $m$ to be the
 
 \begin{proof}
 	Let $T$ and $R$ be discrete time-trees and $T_r$ and $R_r$ their extended ranked versions computed with \autoref{alg:ranked_tree}, respectively.
-	We have already seen above that, if interpreting some rank moves on the extended ranked versions of trees as length moves, a path computed by $\findpath$ can be seen as a path between discrete time-trees.
-	It is also possible to convert a path between discrete time-trees to a path between their extended ranked versions by replacing length moves with rank moves, analogous to how it is described above, while all other moves stay the same.
-	Therefore, any path in $\dtt_m$ from $T$ to $R$ gives a path of equal length between $T_r$ and $R_r$ in the $\rnni$ space on $m+2$ leaves.
+	Any path in $\dtt_m$ from $T$ to $R$ gives a path of equal length between $T_r$ and $R_r$ in the $\rnni$ space on $m+2$ leaves.
+	This is due to the fact that the only moves needed in the subtree $T_r^c$ to transform it to $R_r^c$ are rank moves that correspond to length moves, and no other $\rnni$ moves.
 	If there was a path between $T$ and $R$ shorter than $\fp(T,R)$, the corresponding path between $T_r$ and $R_r$ in $\rnni$ would be shorter than the one computed by $\findpath$ in this space.
 	Since this contradicts \autocite[Theorem 1]{Collienne2020-iu}, it follows that $\fp(T,R)$ is a shortest path in $\dtt_m$.
 \end{proof}
 
 \summary{Running time of $\findpath$ + we don't need to add subtree in practice}
-\autoref{thm:dtt_findpath} shows that $\findpath$ (\autoref{alg:fp_dtt}) computes shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in $\O(mn)$, more details on this are provided following \autoref{thm:dtt_diameter}.
-It is not even necessary to convert a given pair of discrete time-trees to ranked trees to apply $\findpath$ on them.
-Instead, we can define a modified version of $\findpath$ for trees in $\dtt_m$.
-Therefore, iterations of $\findpath$ on the ranked trees that consider clusters in the added caterpillar trees are replaced by length moves increasing the time of internal nodes as described in the \textbf{for} loop in Line~\ref{line:length_move} of \autoref{alg:fp_dtt}.
+\autoref{thm:dtt_findpath} shows that $\findpath$ (\autoref{alg:fp_dtt}) computes shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in $\O(mn)$.
+More details on this are provided in \autoref{section:diameter} following \autoref{thm:dtt_diameter}.
+It is not even necessary to convert a given pair of discrete time-trees to ranked trees to apply $\findpath$ to them.
+Instead, we modify $\findpath$ for trees in $\dtt_m$.
+Iterations of $\findpath$ that consider clusters in the added caterpillar trees are replaced by length moves increasing the time of internal nodes as described in the \textbf{for} loop in Line~\ref{line:length_move} of \autoref{alg:fp_dtt}.
 The benefit of this modified version of the algorithm, compared to using $\findpath$ on the extended ranked versions of the trees, is a reduced use of memory, which is especially of practical relevance for $m >> n$.
-
-Throughout this paper we will however consider $\findpath$ applied to the extended ranked versions of discrete time-trees, as this simplifies some proofs.
 
 \begin{algorithm}[h]
 	\caption{$\findpath$($T,R$)}
@@ -509,6 +508,7 @@ Therefore, the two pairs that share parents in $T$ and $R$, respectively, are no
 
 \subsection{Diameter and Radius}
 
+\label{section:diameter}
 \summary{Definition of Diameter.}
 In this section we  investigate the \emph{diameter} of $\rnni$ and $\dtt_m$, which is the greatest distance between any pair of vertices (trees) in each of these graphs, respectively, i.e. $\max\limits_{\text{trees }T,R}d(T,R)$.
 We first establish the exact diameter of $\rnni$, improving the upper bound $n^2 - 3n - \frac{5}{8}$ given by \textcite{Gavryushkin2018-ol}.
