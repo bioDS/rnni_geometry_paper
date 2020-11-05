@@ -198,13 +198,14 @@ Moreover, we denote the subtree of $T_r$ that is identical to $T$ by $T_r^d$ ($d
 
 \begin{figure}[ht]
 	\includegraphics[width=0.75\textwidth]{dtt_to_ranked_tree.eps}
-	\caption{Extending a tree $T$ on $n$ leaves in $\dtt_6$ (left) to a ranked tree with $m+2=8$ leaves (right) by adding a caterpillar subtree with three leaves.}
+	\caption{Extending a tree $T$ on $n$ leaves in $\dtt_6$ (top left) to a ranked tree with $m+2=8$ leaves (top right) by adding a caterpillar subtree with three leaves.
+	The trees on the bottom result from $T$ and $T_r$ by performing a length move (left) or rank move (right), respectively).}
 	\label{fig:dtt_to_ranked_tree}
 \end{figure}
 
 \summary{Moves on the extended ranked versions of trees -- $\rnni$ vs length moves}
 In the following we distinguish not only rank moves and $\nni$ moves on the extended ranked version $T_r$ of a tree $T$, but we will also distinguish different types of rank moves.
-Rank moves between one node of $T_c$ and one node of $T_r^d$ can be interpreted as length moves, as such rank moves can be seen as length moves in the subtree $T_r^d$ (\autoref{fig:rank_move_length_move.eps}).
+Rank moves between one node of $T_c$ and one node of $T_r^d$ can be interpreted as length moves, as such rank moves can be seen as length moves in the subtree $T_r^d$ (\autoref{fig:dtt_to_ranked_tree}).
 All remaining rank moves will still be called rank moves.
 
 \summary{How to compute shortest $\dtt_m$-paths between trees with $\findpath$}
