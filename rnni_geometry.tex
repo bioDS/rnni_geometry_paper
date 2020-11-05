@@ -126,6 +126,7 @@ A list of clusters $[C_1, \ldots, C_{n-1}]$ uniquely defines a ranked tree, wher
 For each subset $S \subseteq \{a_1, \ldots, a_n\}$ we call the internal node of a tree $T$ with lowest time that is ancestral to all elements of $S$ the \emph{most recent common ancestor} of $S$ and denote it by $(S)_T$.
 \todo{Do we need the definition of $(T)_i$? It currently only appears in the FP pseudo-code}
 We denote the parent of a leaf $a_i$ in $T$ by $(a_i)_T$, and the cluster induced by the node with time $i$ in $T$ by $(T)_i$.
+An important type of trees that will be of importance throughout the whole paper are \emph{caterpillar trees}, which are trees where every internal nodes has at least one child that is a leaf.
 
 \summary{Defining the tree space $\dtt_m$ and $\rnni = \dtt_{n-1}$}
 We are now ready to introduce the centre of study in this paper, the graph (or space) of discrete time-trees.
@@ -174,7 +175,6 @@ Let $m$ be the maximum root time of $T$ and $R$.
 To receive a ranked tree $T_r$ on $m+2$ leaves from $T$, we add leaves to $T$ as described in the following (\autoref{alg:ranked_tree}).
 The same is done for $R$ to get a ranked tree $R_r$.
 To construct $T_r$, consider the tree $T$ and add a new root with time $m + 1$ that becomes parent of the root of $T$.
-\todo{Define caterpillar tree (in technical intro?!)}
 The second child of this new root is the root of a caterpillar tree on leaf set $\{a_{n+1}, a_{n+2}, \ldots, a_{m+2}\}$, such that $\ntime(a_{n+1}) = \ntime(a_{n+2}) < \ntime(a_{n+3}) < \ldots < \ntime(a_{m+2})$.
 Hence $T_r$ is a uniquely defined ranked tree with $m+2$ leaves.
 An example of this extension of a tree $T$ to a ranked tree $T_r$ is depicted in \autoref{fig:dtt_to_ranked_tree}.
