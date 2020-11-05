@@ -343,17 +343,22 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 % This case is completely analogous to the first one, resulting in the same contradiction.
 
 \begin{theorem}
-	The set of caterpillar trees is convex in $\rnni$.
+	The set of caterpillar trees is convex in $\dtt_m$.
 	\label{thm:caterpillar_convex_rnni}
 \end{theorem}
 
 \begin{proof}
-	Let $T$ and $R$ be two caterpillar trees in $\rnni$.
-	We prove the theorem by showing that there is a tree that is neighbour of $T$ and closer to $R$ than $T$.
+	Let $T$ and $R$ be two caterpillar trees in $\dtt_m$.
+	We prove the theorem by showing that there is a caterpillar tree $T'$ that is neighbour of $T$ and closer to $R$ than $T$.
 	The existence of a caterpillar path that is a shortest path between $T$ and $R$ follows inductively.
 
 	We consider the leaf $a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_R | \rank(a_i)_R \neq \rank(a_i)_T\}$ to be the leaf with parent with maximum rank in $R$ among those that are not in the same position in $T$ and $R$.
-	Let $T'$ be the caterpillar tree resulting from $T$ by performing an $\nni$ move exchanging leaves $a_k$ and $a_j$, where $\rank(a_j)_T = \rank(a_k)_T + 1$.
+	In the following twe distinguish the case that the parent of $(a_k)_T$ has rank one greater than the rank of $(a_k)_T$ from the case that its rank is greater than the rank of $(a_k)_T$ by more than one.
+
+	\textbf{Case 1}:
+
+	The parent of $(a_k)_T$ has rank $\rank(a_k)_T + 1$ and has the leaf $a_j$ as child, hence $\rank(a_k)_T = \rank(a_j)_T - 1$.
+	Let $T'$ be the caterpillar tree resulting from $T$ by performing an $\nni$ move exchanging leaves $a_k$ and $a_j$.
 	By using properties of shortest paths computed by $\findpath$, we now show that $|\fp(R,T')| = |\fp(R,T)| - 1$, proving the theorem.
 
 	Since all clusters of $T$ and $T'$ induced by nodes of rank less than $\rank(a_k)_T$ coincide, the paths $\fp(T,R)$ and $\fp(T',R)$ coincide up to a tree $R'$, which contains all these clusters.
@@ -381,6 +386,20 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 	By the above the number of moves on $\fp(R,T)$ between $R'$ and $Q$ is one higher than the number of moves on $\fp(R,T')$ between $R'$ and $Q'$.
 	Since the trees $Q'$ and $T'$ can be received from permuting the leaves of $Q$ and $T$ by the same permutation, namely the transposition $(a_j, a_k)$, the distances between these pairs of trees coincide: $d(Q,T) = d(Q',T')$.
 	We can conclude $d(R,T) = d(R,T') + 1$, and hence $T'$ is on a shortest path from $T$ to $R$.
+
+	\textbf{Case 2:}
+
+	\todo{The rank of $S \cup \{a_k\}$ does not necessarily need to decrease, it could increase. We need to make sure to use the correct notions (discrete time-trees or their extended ranked version?)}
+	Let the rank of the parent of $(a_k)_T$ be greater than $\rank(a_k)_T + 1$.
+	Let furthermore $T'$ be the neighbour of $T$ received by preforming a length move on $T$ that increases the rank of $(a_k)_T$ by one.
+
+	As in Case 1 we can follow from the similarity of $T$ and $T'$ that there is a tree $R'$ on the paths $\fp(R,T)$ and $\fp(R,T')$, such that both paths coincide up to this tree, and all clusters below $(a_k)_T$ coincide in $R'$, $T$, and $T'$.
+	Let again $S$ be the biggest cluster coinciding in all three trees $T$, $T'$, and $R'$.
+	This cluster $S$ contains $a_k$, as the rank of
+
+	When computing $\fp(R',T)$, the first iteration of $\findpath$ considers the cluster $S \cup \{a_k\}$ and decreases the most recent common ancestor of this cluster.
+	Since it is $(S\cup\{a_k\})_{T'} = (a_k)_{T'}$, the first tree on $\fp(T',R')$ is $T$.
+	This however results in a contradiction
 \end{proof}
 
 \todo{Why?}
