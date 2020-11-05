@@ -204,7 +204,7 @@ Moreover, we denote the subtree of $T_r$ that is identical to $T$ by $T_r^d$ ($d
 
 \summary{Moves on the extended ranked versions of trees -- $\rnni$ vs length moves}
 In the following we distinguish not only rank moves and $\nni$ moves on the extended ranked version $T_r$ of a tree $T$, but we will also distinguish different types of rank moves.
-Rank moves between one node of $T_c$ and one node of $T_d$ can be interpreted as length moves, as such rank moves can be seen as length moves in the subtree $T_d$ (\autoref{fig:rank_move_length_move.eps}).
+Rank moves between one node of $T_c$ and one node of $T_r^d$ can be interpreted as length moves, as such rank moves can be seen as length moves in the subtree $T_r^d$ (\autoref{fig:rank_move_length_move.eps}).
 All remaining rank moves will still be called rank moves.
 
 \summary{How to compute shortest $\dtt_m$-paths between trees with $\findpath$}
@@ -519,8 +519,8 @@ Afterwards, we generalise this result to $\dtt_m$.
 Instead, use $\findpath$ and what we know about the extended ranked versions of the trees}
 % Use the decomposition of $\fp(T,R)$ into $\rnni$ and length moves
 % The maximum number of these moves is the diameter of $\rnni$, which is $\frac{(n-1)(n-2)}{2}$.
-% Then count the number of possible length moves, which are rank moves with $T_c$.
-% The maximum here is reached when every node from subtree $T$ swaps rank with every node of subtree $T_c$.
+% Then count the number of possible length moves, which are rank moves with $T_r^c$.
+% The maximum here is reached when every node from subtree $T$ swaps rank with every node of subtree $T_r^c$.
 % This number is $(n-1)(m-n-1)$.
 % Sum of both is $m(n-1) - \frac{n(n-1)}{2}$, proof finished.
 \begin{theorem}
