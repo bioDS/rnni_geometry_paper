@@ -549,16 +549,25 @@ Instead, use $\findpath$ and what we know about the extended ranked versions of 
 \end{theorem}
 
 \begin{proof}
-	With \autoref{lemma:dtt_fp_path_rnni} we know that the distance between two trees $T$ and $R$ in $\dtt_m$ is the sum of the minimum number $r(T,R)$ of $\rnni$ moves and the minimum number $l(T,R)$ of length moves on any shortest path between them.
-	We furthermore have seen (\autoref{thm:diameter_rnni}), that the diameter of $\rnni$ is $\frac{(n-1)(n-2)}{2}$, which is the maximum number that $r(T,R)$ can be for trees $T$ and $R$ in $\dtt_m$.
-	We now establish the maximum of $l(T,R)$ for two trees $T$ and $R$ and will see afterwards, that there are actually trees which reach maxima for both $r(T,R)$ and $l(T,R)$.
+	In order to prove the diameter of $\dtt_m$, we consider the longest path that $\findpath$ can compute between any two trees $T$ and $R$.
+	More specifically, we consider the maximum number of moves that $\findpath$ can performed on the extended ranked versions $T_r$ and $R_r$ of any two trees $T$ and $R$.
+	Therefore, we distinguish $\rnni$ moves in the subtrees on the leaf set $\{a_1, \ldots, a_n\}$ from the rank moves that correspond to length moves, i.e. rank moves between one node of each of the subtrees on leaf subsets $\{a_1, \ldots, 1_n\}$ and $\{a_{n+1}, \ldots a_{m+2}\}$.
 
-	We have already seen in the proof of \autoref{lemma:dtt_fp_path_rnni} that it is $l(T,R) = \sum_{i = n+1}^{m+2} |\rank(a_{i})_{T_c} - \rank(a_{i})_{R_c}|$, where $T_c$ and $R_c$ are the caterpillar trees added to $T$ and $R$ when applying \autoref{alg:ranked_tree}, respectively.
-	The maximum number of length moves is reached when on $\findpath$ between $T_r$ and $R_r$ all internal nodes of the newly added caterpillar tree swap rank with all internal nodes of the subtree on the original leaf set $\{a_1, \ldots, a_n\}$.
-	Since these two subtrees have $m-n+1$ and $n-1$ internal nodes, respectively, the maximum number for $l(T,R)$ between any two trees in $\dtt_m$ is $(n-1)(m-n+1)$.
+	We consider the maximum number of moves that are possible on $\fp(T,R)$.
+	Since this is a shortest path, this number equals the diameter.
+	The maximum number of $\rnni$ moves follows from \autoref{thm:diameter_rnni} and is $\frac{(n-1)(n-2)}{2}$.
+	To establish the maximum number of length moves that could happen on a shortest path between trees $T$ and $R$, we consider those length moves as rank swaps, as described above.
+	\todo{Is this obvious?}
+	On $\fp(T,R)$ each internal node of the subtree $T_r^c$ of $T_r$ can swap rank with every internal node of the subtree $T_r^d$, and cannot be involved in more rank swaps.
+	Therefore, the maximum number of such rank swaps corresponding to length moves is $(m-n+1)(n-1)$.
 
-	The sum of the maximum number for $r(T,R)$ and $l(T,R)$ is hence $\frac{(n-1)(n-2)}{2} + (n-1)(m-n+1) = m(n-1) - \frac{n(n-1)}{2}$.
-	That this upper bound is actually the diameter of $\dtt_m$ can be proven by the trees in \autoref{fig:cat_max_dist_dtt} for which the path computed by $\findpath$ has length $m(n-1) - \frac{n(n-1)}{2}$.
+	The sum of the maximum number for $\rnni$ and length moves is hence $\frac{(n-1)(n-2)}{2} + (n-1)(m-n+1) = m(n-1) - \frac{n(n-1)}{2}$.
+	That this upper bound is actually the diameter of $\dtt_m$ can be proven by the trees $T$ and $R$ in \autoref{fig:cat_max_dist_dtt} for which the path computed by $\findpath$ has length $m(n-1) - \frac{n(n-1)}{2}$.
+	Both $T$ and $R$ are caterpillar trees.
+	$T$ is defined by
+	\[m-n-1 = \rank(a_1)_T = \rank(a_2)_T < \rank(a_3)_T < \ldots < \rank(a_n) = m\]
+	and $R$ by
+	\[1 = \rank(a_1)_T = \rank(a_n)_T < \rank(a_{n-1})_T < \ldots < \rank(a_1) = n-1.\]
 	\begin{figure}[ht]
 		\includegraphics[width=0.65\textwidth]{cat_max_dist_dtt.eps}
 		\caption{Trees with distance $m(n-1) - \frac{n(n-1)}{2}$}
@@ -566,7 +575,6 @@ Instead, use $\findpath$ and what we know about the extended ranked versions of 
 	\end{figure}
 \end{proof}
 
-Since the $\rnni$ graph is the graph $\dtt_{n-1}$, the diameter of $\rnni$ is a direct result of \autoref{thm:dtt_diameter}.
 Note that the worst-case running time of $\findpath$ is $\O(n^2)$ and $\O(nm)$ in $\rnni$ and $\dtt_m$, respectively, and only depends on the diameter of the corresponding tree spaces.
 For computing a shortest path, there is no algorithm with better worst-case running time than this, as the running time for algorithms computing shortest paths is bounded from below by the diameter of the corresponding space.
 
