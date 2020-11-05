@@ -171,13 +171,15 @@ Before introducing the version of $\findpath$ for $\dtt_m$, we introduce a way t
 \summary{How to add leaves to a $\dtt_m$ tree to transform it into a ranked tree}
 Therefore, we consider trees $T$ and $R$ and construct ranked trees $T_r$ and $R_r$ as follows.
 Let $m$ be the maximum root time of $T$ and $R$.
-To receive a ranked tree $T_r$ on $m+2$ leaves from $T$, we add leaves to $T$ as follows (\autoref{alg:ranked_tree}).
+To receive a ranked tree $T_r$ on $m+2$ leaves from $T$, we add leaves to $T$ as described in the following (\autoref{alg:ranked_tree}).
 The same is done for $R$ to get a ranked tree $R_r$.
 To construct $T_r$, consider the tree $T$ and add a new root with time $m + 1$ that becomes parent of the root of $T$.
 \todo{Define caterpillar tree (in technical intro?!)}
 The second child of this new root is the root of a caterpillar tree on leaf set $\{a_{n+1}, a_{n+2}, \ldots, a_{m+2}\}$, such that $\ntime(a_{n+1}) = \ntime(a_{n+2}) < \ntime(a_{n+3}) < \ldots < \ntime(a_{m+2})$.
 Hence $T_r$ is a uniquely defined ranked tree with $m+2$ leaves.
 An example of this extension of a tree $T$ to a ranked tree $T_r$ is depicted in \autoref{fig:dtt_to_ranked_tree}.
+Throughout this paper we use the index $r$ for $T_r$ to refer to this extended ranked version of any tree $T$.
+Moreover, we denote the subtree of $T_r$ that is identical to $T$ by $T_r^d$ ($d$ for discrete time-tree) and the added caterpillar tree by $T_r^c$.
 
 \begin{algorithm}[ht]
 	\caption{RankedTree($T$)}
@@ -199,6 +201,11 @@ An example of this extension of a tree $T$ to a ranked tree $T_r$ is depicted in
 	\caption{Extending a tree $T$ on $n$ leaves in $\dtt_6$ (left) to a ranked tree with $m+2=8$ leaves (right) by adding a caterpillar subtree with three leaves.}
 	\label{fig:dtt_to_ranked_tree}
 \end{figure}
+
+\summary{Moves on the extended ranked versions of trees -- $\rnni$ vs length moves}
+In the following we distinguish not only rank moves and $\nni$ moves on the extended ranked version $T_r$ of a tree $T$, but we will also distinguish different types of rank moves.
+We will refer to rank moves where one node of $T_c$ and one node of $T_d$ swap ranks as length moves.
+The reason for this is that such rank moves can also be seen as length moves in the subtree $T_d$.
 
 \summary{How to compute shortest $\dtt_m$-paths between trees with $\findpath$}
 \todo{Add an example to make relation of length move and rank move clear}
