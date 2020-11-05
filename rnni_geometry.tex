@@ -420,9 +420,8 @@ The only moves possible between caterpillar trees are $\nni$ moves, which simply
 \textcite{Kawahara2017-ey} provide an algorithm for TSP on lollipop graphs, which can be used for computing distances between caterpillar trees in $\rnni$ as well.
 This algorithm however has worst-case time complexity $\O(n^2)$, the same as $\findpath$.
 
-We are however able to present an algorithm with better worst-case complexity, specifically in $\O(n \log n)$ for $\rnni$ (\autoref{cor:caterpillar_distance_rnni_nlogn})
-At first we present in \autoref{thm:caterpillar_distance_formula} a formula to express distances between two caterpillar trees in $\rnni$.
-Using this, distances between caterpillar trees in $\dtt_m$ can be computed in $\O(m + n \log n)$ in $\dtt_m$ (\autoref{cor:caterpillar_distance_dtt_m_nlogn}).
+We are however able to present an algorithm with better worst-case complexity, specifically in $\O(n \log n)$ for $\rnni$ (\autoref{cor:caterpillar_distance_rnni_nlogn}).
+Therefore, we first present in \autoref{thm:caterpillar_distance_formula} a formula to express distances between two caterpillar trees in $\rnni$.
 
 \begin{theorem}
 	Let $T$ and $R$ be caterpillar trees in $\rnni$ such that \[1 = \rank(a_1)_R = \rank(a_2)_R < \rank(a_3)_R < \ldots < \rank(a_n)_R = n-1\]
