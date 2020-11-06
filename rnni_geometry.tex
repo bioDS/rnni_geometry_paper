@@ -467,18 +467,16 @@ Therefore, the two pairs of leaves that sharing their parent in $T$ and $R$, res
 	Concluding, it is $M_{T'} \setminus M_T = \emptyset$, and we can follow that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, which concludes this proof.
 \end{proof}
 
-\todo{Can this somehow be used in $\dtt_m$?}
-
 \begin{corollary}
 	The distance between two caterpillar trees can be computed in $\O(n \log n)$ in $\rnni$.
 	\label{cor:caterpillar_distance_rnni_nlogn}
 \end{corollary}
 
 \begin{proof}
-	By \autoref{thm:caterpillar_distance_formula} the distance between two caterpillar trees is the number of transpositions between two sequences of length $n$ minus the variable $m_T$ as defined in \autoref{thm:caterpillar_distance_formula}.
-	The value $m_T$ can be computed time linear in $n$ for any caterpillar tree $T$ by considering the leaves of the tree ordered according to increasing rank of their parents.
+	By \autoref{thm:caterpillar_distance_formula} the distance between two caterpillar trees in $\rnni$ is the number of transpositions between two sequences of length $n$ minus $m_T$ as defined in \autoref{thm:caterpillar_distance_formula}.
+	The value $m_T$ can be computed in time linear in $n$ for any caterpillar tree $T$ by considering the leaves of the tree ordered according to increasing rank of their parents.
 	The number of transpositions of a sequence of length $n$ (Kendall-tau distance) can be computed in time $\O(n \log n)$ \autocite{Knight1966-hx}.
-	This number is equivalent to $p_t$, as defined in \autoref{thm:caterpillar_distance_formula}, when ignoring the potential transpositions for the pairs of leaves sharing a parent in $T$ and $R$, respectively.
+	This number is equivalent to $p_t$, as defined in \autoref{thm:caterpillar_distance_formula}, when ignoring transpositions for the pairs of leaves sharing a parent in $T$ and $R$, respectively.
 	The worst-case running time for computing the $\rnni$ distance between caterpillar trees is therefore $\O(n \log n)$.
 \end{proof}
 
@@ -486,7 +484,7 @@ Therefore, the two pairs of leaves that sharing their parent in $T$ and $R$, res
 
 \label{section:diameter}
 \summary{Definition of Diameter.}
-In this section we  investigate the \emph{diameter} of $\rnni$ and $\dtt_m$, which is the greatest distance between any pair of vertices (trees) in each of these graphs, respectively, i.e. $\max\limits_{\text{trees }T,R}d(T,R)$.
+In this section we  investigate the \emph{diameter} of $\rnni$ and $\dtt_m$, which is the greatest distance between any pair of trees in each of these graphs, respectively, i.e. $\max\limits_{\text{trees }T,R}d(T,R)$.
 We first establish the exact diameter of $\rnni$, improving the upper bound $n^2 - 3n - \frac{5}{8}$ given by \textcite{Gavryushkin2018-ol}.
 Afterwards, we generalise this result to $\dtt_m$.
 
