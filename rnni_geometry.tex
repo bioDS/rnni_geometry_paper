@@ -307,19 +307,16 @@ Note that even though it seems like distances can be computed in polynomial time
 	There is hence no shortest path between $T$ and $R$ that does not preserve $C$, which proves the cluster property for $\rnni$.
 \end{proof}
 
-The fact that a slightly modified version of $\findpath$ computes shortest paths $\dtt_m$ already suggest that there is a close relation between shortest path in $\rnni$ and $\dtt_m$.
-With the following lemma we see that any shortest path in $\dtt_m$ provides a shortest path in $\rnni$.
-In the remainder of the paper, this lemma will be an essential tool for generalising geometrical properties of $\rnni$ to $\dtt_m$.
-
-The cluster property in $\dtt_m$ follows from \autoref{thm:cluster_property_rnni}.
+The fact that a slightly modified version of $\findpath$ computes shortest paths $\dtt_m$ already suggest that shortest path in $\rnni$ and $\dtt_m$ have similar properties.
+The cluster property in $\dtt_m$ follows from \autoref{thm:cluster_property_rnni}, indeed.
 
 \begin{corollary}
 	The graph $\dtt_m$ has the cluster property.
 \end{corollary}
 
 \begin{proof}
-	If there was a shortest path between two trees $T$ and $R$ in $\dtt_m$ that did not preserve a common cluster, this path can be seen as a path between $T_r$ and $R_r$, the extended ranked versions of $T$ and $R$ in $\rnni$.
-	Since this path has the same length as the one between $T_r$ and $R_r$, it is a shortest path in $\rnni$ as well, which leads to a contradiction to \autoref{thm:cluster_property_rnni}
+	If there was a shortest path between two trees $T$ and $R$ in $\dtt_m$ that did not preserve a common cluster, this path can be seen as a path between $T_r$ and $R_r$, the extended ranked versions of $T$ and $R$ in $\rnni$, as already discussed in \autoref{thm:dtt_findpath}.
+	Since this path has the same length as the one between $T_r$ and $R_r$, it is a shortest path in $\rnni$ as well, which leads to a contradiction to \autoref{thm:cluster_property_rnni}.
 \end{proof}
 
 \subsection{Caterpillar Trees}
