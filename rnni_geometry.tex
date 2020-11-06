@@ -287,24 +287,24 @@ Note that even though it seems like distances can be computed in polynomial time
 \end{theorem}
 
 \begin{proof}
-	We assume to the contrary that there are two ranked trees sharing a cluster that are connected by a shortest path that does not preserve this cluster.
-	Let $T$ and $R$ be ranked trees with minimal distance among those, with shared cluster $C$ that is not present in every tree on a shortest path $p$ between $T$ and $R$.
-	Because of this minimality assumption on the length of $p$, the first tree $T'$ after $T$ on $p$ does not contain $C$.
-	Therefore, all nodes with rank below $(C)_T$ induce the same clusters in $T$ and $T'$.
-	We now compare the distances $d(T,R)$ and $d(T',R)$ by comparing paths $\findpath$ computes between $T$ and $R$ with those computed between $T'$ and $R$.
+	We assume to the contrary that there are two ranked trees $T$ and $R$ are sharing a cluster $C$, such that there is a path $p$ between these trees where $C$ is not present in every tree on $p$.
+	We furthermore assume that there is no pair of trees with a shortest path not containing a shared cluster and distance less than $d(T,R)$, meaning that $T$ and $R$ give a minimum counterexample.
+	Because of this minimality assumption on the length of $p$, the first tree $T'$ following $T$ on $p$ does not contain $C$.
+	Since only the one cluster $C$ changes by the $\nni$ move between $T$ and $T'$, all nodes with rank below $(C)_T$ induce the same clusters in $T$ and $T'$.
+	We now compare distances $d(T,R)$ and $d(T',R)$ by using properties of $\findpath$.
 
-	All trees on $\fp(R,T)$ and $\fp(R, T')$ coincide until the point is reached where the cluster that is considered by $\findpath$ on $R$ and $T$ is $C$.
-	Let $\hat T$ denote the tree right before cluster $C$ is considered.
-	Then $\fp(R,T)$ and $\fp(R,T')$ coincide up to this tree $\hat T$.
-	It follows $d(T,R) = d(R,\hat T) + d(\hat T, T)$ and $d(T',R) = d(R,\hat T) + d(\hat T, T')$.
+	First we compare $\fp(R,T)$ and $\fp(R,T')$.
+	All trees on on these two paths coincide until the point is reached where the cluster considered on $\fp(R,T)$ is $C$.
+	Let $R'$ denote the tree at this point of the path.
+	Then $\fp(R,T)$ and $\fp(R,T')$ coincide up to this tree $R'$.
+	It follows $d(T,R) = d(R,R') + d(R', T)$ and $d(T',R) = d(R,R') + d(R', T')$.
 
-	Now consider $\fp(T', \hat T)$, which has length $d(\hat T, T')$.
-	As $\findpath$ preserves clusters, $C$ is present in every tree on $\fp(T,R)$ up to and including $\hat T$.
-	The fist iteration of $\findpath$ applied to the pair of trees $(T',\hat T)$ considers the cluster $C$, as all cluster induced by nodes below $(C)_{T'}$ coincide in $\hat T$ and $T'$.
-	\todo{Do we need a figure here?}
-	To construct the cluster $C$ in $T'$, there is just one $\nni$ move needed, which results in the tree $T$, as $T$ and $T'$ are $\nni$ neighbours such that $T$ contains $C$ and $T'$ does not.
+	Now consider $\fp(T', R')$ to evaluate $d(R', T')$.
+	As $\findpath$ preserves clusters, $C$ is present in every tree on $\fp(T,R)$ up to and including $R'$.
+	The fist iteration of $\findpath$ applied to the pair of trees $(T',R')$ considers the cluster $C$, as all cluster induced by nodes below $(C)_{T'}$ coincide in $R'$ and $T'$.
+	To construct the cluster $C$ in $T'$, there is just one $\nni$ move needed, which results in the tree $T$, as $T$ and $T'$ are $\nni$ neighbours such that $T$ contains $C$ and $T'$ does not (\autoref{fig:cluster_property_rnni}).
 	We can therefore conclude that $d(T,R) = d(T',R) - 1$, which contradicts the assumption that $T'$ is the first tree on a shortest path from $T$ to $R$.
-	Hence, there is no shortest path between $T$ and $R$ that does not preserve $C$ which shows that the $\rnni$ graph has the cluster property.
+	There is hence no shortest path between $T$ and $R$ that does not preserve $C$, which proves the cluster property for $\rnni$.
 \end{proof}
 
 The fact that a slightly modified version of $\findpath$ computes shortest paths $\dtt_m$ already suggest that there is a close relation between shortest path in $\rnni$ and $\dtt_m$.
