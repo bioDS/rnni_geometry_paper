@@ -338,20 +338,15 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 \begin{proof}
 	Let $T$ and $R$ be two caterpillar trees in $\dtt_m$.
 	We prove the theorem by showing that there is a caterpillar tree $T'$ that is neighbour of $T$ and closer to $R$ than $T$.
-	The existence of a caterpillar path that is a shortest path between $T$ and $R$ follows inductively.
-	More specifically, we consider the extended ranked versions $T_r$ and $R_r$ of the given trees $T$ and $R$.
+	The existence of a shortest path consisting only of caterpillar trees between $T$ and $R$ follows inductively.
+	Throughout this proof we consider the extended ranked versions $T_r$ and $R_r$ of $T$ and $R$.
 
-	Let the leaf $a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_{R_r} | \rank(a_i)_{R_r} \neq \rank(a_i)_{T_r}\}$ be the leaf with parent with maximum rank in $R_r$ among those that are not in the same position in $T_r$ and $R_r$.
-
-	Let $a_j$ be a node with $\rank(a_j)_{T_r} = \rank(a_k)_{T_r} + 1$
-	We define $T'_r$ to be the caterpillar tree resulting from $T_r$ by performing an $\nni$ move or rank move exchanging the ranks of $(a_k)_{T_r}$ and $(a_j)_{T_r}$.
-	An $\nni$ move is necessary, if these two nodes are connected by an edge, otherwise a rank move corresponding to a length move is preformed on $T_r$ to receive $T'_r$.
-	By using properties of shortest paths computed by $\findpath$, we now show that $|\fp(R_r,T'_r)| = |\fp(R_r,T_r)| - 1$, proving the theorem.
-
-	Since all clusters of $T_r$ and $T'_r$ induced by nodes of rank less than $\rank(a_k)_{T_r}$ coincide, the paths $\fp(T_r,R_r)$ and $\fp(T'_r,R_r)$ coincide up to a tree $R'_r$, which contains all these clusters.
-	\todo{Is this obvious?}
-	Moreover, it is $\rank(a_k)_{R'_r}  > \rank(a_j)_{R'_r}$, as this relation does not change on the path computed by $\findpath$ between $R_r$ and $R'_r$.
-	Let $S$ be the largest cluster that is shared between $R'_r, T_r,$ and $T'_r$ (see \autoref{fig:proof_caterpillar_convex_rnni}).
+	Let $a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_{R_r} | \rank(a_i)_{R_r} \neq \rank(a_i)_{T_r}\}$ be the leaf with parent with maximum rank in $R_r$ among those that are not in the same position in $T_r$ and $R_r$.
+	Let furthermore $a_j \in \{a_1, \ldots, a_{m+2}\}$ be a leaf with $\rank(a_j)_{T_r} = \rank(a_k)_{T_r} + 1$.
+	We define $T'_r$ to be the caterpillar tree resulting from $T_r$ by an $\nni$ move or rank move exchanging the ranks of $(a_k)_{T_r}$ and $(a_j)_{T_r}$.
+	An $\nni$ move is necessary if these two nodes are connected by an edge, otherwise a rank move corresponding to a length move is performed on $T_r$ to receive $T'_r$.
+	In both cases $T'_r$ is a caterpillar tree.
+	By using properties of shortest paths computed by $\findpath$, we now show that $|\fp(R_r,T'_r)| = |\fp(R_r,T_r)| - 1$.
 
 	\todo{update this figure to $\dtt_m$}
 	\begin{figure}[ht]
@@ -363,22 +358,22 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 		\label{fig:proof_caterpillar_convex_rnni}
 	\end{figure}
 
+	Since all clusters of $T_r$ and $T'_r$ induced by nodes of rank less than $\rank(a_k)_{T_r}$ coincide, the paths $\fp(R_r,T_r)$ and $\fp(R_r,T'_r)$ coincide up to a ranked tree $R'_r$, which contains all these clusters.
 	We now compare the lengths of $\fp(R'_r,T_r)$ and $\fp(R'_r,T'_r)$.
 	Therefore, we note at first that it is $\rank(a_j)_{R_r} < \rank(a_k)_{R_r}$ by the choice of $a_k$, and therefore also $\rank(a_j)_{R'_r} < \rank(a_k)_{R'_r}$.
 
-	By our assumptions on $T_r$, the clusters considered on $\fp(R_r,T_r)$ in the two iterations following $R'_r$ are first $S \cup \{a_k\}$ and then $S' \cup \{a_j\}$ for some clusters $S$ and $S'$ that are induced by nodes fo the same rank in $T_r$, $T'_r$, and $R'_r$.
-	Decreasing the rank of $(S \cup \{a_k\})_{R'_r}$ takes $\rank(S \cup \{a_k\})_{R'_r} - (\rank(S)_{R'_r} + 1)$ $\rnni$ moves, the following iteration for $S' \cup \{a_j\}$ takes $\rank(S' \cup \{a_j\})_{R'_r} + 1 - (\rank(S')_{R'_r} + 2)$.
-	Since the parents of $a_k$ and $a_j$, which are exchange while the rank of $(S \cup \{a_k\})_{R'_r}$ decreases, the rank of $(S' \cup \{a_j\}$ decreases by one during that iteration, compared to $R'_r$.
-	On $\fp(R_r,T'_r)$ first $\rank(S' \cup \{a_j\})_{R'_r} - (\rank(S')_{R'} + 1)$ $\rnni$ moves decrease the rank of $(S' \cup \{a_j\})_{R'}$, and then $\rank(S \cup \{a_k\})_{R'-r} - (\rank(S)_{R'_r} + 2)$ are needed for $S \cup \{a_k\}$.
+	By our assumptions on $T_r$, the clusters considered on $\fp(R_r,T_r)$ in the two iterations following $R'_r$ are first $S \cup \{a_k\}$ and then $S' \cup \{a_j\}$ for some clusters $S$ and $S'$ that are present in $T_r$, $T'_r$, and $R'_r$.
+	Decreasing the rank of $(S \cup \{a_k\})_{R'_r}$ takes $\rank(S \cup \{a_k\})_{R'_r} - (\rank(S)_{R'_r} + 1)$ $\rnni$ moves.
+	Because the rank of $(S \cup \{a_j\})_{R'_r}$ increases by one when the parents of $a_k$ and $a_j$ swap ranks in this iteration, the following iteration for $S' \cup \{a_j\}$ needs $\rank(S' \cup \{a_j\})_{R'_r} + 1 - (\rank(S')_{R'_r} + 2)$ $\rnni$ moves.
+	On $\fp(R_r,T'_r)$ however, first $\rank(S' \cup \{a_j\})_{R'_r} - (\rank(S')_{R'} + 1)$ $\rnni$ moves decrease the rank of $(S' \cup \{a_j\})_{R'}$, and then $\rank(S \cup \{a_k\})_{R'_r} - (\rank(S)_{R'_r} + 2)$ are needed for $S \cup \{a_k\}$.
+	In total, for both iterations one more move is needed on $\fp(R_r, T'_r)$ compared to $\fp(R_r, T_r)$. 
 
-	Let $Q_r$ and $Q'_r$ be the trees on $\fp(R_r,T_r)$ and $\fp(R_r,T'_r)$, respectively, after the two iterations following $R'_R$.
-	By the above the number of moves on $\fp(R_r,T_r)$ between $R'_r$ and $Q_r$ is one higher than the number of moves on $\fp(R_r,T'_r)$ between $R'_r$ and $Q'_r$.
-	Since the trees $Q'_r$ and $T'_r$ can be received from permuting the leaves of $Q_r$ and $T_r$ by the same permutation, namely the transposition $(a_j, a_k)$, the distances between these pairs of trees coincide: $d(Q_R,T_r) = d(Q'_r,T'_r)$.
-	We can conclude $d(R_r,T_r) = d(R_r,T'_r) + 1$, and hence $T'_r$ is on a shortest path from $T_r$ to $R_r$.
+	The only difference in hte trees after these two iterations on the two different paths is the order of ranks of the parents of $a_j$ and $a_k$.
+	Since the rest of $T_r$ and $T'_r$ coincide, the remaining parts of $\fp(R_r, T_r)$ and $\fp(R_r, T'_r)$ consist on the same moves.
+	With our previous observation we can conclude $d(R_r,T_r) = d(R_r,T'_r) + 1$, and hence $T'_r$ is on a shortest path from $T_r$ to $R_r$.
 \end{proof}
 
-\todo{Why?}
-The convexity of the set of caterpillar trees in $\dtt_m$ follows from \autoref{thm:caterpillar_convex_rnni}.
+The convexity of the set of caterpillar trees in $\rnni$ follows from the convexity of this set in $\dtt_m$ for $m = n-1$ (\autoref{thm:caterpillar_convex_rnni}).
 
 \begin{corollary}
 	The set of caterpillar trees is convex in $\dtt_m$.
