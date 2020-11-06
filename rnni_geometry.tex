@@ -516,14 +516,6 @@ Afterwards, we generalise this result to $\dtt_m$.
 	Note that the caterpillar trees $[\{a_1, a_2\}, \{a_1, a_2, a_3\}, \ldots, \{a_1, \ldots, a_n\}]$ and $[\{a_n, a_{n-1}\}, \{a_n, a_{n-1}, a_{n-2}\}, \ldots, \{a_n, \ldots, a_1\}]$ provide an example of trees that have distance $\frac{(n-1)(n-2)}{2}$, as already pointed out in \autocite[Corollary 1]{Collienne2020-iu}, proving that this upper bound for the length of a shortest path is tight.
 \end{proof}
 
-\todo{The order of this and the previous theorem needs to change again, we can't rely on the formula for $l(T,R)$.
-Instead, use $\findpath$ and what we know about the extended ranked versions of the trees}
-% Use the decomposition of $\fp(T,R)$ into $\rnni$ and length moves
-% The maximum number of these moves is the diameter of $\rnni$, which is $\frac{(n-1)(n-2)}{2}$.
-% Then count the number of possible length moves, which are rank moves with $T_r^c$.
-% The maximum here is reached when every node from subtree $T$ swaps rank with every node of subtree $T_r^c$.
-% This number is $(n-1)(m-n-1)$.
-% Sum of both is $m(n-1) - \frac{n(n-1)}{2}$, proof finished.
 \begin{theorem}
 	The diameter of $\dtt_m$ is $m(n-1) - \frac{n(n-1)}{2}$.
 	\label{thm:dtt_diameter}
