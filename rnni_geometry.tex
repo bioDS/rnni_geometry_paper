@@ -379,21 +379,22 @@ The convexity of the set of caterpillar trees in $\rnni$ follows from the convex
 	\label{cor:caterpillar_convex_rnni}
 \end{corollary}
 
-\summary{With Theorem~\ref{cor:caterpillar_convex_rnni} we can find a more efficient way to compute distances between caterpillar trees.}
-Using the convexity of the set of caterpillar trees (\autoref{thm:caterpillar_convex_dtt}) in $\rnni$, there are several algorithms of computing the distance between two caterpillar trees.
+\summary{With \autoref{cor:caterpillar_convex_rnni} we can find a more efficient way to compute distances between caterpillar trees.}
+Using the convexity of the set of caterpillar trees (\autoref{cor:caterpillar_convex_rnni}) in $\rnni$, there are several algorithms of computing the distance between two caterpillar trees, as the problem of computing a shortest caterpillar path can be interpreted in a few different ways.
 
-A problem analogous to the shortest path problem for caterpillar trees is the \emph{Token Swapping Problem} (TSP) \autocite{Kawahara2017-ey} on a special class of graphs, so-called lollipop graphs.
-The only moves possible between caterpillar trees are $\nni$ moves, which simply swap two leaves, and these can be translated to swapping two tokens in TSP.
+One problem analogous to the shortest path problem for caterpillar trees is the \emph{Token Swapping Problem} (TSP) \autocite{Kawahara2017-ey} on a special class of graphs, so-called lollipop graphs.
+The only moves possible between caterpillar trees in $\rnni$ are $\nni$ moves, which simply swap two leaves.
+These moves can be translated to swapping two tokens in TSP.
 \textcite{Kawahara2017-ey} provide an algorithm for TSP on lollipop graphs, which can be used for computing distances between caterpillar trees in $\rnni$ as well.
 This algorithm however has worst-case time complexity $\O(n^2)$, the same as $\findpath$.
 
-We are however able to present an algorithm with better worst-case complexity, specifically in $\O(n \log n)$ for $\rnni$ (\autoref{cor:caterpillar_distance_rnni_nlogn}).
-Therefore, we first present in \autoref{thm:caterpillar_distance_formula} a formula to express distances between two caterpillar trees in $\rnni$.
+In the following we present an algorithm with better worst-case time complexity, $\O(n \log n)$, for $\rnni$ (\autoref{cor:caterpillar_distance_rnni_nlogn}).
+Therefore, we first establish a formula to express distances between two caterpillar trees in $\rnni$ (\autoref{thm:caterpillar_distance_formula}).
 
 \begin{theorem}
 	Let $T$ and $R$ be caterpillar trees in $\rnni$ such that \[1 = \rank(a_1)_R = \rank(a_2)_R < \rank(a_3)_R < \ldots < \rank(a_n)_R = n-1\]
 	and
-	\[P_T := \{(i,j)| \rank(a_i)_T < \rank(a_j)_T \text{ and } \rank(a_i)_R > \rank(a_j)_R\},\]
+	\[P_T := \{(a_i,a_j)| \rank(a_i)_T < \rank(a_j)_T \text{ and } \rank(a_i)_R > \rank(a_j)_R\},\]
 	\begin{align*}
 		M_T := &\{a_i| (\forall l \textnormal{ with } \rank(a_l)_T \leq \rank(a_i)_T: \rank(a_l)_R > \rank(a_i)_r)\} \\
 		& \cap \{a_i | \rank(a_i)_T < \min\{\rank(a_1)_T, \rank(a_2)_T\}\}
@@ -404,13 +405,12 @@ Therefore, we first present in \autoref{thm:caterpillar_distance_formula} a form
 	\label{thm:caterpillar_distance_formula}
 \end{theorem}
 
-We refer to pairs $(i,j) \in P_T$, as defined in \autoref{thm:caterpillar_distance_formula}, as transpositions.
+We refer to pairs $(a_i,a_j) \in P_T$, as defined in \autoref{thm:caterpillar_distance_formula}, as transpositions.
 The reason for this is that the caterpillar trees can be seen as permutations of the set $\{a_1, \ldots, a_n\}$, ordered according to increasing rank of their parents.
-The tree $R$ then corresponds to the identity permutation $(a_1, a_2, a_3, \ldots, a_n)$.
-We therefore call elements in $P_T$ transpositions.
+The tree $R$ of the theorem then corresponds to the identity permutation $(a_1, a_2, a_3, \ldots, a_n)$.
 Note that there is no one-to-one correspondence between permutations and caterpillar trees.
 For example the permutation $(a_2, a_1, a_3, \ldots, a_n)$ corresponds to the tree $R$ as well, as the first two elements share a parent in the caterpillar tree.
-Therefore, the two pairs that share parents in $T$ and $R$, respectively, are not in the set $P_T$.
+Therefore, the two pairs of leaves that sharing their parent in $T$ and $R$, respectively, are not in the set $P_T$.
 
 \begin{proof}
 	Let $T$ and $R$ be caterpillar trees as described above and $\hat d(T,R) = p_T - m_T$.
@@ -419,14 +419,14 @@ Therefore, the two pairs that share parents in $T$ and $R$, respectively, are no
 		\hat d(T',R) \geq \hat d(T,R) - 1.
 		\label{eq:distance_proof}
 	\end{align}
-	That $\hat d$ and $d$ coincide follows by induction.
+	That $\hat d$ and $d$ coincide follows by induction, as in \autocite[Theorem 1]{Collienne2020-iu}.
 
 	For proving Inequality~\ref{eq:distance_proof} we first establish $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$, assuming that $T'$ is a caterpillar tree that is $\rnni$ neighbour of $T$.
 	We then show that it cannot be $p_{T'} = p_T - 1$ and $m_{T'} = m_t + 1$, which proves Inequality~\ref{eq:distance_proof}.
-	Throughout this proof we call pairs $(i,j) \in P_T$ transpositions, as the order of ranks of parents of leaves in the caterpillar trees $T$ and $T'$ can be seen as a permutation of their order in $R$.
 
-	It is $p_{T'} \geq p_T - 1$, because the only move possible between caterpillar trees $T$ and $T'$ is an $\nni$ move exchanging two leaves, and hence at most one transposition of $T$ can be resolved in $T'$.
-	Let $a_k, a_j$ be the leaves that exchange their position between $T$ and $T'$, such that $\rank(a_k)_T < \rank(a_j)_T$.
+	At most one transposition of $T$ can be resolved in $T'$, because the only move possible between caterpillar trees $T$ and $T'$ is an $\nni$ move exchanging two leaves.
+	It hence is $p_{T'} \geq p_T - 1$.
+	Let $a_k$ and $a_j$ be the leaves that exchange their position between $T$ and $T'$, such that $\rank(a_k)_T < \rank(a_j)_T$.
 	Since these are the only leaves that change positions between $T$ and $T'$, they are the only elements that could be in $M_{T'} \setminus M_T$.
 	It remains to show $(M_{T'} \setminus M_T) \neq \{a_k, a_j\}$, from which we can follow that $m_{T'} \leq m_T - 1$.
 	We prove this by showing that if $a_k \in (M_{T'} \setminus M_T)$, it follows $a_j \notin M_{T'}$.
@@ -445,7 +445,7 @@ Therefore, the two pairs that share parents in $T$ and $R$, respectively, are no
 
 	At first we consider the case that (\ref{condition1}) is violated for $a_k$ in $T$.
 	Then there is an $l$ such that $\rank(a_l)_T \leq rank(a_k)_T$ and $\rank(a_k)_R > \rank(a_l)_R$.
-	It immediately follows that the same condition is violated for $a_k$ in $T'$, because the $\nni$ move exchanging $a_k$ and $a_j$ preserves the relationship of $a_k$ and $a_l$, as $l \neq j$.
+	It immediately follows that the same condition is violated for $a_k$ in $T'$, because the $\nni$ move exchanging $a_k$ and $a_j$ preserves the relationship of $a_k$ and $a_l$.
 	It hence is $a_k \notin M_{T'}$, contradicting our assumption $a_k \in (M_{T'} \setminus M_T)$.
 
 	We can therefore assume that (\ref{condition2}) is violated for $a_k$ to not be in $M_T$.
@@ -455,13 +455,14 @@ Therefore, the two pairs that share parents in $T$ and $R$, respectively, are no
 	We can conclude $(M_{T'} \setminus M_T) \neq \{a_k, a_j\}$, and hence $m_{T'} \leq m_T + 1$.
 
 	It remains to show that it cannot be $p_{T'} = p_T - 1$ and $m_{T'} = m_T + 1$ at the same time, in order to prove Inequality~\ref{eq:distance_proof}.
-	We assume $p_{T'} = p_T - 1$, hence $(k,j)$ is a transposition in $T$, meaning that $\rank(a_k)_T < \rank(a_j)_T$ and $\rank(a_k)_R > \rank(a_j)_R$.
-	As $a_k$ and $a_j$ are the only leaves that could be in $M_T \setminus M_{T'}$, it suffices to show that none of them actually are in $M_{T'} \setminus M_T$, resulting in $m_{T'} < m_T + 1$.
+	We assume $p_{T'} = p_T - 1$, hence $(a_k,a_j)$ is a transposition in $T$, meaning that $\rank(a_k)_T < \rank(a_j)_T$ and $\rank(a_k)_R > \rank(a_j)_R$.
+	As $a_k$ and $a_j$ are the only leaves that could be in $M_{T'} \setminus M_T$, it suffices to show that none of them actually are in $M_{T'} \setminus M_T$, resulting in $m_{T'} < m_T + 1$.
 
-	That $a_k$ is not in $M_{T'}$ follows from a violation of (\ref{condition2}) by $\rank(a_j)_{T'} < \rank(a_k)_{T'}$ and $\rank(a_j)_R < \rank(a_k)_R$, and hence it is $a_k \notin M_{T'} \setminus M_T$.
-	Moreover, if $a_j \in M_{T'}$, it follows $a_j \in M_{T'}$ as explained in the following, which yields $a_j \notin M_{T'} \setminus M_T$.
+	That $a_k$ is not in $M_{T'}$ follows from the violation of (\ref{condition2}) by $\rank(a_j)_{T'} < \rank(a_k)_{T'}$ and $\rank(a_j)_R < \rank(a_k)_R$.
+	It hence is $a_k \notin M_{T'} \setminus M_T$.
+	Moreover, if $a_j \in M_{T'}$, it follows $a_j \in M_T$ as explained in the following.
 	If $a_j \in M_{T'}$, both conditions (\ref{condition1}) and (\ref{condition2}) are met by $a_j$ in $T'$.
-	With $\rank(a_k)_T < \rank(a_j)_T$ and $\rank(a_k)_R > \rank(a_j)_R$ it immediately follows that these conditions are also met in $T$, and hence $a_k \in M_T$, and therefore $a_k \notin M_{T'} \setminus M_T$.
+	With $\rank(a_k)_T < \rank(a_j)_T$ and $\rank(a_k)_R > \rank(a_j)_R$ it immediately follows that these conditions are also met in $T$, and hence $a_j \in M_T$, and therefore $a_j \notin M_{T'} \setminus M_T$.
 
 	Concluding, it is $M_{T'} \setminus M_T = \emptyset$, and we can follow that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, which concludes this proof.
 \end{proof}
