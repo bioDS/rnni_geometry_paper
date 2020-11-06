@@ -324,14 +324,14 @@ The cluster property in $\dtt_m$ follows from \autoref{thm:cluster_property_rnni
 \summary{Defining Caterpillar trees. Why are they interesting?}
 In this subsection we focus on the set of caterpillar trees and establish some properties of shortest paths between those trees in both $\rnni$ and $\dtt_m$.
 A path between two caterpillar trees only consisting of caterpillar trees is a \emph{caterpillar path}.
-In \autoref{thm:caterpillar_convex_rnni} and \autoref{cor:caterpillar_convex_dtt} we will see that, in both $\dtt_m$ and $\rnni$, any two caterpillar trees are connected by a shortest path that is a caterpillar path.
+In \autoref{thm:caterpillar_convex_dtt} and \autoref{cor:caterpillar_convex_rnni} we will see that, in both $\dtt_m$ and $\rnni$, any two caterpillar trees are connected by a shortest path that is a caterpillar path.
 We say that a set of trees for which such a shortest path that stays within this set exists is \emph{convex} in the corresponding tree space.
 This is another property of $\rnni$ that the $\nni$ space of unranked trees does not have \autocite{Gavryushkin2018-ol}.
 Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a way to compute distances between caterpillar trees in this space in time $\O(n\log n)$ in \autoref{cor:caterpillar_distance_rnni_nlogn}, and hence with better worst-case time complexity than $\findpath$.
 
 \begin{theorem}
 	The set of caterpillar trees is convex in $\dtt_m$.
-	\label{thm:caterpillar_convex_rnni}
+	\label{thm:caterpillar_convex_dtt}
 \end{theorem}
 
 \todo{Check this proof carefully!}
@@ -351,7 +351,7 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 	\todo{update this figure to $\dtt_m$}
 	\begin{figure}[ht]
 		\includegraphics[width=0.66\textwidth]{proof_caterpillar_convex_rnni.eps}
-		\caption{Trees $T$, $T'$, and $R'$ as described in the proof of \autoref{thm:caterpillar_convex_rnni}.
+		\caption{Trees $T$, $T'$, and $R'$ as described in the proof of \autoref{thm:caterpillar_convex_dtt}.
 		All three trees share the subtree induced by subset $S$ of leaves.
 		Between $T$ and $T'$ only leaves $a_j$ and $a_k$ are exchanged.
 		Dashed lines represent remaining part of trees, which are equal in $T$ and $T'$.}
@@ -373,17 +373,16 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 	With our previous observation we can conclude $d(R_r,T_r) = d(R_r,T'_r) + 1$, and hence $T'_r$ is on a shortest path from $T_r$ to $R_r$.
 \end{proof}
 
-The convexity of the set of caterpillar trees in $\rnni$ follows from the convexity of this set in $\dtt_m$ for $m = n-1$ (\autoref{thm:caterpillar_convex_rnni}).
+The convexity of the set of caterpillar trees in $\rnni$ follows from the convexity of this set in $\dtt_m$ for $m = n-1$ (\autoref{thm:caterpillar_convex_dtt}).
 
 \begin{corollary}
 	The set of caterpillar trees is convex in $\dtt_m$.
-	\label{cor:caterpillar_convex_dtt}
+	\label{cor:caterpillar_convex_rnni}
 \end{corollary}
 
-\summary{With Theorem~\ref{thm:caterpillar_convex_rnni} we can find a more efficient way to compute distances between caterpillar trees.}
-Using the convexity of the set of caterpillar trees (\autoref{thm:caterpillar_convex_rnni}), there are several algorithms of computing the distance between two caterpillar trees.
+\summary{With Theorem~\ref{cor:caterpillar_convex_rnni} we can find a more efficient way to compute distances between caterpillar trees.}
+Using the convexity of the set of caterpillar trees (\autoref{thm:caterpillar_convex_dtt}) in $\rnni$, there are several algorithms of computing the distance between two caterpillar trees.
 
-\todo{Do I need to go more into detail about TSP?}
 A problem analogous to the shortest path problem for caterpillar trees is the \emph{Token Swapping Problem} (TSP) \autocite{Kawahara2017-ey} on a special class of graphs, so-called lollipop graphs.
 The only moves possible between caterpillar trees are $\nni$ moves, which simply swap two leaves, and these can be translated to swapping two tokens in TSP.
 \textcite{Kawahara2017-ey} provide an algorithm for TSP on lollipop graphs, which can be used for computing distances between caterpillar trees in $\rnni$ as well.
