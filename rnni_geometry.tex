@@ -495,9 +495,9 @@ Afterwards, we generalise this result to $\dtt_m$.
 
 \begin{proof}
 	For proving this theorem we use the fact that $\findpath$ computes shortest paths in $\rnni$.
-	Each iteration $i$ of $\findpath$, applied to two trees $T$ and $R$ in $\rnni$, decreases the rank of the most recent common ancestor of a cluster $C$ of $R$ in the currently last tree $T'$ on the already computed path (starting wth $T' = T$).
+	Each iteration $i$ of $\findpath$, applied to two ranked trees $T$ and $R$, decreases the rank of the most recent common ancestor of a cluster $C$, induced by the node of rank $i$ in $R$, in the currently last tree $T'$ on the already computed path (starting wth $T' = T$).
 	The maximum rank of $(C)_{T'}$ at the beginning of iteration $i$ is $n-1$, the rank of the root.
-	As every move decreases the rank of $(C)_{T'}$ by one, there are at most $m-i$ moves needed in iteration $i$.
+	As every move decreases the rank of $(C)_{T'}$ by one, there are at most $n-1-i$ moves in iteration $i$.
 	The maximum length of a shortest path in $\rnni$ is hence $\sum \limits_{i = 1}^{n-1} i = \frac{(n-1)(n-2)}{2}$.
 	Note that the caterpillar trees $[\{a_1, a_2\}, \{a_1, a_2, a_3\}, \ldots, \{a_1, \ldots, a_n\}]$ and $[\{a_n, a_{n-1}\}, \{a_n, a_{n-1}, a_{n-2}\}, \ldots, \{a_n, \ldots, a_1\}]$ provide an example of trees that have distance $\frac{(n-1)(n-2)}{2}$, as already pointed out in \autocite[Corollary 1]{Collienne2020-iu}, proving that this upper bound for the length of a shortest path is tight.
 \end{proof}
