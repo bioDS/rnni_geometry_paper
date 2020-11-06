@@ -265,16 +265,19 @@ The benefit of this modified version of the algorithm, compared to using $\findp
 
 \subsection{Cluster Property}
 \summary{Definition of Cluster Property and why it is relevant (a bit of bio).}
-In this section we consider a property of tree spaces that is of relevance because of its biological meaning and its connection to complexity results in a tree space similar to $\rnni$.
-We say that a tree space has the \emph{cluster property}, if all trees on every shortest paths between two trees sharing a cluster $C$ also contain this cluster.
-This is desirable biological property as for example for a given sample of trees containing a common subtree, it is expected a summary or mean tree of the sample also contains this subtree.
+In this section we consider a property of tree spaces.
+A tree space has the \emph{cluster property}, if all trees on every shortest paths between two trees sharing a cluster $C$ also contain this cluster.
+This is desirable biological property as trees sharing a cluster or subtree are expected to be closer to each other than to a tree not sharing a cluster with them.
+An example for the practical relevance of this property are summary trees.
+For a given sample of trees containing a common subtree, it is expected that their summary or mean tree also contains this subtree.
+It hence is desirable to have a tree space that has the cluster property.
 
 \summary{Cluster property in $\nni$ and its connection to the complexity result.}
-A tree space very similar to $\rnni$, that has been studied extensively \tocite is the $\nni$ graph on trees without times where $\nni$ moves are allowed on every edge.
+A further reason for investigating the cluster property in $\rnni$ is the importance of it in a similar and well studied \tocite tree space, $\nni$.
+In the $\nni$ graph trees have no times and $\nni$ moves are allowed on every edge.
 Computing distances in $\nni$ is $\np$-hard\autocite{Dasgupta2000-xa}, and the proof relies on the fact that this tree space does not have the cluster property \autocite{Li1996-zw}.
-In the $\rnni$ graph, however, distances can be computed in polynomial time by the algorithm $\findpath$ \autocite{Collienne2020-iu}, which preserves common clusters.
+In the $\rnni$ graph, however, distances can be computed in polynomial time by $\findpath$ \autocite{Collienne2020-iu}, which preserves common clusters.
 The question whether $\rnni$ has the cluster property is hence natural, and will be settled in \autoref{thm:cluster_property_rnni}.
-\todo{Does $\spr$ have the cluster property?}
 Note that even though it seems like distances can be computed in polynomial time in a tree space if it has the cluster property, this does not need to be true in general.
 
 \summary{$\rnni$ has the cluster property.}
