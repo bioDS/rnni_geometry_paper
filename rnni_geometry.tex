@@ -503,30 +503,26 @@ Afterwards, we generalise this result to $\dtt_m$.
 \end{proof}
 
 \begin{theorem}
-	The diameter of $\dtt_m$ is $m(n-1) - \frac{n(n-1)}{2}$.
+	The diameter of $\dtt_m$ is $\frac{(n-1)(n-2)}{2} + (m-n-1)(n-1)$.
 	\label{thm:dtt_diameter}
 \end{theorem}
 
 \begin{proof}
-	In order to prove the diameter of $\dtt_m$, we consider the longest path that $\findpath$ can compute between any two trees $T$ and $R$.
+	In order to prove the diameter of $\dtt_m$, we consider the longest path that $\findpath$ can compute between any two trees $T$ and $R$, as in the proof of \autoref{thm:diameter_rnni}.
 	More specifically, we consider the maximum number of moves that $\findpath$ can performed on the extended ranked versions $T_r$ and $R_r$ of any two trees $T$ and $R$.
-	Therefore, we distinguish $\rnni$ moves in the subtrees on the leaf set $\{a_1, \ldots, a_n\}$ from the rank moves that correspond to length moves, i.e. rank moves between one node of each of the subtrees on leaf subsets $\{a_1, \ldots, 1_n\}$ and $\{a_{n+1}, \ldots a_{m+2}\}$.
+	Therefore, we distinguish $\rnni$ moves in the subtrees on the leaf set $\{a_1, \ldots, a_n\}$ from the rank moves that correspond to length moves, i.e. rank moves between one node of each of the subtrees on leaf subsets $\{a_1, \ldots, a_n\}$ and $\{a_{n+1}, \ldots a_{m+2}\}$.
 
-	We consider the maximum number of moves that are possible on $\fp(T,R)$.
-	Since this is a shortest path, this number equals the diameter.
-	The maximum number of $\rnni$ moves follows from \autoref{thm:diameter_rnni} and is $\frac{(n-1)(n-2)}{2}$.
-	To establish the maximum number of length moves that could happen on a shortest path between trees $T$ and $R$, we consider those length moves as rank swaps, as described above.
-	\todo{Is this obvious?}
-	On $\fp(T,R)$ each internal node of the subtree $T_r^c$ of $T_r$ can swap rank with every internal node of the subtree $T_r^d$, and cannot be involved in more rank swaps.
-	Therefore, the maximum number of such rank swaps corresponding to length moves is $(m-n+1)(n-1)$.
+	The maximum number of $\rnni$ moves (excluding rank moves that correspond to length moves) on $\fp(T_r,R_r)$ follows from \autoref{thm:diameter_rnni} and is $\frac{(n-1)(n-2)}{2}$.
+	To establish the maximum number of rank moves that correspond to length moves on a shortest path between $T_r$ and $R_r$ is reached when every internal node of the subtree $T_r^c$ of $T_r$ swaps rank with every internal node of the subtree $T_r^d$.
+	The maximum number of such rank swaps corresponding to length moves is hence $(m-n+1)(n-1)$.
 
-	The sum of the maximum number for $\rnni$ and length moves is hence $\frac{(n-1)(n-2)}{2} + (n-1)(m-n+1) = m(n-1) - \frac{n(n-1)}{2}$.
+	The sum of the maximum number for $\rnni$ and length moves is therefore $\frac{(n-1)(n-2)}{2} + (n-1)(m-n+1)$.
 	That this upper bound is actually the diameter of $\dtt_m$ can be proven by the trees $T$ and $R$ in \autoref{fig:cat_max_dist_dtt} for which the path computed by $\findpath$ has length $m(n-1) - \frac{n(n-1)}{2}$.
-	Both $T$ and $R$ are caterpillar trees.
-	$T$ is defined by
-	\[m-n-1 = \rank(a_1)_T = \rank(a_2)_T < \rank(a_3)_T < \ldots < \rank(a_n) = m\]
-	and $R$ by
-	\[1 = \rank(a_1)_T = \rank(a_n)_T < \rank(a_{n-1})_T < \ldots < \rank(a_1) = n-1.\]
+	Both $T$ and $R$ are caterpillar trees and defined by
+	\[m-n-1 = \rank(a_1)_T = \rank(a_2)_T < \rank(a_3)_T < \ldots < \rank(a_n)_T = m\]
+	and
+	\[1 = \rank(a_1)_R = \rank(a_n)_R < \rank(a_{n-1})_R < \ldots < \rank(a_1)_R = n-1.\]
+	\todo{Tree labels in figure}
 	\begin{figure}[ht]
 		\includegraphics[width=0.65\textwidth]{cat_max_dist_dtt.eps}
 		\caption{Trees with distance $m(n-1) - \frac{n(n-1)}{2}$}
