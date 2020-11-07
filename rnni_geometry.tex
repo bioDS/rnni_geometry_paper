@@ -50,7 +50,7 @@
 \newcommand{\spr}{\mathrm{SPR}}
 \newcommand{\tbr}{\mathrm{TBR}}
 \newcommand{\fp}{\mathrm{FP}}
-\newcommand{\dtt}{\mathrm{DtT}}
+\newcommand{\dtt}{\mathrm{DCT}}
 \newcommand{\np}{\mathbf{NP}}
 \newcommand{\decprob}[1]{\rnni(#1)\text{-}\mathrm{SP}}
 \newcommand{\rad}{\mathit{rad}}
@@ -73,7 +73,7 @@
 \sloppy
 
 
-\title[Geometry of ranked tree spaces]{The Geometry of the Ranked Nearest Neighbour Interchange Space}
+\title[Geometry of ranked tree spaces]{The Geometry of the space of Discrete Coalescent Trees}
 \date{\today}
 \author{Lena Collienne}
 \email{lcollienne@cs.otago.ac.nz}
@@ -93,33 +93,33 @@
 \section{Introduction}
 
 \todo{Include Alex's idea from github issue \#1}
-\summary{Why we want time-trees}
+\summary{Why we want coalescent trees}
 One of the main tasks in evolutionary biology is reconstructing evolutionary trees, also called phylogenetic trees, from various types of data such as RNA or DNA sequences.
 Leaves of these trees may for example represent different species, virus strains, or cancer cells.
 Internal nodes refer to evolutionary events such as speciation or transmission events, depending on the specific application.
 In order to gain knowledge about the evolutionary history in time, evolutionary trees where nodes are equipped with times are of interest in various applications.
 
-\summary{Why discrete time-trees -- Coalescence}
+\summary{Why discrete coalescent trees -- Coalescence}
 
 \summary{How recent results about $\rnni$ make this space interesting and that it is strongly connected to $\dtt_m$}
 
-\summary{Why we want to investigate geometrical properties of $\dtt_m$ and $\rnni$, and also $\rnni(\rho)$}
+\summary{Why we want to investigate geometrical properties of $\dtt_m$ and $\rnni$}
 
 \summary{Structure of the paper.}
 
 
 \section{Technical Introduction}
 
-\summary{Introducing discrete time-trees and ranked trees}
+\summary{Introducing discrete coalescent trees and ranked trees}
 A binary rooted phylogenetic tree is a binary tree on a fixed number $n$ of leaves, which are uniquely labelled by elements of the set $\{a_1, \ldots, a_n\}$.
-The main objective of study in this paper are \emph{discrete time-trees}, binary rooted phylogenetic trees with positive integer-valued \emph{times} assigned to nodes.
+The main objective of study in this paper are \emph{discrete coalescent trees}, binary rooted phylogenetic trees with positive integer-valued \emph{times} assigned to nodes.
 More specifically, all leaves are assigned time $0$, and every internal node is assigned a unique time, such that it always has time greater than its children.
 We denote the time of an internal node $v$ by $\ntime(v)$.
-If not stated otherwise, we refer to discrete time-trees simply as \emph{trees}.
+If not stated otherwise, we refer to discrete coalescent trees simply as \emph{trees}.
 We furthermore call two trees (not necessarily binary) \emph{identical} if there is a graph isomorphism between them preserving leaf labels and times.
-The number of discrete time-trees with root time less or equal to $m$ is $\frac{(n-1)!n!m^{n-1}}{2^{n-1}}$ \autocite{Gavryushkin2018-ol}.
+The number of discrete coalescent trees with root time less or equal to $m$ is $\frac{(n-1)!n!m^{n-1}}{2^{n-1}}$ \autocite{Gavryushkin2018-ol}.
 
-As special case of discrete time-trees we consider \emph{ranked trees} with root time $n-1$.
+As special case of discrete coalescent trees we consider \emph{ranked trees} with root time $n-1$.
 In these trees internal nodes are uniquely labelled by times in $\{1, \ldots, n-1\}$.
 This definition of ranked trees coincides with the one of \textcite{Collienne2020-iu}.
 In the case of ranked trees we say \emph{rank} of a node $v$ to mean its time ($\rank(v) = \ntime(v)$) to be consistent with notations used in \autocite{Collienne2020-iu}.
@@ -127,13 +127,13 @@ In the case of ranked trees we say \emph{rank} of a node $v$ to mean its time ($
 Every internal node $v$ of a tree $T$ can be referred to by the set $C$ of leaves that are descending from this node.
 We call such a set $C$ \emph{cluster} and say that the cluster $C$ is \emph{induced} by $v$.
 A list of clusters $[C_1, \ldots, C_{n-1}]$ uniquely defines a ranked tree, where cluster $C_i$ is induced by the internal node with rank $i$ for $i \in \{1, \ldots, n-1\}$.
-For discrete time-trees however, times of nodes also need to be provided to uniquely identify a tree.
+For discrete coalescent trees however, times of nodes also need to be provided to uniquely identify a tree.
 For a subset $S \subseteq \{a_1, \ldots, a_n\}$ we call the internal node of a tree $T$ with lowest time among those ancestral to all elements of $S$ the \emph{most recent common ancestor} of $S$ and denote it by $(S)_T$.
 We furthermore denote the parent of a leaf $a_i$ in $T$ by $(a_i)_T$, and the cluster induced by the node with time $i$ in $T$ by $(T)_i$.
 An important type of trees that will be of importance throughout the whole paper are \emph{caterpillar trees}, which are trees where every internal nodes has at least one child that is a leaf.
 
 \summary{Defining the tree space $\dtt_m$ and $\rnni = \dtt_{n-1}$}
-We are now ready to introduce the central object of study of this paper, the graph (or space) of discrete time-trees.
+We are now ready to introduce the central object of study of this paper, the graph (or space) of discrete coalescent trees.
 This graph is called $\dtt_m$ for a fixed positive integer $m$.
 The vertex set of $\dtt_m$ is the set of trees with root time less or equal to $m$.
 Trees $T$ and $R$ are connected by an edge ($T$ and $R$ are \emph{neighbours}) in this graph if performing one of the following (reversible) operations on $T$ results in $R$:
@@ -175,7 +175,7 @@ The resulting tree $T_r$ is hence a uniquely defined ranked tree with $m+2$ leav
 An example of this extension of a tree $T$ to a ranked tree $T_r$ is depicted in \autoref{fig:dtt_to_ranked_tree}.
 
 Throughout this paper we use the index $r$ for $T_r$ to refer to this extended ranked version of a tree $T$.
-Moreover, we denote the subtree of $T_r$ that is identical to $T$ by $T_r^d$ ($d$ for discrete time-tree) and the caterpillar subtree on leaf set $\{a_{n+1}, \ldots, a_{m+2}\}$ by $T_r^c$.
+Moreover, we denote the subtree of $T_r$ that is identical to $T$ by $T_r^d$ ($d$ for discrete coalescent tree) and the caterpillar subtree on leaf set $\{a_{n+1}, \ldots, a_{m+2}\}$ by $T_r^c$.
 
 \begin{algorithm}[ht]
 	\caption{RankedTree($T$, $m$)}
@@ -217,12 +217,12 @@ In \autoref{thm:dtt_findpath} we establish that $\fp(T,R)$ is a shortest path in
 Note that for any given pair of trees $T$ and $R$, if not specified otherwise, we always assume $m$ to be the maximum root time of these trees in and aim to compute a shortest path between them in $\dtt_m$. 
 
 \begin{theorem}
-	The path $\fp(T,R)$ between two discrete time-trees $T$ and $R$ is a shortest path in $\dtt_m$, where $m$ is the maximum root time of $T$ and $R$.
+	The path $\fp(T,R)$ between two discrete coalescent trees $T$ and $R$ is a shortest path in $\dtt_m$, where $m$ is the maximum root time of $T$ and $R$.
 	\label{thm:dtt_findpath}
 \end{theorem}
 
 \begin{proof}
-	Let $T$ and $R$ be discrete time-trees and $T_r$ and $R_r$ their extended ranked versions computed with \autoref{alg:ranked_tree}, respectively.
+	Let $T$ and $R$ be discrete coalescent trees and $T_r$ and $R_r$ their extended ranked versions computed with \autoref{alg:ranked_tree}, respectively.
 	Any path in $\dtt_m$ from $T$ to $R$ gives a path of equal length between $T_r$ and $R_r$ in the $\rnni$ space on $m+2$ leaves.
 	This is due to the fact that the only moves needed in the subtree $T_r^c$ to transform it to $R_r^c$ are rank moves that correspond to length moves, and no other $\rnni$ moves.
 	If there was a path between $T$ and $R$ shorter than $\fp(T,R)$, the corresponding path between $T_r$ and $R_r$ in $\rnni$ would be shorter than the one computed by $\findpath$ in this space.
@@ -232,7 +232,7 @@ Note that for any given pair of trees $T$ and $R$, if not specified otherwise, w
 \summary{Running time of $\findpath$ + we don't need to add subtree in practice}
 \autoref{thm:dtt_findpath} shows that $\findpath$ (\autoref{alg:fp_dtt}) computes shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in $\O(mn)$.
 More details on this are provided in \autoref{section:diameter} following \autoref{thm:dtt_diameter}.
-It is not even necessary to convert a given pair of discrete time-trees to ranked trees to apply $\findpath$ to them.
+It is not even necessary to convert a given pair of discrete coalescent trees to ranked trees to apply $\findpath$ to them.
 Instead, we modify $\findpath$ for trees in $\dtt_m$.
 Iterations of $\findpath$ that consider clusters in the added caterpillar trees are replaced by length moves increasing the time of internal nodes as described in the \textbf{for} loop in Line~\ref{line:length_move} of \autoref{alg:fp_dtt}.
 The benefit of this modified version of the algorithm, compared to using $\findpath$ on the extended ranked versions of the trees, is a reduced use of memory, which is especially of practical relevance for $m >> n$.
@@ -596,7 +596,7 @@ There is no tree in $\dtt_4$ that has distance $\frac{(n-1)(n-2)}{2} + (m-n+1)(n
 
 \summary{Radius $\dtt_m$}
 
-\summary{$\rnni(rho)$ and parameter $\rho$ for discrete time-trees}
+\summary{$\rnni(rho)$ and parameter $\rho$ for discrete coalescent trees}
 
 \summary{scaling-free tree space}
 
