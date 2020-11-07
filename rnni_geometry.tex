@@ -534,10 +534,9 @@ Afterwards, we generalise this result to $\dtt_m$.
 	\[m-n-1 = \rank(a_1)_T = \rank(a_2)_T < \rank(a_3)_T < \ldots < \rank(a_n)_T = m\]
 	and
 	\[1 = \rank(a_1)_R = \rank(a_n)_R < \rank(a_{n-1})_R < \ldots < \rank(a_1)_R = n-1.\]
-	\todo{Tree labels in figure}
 	\begin{figure}[ht]
 		\includegraphics[width=0.65\textwidth]{cat_max_dist_dtt.eps}
-		\caption{Trees with distance $\frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$}
+		\caption{Trees $T$ and $R$ with distance $\frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$ as described in the proof of \autoref{thm:dtt_diameter}}
 		\label{fig:cat_max_dist_dtt}
 	\end{figure}
 \end{proof}
@@ -551,10 +550,10 @@ The \emph{radius} of a graph is defined as he minimum distance of any vertex in 
 For $\dtt_m$ and $\rnni$, this is $\min\limits_{\text{tree } T}\max\limits_{\text{tree }R} d(T,R)$, where $d$ is a distance measure in the corresponding graph.
 In the following we see that the radius of $\rnni$ equals its diameter, which is not true for $\dtt_m$, as we will see afterwards.
 
-\begin{lemma}
+\begin{theorem}
 	The radius of $\rnni$ equals its diameter $\frac{(n-1)(n-2)}{2}$.
-	\label{lemma:radius_rnni}
-\end{lemma}
+	\label{thm:radius_rnni}
+\end{theorem}
 
 \begin{proof}
 	We prove this lemma by showing that every tree $T$ in $\rnni$ has a caterpillar tree $R$ with distance $\frac{(n-1)(n-2)}{2}$ to $T$, using induction on the number of leaves $n$.
@@ -575,7 +574,7 @@ In the following we see that the radius of $\rnni$ equals its diameter, which is
 	Therefore it is $d(T,R) = \frac{(n-1)(n-2)}{2} + n-1 = \frac{n(n-1)}{2}$, which proves the lemma.
 	\begin{figure}[ht]
 		\includegraphics[width=0.8\textwidth]{max_dist_ctree.eps}
-		\caption{Initial $n - 1$ $\rnni$ moves of $\fp(R,T)$ as described in the proof of Lemma~\ref{lemma:radius_rnni}.
+		\caption{Initial $n - 1$ $\rnni$ moves of $\fp(R,T)$ as described in the proof of Lemma~\ref{thm:radius_rnni}.
 		Removing the leaf $x$ and suppressing the non-root node of degree two from the tree on the right results in $R_{n-1}$ as described in the lemma.}
 		\label{fig:max_dist_ctree}
 	\end{figure}
