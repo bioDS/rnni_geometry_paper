@@ -91,21 +91,29 @@
 
 
 \section{Introduction}
-
-\todo{Include Alex's idea from github issue \#1}
+\todo{add Co-authors}
 \summary{Why we want coalescent trees}
 One of the main tasks in evolutionary biology is reconstructing evolutionary trees, also called phylogenetic trees, from various types of data such as RNA or DNA sequences.
-Leaves of these trees may for example represent different species, virus strains, or cancer cells.
-Internal nodes refer to evolutionary events such as speciation or transmission events, depending on the specific application.
+Leaves of these trees may for example represent different species, or different genes within a species.
+Internal nodes refer to evolutionary events such as speciation or divergence events.
 In order to gain knowledge about the evolutionary history in time, evolutionary trees where nodes are equipped with times are of interest in various applications.
 
 \summary{Why discrete coalescent trees -- Coalescence}
+A popular model for reconstructing genealogical trees to infer relationships of a sample of genes or chromosomes is the coalescent model.
+This model considers evolution backwards in time, and hence the evolutionary history from the time of the given samples back back to its most recent common ancestor.
+Commonly used reconstruction methods using MCMC \tocite and Maximum Likelihood \tocite implement the coalescent model to infer trees where nodes are assigned times, representing the times of the associated evolutionary events.
 
 \summary{How recent results about $\rnni$ make this space interesting and that it is strongly connected to $\dtt_m$}
+These reconstruction algorithms rely on tree search algorithm.
+An objective function, such as the posterior probability or the likelihood function \tocite, are optimised by searching a tree space.
+Under the coalescent model, tree spaces where internal nodes are ordered according to times, are used for tree search.
 
 \summary{Why we want to investigate geometrical properties of $\dtt_m$ and $\rnni$}
 
 \summary{Structure of the paper.}
+In this paper we consider the space $\dtt$ of discrete coalescent trees, where internal nodes are assigned distinct discrete times.
+This space can be seen as a generalisation of the ranked nearest neighbour interchange ($\rnni$) space, as introduced in \autocite{Collienne2020-iu}.
+We will therefore investigate geometrical properties of both spaces, using the result of \autocite{Collienne2020-iu}, specifically the algorithm $\findpath$ for computing shortest paths.
 
 
 \section{Technical Introduction}
