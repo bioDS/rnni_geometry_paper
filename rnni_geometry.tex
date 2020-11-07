@@ -503,7 +503,7 @@ Afterwards, we generalise this result to $\dtt_m$.
 \end{proof}
 
 \begin{theorem}
-	The diameter of $\dtt_m$ is $\frac{(n-1)(n-2)}{2} + (m-n-1)(n-1)$.
+	The diameter of $\dtt_m$ is $\frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$.
 	\label{thm:dtt_diameter}
 \end{theorem}
 
@@ -516,8 +516,8 @@ Afterwards, we generalise this result to $\dtt_m$.
 	To establish the maximum number of rank moves that correspond to length moves on a shortest path between $T_r$ and $R_r$ is reached when every internal node of the subtree $T_r^c$ of $T_r$ swaps rank with every internal node of the subtree $T_r^d$.
 	The maximum number of such rank swaps corresponding to length moves is hence $(m-n+1)(n-1)$.
 
-	The sum of the maximum number for $\rnni$ and length moves is therefore $\frac{(n-1)(n-2)}{2} + (n-1)(m-n+1)$.
-	That this upper bound is actually the diameter of $\dtt_m$ can be proven by the trees $T$ and $R$ in \autoref{fig:cat_max_dist_dtt} for which the path computed by $\findpath$ has length $m(n-1) - \frac{n(n-1)}{2}$.
+	The sum of the maximum number for $\rnni$ and length moves is therefore $\frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$.
+	That this upper bound is actually the diameter of $\dtt_m$ can be proven by the trees $T$ and $R$ in \autoref{fig:cat_max_dist_dtt} for which the path computed by $\findpath$ has length $\frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$.
 	Both $T$ and $R$ are caterpillar trees and defined by
 	\[m-n-1 = \rank(a_1)_T = \rank(a_2)_T < \rank(a_3)_T < \ldots < \rank(a_n)_T = m\]
 	and
@@ -525,13 +525,14 @@ Afterwards, we generalise this result to $\dtt_m$.
 	\todo{Tree labels in figure}
 	\begin{figure}[ht]
 		\includegraphics[width=0.65\textwidth]{cat_max_dist_dtt.eps}
-		\caption{Trees with distance $m(n-1) - \frac{n(n-1)}{2}$}
+		\caption{Trees with distance $\frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$}
 		\label{fig:cat_max_dist_dtt}
 	\end{figure}
 \end{proof}
 
-Note that the worst-case running time of $\findpath$ is $\O(n^2)$ and $\O(nm)$ in $\rnni$ and $\dtt_m$, respectively, and only depends on the diameter of the corresponding tree spaces.
+Note that the worst-case running time of $\findpath$ is $\O(n^2)$ in $\rnni$ and $\O(nm)$ and $\dtt_m$ and only depends on the diameter of the corresponding tree spaces.
 For computing a shortest path, there is no algorithm with better worst-case running time than this, as the running time for algorithms computing shortest paths is bounded from below by the diameter of the corresponding space.
+There can however be more efficient algorithms for just computing distances.
 
 \summary{Radius of $\rnni$ is equal to its diameter.}
 The \emph{radius} of a graph is defined as he minimum distance of any vertex in the graph to the vertex with maximum distance from it.
