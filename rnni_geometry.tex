@@ -93,7 +93,7 @@
 \section{Introduction}
 \todo{add Co-authors}
 \summary{Why we want coalescent trees}
-One of the main tasks in evolutionary biology is reconstructing evolutionary trees, also called phylogenetic trees, from various types of data such as RNA or DNA sequences.
+One of the main tasks in evolutionary biology is reconstructing evolutionary trees, also called phylogenetic trees, from various types of data, such as RNA or DNA sequences.
 Leaves of these trees may for example represent different species, or different genes within a species.
 Internal nodes refer to evolutionary events such as speciation or divergence events.
 In order to gain knowledge about the evolutionary history in time, evolutionary trees where nodes are equipped with times are of interest in various applications.
@@ -111,12 +111,19 @@ Under the coalescent model, tree spaces where internal nodes are ordered accordi
 \summary{Why we want to investigate geometrical properties of $\dtt_m$ and $\rnni$}
 
 \summary{Structure of the paper.}
-In this paper we consider the space $\dtt$ of discrete coalescent trees, where internal nodes are assigned distinct discrete times.
+In this paper we consider the space $\dtt_m$ of discrete coalescent trees, where internal nodes are assigned distinct discrete times.
 This space can be seen as a generalisation of the ranked nearest neighbour interchange ($\rnni$) space, as introduced in \autocite{Collienne2020-iu}.
-We will therefore investigate geometrical properties of both spaces, using the result of \autocite{Collienne2020-iu}, specifically the algorithm $\findpath$ for computing shortest paths.
+We investigate geometrical properties of both spaces, using the result of \autocite{Collienne2020-iu}, specifically the algorithm $\findpath$ for computing shortest paths.
+After a technical introduction (\autoref{section:technical_introduction}), we discuss how $\findpath$ can be applied to discrete coalescent trees, generalising the results for $\rnni$ in \autoref{section:fp_dtt}.
+We then analyse some geometrical properties of both tree spaces $\dtt_m$ and $\rnni$.
+At first we discuss the cluster property (\autoref{section:cluster_property}).
+In \autoref{section:caterpillar_convex} we then consider a subset of trees in $\dtt_m$ for which we are able to compute distances even more efficiently than with $\findpath$ in $\rnni$.
+Following that, we establish the diameter of $\dtt_m$ and briefly discuss its radius.
+We finish this paper with a section proposing directions for further research and open problems (\autoref{section:open_problems}).
 
 
 \section{Technical Introduction}
+\label{section:technical_introduction}
 
 \summary{Introducing discrete coalescent trees and ranked trees}
 A binary rooted phylogenetic tree is a binary tree on a fixed number $n$ of leaves, which are uniquely labelled by elements of the set $\{a_1, \ldots, a_n\}$.
@@ -324,6 +331,7 @@ The cluster property in $\dtt_m$ follows from \autoref{thm:cluster_property_rnni
 \end{proof}
 
 \subsection{Caterpillar Trees}
+\label{section:caterpillar_convex}
 
 \summary{Defining Caterpillar trees. Why are they interesting?}
 In this subsection we focus on the set of caterpillar trees and establish some properties of shortest paths between those trees in both $\rnni$ and $\dtt_m$.
@@ -585,6 +593,7 @@ There is no tree in $\dtt_4$ that has distance $\frac{(n-1)(n-2)}{2} + (m-n+1)(n
 
 
 \section{Discussion}
+\label{section:open_problems}
 
 \summary{How partition lattices correspond to $\rnni$.}
 
