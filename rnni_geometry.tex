@@ -657,12 +657,34 @@ Third, the partition $\{1, 2\} \{3, 4\}$ is replaced with $\{1\} \{2, 3, 4\}$ an
 
 \subsection{Further Open Problems}
 
-\summary{More efficient algorithm for computing distances (not shortest paths) -- mentioning David's results on mapping onto L1?}
+\summary{More efficient algorithm for computing distances (not shortest paths)}
+The worst-case time complexity of $\findpath$ for computing a shortest path is $\O(mn)$ in $\dtt_m$.
+We have seen in \autoref{section:diameter} that there is no algorithm with better worst-case running time for computing shortest paths.
+It might however be possible to computed distances more efficiently.
+In \autoref{section:caterpillar_convex} we established a way for computing distances between caterpillar trees in $\O(n \log n)$.
+This raises the question whether there is an algorithm that computes the distance between any two trees in $\dtt_m$ with better running time than $\findpath$.
+\todo{Add David's result about mapping to L1 here?}
 
 \summary{Radius $\dtt_m$}
+Another question left open in this paper is the radius of $\dtt_m$.
+We established the radius of $\rnni$ and found an example showing that this result cannot be generalised to $\dtt_m$.
+Finding the radius of $\dtt_m$ is therefore one of the natural next steps for further analyses of the geometry of $\dtt_m$. 
 
 \summary{$\rnni(rho)$ and parameter $\rho$ for discrete coalescent trees}
+The space $\dtt_m$ generalises $\rnni$ by allowing internal nodes to have integer-valued time differences.
+Therefore, we introduced the parameter $m$ to bound the height of a tree in the space of discrete coalescent trees in order to get a finite space.
+A different parameter $\rho$ has previously been introduced in \textcite{Collienne2020-iu} for generalising $\rnni$ to a space $\rnni(\rho)$ of ranked trees, where rank and $\nni$ moves have weights $\rho$ and one, respectively.
+Combining these two parameters $m$ and $\rho$ gives a space of discrete coalescent trees where different moves have different weights.
+This tree space is relevant for practical applications, where for example more is known about the tree topology but the uncertainty of the timing of internal nodes high.
+Such a tree space is therefore an interesting subject of further studies.
 
 \summary{scaling-free tree space}
+The cluster property, discussed in \autoref{section:cluster_property}, is an important property of tree spaces due to its biological relevance.
+For some applications however, there is a further property that none of the commonly used tree spaces possesses.
+Some studies aim to compare two trees on different data sets, like for example \todo{Paper from Tanja Stadler about comparing HIV and Influenza trees?} \tocite.
+Such a comparison aims to compare the branching process through time.
+Since the given trees arise from different data set, a scaling-free tree space is desired. 
+Since the tree space $\rnni$ and $\dtt_m$ have shortest paths computable in polynomial time, they might be a good starting point for further research with the goal of finding a scaling-free tree space where distances can be computed efficiently.
 
+\printbibliography
 \end{document}
