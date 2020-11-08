@@ -382,18 +382,17 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 	Let $a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_{R_r} | \rank(a_i)_{R_r} \neq \rank(a_i)_{T_r}\}$ be the leaf with parent with maximum rank in $R_r$ among those that are not in the same position in $T_r$ and $R_r$.
 	Let furthermore $a_j \in \{a_1, \ldots, a_{m+2}\}$ be a leaf with $\rank(a_j)_{T_r} = \rank(a_k)_{T_r} + 1$.
 	We define $T'_r$ to be the caterpillar tree resulting from $T_r$ by an $\nni$ move or rank move exchanging the ranks of $(a_k)_{T_r}$ and $(a_j)_{T_r}$.
-	An $\nni$ move is necessary if these two nodes are connected by an edge, otherwise a rank move corresponding to a length move is performed on $T_r$ to receive $T'_r$.
+	An $\nni$ move is necessary if these two nodes are connected by an edge, otherwise a rank move corresponding to a length move is performed on $T_r$ to receive $T'_r$ (\autoref{fig:caterpillar_convex}).
 	In both cases $T'_r$ is a caterpillar tree.
 	By using properties of shortest paths computed by $\findpath$, we now show that $|\fp(R_r,T'_r)| = |\fp(R_r,T_r)| - 1$.
 
 	\todo{update this figure to $\dtt_m$}
 	\begin{figure}[ht]
-		\includegraphics[width=0.66\textwidth]{proof_caterpillar_convex_rnni.eps}
-		\caption{Trees $T$, $T'$, and $R'$ as described in the proof of \autoref{thm:caterpillar_convex_dtt}.
-		All three trees share the subtree induced by subset $S$ of leaves.
-		Between $T$ and $T'$ only leaves $a_j$ and $a_k$ are exchanged.
-		Dashed lines represent remaining part of trees, which are equal in $T$ and $T'$.}
-		\label{fig:proof_caterpillar_convex_rnni}
+		\includegraphics[width=0.66\textwidth]{caterpillar_convex.eps}
+		\caption{The two possible versions of trees $T_r$ (left) and $T'_r$ (right) as described in the proof of \autoref{thm:caterpillar_convex_dtt}.
+		Between $T_r$ and $T'_r$ only the parents of $a_j$ and $a_k$ are exchanged.
+		Dashed lines represent remaining part of trees, which are equal in $T_r$ and $T'_r$.}
+		\label{fig:caterpillar_convex}
 	\end{figure}
 
 	Since all clusters of $T_r$ and $T'_r$ induced by nodes of rank less than $\rank(a_k)_{T_r}$ coincide, the paths $\fp(R_r,T_r)$ and $\fp(R_r,T'_r)$ coincide up to a ranked tree $R'_r$, which contains all these clusters.
