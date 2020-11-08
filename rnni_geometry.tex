@@ -89,11 +89,13 @@
 	Those algorithm require a tree space, which is often defined as a graph where trees are vertices and connected by an edge if one can be received from another by local changes to the tree, so-called tree-rearrangement operations.
 	Often the goal is to reconstruct a tree where internal nodes, and hence speciation or divergence events, are equipped with times.
 	This is especially the case in coalescence theory, where the order of divergence events plays an important role.
+	The problem of most classical tree-rearrangement operations like nearest neighbour interchange, subtree prune and regraft, or tree bisection and reconnection is that they do not take the times of internal nodes into account.
+	The ranked nearest neighbour interchange operations however, a generalisation of nearest neighbour interchange, considers ranked trees and thereby preserves the order of divergence events.
 
-	It has recently been established that the space of ranked nearest neighbour interchange trees has shortest path that can be computed in polynomial time, unlike all previously known tree spaces that base on tree-rearrangement operations.
+	It furthermore has recently been established that this space of ranked nearest neighbour interchange trees has shortest path that can be computed in polynomial time, unlike most other tree spaces.
 	In this paper, we go gone step further and do not only consider ranked trees, but trees where nodes are assigned discrete times.
-	We show that shortest paths in this space can be computed in polynomial time and establish some geometrical properties of this tree space.
-	Since the tree space considered in this paper can be seen as a generalisation of the space of ranked nearest neighbour interchange trees, most of our results apply to both.
+	We show that shortest paths in this space can be computed in polynomial time and establish some geometrical properties.
+	Since the tree space considered in this paper can be seen as a generalisation of the space of ranked nearest neighbour interchange trees, most of our results apply to both tree spaces.
 \end{abstract}
 
 \maketitle
