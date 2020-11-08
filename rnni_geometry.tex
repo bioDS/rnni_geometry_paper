@@ -607,14 +607,55 @@ There is no tree in $\dtt_4$ that has distance $\frac{(n-1)(n-2)}{2} + (m-n+1)(n
 \end{figure}
 
 
-\section{Discussion}
+\section{Related problems and future research questions}
 \label{section:open_problems}
 
-\summary{How partition lattices correspond to $\rnni$.}
+In this paper we introduced and analysed properties of the space of discrete coalescent trees $\dtt_m$.
+An important tool for establishing those is the algorithm $\findpath$, which has been introduced by \textcite{Collienne2020-iu} for $\rnni$ and shown to also produce shortest paths in $\dtt_m$.
+We provide an implementation of this algorithm in $\rnni$ on GitHub \tocite.
+In the following we discuss the connection of the $\rnni$ graph and a well-known algebraic structure, the partition lattice.
 
-\summary{Implementation of FP}
+\subsection{Partition Lattice}
+The connection of $\rnni$ to partition lattices provides a new direction for further research and translates results and open problems from the language of phylogenetics to the language of lattice theory.
 
-\subsection{Open Problems}
+The \emph{partition lattice} on $\{1, \ldots, n\}$ is the lattice given by the partially ordered set $(\Pi_n, \leq)$, where $\Pi_n$ is the power set of $\{1, \ldots, n\}$ and $X \leq Y$ if partition $X$ refines $Y$, that is, $X \leq Y \Leftrightarrow (\forall x \in X)(\exists y \in Y) x \subseteq y$.
+For simplification we will denote the partition lattice on $n$ elements by $\Pi_n$.
+$\Pi_4$ is illustrated in Figure~\ref{fig:partition_lattice4}.
+We assume that a partition $X$ in the partition lattice $\Pi_n$ has rank $k$ if the number of elements in $X$ is $n-k$.
+The algebraic structure of $\Pi_n$ is related to the $\rnni$ graph on $n$-taxa trees in the following way.
+
+\begin{theorem}
+The $\rnni$ graph on $n$ taxa is isomorphic to the graph of maximal chains of the partition lattice $\Pi_n$ where two maximal chains are connected by an edge if and only if they differ by exactly one partition.
+The corresponding metric spaces are isometric.
+\label{thm:partition_lattice}
+\end{theorem}
+
+\begin{proof}
+There is a one-to-one relation between ranked trees and maximum chains in a partition lattice.
+We can define a bijective mapping from the set of ranked trees to the set of maximum chains in $\Pi_n$ as follows.
+A tree $T$ maps onto a maximum chain $\mathcal{C}_T$ if the set in the partition of rank $i$ in $\mathcal{C}_T$ that is the union of two sets of the partition of rank $i-1$ in $\mathcal{C}_T$ is the cluster induced by the internal node of rank $i$ in $T$.
+
+Note that this bijection is an isomorphism between the $\rnni$ graph and the graph of chains as in the theorem.
+Indeed, two chains are different by exactly one partition if and only if the corresponding trees are connected by an $\rnni$ move.
+\end{proof}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{partition_lattice4}
+\vspace{12pt}
+\caption{The partition lattice $\Pi_4$ on $\{1,2,3,4\}$.
+The highlighted edges correspond to an $\rnni$ path from the tree represented by the leftmost chain to the rightmost one.}
+\label{fig:partition_lattice4}
+\end{figure}
+
+Figure~\ref{fig:partition_lattice4} is an illustration of the proof of Theorem~\ref{thm:partition_lattice}.
+The four chains indicated in bold correspond to the following $\rnni$ path.
+The leftmost chain corresponds to the caterpillar tree $[1, 2, 3, 4]$.
+First, the partition $\{1, 2, 3\} \{4\}$ is replaced with $\{1, 2\} \{3, 4\}$ and we get the chain corresponding to the tree $[\{1, 2\}, \{3, 4\}]$ (in the cluster representation), which is one $\rnni$ move away from the caterpillar tree.
+Second, the partition $\{1, 2\} \{3\} \{4\}$ is replaced with $\{1\} \{2\} \{3, 4\}$, which corresponds to the rank swap on the previous tree.
+Third, the partition $\{1, 2\} \{3, 4\}$ is replaced with $\{1\} \{2, 3, 4\}$ and we reach the caterpillar tree $[3, 4, 2, 1]$.
+
+\subsection{Further Open Problems}
 
 \summary{More efficient algorithm for computing distances (not shortest paths) -- mentioning David's results on mapping onto L1?}
 
