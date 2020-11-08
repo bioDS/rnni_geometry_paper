@@ -94,26 +94,35 @@
 \todo{add Co-authors}
 \summary{Why we want coalescent trees}
 One of the main tasks in evolutionary biology is reconstructing evolutionary trees, also called phylogenetic trees, from various types of data, such as RNA or DNA sequences.
-Leaves of these trees may for example represent different species, or different genes within a species.
+Leaves of these trees represent for example different species, or different genes within a species.
 Internal nodes refer to evolutionary events such as speciation or divergence events.
 In order to gain knowledge about the evolutionary history in time, evolutionary trees where nodes are equipped with times are of interest in various applications.
 
 \summary{Why discrete coalescent trees -- Coalescence}
-A popular model for reconstructing genealogical trees to infer relationships of a sample of genes or chromosomes is the coalescent model.
+\todo{Add more motivation for coalescent model to this paragraph}
+A popular model for reconstructing genealogical trees to infer relationships of a sample of genes or chromosomes is the coalescent model \tocite.
 This model considers evolution backwards in time, and hence the evolutionary history from the time of the given samples back back to its most recent common ancestor.
 Commonly used reconstruction methods using MCMC \tocite and Maximum Likelihood \tocite implement the coalescent model to infer trees where nodes are assigned times, representing the times of the associated evolutionary events.
 
 \summary{How recent results about $\rnni$ make this space interesting and that it is strongly connected to $\dtt_m$}
-These reconstruction algorithms rely on tree search algorithm.
-An objective function, such as the posterior probability or the likelihood function \tocite, are optimised by searching a tree space.
-Under the coalescent model, tree spaces where internal nodes are ordered according to times, are used for tree search.
+Most of these reconstruction algorithms rely on tree search algorithm.
+An objective function, such as the posterior probability or the likelihood function \tocite, is optimised by searching a tree space.
+Under the coalescent model, tree spaces where internal nodes are ordered according to times are used.
+Examples of such tree spaces include the BHV-space \tocite, t-space \tocite, and $\tau$-space \tocite, which use different parameterisations for trees.
+The problem of these spaces is however, that computing distances is either $\np$-hard, or shortest paths lack biological meaningfulness.
 
 \summary{Why we want to investigate geometrical properties of $\dtt_m$ and $\rnni$}
+Understanding the geometry and properties of shortest paths in such tree spaces is essential for tree search algorithms, especially for developing those and evaluating inferred trees.
+Methods estimating whether a chain converged in the bayesian tree inference approach, for example, need tree space where distances can be computed efficiently \tocite. %ESS RWTY (Rob Lanfaer)
+Summarising a sample of trees also requires a tree space with this property, as well as shortest paths that preserve information share between trees.
+Some tree spaces like the BHV space and the $\tau$-space suffer this and often produce star trees as summaries for tree samples \tocite.
+It is therefore desirable to find a tree space where distances can be computed efficiently and shortest paths are biologically meaningful.
 
 \summary{Structure of the paper.}
 In this paper we consider the space $\dtt_m$ of discrete coalescent trees, where internal nodes are assigned distinct discrete times.
 This space can be seen as a generalisation of the ranked nearest neighbour interchange ($\rnni$) space, as introduced in \autocite{Collienne2020-iu}.
 We investigate geometrical properties of both spaces, using the result of \autocite{Collienne2020-iu}, specifically the algorithm $\findpath$ for computing shortest paths.
+The space $\dtt_m$ does have the desired properties mentioned above, including efficiently computable shortest paths that preserve biological information shared between trees.
 After a technical introduction (\autoref{section:technical_introduction}), we discuss how $\findpath$ can be applied to discrete coalescent trees, generalising the results for $\rnni$ in \autoref{section:fp_dtt}.
 We then analyse some geometrical properties of both tree spaces $\dtt_m$ and $\rnni$.
 At first we discuss the cluster property (\autoref{section:cluster_property}).
@@ -275,6 +284,7 @@ The benefit of this modified version of the algorithm, compared to using $\findp
 \section{Geometrical Properties of $\dtt_m$}
 
 \subsection{Cluster Property}
+\label{section:cluster_property}
 \summary{Definition of Cluster Property and why it is relevant (a bit of bio).}
 In this section we consider a property of tree spaces.
 A tree space has the \emph{cluster property}, if all trees on every shortest paths between two trees sharing a cluster $C$ also contain this cluster.
