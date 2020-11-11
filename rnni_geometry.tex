@@ -110,18 +110,22 @@
 
 
 \section{Introduction}
-\todo{add Co-authors}
-\summary{Why we want coalescent trees}
+\summary{Why we want a time-tree space}
 One of the main tasks in evolutionary biology is reconstructing evolutionary trees, also called phylogenetic trees, from various types of data, such as RNA or DNA sequences.
-Leaves of these trees represent for example different species, or different genes within a species.
-Internal nodes refer to evolutionary events such as speciation or divergence events.
-In order to gain knowledge about the evolutionary history in time, evolutionary trees where nodes are equipped with times are of interest in various applications.
+In order to gain knowledge about the evolutionary history in time, evolutionary trees where nodes are equipped with times are of interest in various applications, including research on cancer and virus evolution.
+Most tree inference models for these problems, such as Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp, Tamura2011-ky} or Bayesian methods \autocite{Bouckaert2014-ir,Suchard2018-tw, Ronquist2003-eq}, rely on tree search algorithms.
+These algorithms base on tree graphs where vertices represent trees that are connected by an edge if a local change, a so-called tree-rearrangement operation, transforms one tree to another.
+Commonly used tree-rearrangement operations are nearest neighbour interchange, subtree prune and regraft, and tree bisection and reconnection.
+None of these operations, however, take times of internal nodes of trees into account, and computing distances in the tree graphs basing on these operations is $\np$-hard.
 
-\summary{Why discrete coalescent trees -- Coalescence}
-\todo{Add more motivation for coalescent model to this paragraph}
-A popular model for reconstructing genealogical trees to infer relationships of a sample of genes or chromosomes is the coalescent model \tocite.
-This model considers evolution backwards in time, and hence the evolutionary history from the time of the given samples back back to its most recent common ancestor.
-Commonly used reconstruction methods using MCMC \tocite and Maximum Likelihood \tocite implement the coalescent model to infer trees where nodes are assigned times, representing the times of the associated evolutionary events.
+\summary{Why discrete coalescent trees}
+It is hence desirable to have a tree space on trees where internal nodes, representing evolutionary events, are timed, and distances between trees can be computed in polynomial time.
+This is in particular the case when trees are inferred using the coalescent model.
+Te coalescent model is popular for reconstructing genealogical trees to infer relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}.
+It is also widely used in population genetics, especially for estimating population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
+Under the coalescent model, evolution is considered backwards in time.
+The evolutionary history is hence derived from the time of the given samples back to its most recent common ancestor.
+Commonly used reconstruction methods using MCMC \autocite{Bouckaert2014-ir,Suchard2018-tw} and Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp} implement the coalescent model to infer trees where nodes are assigned times, representing the times of the associated evolutionary events.
 
 \summary{How recent results about $\rnni$ make this space interesting and that it is strongly connected to $\dtt_m$}
 Most of these reconstruction algorithms rely on tree search algorithm.
