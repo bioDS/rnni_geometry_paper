@@ -112,7 +112,7 @@
 \section{Introduction}
 \summary{Why we want a time-tree space}
 One of the main tasks in evolutionary biology is reconstructing evolutionary trees, also called phylogenetic trees, from various types of data, such as RNA or DNA sequences.
-In order to gain knowledge about the evolutionary history in time, evolutionary trees where nodes are equipped with times are of interest in various applications, including research on cancer and virus evolution.
+In order to gain knowledge about the evolutionary history in time, evolutionary trees where nodes are equipped with times are of interest in many applications, including research on cancer and virus evolution.
 Most tree inference models for these problems, such as Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp, Tamura2011-ky} or Bayesian methods \autocite{Bouckaert2014-ir,Suchard2018-tw, Ronquist2003-eq}, rely on tree search algorithms.
 These algorithms base on tree graphs where vertices represent trees that are connected by an edge if a local change, a so-called tree-rearrangement operation, transforms one tree to another.
 Commonly used tree-rearrangement operations are nearest neighbour interchange, subtree prune and regraft, and tree bisection and reconnection.
@@ -124,38 +124,36 @@ This is in particular the case when trees are inferred using the coalescent mode
 The coalescent model is popular for reconstructing genealogical trees to infer relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}.
 It is also widely used in population genetics, especially for estimating population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
 Under the coalescent model, evolution is considered backwards in time.
-The evolutionary history is hence derived from the time of the given samples back to its most recent common ancestor, resulting in trees where every internal node is assigned a unique time.
+The evolutionary history is hence derived from the time of the given samples back to its most recent common ancestor, resulting in trees where internal node are assigned unique times.
 Commonly used reconstruction methods using MCMC \autocite{Bouckaert2014-ir,Suchard2018-tw} and Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp} implement the coalescent model to infer trees where nodes are assigned times, representing the times of the associated evolutionary events.
 
 \summary{How recent results about $\rnni$ make this space interesting and that it is strongly connected to $\dtt_m$}
 Therefore, tree spaces where internal nodes are assigned times are needed under the coalescent model.
-Examples of such tree spaces include the BHV-space \autocite{Billera2001-rj}, t-space, and $\tau$-space \autocite{Gavryushkin2016-uu}, which use different parameterisations for trees.
-The problem of these spaces is however, that computing distances is either $\np$-hard (t-space), or shortest paths lack biological meaningfulness.
+Examples of such tree spaces include the BHV-space \autocite{Billera2001-rj}, t-space, and $\tau$-space \autocite{Gavryushkin2016-uu}, which parameterise trees in different ways.
+The problem of these spaces is however, that there are no algorithms for computing shortest paths are known (t-space), or shortest paths lack biological meaningfulness.
 More specifically, BHV space and the $\tau$-space suffer from having trees connected by unique geodesics that pass the star tree \autocite{Gavryushkin2016-uu}.
-Therefore, summarising tree samples often results in star trees in these spaces, which do not contain any biological information of the sample.
+Summarising tree samples often results in star trees in these spaces, which do not contain any biological information.
 
 \summary{Why we want to investigate geometrical properties of $\dtt_m$ and $\rnni$}
 This result highlights the importance of understanding geometrical properties of shortest paths in tree spaces.
-Investigating these properties of tree spaces is essential for tree search algorithms, and especially for developing these algorithms and evaluating inferred trees.
+Investigating those is essential for tree search algorithms, especially for developing these algorithms and evaluating inferred trees.
 Methods estimating whether a chain converged in the bayesian tree inference approach, for example, rely on measuring distances between trees \autocite{Nylander2008-wa, Warren2017-df}.
-Summarising a sample of trees, for example a posterior sample, also requires a tree space with this property, as well as shortest paths that preserve information shared between trees, in order to receive a biological meaningful tree.
+Summarising a sample of trees, for example a posterior sample, also requires a tree space with efficiently computable distances, as well as shortest paths that preserve information shared between trees, in order to receive a biological meaningful summary tree.
 Currently used methods for summarising trees do not rely on such tree spaces, as computing distances is $\np$-hard in most of them.
 Instead, these methods use for example the Robinson-Foulds distance \autocite{Robinson1981-fb, Bansal2010-vr} to compute summary trees.
 This distance can be computed efficiently, but lacks biological interpretability.
-Alternatively, methods such as the maximum clade credibility tree \autocite{Heled2013-sv} or consensus trees \autocite{Margush1981-ba} are used to summarise tree samples.
+Alternatively, maximum clade credibility trees \autocite{Heled2013-sv} or consensus trees \autocite{Margush1981-ba} are used to summarise tree samples.
 To compute biological meaningful summary trees where internal nodes are assigned times, it is therefore desirable to find a tree space where distances can be computed efficiently and shortest paths are biologically meaningful.
 
 \summary{Structure of the paper.}
 In this paper we consider the space $\dtt_m$ of discrete coalescent trees, where internal nodes are assigned distinct discrete times.
-This space can be seen as a generalisation of the ranked nearest neighbour interchange ($\rnni$) space, as introduced in \autocite{Collienne2020-iu}.
-We investigate geometrical properties of both spaces $\dtt_m$ and $\rnni$, using the algorithm $\findpath$ for computing shortest paths as introduced by \textcite{Collienne2020-iu}.
-The space $\dtt_m$ does have the desired properties mentioned above, including efficiently computable shortest paths that preserve biological information shared between trees.
-After introducing notations used throughout this paper (\autoref{section:technical_introduction}), we discuss how $\findpath$ can be applied to discrete coalescent trees, generalising the results for $\rnni$ in \autoref{section:fp_dtt}.
+This space can be seen as a generalisation of the ranked nearest neighbour interchange ($\rnni$) space, which has been introduced by \textcite{Collienne2020-iu}.
+We show in this paper that the space $\dtt_m$ has the desired properties mentioned above, including efficiently computable shortest paths that preserve biological information shared between trees.
+After introducing notations used throughout this paper (\autoref{section:technical_introduction}), we discuss how the algorithm $\findpath$ \autocite{Collienne2020-iu} can be generalise from $\rnni$ to be applied to discrete coalescent trees, computing shortest paths in polynomial time (\autoref{section:fp_dtt}).
 We then analyse some geometrical properties of both tree spaces $\dtt_m$ and $\rnni$ (\autoref{section:geometry}).
-Therefore, we first discuss the cluster property in \autoref{section:cluster_property}.
-In \autoref{section:caterpillar_convex} we then consider a subset of trees for which we are able to compute $\rnni$ distances even more efficiently than with $\findpath$.
-Following that, we establish the diameter of $\dtt_m$ and $\rnni$ and briefly discuss their radius.
-We finish this paper with a section proposing directions for further research and open problems (\autoref{section:open_problems}).
+We do so by first discuss the cluster property in \autoref{section:cluster_property} and then considering a subset of trees (caterpillar trees) for which we are able to compute $\rnni$ distances even more efficiently than with $\findpath$ (\autoref{section:caterpillar_convex}).
+Following that, we establish the diameter of $\dtt_m$ and $\rnni$ and briefly discuss the radius for each space.
+We finish this paper with a section providing a connection between the $\rnni$ space and partition lattices, and propose directions for further research (\autoref{section:open_problems}).
 
 
 \section{Technical Introduction}
