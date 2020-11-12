@@ -381,7 +381,7 @@ A path between two caterpillar trees only consisting of caterpillar trees is a \
 In \autoref{thm:caterpillar_convex_dtt} and \autoref{cor:caterpillar_convex_rnni} we will see that, in both $\dtt_m$ and $\rnni$, any two caterpillar trees are connected by a shortest path that is a caterpillar path.
 We say that a set of trees for which such a shortest path that stays within this set exists is \emph{convex} in the corresponding tree space.
 This is another property of $\rnni$ that the $\nni$ space of unranked trees does not have \autocite{Gavryushkin2018-ol}.
-Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a way to compute distances between caterpillar trees in this space in time $\O(n\log n)$ in \autoref{cor:caterpillar_distance_rnni_nlogn}, and hence with better worst-case time complexity than $\findpath$.
+Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a way to compute distances between caterpillar trees in this space in time $\O(n \sqrt{\log n})$ in \autoref{cor:caterpillar_distance_rnni_nlogn}, and hence with better worst-case time complexity than $\findpath$.
 
 \begin{theorem}
 	The set of caterpillar trees is convex in $\dtt_m$.
@@ -440,7 +440,7 @@ These moves can be translated to swapping two tokens in TSP.
 \textcite{Kawahara2017-ey} provide an algorithm for TSP on lollipop graphs, which can be used for computing distances between caterpillar trees in $\rnni$ as well.
 This algorithm however has worst-case time complexity $\O(n^2)$, the same as $\findpath$.
 
-In the following we present an algorithm with better worst-case time complexity, $\O(n \log n)$, for $\rnni$ (\autoref{cor:caterpillar_distance_rnni_nlogn}).
+In the following we present an algorithm with better worst-case time complexity, $\O(n \sqrt{\log n})$, for $\rnni$ (\autoref{cor:caterpillar_distance_rnni_nlogn}).
 Therefore, we first establish a formula to express distances between two caterpillar trees in $\rnni$ (\autoref{thm:caterpillar_distance_formula}).
 
 \begin{theorem}
@@ -520,16 +520,16 @@ Therefore, the two pairs of leaves that sharing their parent in $T$ and $R$, res
 \end{proof}
 
 \begin{corollary}
-	The distance between two caterpillar trees can be computed in $\O(n \log n)$ in $\rnni$.
+	The distance between two caterpillar trees can be computed in $\O(n \sqrt{\log n})$ in $\rnni$.
 	\label{cor:caterpillar_distance_rnni_nlogn}
 \end{corollary}
 
 \begin{proof}
 	By \autoref{thm:caterpillar_distance_formula} the distance between two caterpillar trees in $\rnni$ is the number of transpositions between two sequences of length $n$ minus $m_T$ as defined in \autoref{thm:caterpillar_distance_formula}.
 	The value $m_T$ can be computed in time linear in $n$ for any caterpillar tree $T$ by considering the leaves of the tree ordered according to increasing rank of their parents.
-	The number of transpositions of a sequence of length $n$ (Kendall-tau distance) can be computed in time $\O(n \log n)$ \autocite{Knight1966-hx}.
+	The number of transpositions of a sequence of length $n$ (Kendall-tau distance) can be computed in time $\O(n \sqrt{\sqrt{\log n}})$ \autocite{Chan2010-ls}.
 	This number is equivalent to $p_t$, as defined in \autoref{thm:caterpillar_distance_formula}, when ignoring transpositions for the pairs of leaves sharing a parent in $T$ and $R$, respectively.
-	The worst-case running time for computing the $\rnni$ distance between caterpillar trees is therefore $\O(n \log n)$.
+	The worst-case running time for computing the $\rnni$ distance between caterpillar trees is therefore $\O(n \sqrt{\log n})$.
 \end{proof}
 
 \subsection{Diameter and Radius}
@@ -695,7 +695,7 @@ After establishing the worst-case time complexity of computing shortest paths in
 The worst-case time complexity of $\findpath$ for computing a shortest path is $\O(mn)$ in $\dtt_m$.
 ANd in \autoref{section:diameter} we have seen that there is no algorithm with better worst-case running time for computing shortest paths.
 It might however be possible to compute distances more efficiently.
-In fact, we established in \autoref{section:caterpillar_convex} a way for computing distances between caterpillar trees in $\O(n \log n)$.
+In fact, we established in \autoref{section:caterpillar_convex} a way for computing distances between caterpillar trees in $\O(n \sqrt{\log n})$.
 This raises the question whether there is an algorithm that computes the distance between any two trees in $\dtt_m$ with better running time than $\findpath$.
 \todo{Add David's result about mapping to L1 here?}
 
