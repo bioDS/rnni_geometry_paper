@@ -95,11 +95,17 @@
 \begin{abstract}
 	Most methods for inferring phylogenetic trees base on tree search algorithm.
 	Those algorithm require a tree space, which is often defined as a graph where trees are vertices and connected by an edge if one can be received from another by local changes to the tree, so-called tree-rearrangement operations.
+	\todo{You need to talk about molecular clock here.}
 	Often the goal is to reconstruct a tree where internal nodes, and hence speciation or divergence events, are equipped with times.
 	This is especially the case in coalescence models, where the order of divergence events is of importance.
 	Most classical tree-rearrangement operations like nearest neighbour interchange, subtree prune and regraft, or tree bisection and reconnection do not take the times of internal nodes into account.
+	\todo{You don't need to go in such detail in the firs para of Intro.
+	All these tree operations are technical things that can be mentioned towards the end of Intro.
+	Here you can just say that treespaces exist for clock trees and we're considering one in this paper.}
 	The ranked nearest neighbour interchange operations however, a generalisation of nearest neighbour interchange, considers ranked trees and thereby preserves the order of divergence events.
 
+	\todo{Again, too details and shortest paths come out of the blue.
+	Just say it was shown that the space has promising properties for statistical analyses in treespace.}
 	It furthermore has recently been established that this space of ranked nearest neighbour interchange trees has shortest path that can be computed in polynomial time, unlike most other tree spaces.
 	In this paper, we go gone step further and do not only consider ranked trees, but trees where nodes are assigned discrete coalescence times.
 	We show that shortest paths in this space can be computed in polynomial time and establish some geometrical properties.
@@ -693,15 +699,16 @@ Finding the radius of $\dtt_m$ is therefore one of the natural next steps for fu
 \summary{More efficient algorithm for computing distances (not shortest paths)}
 After establishing the worst-case time complexity of computing shortest paths in $\dtt_m$ and $\rnni$, it remains open to find the worst-case time complexity of computing distances.
 The worst-case time complexity of $\findpath$ for computing a shortest path is $\O(mn)$ in $\dtt_m$.
-ANd in \autoref{section:diameter} we have seen that there is no algorithm with better worst-case running time for computing shortest paths.
+And in \autoref{section:diameter} we have seen that there is no algorithm with better worst-case running time for computing shortest paths.
 It might however be possible to compute distances more efficiently.
 In fact, we established in \autoref{section:caterpillar_convex} a way for computing distances between caterpillar trees in $\O(n \sqrt{\log n})$.
 This raises the question whether there is an algorithm that computes the distance between any two trees in $\dtt_m$ with better running time than $\findpath$.
-\todo{Add David's result about mapping to L1 here?}
+\todo{Add David's result about mapping to $L_1$ here?
+Yes, unless it's already somewhere.}
 
 \summary{$\rnni(rho)$ and parameter $\rho$ for discrete coalescent trees}
 Throughout this paper we consider $\dtt_m$ as a generalisation of $\rnni$ by allowing internal nodes to have integer-valued time differences.
-we therefore introduced the parameter $m$ to bound the height of a tree in the space of discrete coalescent trees in order to get a finite space.
+We therefore introduced the parameter $m$ to bound the height of a tree in the space of discrete coalescent trees in order to get a finite space.
 A different parameter $\rho$ has previously been introduced in \textcite{Collienne2020-iu} for generalising $\rnni$ to a space $\rnni(\rho)$ of ranked trees, where rank and $\nni$ moves have weights $\rho$ and one, respectively.
 Combining these two approaches of generalising $\rnni$ gives a space of discrete coalescent trees where different moves have different weights.
 This tree space is relevant for practical applications, where for example some knowledge about the tree topology exists, but the uncertainty of the timing of internal nodes remains high.
