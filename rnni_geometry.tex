@@ -255,7 +255,7 @@ The only moves involving internal nodes of this caterpillar subtree are rank mov
 Hence the path $\fp(T_r,R_r)$ provides a path between $T$ and $R$ in $\dtt_m$, when only considering the subtrees induced by $\{a_1, \ldots, a_n\}$ in all trees on $\fp(T_r, R_r)$, interpreting some rank moves between $T_r$ and $R_r$ as length moves.
 We denote this path in $\dtt_m$, which results from $\fp(T_r, R_r)$, by $\fp(T,R)$.
 In \autoref{thm:dtt_findpath} we establish that $\fp(T,R)$ is a shortest path in $\dtt_m$ indeed.
-Note that for any given pair of trees $T$ and $R$, if not specified otherwise, we always assume $m$ to be the maximum root time of these trees in and aim to compute a shortest path between them in $\dtt_m$. 
+Note that for any given pair of trees $T$ and $R$, if not specified otherwise, we always assume $m$ to be the maximum root time of these trees in and aim to compute a shortest path between them in $\dtt_m$.
 
 \begin{theorem}
 	The path $\fp(T,R)$ between two discrete coalescent trees $T$ and $R$ is a shortest path in $\dtt_m$, where $m$ is the maximum root time of $T$ and $R$.
@@ -417,7 +417,7 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 	Decreasing the rank of $(S \cup \{a_k\})_{R'_r}$ takes $\rank(S \cup \{a_k\})_{R'_r} - (\rank(S)_{R'_r} + 1)$ $\rnni$ moves.
 	Because the rank of $(S \cup \{a_j\})_{R'_r}$ increases by one when the parents of $a_k$ and $a_j$ swap ranks in this iteration, the following iteration for $S' \cup \{a_j\}$ needs $\rank(S' \cup \{a_j\})_{R'_r} + 1 - (\rank(S')_{R'_r} + 2)$ $\rnni$ moves.
 	On $\fp(R_r,T'_r)$ however, first $\rank(S' \cup \{a_j\})_{R'_r} - (\rank(S')_{R'} + 1)$ $\rnni$ moves decrease the rank of $(S' \cup \{a_j\})_{R'}$, and then $\rank(S \cup \{a_k\})_{R'_r} - (\rank(S)_{R'_r} + 2)$ are needed for $S \cup \{a_k\}$.
-	In total, for both iterations one more move is needed on $\fp(R_r, T'_r)$ compared to $\fp(R_r, T_r)$. 
+	In total, for both iterations one more move is needed on $\fp(R_r, T'_r)$ compared to $\fp(R_r, T_r)$.
 
 	The only difference in hte trees after these two iterations on the two different paths is the order of ranks of the parents of $a_j$ and $a_k$.
 	Since the rest of $T_r$ and $T'_r$ coincide, the remaining parts of $\fp(R_r, T_r)$ and $\fp(R_r, T'_r)$ consist on the same moves.
@@ -712,7 +712,7 @@ The cluster property, discussed in \autoref{section:cluster_property}, is an imp
 For some applications however, there is a further property that none of the commonly used tree spaces possesses.
 Sometimes studies aim to compare two trees on different data sets.
 The goal of such comparisons is to compare the branching process through time.
-Since the given trees arise from different data sets, a scaling-free tree space is desired. 
+Since the given trees arise from different data sets, a scaling-free tree space is desired.
 The tree space $\rnni$ and $\dtt_m$ have shortest paths computable in polynomial time, and therefore might be a good starting point for finding a scaling-free tree space where distances can be computed efficiently.
 
 \printbibliography
