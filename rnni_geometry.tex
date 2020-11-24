@@ -96,16 +96,16 @@
 \begin{abstract}
 	Most methods for inferring phylogenetic trees base on tree search algorithm.
 	Those algorithm require a tree space, which is often defined as a graph where trees are vertices and connected by an edge if one can be received from another by local changes to the tree, so-called tree-rearrangement operations.
-	\todo{You need to talk about molecular clock here.}
+	\todo[inline]{You need to talk about molecular clock here.}
 	Often the goal is to reconstruct a tree where internal nodes, and hence speciation or divergence events, are equipped with times.
 	This is especially the case in coalescence models, where the order of divergence events is of importance.
 	Most classical tree-rearrangement operations like nearest neighbour interchange, subtree prune and regraft, or tree bisection and reconnection do not take the times of internal nodes into account.
-	\todo{You don't need to go in such detail in the firs para of Intro.
+	\todo[inline]{You don't need to go in such detail in the firs para of Intro.
 	All these tree operations are technical things that can be mentioned towards the end of Intro.
 	Here you can just say that treespaces exist for clock trees and we're considering one in this paper.}
 	The ranked nearest neighbour interchange operations however, a generalisation of nearest neighbour interchange, considers ranked trees and thereby preserves the order of divergence events.
 
-	\todo{Again, too details and shortest paths come out of the blue.
+	\todo[inline]{Again, too details and shortest paths come out of the blue.
 	Just say it was shown that the space has promising properties for statistical analyses in treespace.}
 	It furthermore has recently been established that this space of ranked nearest neighbour interchange trees has shortest path that can be computed in polynomial time, unlike most other tree spaces.
 	In this paper, we go gone step further and do not only consider ranked trees, but trees where nodes are assigned discrete coalescence times.
@@ -118,6 +118,8 @@
 
 \section{Introduction}
 \summary{Why we want a time-tree space}
+\todo{This paragraph can be about molecular clock, then about a different parameterization necessary for inference software that deal with clock trees, and finally about tree proposals.
+So possible two or three paragraphs.}
 One of the main tasks in evolutionary biology is reconstructing evolutionary trees, also called phylogenetic trees, from various types of data, such as RNA or DNA sequences.
 In order to gain knowledge about the evolutionary history in time, evolutionary trees where nodes are equipped with times are of interest in many applications, including research on cancer and virus evolution.
 Most tree inference models for these problems, such as Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp, Tamura2011-ky} or Bayesian methods \autocite{Bouckaert2014-ir,Suchard2018-tw, Ronquist2003-eq}, rely on tree search algorithms.
@@ -126,6 +128,8 @@ Commonly used tree-rearrangement operations are nearest neighbour interchange, s
 None of these operations, however, take times of internal nodes of trees into account, and computing distances in the tree graphs basing on these operations is $\np$-hard \autocite{Dasgupta2000-xa, Bordewich2005-nx, Allen2001-ky, Hickey2008-wv}.
 
 \summary{Why discrete coalescent trees}
+\todo{This paragraph can be a description of coalescent as a popular class of evolutionary generating models, the parameterization should follow naturally after coalescent models are described.
+So tree space is the last thing to appear, not first.}
 It is hence desirable to have a tree space on trees where internal nodes, representing evolutionary events, are timed, and distances between trees can be computed in polynomial time.
 This is in particular the case when trees are inferred using the coalescent model.
 The coalescent model is popular for reconstructing genealogical trees to infer relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}.
@@ -136,12 +140,16 @@ Commonly used reconstruction methods using MCMC \autocite{Bouckaert2014-ir,Sucha
 
 \summary{How recent results about $\rnni$ make this space interesting and that it is strongly connected to $\dtt_m$}
 Therefore, tree spaces where internal nodes are assigned times are needed under the coalescent model.
+\todo{BHV does not have time, and cannot be easily fixed to include molecular clock -- have a look at our paper with Alexei.}
 Examples of such tree spaces include the BHV-space \autocite{Billera2001-rj}, t-space, and $\tau$-space \autocite{Gavryushkin2016-uu}, which parameterise trees in different ways.
 The problem of these spaces is however, that there are no algorithms for computing shortest paths are known (t-space), or shortest paths lack biological meaningfulness.
 More specifically, BHV space and the $\tau$-space suffer from having trees connected by unique geodesics that pass the star tree \autocite{Gavryushkin2016-uu}.
 Summarising tree samples often results in star trees in these spaces, which do not contain any biological information.
 
 \summary{Why we want to investigate geometrical properties of $\dtt_m$ and $\rnni$}
+\todo{No, they don't -- it's the first time geometry is mentioned, so we need to link the discussion above to geometry.
+Papers that employ geometric information in various algorithms and methods need to be cited here.
+You sort of do it later on but I think a claim should follow an argument, unlike in maths :)}
 This result highlights the importance of understanding geometrical properties of shortest paths in tree spaces.
 Investigating those is essential for tree search algorithms, especially for developing these algorithms and evaluating inferred trees.
 Methods estimating whether a chain converged in the bayesian tree inference approach, for example, rely on measuring distances between trees \autocite{Nylander2008-wa, Warren2017-df}.
