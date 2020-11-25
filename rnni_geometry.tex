@@ -218,19 +218,19 @@ In this graph length moves are not possible, so we use the notion $\rnni$ \emph{
 \label{section:fp_dtt}
 
 \summary{Introduce how we can use $\findpath$ to compute $\dtt_m$ distances}
-Shortest paths, and therefore distances, between trees in $\rnni$ can be computed in quadratic running time with the algorithm $\findpath$, introduced by \textcite{Collienne2020-iu}.
+Shortest paths, and therefore distances, between trees in $\rnni$ can be computed with the algorithm $\findpath$, which was introduced by \textcite{Collienne2020-iu} and has running time quadratic in the number of leaves $n$.
 As $\rnni$ is a special case of $\dtt_m$ for $m = n-1$, the question whether this algorithm can also be used to compute shortest paths in $\dtt_m$ arises.
 In this section we present a generalisation of $\findpath$ that computes distances between trees in $\dtt_m$.
-Before introducing the version of $\findpath$ for $\dtt_m$, we introduce a way to convert trees in $\dtt_m$ into ranked trees, such that the $\rnni$ distance between those ranked trees equals their distance in $\dtt_m$ (\autoref{thm:dtt_findpath}).
+Before introducing the version of $\findpath$ for $\dtt_m$, we introduce a way to convert trees in $\dtt_m$ on $n$ leaves into ranked trees on $m+2$ leaves, such that the $\rnni$ distance between those ranked trees equals their distance in $\dtt_m$ (\autoref{thm:dtt_findpath}).
 
 \summary{How to add leaves to a $\dtt_m$ tree to transform it into a ranked tree}
-A tree $T$ in $\dtt_m$ can be converted into a ranked tree in $\rnni$ on $m+2$ in the following way (\autoref{alg:ranked_tree}).
+A tree $T$ in $\dtt_m$ on $n$ leaves can be converted into a ranked tree in $\rnni$ on $m+2$ in the following way (\autoref{alg:ranked_tree}).
 First add a new root with time $m + 1$ that becomes parent of the root of $T$.
 The second child of this new root is the root of a caterpillar tree on leaf set $\{a_{n+1}, a_{n+2}, \ldots, a_{m+2}\}$, such that $\ntime(a_{n+1}) = \ntime(a_{n+2}) < \ntime(a_{n+3}) < \ldots < \ntime(a_{m+2})$.
 The resulting tree $T_r$ is hence a uniquely defined ranked tree with $m+2$ leaves.
 An example of this extension of a tree $T$ to a ranked tree $T_r$ is depicted in \autoref{fig:dtt_to_ranked_tree}.
 
-Throughout this paper we use the index $r$ for $T_r$ to refer to this extended ranked version of a tree $T$.
+Throughout this paper we use the index $r$ to refer to this extended ranked version $T_r$ of a tree $T$.
 Moreover, we denote the subtree of $T_r$ that is identical to $T$ by $T_r^d$ ($d$ for discrete coalescent tree) and the caterpillar subtree on leaf set $\{a_{n+1}, \ldots, a_{m+2}\}$ by $T_r^c$.
 
 \begin{algorithm}[ht]
@@ -252,13 +252,13 @@ Moreover, we denote the subtree of $T_r$ that is identical to $T$ by $T_r^d$ ($d
 \begin{figure}[ht]
 	\includegraphics[width=0.75\textwidth]{dtt_to_ranked_tree.eps}
 	\caption{Extending a tree $T$ on $n$ leaves in $\dtt_6$ (top left) to a ranked tree with $m+2=8$ leaves (top right) by adding a caterpillar subtree with three leaves.
-	The trees on the bottom result from $T$ and $T_r$ by performing a length move (left) or rank move (right), respectively).}
+	The trees on the bottom result from $T$ and $T_r$ by performing a length move (left) or rank move (right), respectively.}
 	\label{fig:dtt_to_ranked_tree}
 \end{figure}
 
 \summary{Moves on the extended ranked versions of trees -- $\rnni$ vs length moves}
-In the following we distinguish not only rank moves and $\nni$ moves on the extended ranked version $T_r$ of a tree $T$, but we will also distinguish two different types of rank moves.
-Rank moves between one node of $T_r^c$ and one node of $T_r^d$ can be interpreted as length moves in $T_r^d$ (\autoref{fig:dtt_to_ranked_tree}).
+In the following we distinguish not only rank moves and $\nni$ moves on the extended ranked version $T_r$ of a tree $T$, but also two different types of rank moves.
+Rank moves between one node of $T_r^c$ and one node of $T_r^d$ can be interpreted as length moves when considering $T_r^d$ in $\dtt_m$ (\autoref{fig:dtt_to_ranked_tree}).
 Therefore, we will refer to such rank moves as \emph{rank moves corresponding to length moves}.
 All remaining rank moves will still be called rank moves.
 Note that the correspondence of rank moves between $T_r^c$ and $T_r^d$ to length moves in $T$ shows that any path between $T$ and $R$ in $\dtt_m$ can be interpreted as a path between $T_r$ and $R_r$ in $\rnni$.
@@ -270,7 +270,7 @@ The only moves involving internal nodes of this caterpillar subtree are rank mov
 Hence the path $\fp(T_r,R_r)$ provides a path between $T$ and $R$ in $\dtt_m$, when only considering the subtrees induced by $\{a_1, \ldots, a_n\}$ in all trees on $\fp(T_r, R_r)$, interpreting some rank moves between $T_r$ and $R_r$ as length moves.
 We denote this path in $\dtt_m$, which results from $\fp(T_r, R_r)$, by $\fp(T,R)$.
 In \autoref{thm:dtt_findpath} we establish that $\fp(T,R)$ is a shortest path in $\dtt_m$ indeed.
-Note that for any given pair of trees $T$ and $R$, if not specified otherwise, we always assume $m$ to be the maximum root time of these trees in and aim to compute a shortest path between them in $\dtt_m$.
+Note that for any given pair of trees $T$ and $R$, if not specified otherwise, we always assume $m$ to be the maximum root time of these trees and consider a shortest path between them in $\dtt_m$.
 
 \begin{theorem}
 	The path $\fp(T,R)$ between two discrete coalescent trees $T$ and $R$ is a shortest path in $\dtt_m$, where $m$ is the maximum root time of $T$ and $R$.
@@ -282,14 +282,14 @@ Note that for any given pair of trees $T$ and $R$, if not specified otherwise, w
 	Any path in $\dtt_m$ from $T$ to $R$ gives a path of equal length between $T_r$ and $R_r$ in the $\rnni$ space on $m+2$ leaves.
 	This is due to the fact that the only moves needed in the subtree $T_r^c$ to transform it to $R_r^c$ are rank moves that correspond to length moves, and no other $\rnni$ moves.
 	If there was a path between $T$ and $R$ shorter than $\fp(T,R)$, the corresponding path between $T_r$ and $R_r$ in $\rnni$ would be shorter than the one computed by $\findpath$ in this space.
-	Since this contradicts \autocite[Theorem 1]{Collienne2020-iu}, it follows that $\fp(T,R)$ is a shortest path in $\dtt_m$.
+	Since this contradicts the fact that $\findpath$ computes shortest paths in $\rnni$ \autocite[Theorem 1]{Collienne2020-iu}, it follows that $\fp(T,R)$ is a shortest path in $\dtt_m$.
 \end{proof}
 
 \summary{Running time of $\findpath$ + we don't need to add subtree in practice}
-\autoref{thm:dtt_findpath} shows that $\findpath$ (\autoref{alg:fp_dtt}) computes shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in $\O(mn)$.
-More details on this are provided in \autoref{section:diameter} following \autoref{thm:dtt_diameter}.
+\autoref{thm:dtt_findpath} shows that $\findpath$ computes shortest path between two trees in $\dtt_m$ in polynomial time, more specifically in $\O(mn)$.
+More details on the running time are discussed in \autoref{section:diameter} following \autoref{thm:dtt_diameter}.
 It is not even necessary to convert a given pair of discrete coalescent trees to ranked trees to apply $\findpath$ to them.
-Instead, we modify $\findpath$ for trees in $\dtt_m$.
+Instead, we modify $\findpath$ for trees in $\dtt_m$ (\autoref{alg:fp_dtt}).
 Iterations of $\findpath$ that consider clusters in the added caterpillar trees are replaced by length moves increasing the time of internal nodes as described in the \textbf{for} loop in Line~\ref{line:length_move} of \autoref{alg:fp_dtt}.
 The benefit of this modified version of the algorithm, compared to using $\findpath$ on the extended ranked versions of the trees, is a reduced use of memory, which is especially of practical relevance for $m >> n$.
 
@@ -299,14 +299,14 @@ The benefit of this modified version of the algorithm, compared to using $\findp
 		\label{alg:fp_dtt}
 		\STATE $T_1 := T$, $p := [T_1]$
 		\FOR {$k = 1, \dots, m$}
-			\IF {$R$ has a node with rank $i$}
-			\STATE $C:=(R)_i$
-			\WHILE {$\rank((C)_{T_1})>k$}
+			\IF {$R$ has a node with rank $k$}
+			\STATE $C:=(R)_k$
+			\WHILE {$\ntime((C)_{T_1})>k$}
 					\STATE $T_2$ is $T_1$ with the rank of $(C)_{T_1}$ decreased by an $\rnni$ move
 				\STATE $T_1 = T_2$
 				\STATE $p = p+T_1$
 			\ENDWHILE
-			\ELSE
+			\ELSIF {$T$ has a node with rank $k$}
 				\STATE $i := \min\{l | l>k \text{ and no node in } T_1 \text{ has time }l\}$
 				\FOR {$j = i-1, \dots, k$}
 					\label{line:length_move}
@@ -329,13 +329,13 @@ The benefit of this modified version of the algorithm, compared to using $\findp
 \summary{Definition of Cluster Property and why it is relevant (a bit of bio).}
 In this section we consider a property of tree spaces.
 A tree space has the \emph{cluster property}, if all trees on every shortest paths between two trees sharing a cluster $C$ also contain this cluster.
-This is desirable biological property as trees sharing a cluster or subtree are expected to be closer to each other than to a tree not sharing a cluster with them.
+This is a desirable biological property as trees sharing a cluster or subtree are expected to be closer to each other than to a tree not sharing a cluster with them.
 An example for the practical relevance of this property are summary trees.
-For a given sample of trees containing a common subtree, it is expected that their summary or mean tree also contains this subtree.
+For a given sample of trees containing a common subtree, it is expected that their summary tree also contains this subtree.
 It hence is desirable to have a tree space that has the cluster property.
 
 \summary{Cluster property in $\nni$ and its connection to the complexity result.}
-A further reason for investigating the cluster property in $\rnni$ is its importance of in a similar tree space, the nearest neighbour interchange graph ($\nni$).
+A further reason for investigating the cluster property in $\rnni$ is its importance in a similar tree space, the nearest neighbour interchange graph ($\nni$).
 In the $\nni$ graph trees have no times and $\nni$ moves are allowed on every edge.
 Computing distances in $\nni$ is $\np$-hard \autocite{Dasgupta2000-xa}, and the proof relies on the fact that this tree space does not have the cluster property \autocite{Li1996-zw}.
 In the $\rnni$ graph, however, distances can be computed in polynomial time by $\findpath$ \autocite{Collienne2020-iu}, which preserves common clusters.
@@ -349,10 +349,10 @@ Note that even though it seems like distances can be computed in polynomial time
 \end{theorem}
 
 \begin{proof}
-	We assume to the contrary that there are two ranked trees $T$ and $R$ are sharing a cluster $C$, such that there is a path $p$ between these trees where $C$ is not present in every tree on $p$.
+	We assume to the contrary that there are two ranked trees $T$ and $R$ sharing a cluster $C$ and a path $p$ between these trees where $C$ is not present in every tree.
 	We furthermore assume that there is no pair of trees with a shortest path not containing a shared cluster and distance less than $d(T,R)$, meaning that $T$ and $R$ give a minimum counterexample.
 	Because of this minimality assumption on the length of $p$, the first tree $T'$ following $T$ on $p$ does not contain $C$.
-	Since only the one cluster $C$ changes by the $\nni$ move between $T$ and $T'$, all nodes with rank below $(C)_T$ induce the same clusters in $T$ and $T'$ (\autoref{fig:nni_neighbours_clusters}).
+	Since only $C$ changes by the $\nni$ move between $T$ and $T'$, all nodes with rank below $(C)_T$ induce the same clusters in $T$ and $T'$ (\autoref{fig:nni_neighbours_clusters}).
 	We now compare distances $d(T,R)$ and $d(T',R)$ by using properties of $\findpath$.
 
 	\begin{figure}[ht]
@@ -363,13 +363,12 @@ Note that even though it seems like distances can be computed in polynomial time
 
 	First we compare $\fp(R,T)$ and $\fp(R,T')$.
 	All trees on on these two paths coincide until the point is reached where the cluster considered on $\fp(R,T)$ is $C$.
-	Let $R'$ denote the tree at this point of the path.
-	Then $\fp(R,T)$ and $\fp(R,T')$ coincide up to this tree $R'$.
+	Let $R'$ denote the tree at this point of the path, meaning that $\fp(R,T)$ and $\fp(R,T')$ coincide up to this tree $R'$.
 	It follows $d(T,R) = d(R,R') + d(R', T)$ and $d(T',R) = d(R,R') + d(R', T')$.
 
 	Now consider $\fp(T', R')$ to evaluate $d(R', T')$.
 	As $\findpath$ preserves clusters, $C$ is present in every tree on $\fp(T,R)$ up to and including $R'$.
-	The fist iteration of $\findpath$ applied to the pair of trees $(T',R')$ considers the cluster $C$, as all cluster induced by nodes below $(C)_{T'}$ coincide in $R'$ and $T'$.
+	The first iteration of $\findpath$ applied to the pair of trees $(T',R')$ hence considers the cluster $C$, as all cluster induced by nodes below $(C)_{T'}$ coincide in $R'$ and $T'$.
 	To construct the cluster $C$ in $T'$, there is just one $\nni$ move needed, which results in the tree $T$, as $T$ and $T'$ are $\nni$ neighbours such that $T$ contains $C$ and $T'$ does not (\autoref{fig:nni_neighbours_clusters}).
 	We can therefore conclude that $d(T,R) = d(T',R) - 1$, which contradicts the assumption that $T'$ is the first tree on a shortest path from $T$ to $R$.
 	There is hence no shortest path between $T$ and $R$ that does not preserve $C$, which proves the cluster property for $\rnni$.
@@ -394,7 +393,7 @@ The cluster property in $\dtt_m$ follows from \autoref{thm:cluster_property_rnni
 In this subsection we focus on the set of caterpillar trees and establish some properties of shortest paths between those trees in both $\rnni$ and $\dtt_m$.
 A path between two caterpillar trees only consisting of caterpillar trees is a \emph{caterpillar path}.
 In \autoref{thm:caterpillar_convex_dtt} and \autoref{cor:caterpillar_convex_rnni} we will see that, in both $\dtt_m$ and $\rnni$, any two caterpillar trees are connected by a shortest path that is a caterpillar path.
-We say that a set of trees for which such a shortest path that stays within this set exists is \emph{convex} in the corresponding tree space.
+We say that a set of trees is \emph{convex} in a tree space, if shortest paths between trees in this set stay within the set.
 This is another property of $\rnni$ that the $\nni$ space of unranked trees does not have \autocite{Gavryushkin2018-ol}.
 Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a way to compute distances between caterpillar trees in this space in time $\O(n \sqrt{\log n})$ in \autoref{cor:caterpillar_distance_rnni_nlogn}, and hence with better worst-case time complexity than $\findpath$.
 
@@ -420,6 +419,7 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 		\includegraphics[width=0.66\textwidth]{caterpillar_convex.eps}
 		\caption{The two possible versions of trees $T_r$ (left) and $T'_r$ (right) as described in the proof of \autoref{thm:caterpillar_convex_dtt}.
 		Between $T_r$ and $T'_r$ only the parents of $a_j$ and $a_k$ are exchanged.
+		At the bottom $(a_j)_T$ is parent of $(a_k)_T$, at the top these nodes are in the two different subtrees $T_r^d$ and $T_r^c$.
 		Dashed lines represent remaining part of trees, which are equal in $T_r$ and $T'_r$.}
 		\label{fig:caterpillar_convex}
 	\end{figure}
@@ -429,13 +429,14 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 	Therefore, we note at first that it is $\rank(a_j)_{R_r} < \rank(a_k)_{R_r}$ by the choice of $a_k$, and therefore also $\rank(a_j)_{R'_r} < \rank(a_k)_{R'_r}$.
 
 	By our assumptions on $T_r$, the clusters considered on $\fp(R_r,T_r)$ in the two iterations following $R'_r$ are first $S \cup \{a_k\}$ and then $S' \cup \{a_j\}$ for some clusters $S$ and $S'$ that are present in $T_r$, $T'_r$, and $R'_r$.
-	Decreasing the rank of $(S \cup \{a_k\})_{R'_r}$ takes $\rank(S \cup \{a_k\})_{R'_r} - (\rank(S)_{R'_r} + 1)$ $\rnni$ moves.
-	Because the rank of $(S \cup \{a_j\})_{R'_r}$ increases by one when the parents of $a_k$ and $a_j$ swap ranks in this iteration, the following iteration for $S' \cup \{a_j\}$ needs $\rank(S' \cup \{a_j\})_{R'_r} + 1 - (\rank(S')_{R'_r} + 2)$ $\rnni$ moves.
-	On $\fp(R_r,T'_r)$ however, first $\rank(S' \cup \{a_j\})_{R'_r} - (\rank(S')_{R'} + 1)$ $\rnni$ moves decrease the rank of $(S' \cup \{a_j\})_{R'}$, and then $\rank(S \cup \{a_k\})_{R'_r} - (\rank(S)_{R'_r} + 2)$ are needed for $S \cup \{a_k\}$.
+	Let $l = \rank(S \cup \{a_k\})_{T_r}$ be the number of the iteration of $\fp(R_r, T_r)$ following $R'_r$.
+	Decreasing the rank of $(S \cup \{a_k\})_{R'_r}$ takes $\rank(S \cup \{a_k\})_{R'_r} - l$ $\rnni$ moves.
+	Because the rank of $(S \cup \{a_j\})_{R'_r}$ increases by one when the parents of $a_k$ and $a_j$ swap ranks in this iteration, the following iteration for $S' \cup \{a_j\}$ needs $\rank(S' \cup \{a_j\})_{R'_r} + 1 - (l+2)$ $\rnni$ moves.
+	On $\fp(R_r,T'_r)$ however, first $\rank(S' \cup \{a_j\})_{R'_r} - l$ $\rnni$ moves decrease the rank of $(S' \cup \{a_j\})_{R'}$, and then $\rank(S \cup \{a_k\})_{R'_r} - (l+1)$ are needed for $S \cup \{a_k\}$.
 	In total, for both iterations one more move is needed on $\fp(R_r, T'_r)$ compared to $\fp(R_r, T_r)$.
 
-	The only difference in hte trees after these two iterations on the two different paths is the order of ranks of the parents of $a_j$ and $a_k$.
-	Since the rest of $T_r$ and $T'_r$ coincide, the remaining parts of $\fp(R_r, T_r)$ and $\fp(R_r, T'_r)$ consist on the same moves.
+	The only difference in the trees after these two iterations on the two different paths is the order of ranks of the parents of $a_j$ and $a_k$.
+	Since the rest of $T_r$ and $T'_r$ coincide, the remaining parts of $\fp(R_r, T_r)$ and $\fp(R_r, T'_r)$ consist of the same moves.
 	With our previous observation we can conclude $d(R_r,T_r) = d(R_r,T'_r) + 1$, and hence $T'_r$ is on a shortest path from $T_r$ to $R_r$.
 \end{proof}
 
@@ -447,7 +448,7 @@ The convexity of the set of caterpillar trees in $\rnni$ follows from the convex
 \end{corollary}
 
 \summary{With \autoref{cor:caterpillar_convex_rnni} we can find a more efficient way to compute distances between caterpillar trees.}
-Using the convexity of the set of caterpillar trees (\autoref{cor:caterpillar_convex_rnni}) in $\rnni$, there are several algorithms of computing the distance between two caterpillar trees, as the problem of computing a shortest caterpillar path can be interpreted in a few different ways.
+Using the convexity of the set of caterpillar trees (\autoref{cor:caterpillar_convex_rnni}) in $\rnni$, there are several algorithms for computing the distance between two caterpillar trees, as the problem of computing a shortest caterpillar path can be interpreted in a few different ways.
 
 One problem analogous to the shortest path problem for caterpillar trees is the \emph{Token Swapping Problem} (TSP) \autocite{Kawahara2017-ey} on a special class of graphs, so-called lollipop graphs.
 The only moves possible between caterpillar trees in $\rnni$ are $\nni$ moves, which simply swap two leaves.
@@ -455,7 +456,7 @@ These moves can be translated to swapping two tokens in TSP.
 \textcite{Kawahara2017-ey} provide an algorithm for TSP on lollipop graphs, which can be used for computing distances between caterpillar trees in $\rnni$ as well.
 This algorithm however has worst-case time complexity $\O(n^2)$, the same as $\findpath$.
 
-In the following we present an algorithm with better worst-case time complexity, $\O(n \sqrt{\log n})$, for $\rnni$ (\autoref{cor:caterpillar_distance_rnni_nlogn}).
+In the following we present an algorithm for computing distances between caterpillar trees with better worst-case time complexity, $\O(n \sqrt{\log n})$, for $\rnni$ (\autoref{cor:caterpillar_distance_rnni_nlogn}).
 Therefore, we first establish a formula to express distances between two caterpillar trees in $\rnni$ (\autoref{thm:caterpillar_distance_formula}).
 
 \begin{theorem}
@@ -473,10 +474,10 @@ Therefore, we first establish a formula to express distances between two caterpi
 \end{theorem}
 
 We refer to pairs $(a_i,a_j) \in P_T$, as defined in \autoref{thm:caterpillar_distance_formula}, as transpositions.
-The reason for this is that the caterpillar trees can be seen as permutations of the set $\{a_1, \ldots, a_n\}$, ordered according to increasing rank of their parents.
+The reason for this is that caterpillar trees can be seen as permutations of the set $\{a_1, \ldots, a_n\}$, ordered according to increasing rank of their parents.
 The tree $R$ of the theorem then corresponds to the identity permutation $(a_1, a_2, a_3, \ldots, a_n)$.
 Note that there is no one-to-one correspondence between permutations and caterpillar trees.
-For example the permutation $(a_2, a_1, a_3, \ldots, a_n)$ corresponds to the tree $R$ as well, as the first two elements share a parent in the caterpillar tree.
+For example the permutation $(a_2, a_1, a_3, \ldots, a_n)$ corresponds to the tree $R$ as well, as the first two elements share a parent in the caterpillar tree and are hence incomparable.
 Therefore, the two pairs of leaves that sharing their parent in $T$ and $R$, respectively, are not in the set $P_T$.
 
 \begin{proof}
@@ -489,7 +490,7 @@ Therefore, the two pairs of leaves that sharing their parent in $T$ and $R$, res
 	That $\hat d$ and $d$ coincide follows by induction, as in \autocite[Theorem 1]{Collienne2020-iu}.
 
 	For proving Inequality~\ref{eq:distance_proof} we first establish $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$, assuming that $T'$ is a caterpillar tree that is $\rnni$ neighbour of $T$.
-	We then show that it cannot be $p_{T'} = p_T - 1$ and $m_{T'} = m_t + 1$, which proves Inequality~\ref{eq:distance_proof}.
+	We then show that it cannot be $p_{T'} = p_T - 1$ and $m_{T'} = m_T + 1$ at the same time, which proves Inequality~\ref{eq:distance_proof}.
 
 	At most one transposition of $T$ can be resolved in $T'$, because the only move possible between caterpillar trees $T$ and $T'$ is an $\nni$ move exchanging two leaves.
 	It hence is $p_{T'} \geq p_T - 1$.
@@ -542,8 +543,8 @@ Therefore, the two pairs of leaves that sharing their parent in $T$ and $R$, res
 \begin{proof}
 	By \autoref{thm:caterpillar_distance_formula} the distance between two caterpillar trees in $\rnni$ is the number of transpositions between two sequences of length $n$ minus $m_T$ as defined in \autoref{thm:caterpillar_distance_formula}.
 	The value $m_T$ can be computed in time linear in $n$ for any caterpillar tree $T$ by considering the leaves of the tree ordered according to increasing rank of their parents.
-	The number of transpositions of a sequence of length $n$ (Kendall-tau distance) can be computed in time $\O(n \sqrt{\sqrt{\log n}})$ \autocite{Chan2010-ls}.
-	This number is equivalent to $p_t$, as defined in \autoref{thm:caterpillar_distance_formula}, when ignoring transpositions for the pairs of leaves sharing a parent in $T$ and $R$, respectively.
+	The number of transpositions of a sequence of length $n$ (Kendall-tau distance) can be computed in time $\O(n \sqrt{\log n})$ \autocite{Chan2010-ls}.
+	This number is equivalent to $p_T$, as defined in \autoref{thm:caterpillar_distance_formula}, when ignoring transpositions for the pairs of leaves sharing a parent in $T$ and $R$, respectively.
 	The worst-case running time for computing the $\rnni$ distance between caterpillar trees is therefore $\O(n \sqrt{\log n})$.
 \end{proof}
 
@@ -576,7 +577,7 @@ Afterwards, we generalise this result to $\dtt_m$.
 
 \begin{proof}
 	In order to prove the diameter of $\dtt_m$, we consider the longest path that $\findpath$ can compute between any two trees $T$ and $R$, as in the proof of \autoref{thm:diameter_rnni}.
-	More specifically, we consider the maximum number of moves that $\findpath$ can performed on the extended ranked versions $T_r$ and $R_r$ of any two trees $T$ and $R$.
+	More specifically, we consider the maximum number of moves that $\findpath$ can perform on the extended ranked versions $T_r$ and $R_r$ of any two trees $T$ and $R$.
 	Therefore, we distinguish $\rnni$ moves in the subtrees on the leaf set $\{a_1, \ldots, a_n\}$ from the rank moves that correspond to length moves, i.e. rank moves between one node of each of the subtrees on leaf subsets $\{a_1, \ldots, a_n\}$ and $\{a_{n+1}, \ldots a_{m+2}\}$.
 
 	The maximum number of $\rnni$ moves (excluding rank moves that correspond to length moves) on $\fp(T_r,R_r)$ follows from \autoref{thm:diameter_rnni} and is $\frac{(n-1)(n-2)}{2}$.
@@ -596,13 +597,13 @@ Afterwards, we generalise this result to $\dtt_m$.
 	\end{figure}
 \end{proof}
 
-Note that the worst-case running time of $\findpath$ is $\O(n^2)$ in $\rnni$ and $\O(nm)$ and $\dtt_m$ and only depends on the diameter of the corresponding tree spaces.
+Note that the worst-case running time of $\findpath$ is $\O(n^2)$ in $\rnni$ and $\O(nm)$ and $\dtt_m$ and depends on the diameter of the corresponding tree spaces.
 For computing a shortest path, there is no algorithm with better worst-case running time than this, as the running time for algorithms computing shortest paths is bounded from below by the diameter of the corresponding space.
 There can however be more efficient algorithms for just computing distances.
 
 \summary{Radius of $\rnni$ is equal to its diameter.}
 The \emph{radius} of a graph is defined as he minimum distance of any vertex in the graph to the vertex with maximum distance from it.
-For $\dtt_m$ and $\rnni$, this is $\min\limits_{\text{tree } T}\max\limits_{\text{tree }R} d(T,R)$, where $d$ is a distance measure in the corresponding graph.
+For $\dtt_m$ and $\rnni$, this is $\min\limits_{\text{tree } T}\max\limits_{\text{tree }R} d(T,R)$, where $d$ is the distance measure in the corresponding graph.
 In the following we see that the radius of $\rnni$ equals its diameter, which is not true for $\dtt_m$, as we will see afterwards.
 
 \begin{theorem}
@@ -611,7 +612,7 @@ In the following we see that the radius of $\rnni$ equals its diameter, which is
 \end{theorem}
 
 \begin{proof}
-	We prove this lemma by showing that every tree $T$ in $\rnni$ has a caterpillar tree $R$ with distance $\frac{(n-1)(n-2)}{2}$ to $T$, using induction on the number of leaves $n$.
+	We prove this lemma by showing that every ranked tree $T$ in $\rnni$ has a caterpillar tree $R$ with distance $\frac{(n-1)(n-2)}{2}$ to $T$, using induction on the number of leaves $n$.
 
 	The base case $n=3$ is trivial, as all three trees in this space are caterpillar trees with distance one from each other.
 	For the induction step we consider an arbitrary tree $T$ with $n+1$ leaves.
@@ -665,10 +666,10 @@ The \emph{partition lattice} on $\{1, \ldots, n\}$ is the lattice given by the p
 For simplification we will denote the partition lattice on $n$ elements by $\Pi_n$.
 $\Pi_4$ is illustrated in Figure~\ref{fig:partition_lattice4}.
 We assume that a partition $X$ in the partition lattice $\Pi_n$ has rank $k$ if the number of elements in $X$ is $n-k$.
-The algebraic structure of $\Pi_n$ is related to the $\rnni$ graph on $n$-taxa trees in the following way.
+The algebraic structure of $\Pi_n$ is related to the $\rnni$ graph on trees on $n$ leaves in the following way.
 
 \begin{theorem}
-The $\rnni$ graph on $n$ taxa is isomorphic to the graph of maximal chains of the partition lattice $\Pi_n$ where two maximal chains are connected by an edge if and only if they differ by exactly one partition.
+The $\rnni$ graph on $n$ leaves is isomorphic to the graph of maximal chains of the partition lattice $\Pi_n$ where two maximal chains are connected by an edge if and only if they differ by exactly one partition.
 The corresponding metric spaces are isometric.
 \label{thm:partition_lattice}
 \end{theorem}
@@ -676,7 +677,7 @@ The corresponding metric spaces are isometric.
 \begin{proof}
 There is a one-to-one relation between ranked trees and maximum chains in a partition lattice.
 We can define a bijective mapping from the set of ranked trees to the set of maximum chains in $\Pi_n$ as follows.
-A tree $T$ maps onto a maximum chain $\mathcal{C}_T$ if the set in the partition of rank $i$ in $\mathcal{C}_T$ that is the union of two sets of the partition of rank $i-1$ in $\mathcal{C}_T$ is the cluster induced by the internal node of rank $i$ in $T$.
+A ranked tree $T$ maps onto a maximum chain $\mathcal{C}_T$ if the set in the partition of rank $i$ in $\mathcal{C}_T$ that is the union of two sets of the partition of rank $i-1$ in $\mathcal{C}_T$ is the cluster induced by the internal node of rank $i$ in $T$.
 
 Note that this bijection is an isomorphism between the $\rnni$ graph and the graph of chains as in the theorem.
 Indeed, two chains are different by exactly one partition if and only if the corresponding trees are connected by an $\rnni$ move.
@@ -706,7 +707,6 @@ We established the radius of $\rnni$ and found an example showing that this resu
 Finding the radius of $\dtt_m$ is therefore one of the natural next steps for further analyses of the geometry of $\dtt_m$.
 
 \summary{More efficient algorithm for computing distances (not shortest paths)}
-After establishing the worst-case time complexity of computing shortest paths in $\dtt_m$ and $\rnni$, it remains open to find the worst-case time complexity of computing distances.
 The worst-case time complexity of $\findpath$ for computing a shortest path is $\O(mn)$ in $\dtt_m$.
 And in \autoref{section:diameter} we have seen that there is no algorithm with better worst-case running time for computing shortest paths.
 It might however be possible to compute distances more efficiently.
@@ -724,8 +724,8 @@ This tree space is relevant for practical applications, where for example some k
 Investigating such a tree space could therefore be a next step for further studies.
 
 \summary{scaling-free tree space}
-The cluster property, discussed in \autoref{section:cluster_property}, is an important property of tree spaces due to its biological relevance.
-For some applications however, there is a further property that none of the commonly used tree spaces possesses.
+Another due to its biological relevance important property of tree spaces is the cluster property, discussed in \autoref{section:cluster_property}.
+For some applications a further property that none of the commonly used tree spaces possesses is desired.
 Sometimes studies aim to compare two trees on different data sets.
 The goal of such comparisons is to compare the branching process through time.
 Since the given trees arise from different data sets, a scaling-free tree space is desired.
