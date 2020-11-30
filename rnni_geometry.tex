@@ -175,13 +175,20 @@ We finish this paper with a section providing a connection between the $\rnni$ s
 \label{section:technical_introduction}
 
 \summary{Introducing discrete coalescent trees and ranked trees}
-A binary rooted phylogenetic tree is a binary tree on a fixed number $n$ of leaves, which are uniquely labelled by elements of the set $\{a_1, \ldots, a_n\}$.
+A \emph{binary rooted phylogenetic tree} is a binary tree on a fixed number $n$ of leaves, which are uniquely labelled by elements of the set $\{a_1, \ldots, a_n\}$.
 The main objective of study in this paper are \emph{discrete coalescent trees}, binary rooted phylogenetic trees with positive integer-valued \emph{times} assigned to nodes.
-More specifically, all leaves are assigned time $0$, and every internal node is assigned a unique time, such that it always has time greater than its children.
+More specifically, all $n$ leaves $a_1, \ldots, a_n$ are assigned time $0$, and every internal node is assigned a unique time less or equal to an integer $m$, such that it always has time greater than its children.
 We denote the time of an internal node $v$ by $\ntime(v)$.
 If not stated otherwise, we refer to discrete coalescent trees simply as \emph{trees}.
 We furthermore call two trees (not necessarily binary) \emph{identical} if there is a graph isomorphism between them preserving leaf labels and times.
-The number of discrete coalescent trees with root time less or equal to $m$ is $\frac{(n-1)!n!m^{n-1}}{2^{n-1}}$ \autocite{Gavryushkin2018-ol}.
+The number of discrete coalescent trees with root time at most $m$ is $\frac{(n-1)!n!m^{n-1}}{2^{n-1}}$ \autocite{Gavryushkin2018-ol}.
+
+\begin{figure}[ht]
+	\includegraphics[width=0.25\textwidth]{dtt_tree.eps}
+	\caption{Discrete coalescent tree with $n = 5$ leaves and root height $m = 6$.
+	The highlighted node with time three can be referred to as $(a_5)_T$, $(\{a_1,a_5\})_T$, or $(a_3)_T$.}
+	\label{fig:dtt_tree}
+\end{figure}
 
 As special case of discrete coalescent trees we consider \emph{ranked trees} with root time $n-1$.
 In these trees internal nodes are uniquely labelled by times in $\{1, \ldots, n-1\}$.
@@ -190,24 +197,33 @@ In the case of ranked trees we say \emph{rank} of a node $v$ to mean its time ($
 
 Every internal node $v$ of a tree $T$ can be referred to by the set $C$ of leaves that are descending from this node.
 We call such a set $C$ \emph{cluster} and say that the cluster $C$ is \emph{induced} by $v$.
-A list of clusters $[C_1, \ldots, C_{n-1}]$ uniquely defines a ranked tree, where cluster $C_i$ is induced by the internal node with rank $i$ for $i \in \{1, \ldots, n-1\}$.
+A list of clusters $[C_1, \ldots, C_{n-1}]$ uniquely defines a ranked tree \autocite{Collienne2020-iu}, where cluster $C_i$ is induced by the internal node with rank $i$ for $i \in \{1, \ldots, n-1\}$.
 For discrete coalescent trees however, times of nodes also need to be provided to uniquely identify a tree.
 For a subset $S \subseteq \{a_1, \ldots, a_n\}$ we call the internal node of a tree $T$ with lowest time among those ancestral to all elements of $S$ the \emph{most recent common ancestor} of $S$ and denote it by $(S)_T$.
 We furthermore denote the parent of a leaf $a_i$ in $T$ by $(a_i)_T$, and the cluster induced by the node with time $i$ in $T$ by $(T)_i$.
-An important type of trees that will be of importance throughout the whole paper are \emph{caterpillar trees}, which are trees where every internal nodes has at least one child that is a leaf.
+The node highlighted in \autoref{fig:dtt_tree} for example can be referred to as $(a_5)_T$, the parent of $a_5$, or $(\{a_1, a_5\})_T$, the most common ancestor of $\{a_1, a_5\}$, or $(T)_3$, the node with time three in $T$.
+A type of trees that will be of importance throughout the whole paper are \emph{caterpillar trees}, which are trees where every internal nodes has at least one child that is a leaf.
 
 \summary{Defining the tree space $\dtt_m$ and $\rnni = \dtt_{n-1}$}
 We are now ready to introduce the central object of study of this paper, the graph (or space) of discrete coalescent trees.
 This graph is called $\dtt_m$ for a fixed positive integer $m$.
 The vertex set of $\dtt_m$ is the set of trees with root time less or equal to $m$.
-Trees $T$ and $R$ are connected by an edge ($T$ and $R$ are \emph{neighbours}) in this graph if performing one of the following (reversible) operations on $T$ results in $R$:
+Note that a second parameter of $\dtt_m$ is the number of leaves $n$ of the trees in the graph, which we assume to be fixed throughout this paper.
+Trees $T$ and $R$ are connected by an edge ($T$ and $R$ are \emph{neighbours}) in this graph if performing one of the following (reversible) operations on $T$ results in $R$ (\autoref{fig:dtt}):
 \begin{enumerate}
 	\item An \emph{$\nni$ move} connects trees $T$ and $R$ if there is an edge $e$ in $T$ and an edge $f$ in $R$, both of length one, such that shrinking $e$ and $f$ to nodes results in identical trees.
 	\item A \emph{rank move} on $T$ exchanges the times of two internal nodes with time difference one.
 	\item A \emph{length move} on $T$ changes the time of an internal node by one.
 \end{enumerate}
 A length move can only change the time of a node to become $t$ if there is no node with time $t$ already.
-Note that our definition of $\dtt_m$ differs from the definition of \textcite{Gavryushkin2018-ol}, as length move are defined differently in their paper.
+Note that our definition of $\dtt_m$ differs from the definition of the space on discrete time-trees of \textcite{Gavryushkin2018-ol}.
+In contrast to their definition, length moves in $\dtt_m$ do not change the height of a tree, unless it is performed on the root, which makes our definition appropriate for coalescent trees.
+
+\begin{figure}[ht]
+	\includegraphics[width=0.85\textwidth]{dtt.eps}
+	\caption{The three possible moves on a discrete coalescent tree: length move changing the time of the highlighted node on the left, a rank move swapping the ranks of the highlighted nodes in the middle and an $\nni$ move on the dotted edge on the right.}
+	\label{fig:dtt}
+\end{figure}
 
 The definition of $\dtt_m$ leads to a natural definition of the \emph{distance} between two trees $T$ and $R$ in this graph as the length of a shortest paths between these trees, denoted by $d(T,R)$.
 We also consider the ranked nearest neighbour interchange ($\rnni$) graph of \textcite{Collienne2020-iu}, which is the graph $\dtt_m$ for $m=n-1$, and hence a graph of ranked trees.
