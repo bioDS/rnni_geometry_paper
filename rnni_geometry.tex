@@ -253,7 +253,7 @@ Moreover, we denote the subtree of $T_r$ that is identical to $T$ by $T_r^d$ ($d
 	\caption{RankedTree($T$, $m$)}
 	\label{alg:ranked_tree}
 	\begin{algorithmic}[1]
-		\STATE $S:= \{1 \leq i \leq m | \text{ no internal node in } T \text{ has time } i\}$
+		\STATE $S:= \{1 \leq i \leq m \ |\  \text{ no internal node in } T \text{ has time } i\}$
 		\STATE $[i_1, \ldots, i_{m-n+1}] = sort(S)$
 		\STATE $T_r^d =$ copy of $T$
 		\STATE $T_r^c =$ tree consisting of just one internal node $v_1$ with rank $i_1$ and children $a_{n+1}, a_{n+2}$
@@ -315,15 +315,15 @@ The benefit of this modified version of the algorithm, compared to using $\findp
 		\label{alg:fp_dtt}
 		\STATE $T_1 := T$, $p := [T_1]$
 		\FOR {$k = 1, \dots, m$}
-			\IF {$R$ has a node with rank $k$}
+			\IF {$R$ has a node with time $k$}
 			\STATE $C:=(R)_k$
 			\WHILE {$\ntime((C)_{T_1})>k$}
-					\STATE $T_2$ is $T_1$ with the rank of $(C)_{T_1}$ decreased by an $\rnni$ move
+					\STATE $T_2$ is $T_1$ with the time of $(C)_{T_1}$ decreased by an $\rnni$ move
 				\STATE $T_1 = T_2$
 				\STATE $p = p+T_1$
 			\ENDWHILE
-			\ELSIF {$T$ has a node with rank $k$}
-				\STATE $i := \min\{l | l>k \text{ and no node in } T_1 \text{ has time }l\}$
+			\ELSIF {$T$ has a node with time $k$}
+				\STATE $i := \min\{l \ |\  l>k \text{ and no node in } T_1 \text{ has time }l\}$
 				\FOR {$j = i-1, \dots, k$}
 					\label{line:length_move}
 					\STATE $T_2$ is $T_1$ where the time of $(T_1)_j$ is increased by one (length move)
@@ -343,20 +343,18 @@ The benefit of this modified version of the algorithm, compared to using $\findp
 \subsection{Cluster Property}
 \label{section:cluster_property}
 \summary{Definition of Cluster Property and why it is relevant (a bit of bio).}
-In this section we consider a property of tree spaces.
 A tree space has the \emph{cluster property}, if all trees on every shortest paths between two trees sharing a cluster $C$ also contain this cluster.
-This is a desirable biological property as trees sharing a cluster or subtree are expected to be closer to each other than to a tree not sharing a cluster with them.
-An example for the practical relevance of this property are summary trees.
+This is a desirable property in evolutionary biology applications as trees sharing a cluster or subtree are expected to be closer to each other than to a tree not sharing a cluster with them.
+This property is also desirable in centroid-based tree sample summary methods.
 For a given sample of trees containing a common subtree, it is expected that their summary tree also contains this subtree.
 It hence is desirable to have a tree space that has the cluster property.
 
 \summary{Cluster property in $\nni$ and its connection to the complexity result.}
-A further reason for investigating the cluster property in $\rnni$ is its importance in a similar tree space, the nearest neighbour interchange graph ($\nni$).
+A mathematical motivation for investigating the cluster property in $\rnni$ is its importance in a similar tree space, the nearest neighbour interchange graph ($\nni$).
 In the $\nni$ graph trees have no times and $\nni$ moves are allowed on every edge.
 Computing distances in $\nni$ is $\np$-hard \autocite{Dasgupta2000-xa}, and the proof relies on the fact that this tree space does not have the cluster property \autocite{Li1996-zw}.
-In the $\rnni$ graph, however, distances can be computed in polynomial time by $\findpath$ \autocite{Collienne2020-iu}, which preserves common clusters.
+In the $\rnni$ graph, however, distances can be computed in polynomial time using $\findpath$ \autocite{Collienne2020-iu}, which preserves common clusters.
 The question whether $\rnni$ has the cluster property is hence natural, and will be settled in \autoref{thm:cluster_property_rnni}.
-Note that even though it seems like distances can be computed in polynomial time in a tree space if it has the cluster property, this does not need to be true in general.
 
 \summary{$\rnni$ has the cluster property.}
 \begin{theorem}
@@ -390,7 +388,7 @@ Note that even though it seems like distances can be computed in polynomial time
 	There is hence no shortest path between $T$ and $R$ that does not preserve $C$, which proves the cluster property for $\rnni$.
 \end{proof}
 
-The fact that a slightly modified version of $\findpath$ computes shortest paths $\dtt_m$ already suggest that shortest path in $\rnni$ and $\dtt_m$ have similar properties.
+The fact that the slightly modified version of $\findpath$ computes shortest paths $\dtt_m$ already suggest that shortest path in $\rnni$ and $\dtt_m$ have similar properties.
 The cluster property in $\dtt_m$ follows from \autoref{thm:cluster_property_rnni}, indeed.
 
 \begin{corollary}
@@ -398,7 +396,7 @@ The cluster property in $\dtt_m$ follows from \autoref{thm:cluster_property_rnni
 \end{corollary}
 
 \begin{proof}
-	If there was a shortest path between two trees $T$ and $R$ in $\dtt_m$ that did not preserve a common cluster, this path can be seen as a path between $T_r$ and $R_r$, the extended ranked versions of $T$ and $R$ in $\rnni$, as already discussed in \autoref{thm:dtt_findpath}.
+	If there was a shortest path between two trees $T$ and $R$ in $\dtt_m$ that did not preserve a common cluster, this path corresponds to a path between $T_r$ and $R_r$, the extended ranked versions of $T$ and $R$ in $\rnni$, as already discussed in \autoref{thm:dtt_findpath}.
 	Since this path has the same length as the one between $T_r$ and $R_r$, it is a shortest path in $\rnni$ as well, which leads to a contradiction to \autoref{thm:cluster_property_rnni}.
 \end{proof}
 
@@ -409,9 +407,10 @@ The cluster property in $\dtt_m$ follows from \autoref{thm:cluster_property_rnni
 In this subsection we focus on the set of caterpillar trees and establish some properties of shortest paths between those trees in both $\rnni$ and $\dtt_m$.
 A path between two caterpillar trees only consisting of caterpillar trees is a \emph{caterpillar path}.
 In \autoref{thm:caterpillar_convex_dtt} and \autoref{cor:caterpillar_convex_rnni} we will see that, in both $\dtt_m$ and $\rnni$, any two caterpillar trees are connected by a shortest path that is a caterpillar path.
-We say that a set of trees is \emph{convex} in a tree space, if shortest paths between trees in this set stay within the set.
+We say that a set of trees is \emph{convex} in a tree space, if there is a shortest path between any two trees in this set that stays within the set.
 This is another property of $\rnni$ that the $\nni$ space of unranked trees does not have \autocite{Gavryushkin2018-ol}.
 Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a way to compute distances between caterpillar trees in this space in time $\O(n \sqrt{\log n})$ in \autoref{cor:caterpillar_distance_rnni_nlogn}, and hence with better worst-case time complexity than $\findpath$.
+Whether this complexity can be achieved in $\dtt_m$ is an open questions.
 
 \begin{theorem}
 	The set of caterpillar trees is convex in $\dtt_m$.
@@ -420,51 +419,48 @@ Based on the convexity of the set of caterpillar trees in $\rnni$ we introduce a
 
 \begin{proof}
 	Let $T$ and $R$ be two caterpillar trees in $\dtt_m$.
-	We prove the theorem by showing that there is a caterpillar tree $T'$ that is neighbour of $T$ and closer to $R$ than $T$.
+	We prove the theorem by showing that there is a caterpillar tree $T'$ that is a neighbour of $T$ and closer to $R$ than $T$.
 	The existence of a shortest path consisting only of caterpillar trees between $T$ and $R$ follows inductively.
 	Throughout this proof we consider the extended ranked versions $T_r$ and $R_r$ of $T$ and $R$.
 
-	Let $a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_{R_r} | \rank(a_i)_{R_r} \neq \rank(a_i)_{T_r}\}$ be the leaf with parent with maximum rank in $R_r$ among those that are not in the same position in $T_r$ and $R_r$.
+	Let $a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_{R_r} \ |\  \rank(a_i)_{R_r} \neq \rank(a_i)_{T_r}\}$ be the leaf with parent with maximum rank in $R_r$ among those that are not in the same position in $T_r$ and $R_r$.
 	Let furthermore $a_j \in \{a_1, \ldots, a_{m+2}\}$ be a leaf with $\rank(a_j)_{T_r} = \rank(a_k)_{T_r} + 1$.
 	We define $T'_r$ to be the caterpillar tree resulting from $T_r$ by an $\nni$ move or rank move exchanging the ranks of $(a_k)_{T_r}$ and $(a_j)_{T_r}$.
-	An $\nni$ move is necessary if these two nodes are connected by an edge, otherwise a rank move corresponding to a length move is performed on $T_r$ to receive $T'_r$ (\autoref{fig:caterpillar_convex}).
-	In both cases $T'_r$ is a caterpillar tree.
-	By using properties of shortest paths computed by $\findpath$, we now show that $|\fp(R_r,T'_r)| = |\fp(R_r,T_r)| - 1$.
+	An $\nni$ move is necessary if these two nodes are connected by an edge, otherwise a rank move corresponding to a length move is performed on $T_r$ to obtain $T'_r$ (\autoref{fig:caterpillar_convex}).
+	In both cases ${T'_r}^d$ is a caterpillar tree.
+	We will use properties of shortest paths computed by $\findpath$ to show that $|\fp(R_r,T'_r)| = |\fp(R_r,T_r)| - 1$.
 
 	\begin{figure}[ht]
 		\includegraphics[width=0.66\textwidth]{caterpillar_convex.eps}
 		\caption{The two possible versions of trees $T_r$ (left) and $T'_r$ (right) as described in the proof of \autoref{thm:caterpillar_convex_dtt}.
 		Between $T_r$ and $T'_r$ only the parents of $a_j$ and $a_k$ are exchanged.
 		At the bottom $(a_j)_T$ is parent of $(a_k)_T$, at the top these nodes are in the two different subtrees $T_r^d$ and $T_r^c$.
-		Dashed lines represent remaining part of trees, which are equal in $T_r$ and $T'_r$.}
+		Dashed lines represent remaining parts of trees, which are equal in $T_r$ and $T'_r$.}
 		\label{fig:caterpillar_convex}
 	\end{figure}
 
 	Since all clusters of $T_r$ and $T'_r$ induced by nodes of rank less than $\rank(a_k)_{T_r}$ coincide, the paths $\fp(R_r,T_r)$ and $\fp(R_r,T'_r)$ coincide up to a ranked tree $R'_r$, which contains all these clusters.
 	We now compare the lengths of $\fp(R'_r,T_r)$ and $\fp(R'_r,T'_r)$.
-	Therefore, we note at first that it is $\rank(a_j)_{R_r} < \rank(a_k)_{R_r}$ by the choice of $a_k$, and therefore also $\rank(a_j)_{R'_r} < \rank(a_k)_{R'_r}$.
+	We note at first that $\rank(a_j)_{R_r} < \rank(a_k)_{R_r}$ by the choice of $a_k$, and therefore also $\rank(a_j)_{R'_r} < \rank(a_k)_{R'_r}$.
 
 	By our assumptions on $T_r$, the clusters considered on $\fp(R_r,T_r)$ in the two iterations following $R'_r$ are first $S \cup \{a_k\}$ and then $S' \cup \{a_j\}$ for some clusters $S$ and $S'$ that are present in $T_r$, $T'_r$, and $R'_r$.
-	Let $l = \rank(S \cup \{a_k\})_{T_r}$ be the number of the iteration of $\fp(R_r, T_r)$ following $R'_r$.
+	Let $l = \rank(S \cup \{a_k\})_{T_r}$ be the iteration of $\fp(R_r, T_r)$ following $R'_r$.
 	Decreasing the rank of $(S \cup \{a_k\})_{R'_r}$ takes $\rank(S \cup \{a_k\})_{R'_r} - l$ $\rnni$ moves.
 	Because the rank of $(S \cup \{a_j\})_{R'_r}$ increases by one when the parents of $a_k$ and $a_j$ swap ranks in this iteration, the following iteration for $S' \cup \{a_j\}$ needs $\rank(S' \cup \{a_j\})_{R'_r} + 1 - (l+2)$ $\rnni$ moves.
 	On $\fp(R_r,T'_r)$ however, first $\rank(S' \cup \{a_j\})_{R'_r} - l$ $\rnni$ moves decrease the rank of $(S' \cup \{a_j\})_{R'}$, and then $\rank(S \cup \{a_k\})_{R'_r} - (l+1)$ are needed for $S \cup \{a_k\}$.
-	In total, for both iterations one more move is needed on $\fp(R_r, T'_r)$ compared to $\fp(R_r, T_r)$.
+	In total, these two iterations combined result in at least one extra move on $\fp(R_r, T'_r)$ comparing to $\fp(R_r, T_r)$.
 
 	The only difference in the trees after these two iterations on the two different paths is the order of ranks of the parents of $a_j$ and $a_k$.
 	Since the rest of $T_r$ and $T'_r$ coincide, the remaining parts of $\fp(R_r, T_r)$ and $\fp(R_r, T'_r)$ consist of the same moves.
 	With our previous observation we can conclude $d(R_r,T_r) = d(R_r,T'_r) + 1$, and hence $T'_r$ is on a shortest path from $T_r$ to $R_r$.
 \end{proof}
 
-The convexity of the set of caterpillar trees in $\rnni$ follows from the convexity of this set in $\dtt_m$ for $m = n-1$ (\autoref{thm:caterpillar_convex_dtt}).
+Note that it follows that the  set of caterpillar trees is convex in $\dtt_{n-1}$.
+This convexity property implies that the $\dtt_m$ distance between caterpillar trees can be computed more efficiently than by $\findpath$.
+We prove this in the rest of this section.
 
-\begin{corollary}
-	The set of caterpillar trees is convex in $\dtt_m$.
-	\label{cor:caterpillar_convex_rnni}
-\end{corollary}
-
-\summary{With \autoref{cor:caterpillar_convex_rnni} we can find a more efficient way to compute distances between caterpillar trees.}
-Using the convexity of the set of caterpillar trees (\autoref{cor:caterpillar_convex_rnni}) in $\rnni$, there are several algorithms for computing the distance between two caterpillar trees, as the problem of computing a shortest caterpillar path can be interpreted in a few different ways.
+\summary{With \autoref{thm:caterpillar_convex_dtt} we can find a more efficient way to compute distances between caterpillar trees.}
+Using the convexity of the set of caterpillar trees (\autoref{thm:caterpillar_convex_dtt}) in $\rnni$, there are several algorithms for computing the distance between two caterpillar trees, as the problem of computing a shortest caterpillar path can be interpreted in a few different ways.
 
 One problem analogous to the shortest path problem for caterpillar trees is the \emph{Token Swapping Problem} (TSP) \autocite{Kawahara2017-ey} on a special class of graphs, so-called lollipop graphs.
 The only moves possible between caterpillar trees in $\rnni$ are $\nni$ moves, which simply swap two leaves.
@@ -478,10 +474,10 @@ Therefore, we first establish a formula to express distances between two caterpi
 \begin{theorem}
 	Let $T$ and $R$ be caterpillar trees in $\rnni$ such that \[1 = \rank(a_1)_R = \rank(a_2)_R < \rank(a_3)_R < \ldots < \rank(a_n)_R = n-1\]
 	and
-	\[P_T := \{(a_i,a_j)| \rank(a_i)_T < \rank(a_j)_T \text{ and } \rank(a_i)_R > \rank(a_j)_R\},\]
+	\[P_T := \{(a_i,a_j)\ |\  \rank(a_i)_T < \rank(a_j)_T \text{ and } \rank(a_i)_R > \rank(a_j)_R\},\]
 	\begin{align*}
-		M_T := &\{a_i| (\forall l \textnormal{ with } \rank(a_l)_T \leq \rank(a_i)_T: \rank(a_l)_R > \rank(a_i)_r)\} \\
-		& \cap \{a_i | \rank(a_i)_T < \min\{\rank(a_1)_T, \rank(a_2)_T\}\}
+		M_T := &\{a_i\ |\  (\forall l \textnormal{ with } \rank(a_l)_T \leq \rank(a_i)_T: \rank(a_l)_R > \rank(a_i)_r)\} \\
+		& \cap \{a_i \ |\  \rank(a_i)_T < \min\{\rank(a_1)_T, \rank(a_2)_T\}\}
 	\end{align*}
 	Then it is
 	\[d(T,R) = p_T - m_T,\]
@@ -490,11 +486,11 @@ Therefore, we first establish a formula to express distances between two caterpi
 \end{theorem}
 
 We refer to pairs $(a_i,a_j) \in P_T$, as defined in \autoref{thm:caterpillar_distance_formula}, as transpositions.
-The reason for this is that caterpillar trees can be seen as permutations of the set $\{a_1, \ldots, a_n\}$, ordered according to increasing rank of their parents.
-The tree $R$ of the theorem then corresponds to the identity permutation $(a_1, a_2, a_3, \ldots, a_n)$.
+The reason for this is that caterpillar trees can be seen as permutations of the set $\{a_1, \ldots, a_n\}$, ordered by the ranks of their parents.
+The tree $R$ in the theorem then corresponds to the identity permutation $(a_1, a_2, a_3, \ldots, a_n)$.
 Note that there is no one-to-one correspondence between permutations and caterpillar trees.
-For example the permutation $(a_2, a_1, a_3, \ldots, a_n)$ corresponds to the tree $R$ as well, as the first two elements share a parent in the caterpillar tree and are hence incomparable.
-Therefore, the two pairs of leaves that sharing their parent in $T$ and $R$, respectively, are not in the set $P_T$.
+For example the permutation $(a_2, a_1, a_3, \ldots, a_n)$ corresponds to the tree $R$ as well.
+Therefore, the two pairs of leaves sharing their parent in $T$ and $R$, respectively, are not in the set $P_T$.
 
 \begin{proof}
 	Let $T$ and $R$ be caterpillar trees as described above and $\hat d(T,R) = p_T - m_T$.
@@ -503,16 +499,16 @@ Therefore, the two pairs of leaves that sharing their parent in $T$ and $R$, res
 		\hat d(T',R) \geq \hat d(T,R) - 1.
 		\label{eq:distance_proof}
 	\end{align}
-	That $\hat d$ and $d$ coincide follows by induction, as in \autocite[Theorem 1]{Collienne2020-iu}.
+	The fact that inequality (\ref{eq:distance_proof}) implies $\hat d(T,R) = d(T,R)$can be established by induction as in \autocite[Theorem 1]{Collienne2020-iu}.
 
-	For proving Inequality~\ref{eq:distance_proof} we first establish $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$, assuming that $T'$ is a caterpillar tree that is $\rnni$ neighbour of $T$.
-	We then show that it cannot be $p_{T'} = p_T - 1$ and $m_{T'} = m_T + 1$ at the same time, which proves Inequality~\ref{eq:distance_proof}.
+	For proving inequality (\ref{eq:distance_proof}) we first establish $p_{T'} \geq p_T - 1$ and then $m_{T'} \leq m_t + 1$, assuming that $T'$ is a caterpillar tree that is an $\rnni$ neighbour of $T$.
+	We then show that $p_{T'} = p_T - 1$ and $m_{T'} = m_T + 1$ cannot both be true simultaneously, which proves inequality (\ref{eq:distance_proof}).
 
-	At most one transposition of $T$ can be resolved in $T'$, because the only move possible between caterpillar trees $T$ and $T'$ is an $\nni$ move exchanging two leaves.
-	It hence is $p_{T'} \geq p_T - 1$.
+	At most one transposition of $T$ can be resolved in $T'$ because the only move possible between caterpillar trees $T$ and $T'$ is an $\nni$ move exchanging two leaves.
+	Hence $p_{T'} \geq p_T - 1$.
 	Let $a_k$ and $a_j$ be the leaves that exchange their position between $T$ and $T'$, such that $\rank(a_k)_T < \rank(a_j)_T$.
 	Since these are the only leaves that change positions between $T$ and $T'$, they are the only elements that could be in $M_{T'} \setminus M_T$.
-	It remains to show $(M_{T'} \setminus M_T) \neq \{a_k, a_j\}$, from which we can follow that $m_{T'} \leq m_T - 1$.
+	It remains to show $(M_{T'} \setminus M_T) \neq \{a_k, a_j\}$, from which we can conclude that $m_{T'} \leq m_T - 1$.
 	We prove this by showing that if $a_k \in (M_{T'} \setminus M_T)$, it follows $a_j \notin M_{T'}$.
 
 	We assume that $a_k \in (M_{T'} \setminus M_T)$, implying $a_k \notin M_T$, so at least one of the following conditions must be violated for $i = k$:
@@ -532,15 +528,15 @@ Therefore, the two pairs of leaves that sharing their parent in $T$ and $R$, res
 	It immediately follows that the same condition is violated for $a_k$ in $T'$, because the $\nni$ move exchanging $a_k$ and $a_j$ preserves the relationship of $a_k$ and $a_l$.
 	It hence is $a_k \notin M_{T'}$, contradicting our assumption $a_k \in (M_{T'} \setminus M_T)$.
 
-	We can therefore assume that (\ref{condition2}) is violated for $a_k$ to not be in $M_T$.
+	We can therefore assume that (\ref{condition2}) is violated for $a_k$.
 	It follows $\rank(a_k)_T \geq \min\{\rank(a_1)_T, \rank(a_2)_T\}$.
 	As only $a_k$ and $a_j$ exchange between $T$ and $T'$ and $a_k \in M_{T'}$, it follows $a_j \in \{a_1, a_2\}$.
 	This however results in a violation of (\ref{condition2}) for $a_j$ in $T'$ and hence $a_j \notin M_{T'}$.
 	We can conclude $(M_{T'} \setminus M_T) \neq \{a_k, a_j\}$, and hence $m_{T'} \leq m_T + 1$.
 
-	It remains to show that it cannot be $p_{T'} = p_T - 1$ and $m_{T'} = m_T + 1$ at the same time, in order to prove Inequality~\ref{eq:distance_proof}.
+	It remains to show that $p_{T'} = p_T - 1$ and $m_{T'} = m_T + 1$ cannot be true at the same time.
 	We assume $p_{T'} = p_T - 1$, hence $(a_k,a_j)$ is a transposition in $T$, meaning that $\rank(a_k)_T < \rank(a_j)_T$ and $\rank(a_k)_R > \rank(a_j)_R$.
-	As $a_k$ and $a_j$ are the only leaves that could be in $M_{T'} \setminus M_T$, it suffices to show that none of them actually are in $M_{T'} \setminus M_T$, resulting in $m_{T'} < m_T + 1$.
+	As $a_k$ and $a_j$ are the only leaves that could be in $M_{T'} \setminus M_T$, it suffices to show that none of them actually is in $M_{T'} \setminus M_T$, resulting in $m_{T'} < m_T + 1$.
 
 	That $a_k$ is not in $M_{T'}$ follows from the violation of (\ref{condition2}) by $\rank(a_j)_{T'} < \rank(a_k)_{T'}$ and $\rank(a_j)_R < \rank(a_k)_R$.
 	It hence is $a_k \notin M_{T'} \setminus M_T$.
@@ -548,7 +544,7 @@ Therefore, the two pairs of leaves that sharing their parent in $T$ and $R$, res
 	If $a_j \in M_{T'}$, both conditions (\ref{condition1}) and (\ref{condition2}) are met by $a_j$ in $T'$.
 	With $\rank(a_k)_T < \rank(a_j)_T$ and $\rank(a_k)_R > \rank(a_j)_R$ it immediately follows that these conditions are also met in $T$, and hence $a_j \in M_T$, and therefore $a_j \notin M_{T'} \setminus M_T$.
 
-	Concluding, it is $M_{T'} \setminus M_T = \emptyset$, and we can follow that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, which concludes this proof.
+	Summarising, it is $M_{T'} \setminus M_T = \emptyset$, and we can follow that if $p_{T'} = p_T - 1$, it is $m_{T'} < m_T + 1$, which concludes this proof.
 \end{proof}
 
 \begin{corollary}
@@ -560,7 +556,7 @@ Therefore, the two pairs of leaves that sharing their parent in $T$ and $R$, res
 	By \autoref{thm:caterpillar_distance_formula} the distance between two caterpillar trees in $\rnni$ is the number of transpositions between two sequences of length $n$ minus $m_T$ as defined in \autoref{thm:caterpillar_distance_formula}.
 	The value $m_T$ can be computed in time linear in $n$ for any caterpillar tree $T$ by considering the leaves of the tree ordered according to increasing rank of their parents.
 	The number of transpositions of a sequence of length $n$ (Kendall-tau distance) can be computed in time $\O(n \sqrt{\log n})$ \autocite{Chan2010-ls}.
-	This number is equivalent to $p_T$, as defined in \autoref{thm:caterpillar_distance_formula}, when ignoring transpositions for the pairs of leaves sharing a parent in $T$ and $R$, respectively.
+	This number is equal` to $p_T$, as defined in \autoref{thm:caterpillar_distance_formula}, when ignoring transpositions for the pairs of leaves sharing a parent in $T$ and $R$, respectively.
 	The worst-case running time for computing the $\rnni$ distance between caterpillar trees is therefore $\O(n \sqrt{\log n})$.
 \end{proof}
 
@@ -592,8 +588,8 @@ Afterwards, we generalise this result to $\dtt_m$.
 \end{theorem}
 
 \begin{proof}
-	In order to prove the diameter of $\dtt_m$, we consider the longest path that $\findpath$ can compute between any two trees $T$ and $R$, as in the proof of \autoref{thm:diameter_rnni}.
-	More specifically, we consider the maximum number of moves that $\findpath$ can perform on the extended ranked versions $T_r$ and $R_r$ of any two trees $T$ and $R$.
+	In order to prove the diameter of $\dtt_m$, we consider the longest path that $\findpath$ can compute between any two trees $T$ and $R$.
+	That is, we consider the maximum number of moves that $\findpath$ can perform on the extended ranked versions $T_r$ and $R_r$ of any two trees $T$ and $R$.
 	Therefore, we distinguish $\rnni$ moves in the subtrees on the leaf set $\{a_1, \ldots, a_n\}$ from the rank moves corresponding to length moves, i.e. rank moves between one node of each of the subtrees on leaf subsets $\{a_1, \ldots, a_n\}$ and $\{a_{n+1}, \ldots a_{m+2}\}$.
 
 	The maximum number of $\rnni$ moves (excluding rank moves corresponding to length moves) on $\fp(T_r,R_r)$ follows from \autoref{thm:diameter_rnni} and is $\frac{(n-1)(n-2)}{2}$.
@@ -601,25 +597,24 @@ Afterwards, we generalise this result to $\dtt_m$.
 	The maximum number of such rank swaps corresponding to length moves is hence $(m-n+1)(n-1)$.
 
 	The sum of the maximum number for $\rnni$ and length moves is therefore $\frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$.
-	That this upper bound is actually the diameter of $\dtt_m$ can be proven by the trees $T$ and $R$ in \autoref{fig:cat_max_dist_dtt} for which the path computed by $\findpath$ has length $\frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$.
-	Both $T$ and $R$ are caterpillar trees and defined by
+	To show that this upper bound is actually the diameter of $\dtt_m$ we give an example of trees $T$ and $R$ (\autoref{fig:cat_max_dist_dtt}) for which the path computed by $\findpath$ has length $\frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$.
+	Both $T$ and $R$ are caterpillar trees defined as follows.
 	\[m-n-1 = \rank(a_1)_T = \rank(a_2)_T < \rank(a_3)_T < \ldots < \rank(a_n)_T = m\]
 	and
 	\[1 = \rank(a_1)_R = \rank(a_n)_R < \rank(a_{n-1})_R < \ldots < \rank(a_1)_R = n-1.\]
 	\begin{figure}[ht]
 		\includegraphics[width=0.65\textwidth]{cat_max_dist_dtt.eps}
-		\caption{Trees $T$ and $R$ with distance $\frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$ as described in the proof of \autoref{thm:dtt_diameter}}
+		\caption{Trees $T$ and $R$ with distance $\frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$ as described in the proof of \autoref{thm:dtt_diameter}.}
 		\label{fig:cat_max_dist_dtt}
 	\end{figure}
 \end{proof}
 
 Note that the worst-case running time of $\findpath$ is $\O(n^2)$ in $\rnni$ and $\O(nm)$ and $\dtt_m$ and depends on the diameter of the corresponding tree spaces.
 For computing a shortest path, there is no algorithm with better worst-case running time than this, as the running time for algorithms computing shortest paths is bounded from below by the diameter of the corresponding space.
-There can however be more efficient algorithms for just computing distances.
+There can however be more efficient algorithms for computing distances.
 
 \summary{Radius of $\rnni$ is equal to its diameter.}
-The \emph{radius} of a graph is defined as he minimum distance of any vertex in the graph to the vertex with maximum distance from it.
-For $\dtt_m$ and $\rnni$, this is $\min\limits_{\text{tree } T}\max\limits_{\text{tree }R} d(T,R)$, where $d$ is the distance measure in the corresponding graph.
+The \emph{radius} of a graph is defined as he minimum distance of any vertex in the graph to the vertex with maximum distance from it, that is, $\min\limits_{T}\max\limits_{R} d(T,R)$, where $d$ is the distance measure in the corresponding graph.
 In the following we see that the radius of $\rnni$ equals its diameter, which is not true for $\dtt_m$, as we will see afterwards.
 
 \begin{theorem}
@@ -628,11 +623,11 @@ In the following we see that the radius of $\rnni$ equals its diameter, which is
 \end{theorem}
 
 \begin{proof}
-	We prove this lemma by showing that every ranked tree $T$ in $\rnni$ has a caterpillar tree $R$ with distance $\frac{(n-1)(n-2)}{2}$ to $T$, using induction on the number of leaves $n$.
+	We prove this theorem by showing that every ranked tree $T$ in $\rnni$ has a caterpillar tree $R$ with distance $\frac{(n-1)(n-2)}{2}$ to $T$, using induction on the number of leaves $n$.
 
 	The base case $n=3$ is trivial, as all three trees in this space are caterpillar trees with distance one from each other.
 	For the induction step we consider an arbitrary tree $T$ with $n+1$ leaves.
-	Let $x$ and $y$ be the leaves of $T$ that share the internal node of rank one as parent in $T$, and let $T_{n-1}$ be the tree on $n$ leaves resulting from deleting one of these leaves, say $x$, of $T$.
+	Let $x$ and $y$ be the leaves of $T$ that share the internal node of rank one as parent in $T$, and let $T_{n-1}$ be the tree on $n$ leaves resulting from deleting one of these leaves, say $x$, from $T$.
 	By the induction hypothesis there is a caterpillar tree $R_{n-1}$ with distance $\frac{(n-1)(n-2)}{2}$ to $T_{n-1}$.
 	Now consider the tree $R$ resulting from adding $x$ at the top of $R_{n-1}$ such that the root of $R$ has $x$ and $R_{n-1}$ as children.
 
@@ -646,8 +641,8 @@ In the following we see that the radius of $\rnni$ equals its diameter, which is
 	Therefore it is $d(T,R) = \frac{(n-1)(n-2)}{2} + n-1 = \frac{n(n-1)}{2}$, which proves the lemma.
 	\begin{figure}[ht]
 		\includegraphics[width=0.8\textwidth]{max_dist_ctree.eps}
-		\caption{Initial $n - 1$ $\rnni$ moves of $\fp(R,T)$ as described in the proof of Lemma~\ref{thm:radius_rnni}.
-		Removing the leaf $x$ and suppressing the non-root node of degree two from the tree on the right results in $R_{n-1}$ as described in the lemma.}
+		\caption{Initial $n - 1$ $\rnni$ moves of $\fp(R,T)$ as described in the proof of \autoref{thm:radius_rnni}.
+		Removing the leaf $x$ and suppressing the non-root node of degree two from the tree on the right results in $R_{n-1}$ as described in the theorem.}
 		\label{fig:max_dist_ctree}
 	\end{figure}
 \end{proof}
