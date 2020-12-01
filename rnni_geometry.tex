@@ -667,7 +667,7 @@ We generalised this algorithm and showed in \autoref{thm:dtt_findpath} that it s
 Afterwards, we established properties of $\dtt_m$ and $\rnni$ such as the cluster property (\autoref{section:cluster_property}), the convexity of the set of caterpillar trees (\autoref{section:caterpillar_convex}), diameter, and radius (\autoref{section:diameter}).
 
 With the convexity of the set of caterpillar trees in $\rnni$ we also found a more efficient way of computing distances between such trees, using the correspondence between caterpillar trees and permutations.
-In the following we discuss the connection of the $\rnni$ graph, not only the caterpillar subgraph, with a well-known algebraic structure, the partition lattice.
+In the following we discuss a connection of the $\rnni$ graph to a well-known algebraic structure, the partition lattice.
 Following that, we discuss further open problems providing new ideas for future research.
 
 \subsection{Partition Lattice}
@@ -684,6 +684,8 @@ The $\rnni$ graph on $n$ leaves is isomorphic to the graph of maximal chains of 
 The corresponding metric spaces are isometric.
 \label{thm:partition_lattice}
 \end{theorem}
+
+This theorem implies that the algorithms developed for trees, such as $\findpath$, can be used on lattices, and also complexity results from $\rnni$ can be transferred.
 
 \begin{proof}
 There is a one-to-one relation between ranked trees and maximum chains in a partition lattice.
@@ -713,7 +715,7 @@ Third, the partition $\{1, 2\} \{3, 4\}$ is replaced with $\{1\} \{2, 3, 4\}$ an
 \subsection{Further Open Problems}
 
 \summary{Radius $\dtt_m$}
-One question left open in this paper is the radius of $\dtt_m$.
+A question left open in this paper is the radius of $\dtt_m$.
 We established the radius of $\rnni$ and found an example showing that this result cannot be generalised to $\dtt_m$.
 Finding the radius of $\dtt_m$ is therefore one of the natural next steps for further analyses of the geometry of $\dtt_m$.
 
