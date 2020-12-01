@@ -120,12 +120,20 @@
 \summary{Why we want a time-tree space}
 \todo{This paragraph can be about molecular clock, then about a different parameterization necessary for inference software that deal with clock trees, and finally about tree proposals.
 So possible two or three paragraphs.}
-One of the main tasks in evolutionary biology is reconstructing evolutionary trees, also called phylogenetic trees, from various types of data, such as RNA or DNA sequences.
-In order to gain knowledge about the evolutionary history in time, evolutionary trees where nodes are equipped with times are of interest in many applications, including research on cancer and virus evolution.
-Most tree inference models for these problems, such as Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp, Tamura2011-ky} or Bayesian methods \autocite{Bouckaert2014-ir,Suchard2018-tw, Ronquist2003-eq}, rely on tree search algorithms.
-These algorithms base on tree graphs where vertices represent trees that are connected by an edge if a local change, a so-called tree-rearrangement operation, transforms one tree to another.
-Commonly used tree-rearrangement operations are nearest neighbour interchange, subtree prune and regraft, and tree bisection and reconnection.
-None of these operations, however, take times of internal nodes of trees into account, and computing distances in the tree graphs basing on these operations is $\np$-hard \autocite{Dasgupta2000-xa, Bordewich2005-nx, Allen2001-ky, Hickey2008-wv}.
+
+\summary{Molecular clock and divergence dating}
+Discovered in the 1960s \tocite and still used today in evolutionary biology is the molecular clock hypothesis.
+The idea of the molecular clock is that the evolutionary rate of a gene is more or less constant over time.
+In the more recent past a relaxed version of the molecular clock is more popular \tocite, which allows rates to vary across different lineages.
+Many applications, such as [..] \tocite, assume a molecular clock, as it can be used to infer dates of evolutionary events.
+In phylogenetic trees, which display evolutionary relationships, internal nodes can hence be equipped with times, when assuming a molecular clock.
+Software packages for reconstructing those trees from data such as RNA, DNA, or protein sequences rely on a parameterisation of trees where internal nodes are equipped with dates.
+
+\summary{Software needs to deal with clock trees, tree proposals}
+Popular tree inference methods are Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp, Tamura2011-ky} or Bayesian methods \autocite{Bouckaert2014-ir,Suchard2018-tw, Ronquist2003-eq}.
+These methods rely on tree search algorithms, where in every step a new tree is proposed and accepted if the proposed tree fulfils certain requirements.
+For tree proposals under the molecular clock assumptions a parameterisation of trees taking the times of internal nodes into account is needed.
+Furthermore, a similarity measure for these trees is required, to propose tree that are similar to the current tree.
 
 \summary{Why discrete coalescent trees}
 \todo{This paragraph can be a description of coalescent as a popular class of evolutionary generating models, the parameterization should follow naturally after coalescent models are described.
