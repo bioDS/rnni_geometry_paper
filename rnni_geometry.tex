@@ -117,6 +117,9 @@
 
 
 \section{Introduction}
+
+\todo{Using cancer evolution to demonstrate everything -- cancer trees are actual trees, not networks. The mainstream phylo community is missing this point, as everyone seems to be working on networks these days.}
+
 \summary{Why we want a time-tree space}
 \todo{This paragraph can be about molecular clock, then about a different parameterization necessary for inference software that deal with clock trees, and finally about tree proposals.
 So possible two or three paragraphs.}
@@ -146,6 +149,7 @@ In the resulting trees all internal nodes, which correspond to coalescence event
 A tree space parameterising trees such that internal nodes are assigned unique times is therefore desirable when using the coalescent as underlying model for reconstructing trees, for example by using MCMC \autocite{Bouckaert2014-ir,Suchard2018-tw}, or Maximum Likelihood methods \autocite{Kozlov2019-cf, Nguyen2015-sp}.
 
 \summary{Known tree spaces}
+\todo{why BHV is an inappropriate model of time trees -- a change in a recent event changes all older events, including the root date. Potentially, this can be extended and used as the main motivational framework for all results.}
 \todo{BHV does not have time, and cannot be easily fixed to include molecular clock -- have a look at our paper with Alexei.}
 Most commonly known tree spaces, like the BHV-space \autocite{Billera2001-rj} or discrete tree spaces basing on tree-rearrangement operations, however, do not take times of internal nodes into account.
 Examples of tree spaces where internal nodes of trees are equipped with times include the t-space and $\tau$-space \autocite{Gavryushkin2016-uu}, which parameterise trees in different ways.
