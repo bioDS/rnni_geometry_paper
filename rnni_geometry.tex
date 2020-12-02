@@ -316,6 +316,9 @@ Instead, we modify $\findpath$ for trees in $\dtt_m$ (\autoref{alg:fp_dtt}).
 Iterations of $\findpath$ that consider clusters in the added caterpillar trees are replaced by length moves increasing the time of internal nodes as described in the \textbf{for} loop in Line~\ref{line:length_move} of \autoref{alg:fp_dtt}.
 The benefit of this modified version of the algorithm, compared to using $\findpath$ on the extended ranked versions of the trees, is a reduced use of memory, which is especially of practical relevance for $m >> n$, which is typical in applications.
 
+Note that we do not need the parameter $m$ in practise, as the distance between any two trees in $\dtt_{m'}$ is the same as their distance in $\dtt_m$ for $m' < m$.
+Therefore, if the distance between two trees is to be computed, we can simply choose $m$ to be the maximum root height of the two trees and compute distance in $\dtt_m$.
+
 \begin{algorithm}[h]
 	\caption{$\findpath$($T,R$)}
 	\begin{algorithmic}[1]
