@@ -107,6 +107,7 @@
 
 	\todo[inline]{Again, too details and shortest paths come out of the blue.
 	Just say it was shown that the space has promising properties for statistical analyses in treespace.}
+	\tod[inline]{Mention t-space and that we can approximate it with $\dtt_m$}
 	It furthermore has recently been established that this space of ranked nearest neighbour interchange trees has shortest path that can be computed in polynomial time, unlike most other tree spaces.
 	In this paper, we go gone step further and do not only consider ranked trees, but trees where nodes are assigned discrete coalescence times.
 	We show that shortest paths in this space can be computed in polynomial time and establish some geometrical properties.
@@ -769,11 +770,11 @@ Investigating such a tree space could therefore be a next step for further studi
 
 \summary{t-space}
 Another tree space very similar to $\dtt_m$ is $t$-space \autocite{Gavryushkin2016-uu}, where internal nodes are assigned real-valued times.
-For this space on time-trees no algorithm for computing shortest paths or distances is known.
-Our results of $\dtt_m$ can however be transferred to this space, as discrete coalescent trees are a discretisation of time-trees.
+For this space on time-trees no algorithm for computing shortest paths or distances is known yet.
+Our results for $\dtt_m$, however, can be transferred to this space, as discrete coalescent trees are a discretisation of time-trees.
 Distances in $\dtt_m$ can therefore be used to approximate those in $t$-space.
-In practice, the parameter $m$ is not relevant, as distances between two trees in $\dtt_{m'}$ coincide with those in $\dtt_m$ if $m' < m$.
-How to discretise time-trees to be able to use our results on $\dtt_m$ is a potential question for further research.
+For this it is important to notice that the parameter $m$ is not relevant in applications, as distances between two trees in $\dtt_{m'}$ coincide with those in $\dtt_m$ if $m' < m$.
+As the choice of $m$, and therefore the choice on how to discretise time-trees, drives the complexity of computing shortest paths (\autoref{section:diameter}), finding a way to discretise time-trees to use our results on $\dtt_m$ can be subject of further research.
 
 \summary{scaling-free tree space}
 Another property important due to its biological relevance is the cluster property, discussed in \autoref{section:cluster_property}.
