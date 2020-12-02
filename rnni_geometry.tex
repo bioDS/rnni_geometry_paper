@@ -118,18 +118,13 @@
 
 \section{Introduction}
 
-\todo{Using cancer evolution to demonstrate everything -- cancer trees are actual trees, not networks. The mainstream phylo community is missing this point, as everyone seems to be working on networks these days.}
-
-\summary{Why we want a time-tree space}
-\todo{This paragraph can be about molecular clock, then about a different parameterization necessary for inference software that deal with clock trees, and finally about tree proposals.
-So possible two or three paragraphs.}
-
 \summary{Molecular clock and divergence dating}
-A common hypothesis used in various applications in evolutionary biology is the molecular clock assumption.
-The idea of the molecular clock is that the evolutionary rate of a gene is more or less constant over time.
-A relaxed version of the molecular clock has been developed \autocite{Thorne1998-ev, Rambaut1998-kq, Kumar2016-eu}, which allows rates to vary across different lineages.
-Common applications that use a molecular clock are cancer \autocite{Alves2019-eo, Naxerova2015-qg} or virus evolution \autocite{Korber2000-sp}.
-Under this assumption and with the knowledge of calibration times, dates of evolutionary events can be inferred, for example speciation events \autocite{Yoder2000-ks}.
+The molecular clock hypothesis is commonly used in various applications in evolutionary biology.
+Assuming a molecular clock means assuming the evolutionary rate of a gene to be more or less constant over time.
+After the first observation of this phenomenon by \textcite{zuckerkandl1965evolutionary}, the molecular clock became a popular assumption, and has in recent years been developed further to relax the assumption of a constant rate \autocite{Kumar2016-eu}.
+Relaxed versions of a molecular clock allow rates to vary across different lineages \autocite{LiLi2012-hf, Thorne1998-ev, Rambaut1998-kq}.
+Fields in which the molecular clock assumption is frequently used are cancer \autocite{Alves2019-eo, Naxerova2015-qg} or virus evolution \autocite{Korber2000-sp}.
+Under this assumption and with the knowledge of calibration times, dates of evolutionary events, for example speciation events \autocite{Yoder2000-ks}, can be inferred.
 
 \summary{Software needs to deal with clock trees, tree proposals}
 In phylogenetic trees, which display evolutionary relationships, internal nodes can hence be equipped with times, when assuming a molecular clock.
@@ -139,23 +134,23 @@ These methods base on tree search algorithms, where in every step a new tree is 
 For tree proposals under the molecular clock assumptions a parameterisation of trees taking the times of internal nodes into account is needed.
 Furthermore, a similarity measure for these trees is required, to propose tree that are similar to the current tree.
 
-\summary{Why discrete coalescent trees}
-\todo{This paragraph can be a description of coalescent as a popular class of evolutionary generating models, the parameterization should follow naturally after coalescent models are described.
-So tree space is the last thing to appear, not first.}
-A popular model assumed to generate evolutionary histories is the coalescent model \autocite{Kingman1982-df}.
-This model is for example popular for inferring relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}, or for analysing population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
-Under the coalescent model evolution is considered backwards in time, such that two lineages coalesce after a waiting time, which is to be estimated.
+\summary{Coalescent as a popular class of evolutionary generating models}
+Under the assumption of a molecular clock, the coalescent model is often used in tree inference.
+This model is used to generate evolutionary histories \autocite{Kingman1982-df} where divergence events are equipped with times.
+It for example popular for inferring relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}, or for analysing population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
+The coalescent model can also be used for inferring cancer phylogenies \autocite{Posada2020-aa, Ohtsuki2017-su}, where the timing of divergence events can be essential for finding the best treatment.
+Under the coalescent model evolution is considered backwards in time, two lineages coalesce after a waiting time, which is to be estimated.
 In the resulting trees all internal nodes, which correspond to coalescence events, are assigned unique times.
-A tree space parameterising trees such that internal nodes are assigned unique times is therefore desirable when using the coalescent as underlying model for reconstructing trees, for example by using MCMC \autocite{Bouckaert2014-ir,Suchard2018-tw}, or Maximum Likelihood methods \autocite{Kozlov2019-cf, Nguyen2015-sp}.
+A tree space parameterising trees such that internal nodes are assigned unique times is therefore necessary when using the coalescent as underlying model for reconstructing trees, for example by using MCMC \autocite{Bouckaert2014-ir,Suchard2018-tw}, or Maximum Likelihood methods \autocite{Kozlov2019-cf, Nguyen2015-sp}.
 
-\summary{Known tree spaces}
-\todo{why BHV is an inappropriate model of time trees -- a change in a recent event changes all older events, including the root date. Potentially, this can be extended and used as the main motivational framework for all results.}
-\todo{BHV does not have time, and cannot be easily fixed to include molecular clock -- have a look at our paper with Alexei.}
-Most commonly known tree spaces, like the BHV-space \autocite{Billera2001-rj} or discrete tree spaces basing on tree-rearrangement operations, however, do not take times of internal nodes into account.
+\summary{Known tree spaces -- BHV, $t$-space and $\tau$-space}
+Most of the commonly known tree spaces, like the BHV-space \autocite{Billera2001-rj} or discrete tree spaces basing on tree-rearrangement operations, do not take times of internal nodes into account.
+Even though the BHV-space allows branch lengths, it is not a suitable model for coalescent trees.
+This is because changing times of recent events changes the time of all preceding events as well.
 Examples of tree spaces where internal nodes of trees are equipped with times include the t-space and $\tau$-space \autocite{Gavryushkin2016-uu}, which parameterise trees in different ways.
-The problem of these spaces is however, that no algorithms for computing shortest paths are known (t-space), or shortest paths lack biological meaningfulness.
-More specifically, the $\tau$-space suffers from having trees connected by unique geodesics that pass the star tree \autocite{Gavryushkin2016-uu}.
-Summarising tree samples often results in star trees in these spaces, which do not contain any biological information.
+The problem of the $\tau$-space suffers from having trees connected by unique geodesics that pass the star tree \autocite{Gavryushkin2016-uu}.
+Summarising tree samples then often results in star trees, which do not contain any biological information.
+For the $t$-space no algorithms for computing distances or shortest paths between trees are known, which are needed for applications such as summarising trees or estimating convergence.
 
 \summary{Why we want to investigate geometrical properties of $\dtt_m$ and $\rnni$}
 \todo{No, they don't -- it's the first time geometry is mentioned, so we need to link the discussion above to geometry.
