@@ -139,13 +139,11 @@ Furthermore, a similarity measure for these trees is required, to propose tree t
 \summary{Why discrete coalescent trees}
 \todo{This paragraph can be a description of coalescent as a popular class of evolutionary generating models, the parameterization should follow naturally after coalescent models are described.
 So tree space is the last thing to appear, not first.}
-It is hence desirable to have a tree space on trees where internal nodes, representing evolutionary events, are timed, and distances between trees can be computed in polynomial time.
-This is in particular the case when trees are inferred using the coalescent model.
-The coalescent model is popular for reconstructing genealogical trees to infer relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}.
-It is also widely used in population genetics, especially for estimating population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
-Under the coalescent model, evolution is considered backwards in time.
-The evolutionary history is hence derived from the time of the given samples back to its most recent common ancestor, resulting in trees where internal node are assigned unique times.
-Commonly used reconstruction methods using MCMC \autocite{Bouckaert2014-ir,Suchard2018-tw} and Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp} implement the coalescent model to infer trees where nodes are assigned times, representing the times of the associated evolutionary events.
+A popular model assumed to generate evolutionary histories is the coalescent model \autocite{Kingman1982-df}.
+This model is for example popular for inferring relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}, or for analysing population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
+Under the coalescent model evolution is considered backwards in time, such that two lineages coalesce after a waiting time, which is to be estimated.
+In the resulting trees all internal nodes, which correspond to coalescence events, are assigned unique times.
+A tree space parameterising trees such that internal nodes are assigned unique times is therefore desirable when using the coalescent as underlying model for reconstructing trees, for example by using MCMC \autocite{Bouckaert2014-ir,Suchard2018-tw}, or Maximum Likelihood methods \autocite{Kozlov2019-cf, Nguyen2015-sp}.
 
 \summary{How recent results about $\rnni$ make this space interesting and that it is strongly connected to $\dtt_m$}
 Therefore, tree spaces where internal nodes are assigned times are needed under the coalescent model.
