@@ -473,14 +473,36 @@ We prove this in the rest of this section.
 \summary{With \autoref{thm:caterpillar_convex_dtt} we can find a more efficient way to compute distances between caterpillar trees.}
 Using the convexity of the set of caterpillar trees (\autoref{thm:caterpillar_convex_dtt}) in $\rnni$, there are several algorithms for computing the distance between two caterpillar trees, as the problem of computing a shortest caterpillar path can be interpreted in a few different ways.
 
-One problem analogous to the shortest path problem for caterpillar trees is the \emph{Token Swapping Problem} (TSP) \autocite{Kawahara2017-ey} on a special class of graphs, so-called lollipop graphs.
-The only moves possible between caterpillar trees in $\rnni$ are $\nni$ moves, which simply swap two leaves.
-These moves can be translated to swapping two tokens in TSP.
-\textcite{Kawahara2017-ey} provide an algorithm for TSP on lollipop graphs, which can be used for computing distances between caterpillar trees in $\rnni$ as well.
-This algorithm however has worst-case time complexity $\O(n^2)$, the same as $\findpath$.
+One problem analogous to the shortest path problem for caterpillar trees in $\rnni$ is the \emph{Token Swapping Problem} (TSP) \autocite{Kawahara2017-ey} on a special class of graphs, so-called lollipop graphs.
+An instance of TSP is a simple graph where every vertex is assigned a token.
+Two tokens are allowed to swap positions if they are on vertices that are connected by an edge.
+Each token is assigned a unique goal vertex, and the aim is to find the minimum number of token swaps for all tokens to reach their goal vertex.
+
+The problems of computing distances between caterpillar trees can be seen as an instance of TSP on lollipop graphs where the complete graph contains three vertices, as described in the following.
+An example is illustrated in \autoref{fig:tsp_caterpillar}
+Let $T$ and $R$ be caterpillar trees with
+\[\rank(a_1)_R = \rank(a_2)_R < \rank(a_3)_R < \ldots < \rank(a_n)_R \text{ and}\]
+\[\rank(b_1)_T = \rank(b_2)_T < \rank(b_3)_T < \ldots < \rank(b_n)_T\]
+such that $\{b_1, \ldots, b_n\} = \{a_1, \ldots, a_n\}$.
+The corresponding instance of TSP consists of a lollipop graph consisting of a complete graph on three leaves, connected to a path of length $n-3$ by an edge.
+The vertex in the complete graph incident to the edge connecting complete graph and path is labelled by $a_3$, the other ones in the complete graph by $a_1$ and $a_2$.
+The vertex on the paths are then labelled inductively, starting at the neighbour of $a_3$, such that the new label is $a_i$ if the neighbour is labelled $a_{i-1}$.
+The token on vertex $a_i$ has $b_i$ as goal vertex.
+Since the only moves between two caterpillar trees in $\rnni$ are $\nni$ moves, which simply swap two leaves, they correspond to swapping two tokens in the above described instance of TSP.
+
+\begin{figure}[ht]
+	\includegraphics[width=0.45\textwidth]{tsp_caterpillar.eps}
+	\caption{Two caterpillar trees $T$ and $R$ and the corresponding instance of TSP.
+	The vertex labelled are inside circles and the token goal vertices in rectangles.}
+	\label{fig:tsp_caterpillar}
+\end{figure}
+
+Therefore, the algorithm described by \textcite{Kawahara2017-ey} to solve the TSP on lollipop graphs can be used for computing distances between caterpillar trees.
+It however has worst-case time complexity $\O(n^2)$, the same as $\findpath$.
 
 In the following we present an algorithm for computing distances between caterpillar trees with better worst-case time complexity, $\O(n \sqrt{\log n})$, for $\rnni$ (\autoref{cor:caterpillar_distance_rnni_nlogn}).
 Therefore, we first establish a formula to express distances between two caterpillar trees in $\rnni$ (\autoref{thm:caterpillar_distance_formula}).
+Note that this algorithm can also be used to solve TSP on lollipop graphs, improving the worst-case running time of the known algorithm \autocite{Kawahara2017-ey}.
 
 \begin{theorem}
 	Let $T$ and $R$ be caterpillar trees in $\rnni$ such that \[1 = \rank(a_1)_R = \rank(a_2)_R < \rank(a_3)_R < \ldots < \rank(a_n)_R = n-1\]
