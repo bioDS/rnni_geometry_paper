@@ -145,12 +145,12 @@ Under the coalescent model evolution is considered backwards in time, such that 
 In the resulting trees all internal nodes, which correspond to coalescence events, are assigned unique times.
 A tree space parameterising trees such that internal nodes are assigned unique times is therefore desirable when using the coalescent as underlying model for reconstructing trees, for example by using MCMC \autocite{Bouckaert2014-ir,Suchard2018-tw}, or Maximum Likelihood methods \autocite{Kozlov2019-cf, Nguyen2015-sp}.
 
-\summary{How recent results about $\rnni$ make this space interesting and that it is strongly connected to $\dtt_m$}
-Therefore, tree spaces where internal nodes are assigned times are needed under the coalescent model.
+\summary{Known tree spaces}
 \todo{BHV does not have time, and cannot be easily fixed to include molecular clock -- have a look at our paper with Alexei.}
-Examples of such tree spaces include the BHV-space \autocite{Billera2001-rj}, t-space, and $\tau$-space \autocite{Gavryushkin2016-uu}, which parameterise trees in different ways.
-The problem of these spaces is however, that there are no algorithms for computing shortest paths are known (t-space), or shortest paths lack biological meaningfulness.
-More specifically, BHV space and the $\tau$-space suffer from having trees connected by unique geodesics that pass the star tree \autocite{Gavryushkin2016-uu}.
+Most commonly known tree spaces, like the BHV-space \autocite{Billera2001-rj} or discrete tree spaces basing on tree-rearrangement operations, however, do not take times of internal nodes into account.
+Examples of tree spaces where internal nodes of trees are equipped with times include the t-space and $\tau$-space \autocite{Gavryushkin2016-uu}, which parameterise trees in different ways.
+The problem of these spaces is however, that no algorithms for computing shortest paths are known (t-space), or shortest paths lack biological meaningfulness.
+More specifically, the $\tau$-space suffers from having trees connected by unique geodesics that pass the star tree \autocite{Gavryushkin2016-uu}.
 Summarising tree samples often results in star trees in these spaces, which do not contain any biological information.
 
 \summary{Why we want to investigate geometrical properties of $\dtt_m$ and $\rnni$}
