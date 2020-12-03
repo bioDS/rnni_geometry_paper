@@ -154,22 +154,17 @@ Summarising tree samples then often results in star trees, which do not contain 
 For the $t$-space no algorithms for computing distances or shortest paths between trees are known, which are needed for applications such as summarising trees or estimating convergence.
 
 \summary{Why we want to investigate geometrical properties of $\dtt_m$ and $\rnni$}
-\todo{No, they don't -- it's the first time geometry is mentioned, so we need to link the discussion above to geometry.
-Papers that employ geometric information in various algorithms and methods need to be cited here.
-You sort of do it later on but I think a claim should follow an argument, unlike in maths :)}
-In order to analyse samples of trees and finding a tree summarising the sample, it is important to understand the geometry of the underlying tree space \autocite{Benner2014-mx}.
-Investigating those is essential for tree search algorithms, especially for developing these algorithms and evaluating inferred trees.
-Methods estimating whether a chain converged in the bayesian tree inference approach, for example, rely on measuring distances between trees \autocite{Nylander2008-wa, Warren2017-df}.
-Summarising a sample of trees, for example a posterior sample, also requires a tree space with efficiently computable distances, as well as shortest paths that preserve information shared between trees, in order to receive a biological meaningful summary tree.
-Currently used methods for summarising trees do not rely on such tree spaces, as computing distances is $\np$-hard in most of them.
-Instead, these methods use for example the Robinson-Foulds distance \autocite{Robinson1981-fb, Bansal2010-vr} to compute summary trees.
-This distance can be computed efficiently, but lacks biological interpretability.
-Alternatively, maximum clade credibility trees \autocite{Heled2013-sv} or consensus trees \autocite{Margush1981-ba} are used to summarise tree samples.
-To compute biological meaningful summary trees where internal nodes are assigned times, it is therefore desirable to find a tree space where distances can be computed efficiently and shortest paths are biologically meaningful.
+In applications the goal is often to infer a single tree that fits the given data best.
+This however can be problematic, as most data contain a lot of noise, which might result in a highly uncertain tree.
+In order to statistically analyse reconstructed trees, for example to evaluate the certainty of the timing of the root, knowledge about the geometry of the tree space is essential.
+\textcite{Billera2001-rj} for example introduced the BHV-space and established geometric properties as a basis for such analyses for trees with branch lengths.
+The BHV-space is however not suitable for coalescent trees, as two trees can be very close in this space even though the timing of most internal nodes differs.
+Geometrical properties of tree spaces have also been used for analysing behaviour of rogue taxa in a tree \autocite{Cueto2011-bh}, or computing summary trees \autocite{Miller2015-rk}.
 
 \summary{Structure of the paper.}
 In this paper we consider the space $\dtt_m$ of discrete coalescent trees, where internal nodes are assigned distinct discrete times.
-This space can be seen as a generalisation of the ranked nearest neighbour interchange ($\rnni$) space, which has been introduced by \textcite{Collienne2020-iu}.
+These tree space can be interpreted a discrete version of the $t$-space.
+It also can be seen as a generalisation of the ranked nearest neighbour interchange ($\rnni$) space, which has been introduced by \textcite{Collienne2020-iu}.
 We show in this paper that the space $\dtt_m$ has the desired properties mentioned above, including efficiently computable shortest paths that preserve biological information shared between trees.
 After introducing notations used throughout this paper (\autoref{section:technical_introduction}), we discuss how the algorithm $\findpath$ \autocite{Collienne2020-iu} can be generalise from $\rnni$ to be applied to discrete coalescent trees, computing shortest paths in polynomial time (\autoref{section:fp_dtt}).
 We then analyse some geometrical properties of both tree spaces $\dtt_m$ and $\rnni$ (\autoref{section:geometry}).
