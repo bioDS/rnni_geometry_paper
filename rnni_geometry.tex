@@ -762,17 +762,17 @@ This tree space is relevant for practical applications, where for example some k
 Investigating such a tree space could therefore be a next step for further studies.
 
 \summary{t-space}
-Another tree space very similar to $\dtt_m$ is $t$-space \autocite{Gavryushkin2016-uu}, where internal nodes are assigned real-valued times.
+Another tree space, of which $\dtt_m$ is a discretisation, is the $t$-space \autocite{Gavryushkin2016-uu}, where internal nodes are assigned real-valued times.
 For this space on time-trees no algorithm for computing shortest paths or distances is known yet.
-Our results for $\dtt_m$, however, can be transferred to this space, as discrete coalescent trees are a discretisation of time-trees.
+Our results for $\dtt_m$, however, can be transferred to this space, as discrete coalescent trees can be interpreted as discrete time-trees.
 Distances in $\dtt_m$ can therefore be used to approximate those in $t$-space.
 For this it is important to notice that the parameter $m$ is not relevant in applications, as distances between two trees in $\dtt_{m'}$ coincide with those in $\dtt_m$ if $m' < m$.
-As the choice of $m$, and therefore the choice on how to discretise time-trees, drives the complexity of computing shortest paths (\autoref{section:diameter}), finding a way to discretise time-trees to use our results on $\dtt_m$ can be subject of further research.
+Since choice of $m$, and therefore the choice on how to discretise time-trees, drives the complexity of computing shortest paths (\autoref{section:diameter}), finding a way to discretise time-trees to use our results on $\dtt_m$ can be subject of further research.
 
 \summary{scaling-free tree space}
-The tree space $\dtt_m$ discussed in this paper is also a promising starting point for establishing a scaling-free tree space, where the distance between trees is the same if all branch lengths are multiplied with the same factor.
+The tree space $\dtt_m$ discussed in this paper is also a promising starting point for establishing a scaling-free tree space, where distances between trees stay the same if all branch lengths are multiplied by the same factor.
 Such a tree space is necessary for studies aiming to compare trees on different data sets.
-The goal is to compare the branching process through time, without taking leaf labels into account.
+The goal of such analyses is to compare branching processes through time, without taking leaf labels into account.
 This can for example be the case when comparing the evolutionary history of different viruses.
 As the tree spaces $\rnni$ and $\dtt_m$ have shortest paths computable in polynomial time, they might be a good starting point for finding a scaling-free tree space where distances can be computed efficiently.
 
