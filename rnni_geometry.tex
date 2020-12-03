@@ -94,24 +94,15 @@
 \begin{document}
 
 \begin{abstract}
-	Most methods for inferring phylogenetic trees base on tree search algorithm.
-	Those algorithm require a tree space, which is often defined as a graph where trees are vertices and connected by an edge if one can be received from another by local changes to the tree, so-called tree-rearrangement operations.
-	\todo[inline]{You need to talk about molecular clock here.}
-	Often the goal is to reconstruct a tree where internal nodes, and hence speciation or divergence events, are equipped with times.
-	This is especially the case in coalescence models, where the order of divergence events is of importance.
-	Most classical tree-rearrangement operations like nearest neighbour interchange, subtree prune and regraft, or tree bisection and reconnection do not take the times of internal nodes into account.
-	\todo[inline]{You don't need to go in such detail in the firs para of Intro.
-	All these tree operations are technical things that can be mentioned towards the end of Intro.
-	Here you can just say that treespaces exist for clock trees and we're considering one in this paper.}
-	The ranked nearest neighbour interchange operations however, a generalisation of nearest neighbour interchange, considers ranked trees and thereby preserves the order of divergence events.
+	A popular assumption in phylogenetic tree inference if the molecular clock hypothesis.
+	Using a molecular clock model, times of divergence events in the evolutionary tree can be inferred.
+	A class of models using this assumption are coalescent models, which are used in a variety of tree inference tools.
+	In order to analyse resulting tools, especially uncertainties, some statistical measures are required.
+	Therefore, a tree space for coalescent trees is necessary, as well as knowledge about its geometry.
 
-	\todo[inline]{Again, too details and shortest paths come out of the blue.
-	Just say it was shown that the space has promising properties for statistical analyses in treespace.}
-	\todo[inline]{Mention t-space and that we can approximate it with $\dtt_m$}
-	It furthermore has recently been established that this space of ranked nearest neighbour interchange trees has shortest path that can be computed in polynomial time, unlike most other tree spaces.
-	In this paper, we go gone step further and do not only consider ranked trees, but trees where nodes are assigned discrete coalescence times.
-	We show that shortest paths in this space can be computed in polynomial time and establish some geometrical properties.
-	Since the tree space considered in this paper can be seen as a generalisation of the space of ranked nearest neighbour interchange trees, most of our results apply to both tree spaces.
+	We present a discrete parameterisation of coalescent trees and establish geometrical properties of the corresponding tree space.
+	This tree space is closely related to the ranked nearest neighbour interchange space, a tree space with properties promising for statistical analyses.
+	Our tree space can be seen as discretisation of the $t$-space of time trees, and results can hence be transferred for a fine enough resolution.
 \end{abstract}
 
 \maketitle
