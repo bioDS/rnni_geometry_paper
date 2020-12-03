@@ -431,24 +431,24 @@ Whether this complexity can be achieved in $\dtt_m$ is an open questions.
 	\begin{figure}[ht]
 		\includegraphics[width=1\textwidth]{caterpillar_convex.eps}
 		\caption{The two possible versions of trees $T_r$ (left), $T'_r$ (middle), and $R'_r$ as described in the proof of \autoref{thm:caterpillar_convex_dtt}.
-		The clusters $S$ and $S'$ can be found in all three trees.
 		Between $T_r$ and $T'_r$ only the parents of $a_j$ and $a_k$ are exchanged, the rest of the trees coincide.
 		At the bottom the case that $(a_j)_T$ is parent of $(a_k)_T$ and $S' = S \cup \{a_k\}$ is displayed.
-		At the top $(a_j)_T$ and $(a_k)_T$ are in the two different subtrees $T_r^d$ and $T_r^c$ (the same in $T'_r$ and $R'_r$), which is also true for the disjoint sets $S$ and $S'$.
+		S' is a cluster in all three trees at the bottom.
+		At the top $(a_j)_T$ and $(a_k)_T$ are in the two different subtrees $T_r^d$ and $T_r^c$ (the same in $T'_r$ and $R'_r$), which is also true for the disjoint sets $S$ and $S'$, which are present as clusters in all three trees.
 		Dotted lines represent remaining parts of trees, which are equal in $T_r$ and $T'_r$, but different to $R'_r$.
-		Note that the rank difference of $(a_k)_{R'_r}$ and $(a_k)_{R'_r}$ does not need to be one, as it is in $T_r$ and $T'_r$.
+		Note that the rank difference of $(a_k)_{R'_r}$ and $(a_j)_{R'_r}$ does not need to be one, which it is in $T_r$ and $T'_r$.
 		\label{fig:caterpillar_convex}}
 	\end{figure}
 
 	Since all clusters of $T_r$ and $T'_r$ induced by nodes of rank less than $\rank(a_k)_{T_r}$ coincide, the paths $\fp(R_r,T_r)$ and $\fp(R_r,T'_r)$ coincide up to a ranked tree $R'_r$, which contains all these clusters.
 	We now compare the lengths of $\fp(R'_r,T_r)$ and $\fp(R'_r,T'_r)$.
 	We note at first that $\rank(a_j)_{R_r} < \rank(a_k)_{R_r}$.
-	If it otherwise was $\rank(a_k)_{R_r} \leq \rank(a_j)_{R_r}$, it follows $\rank(a_k)_{R_r} \leq \rank(a_j)_{R_r}$, by the definition of $a_k$, and therefore  $\rank(a_k)_{R_r} \leq \rank(a_j)_{R_r} = \rank(a_j)_{T_r} = \rank(a_k)_{T_r} + 1$.
+	If it otherwise was $\rank(a_k)_{R_r} \leq \rank(a_j)_{R_r}$, it follows $\rank(a_j)_{R_r} = \rank(a_j)_{T_r}$, by the definition of $a_k$, and therefore  $\rank(a_k)_{R_r} \leq \rank(a_j)_{R_r} = \rank(a_j)_{T_r} = \rank(a_k)_{T_r} + 1$.
 	$\rank(a_k)_{R_r} \leq \rank(a_k)_{T_r} + 1$ however contradicts the definition of $a_k$, hence $\rank(a_j)_{R_r} < \rank(a_k)_{R_r}$.
-	With this it also follows $\rank(a_j)_{R'_r} < \rank(a_k)_{R'_r}$.
+	It follows $\rank(a_j)_{R'_r} < \rank(a_k)_{R'_r}$, as $a_j$ and $a_k$ are not in any of the clusters considered by $\findpath$ before $R'_r$, which means that their parents do not exchange ranks before $R'_r$.
 
-	By our assumptions on $T_r$, the clusters considered on $\fp(R_r,T_r)$ in the iteration $l$ following $R'_r$ is $S \cup \{a_k\}$, where $S$ is a cluster that is present in all three trees $T_r, T'_r,$ and $R_r$.
-	In the following iteration $l+1$, $S' \cup \{a_j\}$ is considered for a cluster $S'$, where $S$ either equals $S \cup \{a_k\}$, if $T_r$ and $T'_r$ are connected by an $\nni$ moves, or is a cluster present in ${T_r}^c$, ${T'_r}^c$, and ${R'_r}^c$, if $T_r$ and $T'_r$ are connected by a rank move (\autoref{fig:caterpillar_convex}).
+	By our assumptions on $T_r$, the clusters considered on $\fp(R_r,T_r)$ in iteration $l = \rank(a_k)_{T_r}$, which is the iteration following $R'_r$, is $S \cup \{a_k\}$, where $S$ is a cluster that is present in all three trees $T_r, T'_r,$ and $R_r$.
+	In the following iteration $l+1 = \rank(a_j)_{T_r}$, $S' \cup \{a_j\}$ is considered for a cluster $S'$, where $S$ either equals $S \cup \{a_k\}$, if $T_r$ and $T'_r$ are connected by an $\nni$ moves (bottom of \autoref{fig:caterpillar_convex}), or is a cluster present in ${T_r}^c$, ${T'_r}^c$, and ${R'_r}^c$, if $T_r$ and $T'_r$ are connected by a rank move (top of \autoref{fig:caterpillar_convex}).
 	Decreasing the rank of $(S \cup \{a_k\})_{R'_r}$ takes $\rank(S \cup \{a_k\})_{R'_r} - l$ $\rnni$ moves.
 	Because the rank of $(S \cup \{a_j\})_{R'_r}$ increases by one when the parents of $a_k$ and $a_j$ swap ranks in this iteration, the following iteration for $S' \cup \{a_j\}$ needs $\rank(S' \cup \{a_j\})_{R'_r} + 1 - (l+1)$ $\rnni$ moves.
 	On $\fp(R_r,T'_r)$ however, first $\rank(S' \cup \{a_j\})_{R'_r} - l$ $\rnni$ moves decrease the rank of $(S' \cup \{a_j\})_{R'}$, and then $\rank(S \cup \{a_k\})_{R'_r} - (l+1)$ are needed for $S \cup \{a_k\}$.
