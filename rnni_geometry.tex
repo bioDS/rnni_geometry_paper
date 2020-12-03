@@ -778,12 +778,11 @@ For this it is important to notice that the parameter $m$ is not relevant in app
 As the choice of $m$, and therefore the choice on how to discretise time-trees, drives the complexity of computing shortest paths (\autoref{section:diameter}), finding a way to discretise time-trees to use our results on $\dtt_m$ can be subject of further research.
 
 \summary{scaling-free tree space}
-Another property important due to its biological relevance is the cluster property, discussed in \autoref{section:cluster_property}.
-For some applications a further property that none of the commonly used tree spaces possesses is desired.
-Sometimes studies aim to compare two trees on different data sets.
-The goal of such comparisons is to compare the branching process through time.
-Since the given trees arise from different data sets, a scaling-free tree space is desired.
-The tree space $\rnni$ and $\dtt_m$ have shortest paths computable in polynomial time, and therefore might be a good starting point for finding a scaling-free tree space where distances can be computed efficiently.
+The tree space $\dtt_m$ discussed in this paper is also a promising starting point for establishing a scaling-free tree space, where the distance between trees is the same if all branch lengths are multiplied with the same factor.
+Such a tree space is necessary for studies aiming to compare trees on different data sets.
+The goal is to compare the branching process through time, without taking leaf labels into account.
+This can for example be the case when comparing the evolutionary history of different viruses.
+As the tree spaces $\rnni$ and $\dtt_m$ have shortest paths computable in polynomial time, they might be a good starting point for finding a scaling-free tree space where distances can be computed efficiently.
 
 \printbibliography
 \end{document}
