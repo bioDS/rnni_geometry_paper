@@ -107,7 +107,7 @@
 
 	\todo[inline]{Again, too details and shortest paths come out of the blue.
 	Just say it was shown that the space has promising properties for statistical analyses in treespace.}
-	\tod[inline]{Mention t-space and that we can approximate it with $\dtt_m$}
+	\todo[inline]{Mention t-space and that we can approximate it with $\dtt_m$}
 	It furthermore has recently been established that this space of ranked nearest neighbour interchange trees has shortest path that can be computed in polynomial time, unlike most other tree spaces.
 	In this paper, we go gone step further and do not only consider ranked trees, but trees where nodes are assigned discrete coalescence times.
 	We show that shortest paths in this space can be computed in polynomial time and establish some geometrical properties.
@@ -123,7 +123,7 @@
 The molecular clock hypothesis is commonly used in various applications in evolutionary biology.
 Assuming a molecular clock means assuming the evolutionary rate of a gene to be more or less constant over time.
 After the first observation of this phenomenon by \textcite{zuckerkandl1965evolutionary}, the molecular clock became a popular assumption, and has in recent years been developed further to relax the assumption of a constant rate \autocite{Kumar2016-eu}.
-Relaxed versions of a molecular clock allow rates to vary across different lineages \autocite{LiLi2012-hf, Thorne1998-ev, Rambaut1998-kq}.
+Relaxed versions of a molecular clock allow rates to vary across different lineages \autocite{Li2012-hf, Thorne1998-ev, Rambaut1998-kq}.
 Fields in which the molecular clock assumption is frequently used are cancer \autocite{Alves2019-eo, Naxerova2015-qg} or virus evolution \autocite{Korber2000-sp}.
 Under this assumption and with the knowledge of calibration times, dates of evolutionary events, for example speciation events \autocite{Yoder2000-ks}, can be inferred.
 
@@ -442,20 +442,26 @@ Whether this complexity can be achieved in $\dtt_m$ is an open questions.
 	We will use properties of shortest paths computed by $\findpath$ to show that $|\fp(R_r,T'_r)| = |\fp(R_r,T_r)| - 1$.
 
 	\begin{figure}[ht]
-		\includegraphics[width=0.66\textwidth]{caterpillar_convex.eps}
-		\caption{The two possible versions of trees $T_r$ (left) and $T'_r$ (right) as described in the proof of \autoref{thm:caterpillar_convex_dtt}.
-		Between $T_r$ and $T'_r$ only the parents of $a_j$ and $a_k$ are exchanged.
-		At the bottom $(a_j)_T$ is parent of $(a_k)_T$, at the top these nodes are in the two different subtrees $T_r^d$ and $T_r^c$.
-		Dashed lines represent remaining parts of trees, which are equal in $T_r$ and $T'_r$.}
-		\label{fig:caterpillar_convex}
+		\includegraphics[width=1\textwidth]{caterpillar_convex.eps}
+		\caption{The two possible versions of trees $T_r$ (left), $T'_r$ (middle), and $R'_r$ as described in the proof of \autoref{thm:caterpillar_convex_dtt}.
+		The clusters $S$ and $S'$ can be found in all three trees.
+		Between $T_r$ and $T'_r$ only the parents of $a_j$ and $a_k$ are exchanged, the rest of the trees coincide.
+		At the bottom the case that $(a_j)_T$ is parent of $(a_k)_T$ and $S' = S \cup \{a_k\}$ is displayed.
+		At the top $(a_j)_T$ and $(a_k)_T$ are in the two different subtrees $T_r^d$ and $T_r^c$ (the same in $T'_r$ and $R'_r$), which is also true for the disjoint sets $S$ and $S'$.
+		Dotted lines represent remaining parts of trees, which are equal in $T_r$ and $T'_r$, but different to $R'_r$.
+		Note that the rank difference of $(a_k)_{R'_r}$ and $(a_k)_{R'_r}$ does not need to be one, as it is in $T_r$ and $T'_r$.
+		\label{fig:caterpillar_convex}}
 	\end{figure}
 
 	Since all clusters of $T_r$ and $T'_r$ induced by nodes of rank less than $\rank(a_k)_{T_r}$ coincide, the paths $\fp(R_r,T_r)$ and $\fp(R_r,T'_r)$ coincide up to a ranked tree $R'_r$, which contains all these clusters.
 	We now compare the lengths of $\fp(R'_r,T_r)$ and $\fp(R'_r,T'_r)$.
-	We note at first that $\rank(a_j)_{R_r} < \rank(a_k)_{R_r}$ by the choice of $a_k$, and therefore also $\rank(a_j)_{R'_r} < \rank(a_k)_{R'_r}$.
+	We note at first that $\rank(a_j)_{R_r} < \rank(a_k)_{R_r}$.
+	If it otherwise was $\rank(a_k)_{R_r} \leq \rank(a_j)_{R_r}$, it follows $\rank(a_k)_{R_r} \leq \rank(a_j)_{R_r}$, by the definition of $a_k$, and therefore  $\rank(a_k)_{R_r} \leq \rank(a_j)_{R_r} = \rank(a_j)_{T_r} = \rank(a_k)_{T_r} + 1$.
+	$\rank(a_k)_{R_r} \leq \rank(a_k)_{T_r} + 1$ however contradicts the definition of $a_k$, hence $\rank(a_j)_{R_r} < \rank(a_k)_{R_r}$.
+	With this it also follows $\rank(a_j)_{R'_r} < \rank(a_k)_{R'_r}$.
 
 	By our assumptions on $T_r$, the clusters considered on $\fp(R_r,T_r)$ in the iteration $l$ following $R'_r$ is $S \cup \{a_k\}$, where $S$ is a cluster that is present in all three trees $T_r, T'_r,$ and $R_r$.
-	In the following iteration $l+1$, $S' \cup \{a_j\}$ is considered for a cluster $S'$, where $S$ either equals $S \cup \{a_k\}$, if $T_r$ and $T'_r$ are connected by an $\nni$ moves, or is a cluster present in ${T_r}^c$, ${T'_r}^c$, and ${R'_r}^c$, if $T_r$ and $T'_r$ are connected by a rank move.
+	In the following iteration $l+1$, $S' \cup \{a_j\}$ is considered for a cluster $S'$, where $S$ either equals $S \cup \{a_k\}$, if $T_r$ and $T'_r$ are connected by an $\nni$ moves, or is a cluster present in ${T_r}^c$, ${T'_r}^c$, and ${R'_r}^c$, if $T_r$ and $T'_r$ are connected by a rank move (\autoref{fig:caterpillar_convex}).
 	Decreasing the rank of $(S \cup \{a_k\})_{R'_r}$ takes $\rank(S \cup \{a_k\})_{R'_r} - l$ $\rnni$ moves.
 	Because the rank of $(S \cup \{a_j\})_{R'_r}$ increases by one when the parents of $a_k$ and $a_j$ swap ranks in this iteration, the following iteration for $S' \cup \{a_j\}$ needs $\rank(S' \cup \{a_j\})_{R'_r} + 1 - (l+1)$ $\rnni$ moves.
 	On $\fp(R_r,T'_r)$ however, first $\rank(S' \cup \{a_j\})_{R'_r} - l$ $\rnni$ moves decrease the rank of $(S' \cup \{a_j\})_{R'}$, and then $\rank(S \cup \{a_k\})_{R'_r} - (l+1)$ are needed for $S \cup \{a_k\}$.
