@@ -112,52 +112,52 @@
 \section{Introduction}
 
 \summary{Molecular clock and divergence dating}
-The molecular clock hypothesis is commonly used in various applications in evolutionary biology.
+A commonly used hypothesis in various applications in evolutionary biology is the molecular clock.
 Assuming a molecular clock means assuming the evolutionary rate of a gene to be more or less constant over time.
 After the first observation of this phenomenon by \textcite{zuckerkandl1965evolutionary}, the molecular clock became a popular assumption, and has in recent years been developed further to relax the assumption of a constant rate \autocite{Kumar2016-eu}.
 Relaxed versions of a molecular clock allow rates to vary across different lineages \autocite{Li2012-hf, Thorne1998-ev, Rambaut1998-kq}.
 Fields in which the molecular clock assumption is frequently used are cancer \autocite{Alves2019-eo, Naxerova2015-qg} or virus evolution \autocite{Korber2000-sp}.
-Under this assumption and with the knowledge of calibration times, dates of evolutionary events, for example speciation events \autocite{Yoder2000-ks}, can be inferred.
+The advantage of this assumption is that is makes it possible to time evolutionary events, if some knowledge of calibration times exists, for example to date speciation events \autocite{Yoder2000-ks}.
 
 \summary{Software needs to deal with clock trees, tree proposals}
 In phylogenetic trees, which display evolutionary relationships, internal nodes can hence be equipped with times, when assuming a molecular clock.
-Software packages for reconstructing those trees from data such as RNA, DNA, or protein sequences rely on a parameterisation of trees where internal nodes are equipped with dates.
-Popular tree inference methods used for this purpose are Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp, Tamura2011-ky} or Bayesian methods \autocite{Bouckaert2014-ir,Suchard2018-tw, Ronquist2003-eq}.
-These methods base on tree search algorithms, where in every step a new tree is proposed and accepted if the proposed tree fulfils certain requirements.
+Software packages for reconstructing those trees from data such as RNA, DNA, or protein sequences rely on a parameterisation of trees where internal nodes are equipped with times.
+Popular tree inference software used for this purpose are based on Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp, Tamura2011-ky} or Bayesian methods \autocite{Bouckaert2014-ir,Suchard2018-tw, Ronquist2003-eq}.
+They rely on tree search algorithms, where in every step a new tree is proposed and accepted if the proposed tree fulfils certain requirements.
 For tree proposals under the molecular clock assumptions a parameterisation of trees taking the times of internal nodes into account is needed.
-Furthermore, a similarity measure for these trees is required, to propose tree that are similar to the current tree.
+Furthermore, a similarity measure for these trees is required, to propose trees that are similar to the current tree.
 
 \summary{Coalescent as a popular class of evolutionary generating models}
-Under the assumption of a molecular clock, the coalescent model is often used in tree inference.
+Under the assumption of a molecular clock, the coalescent model is a popular choice when reconstructing trees.
 This model is used to generate evolutionary histories \autocite{Kingman1982-df} where divergence events are equipped with times.
 It for example popular for inferring relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}, or for analysing population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
 The coalescent model can also be used for inferring cancer phylogenies \autocite{Posada2020-aa, Ohtsuki2017-su}, where the timing of divergence events can be essential for finding the best treatment.
 Under the coalescent model evolution is considered backwards in time, two lineages coalesce after a waiting time, which is to be estimated.
 In the resulting trees all internal nodes, which correspond to coalescence events, are assigned unique times.
-A tree space parameterising trees such that internal nodes are assigned unique times is therefore necessary when using the coalescent as underlying model for reconstructing trees, for example by using MCMC \autocite{Bouckaert2014-ir,Suchard2018-tw}, or Maximum Likelihood methods \autocite{Kozlov2019-cf, Nguyen2015-sp}.
+A tree space parameterising trees such that internal nodes are assigned unique times is hence necessary when using the coalescent as underlying model for reconstructing trees, for example by using MCMC \autocite{Bouckaert2014-ir,Suchard2018-tw} or Maximum Likelihood methods \autocite{Kozlov2019-cf, Nguyen2015-sp}.
 
 \summary{Known tree spaces -- BHV, $t$-space and $\tau$-space}
-Most of the commonly known tree spaces, like the BHV-space \autocite{Billera2001-rj} or discrete tree spaces basing on tree-rearrangement operations, do not take times of internal nodes into account.
-Even though the BHV-space allows branch lengths, it is not a suitable model for coalescent trees.
-This is because changing times of recent events changes the time of all preceding events as well.
-Examples of tree spaces where internal nodes of trees are equipped with times include the t-space and $\tau$-space \autocite{Gavryushkin2016-uu}, which parameterise trees in different ways.
-The problem of the $\tau$-space suffers from having trees connected by unique geodesics that pass the star tree \autocite{Gavryushkin2016-uu}.
+There are a few tree spaces that take branch lengths of trees into account, including the BHV-space \autocite{Billera2001-rj}.
+This space allows branch lengths, but is not a suitable model for coalescent trees, because changing the times of an evolutionary event in the tree changes the time of all preceding events as well.
+Examples of more suitable tree spaces where internal nodes of trees are equipped with times are $t$-space and $\tau$-space \autocite{Gavryushkin2016-uu}, which parameterise trees in different ways.
+The problem of the $\tau$-space is that trees often are connected by unique geodesics that pass the star tree \autocite{Gavryushkin2016-uu}.
 Summarising tree samples then often results in star trees, which do not contain any biological information.
 For the $t$-space no algorithms for computing distances or shortest paths between trees are known, which are needed for applications such as summarising trees or estimating convergence.
 
 \summary{Why we want to investigate geometrical properties of $\dtt_m$ and $\rnni$}
 In applications the goal is often to infer a single tree that fits the given data best.
-This however can be problematic, as most data contain a lot of noise, which might result in a highly uncertain tree.
-In order to statistically analyse reconstructed trees, for example to evaluate the certainty of the timing of the root, knowledge about the geometry of the tree space is essential.
+This however can be problematic, as data often contain a lot of noise, and different reconstruction methods return different results, for example described for bulk sequencing data of cancer cells by \autocite{Miura2020-im}.
+Therefore, it is important to provide a measure of accuracy of a computed tree, or its parameters, e.g. dates on the tree.
+For such statistically analyses of reconstructed trees, knowledge about the geometry of the tree space is essential.
 \textcite{Billera2001-rj} for example introduced the BHV-space and established geometric properties as a basis for such analyses for trees with branch lengths.
 The BHV-space is however not suitable for coalescent trees, as two trees can be very close in this space even though the timing of most internal nodes differs.
-Geometrical properties of tree spaces have also been used for analysing behaviour of rogue taxa in a tree \autocite{Cueto2011-bh}, or computing summary trees \autocite{Miller2015-rk}.
+Geometrical properties of tree spaces have also been used for analysing behaviour of rogue taxa in a tree \autocite{Cueto2011-bh}, or computing summary trees \autocite{Miller2015-rk}, pointing out the importance of studying the geometry of tree spaces.
 
 \summary{Structure of the paper.}
-In this paper we consider the space $\dtt_m$ of discrete coalescent trees, where internal nodes are assigned distinct discrete times.
-These tree space can be interpreted a discrete version of the $t$-space.
+In this paper we consider the space $\dtt_m$ of discrete coalescent trees, where internal nodes are assigned unique discrete times.
+This tree space can be interpreted a discrete version of the $t$-space.
 It also can be seen as a generalisation of the ranked nearest neighbour interchange ($\rnni$) space, which has been introduced by \textcite{Collienne2020-iu}.
-We show in this paper that the space $\dtt_m$ has the desired properties mentioned above, including efficiently computable shortest paths that preserve biological information shared between trees.
+We show in this paper that the space $\dtt_m$ as well as $\rnni$ has the desired properties mentioned above, including efficiently computable shortest paths that preserve biological information shared between trees.
 After introducing notations used throughout this paper (\autoref{section:technical_introduction}), we discuss how the algorithm $\findpath$ \autocite{Collienne2020-iu} can be generalise from $\rnni$ to be applied to discrete coalescent trees, computing shortest paths in polynomial time (\autoref{section:fp_dtt}).
 We then analyse some geometrical properties of both tree spaces $\dtt_m$ and $\rnni$ (\autoref{section:geometry}).
 We do so by first discuss the cluster property in \autoref{section:cluster_property} and then considering a subset of trees (caterpillar trees) for which we are able to compute $\rnni$ distances even more efficiently than with $\findpath$ (\autoref{section:caterpillar_convex}).
