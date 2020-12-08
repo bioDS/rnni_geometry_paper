@@ -94,7 +94,7 @@
 \begin{document}
 
 \begin{abstract}
-Computational inference of dated evolutionary histories relies upon various hypotheses about DNA and protein sequence mutations rates.
+Computational inference of dated evolutionary histories relies upon various hypotheses about RNA, DNA, and protein sequence mutations rates.
 These phylogenetic techniques are collectively termed a molecular clock.
 Coalescent theory is a popular class of evolutionary models that implements the molecular clock hypothesis to facilitate computational inference of dated phylogenies.
 Cancer and virus evolution are two areas where these methods are particularly important.
@@ -115,10 +115,10 @@ Our trees space is also a generalisation of another known trees space, called th
 
 \summary{Molecular clock and divergence dating}
 A commonly used hypothesis in various applications in evolutionary biology is the molecular clock.
-Assuming a molecular clock means assuming the evolutionary rate of a gene to be more or less constant over time.
-After the first observation of this phenomenon by \textcite{zuckerkandl1965evolutionary}, the molecular clock became a popular assumption, and has in recent years been developed further to relax the assumption of a constant rate \autocite{Kumar2016-eu}.
+For example, a strict molecular clock is the assumption that the mutation rate of a gene is approximately constant over time.
+After this phenomenon was first observed by \textcite{zuckerkandl1965evolutionary}, the molecular clock became a popular hypothesis, and various relaxations had been developed \autocite{Kumar2016-eu}.
 Relaxed versions of a molecular clock allow rates to vary across different lineages \autocite{Li2012-hf, Thorne1998-ev, Rambaut1998-kq}.
-Fields in which the molecular clock assumption is frequently used are cancer \autocite{Alves2019-eo, Naxerova2015-qg} or virus evolution \autocite{Korber2000-sp}.
+Fields in which the (relaxed) molecular clock assumption is frequently used are cancer \autocite{Alves2019-eo, Naxerova2015-qg} or virus evolution \autocite{Korber2000-sp}.
 The advantage of this assumption is that is makes it possible to time evolutionary events, if some knowledge of calibration times exists, for example to date speciation events \autocite{Yoder2000-ks}.
 
 \summary{Software needs to deal with clock trees, tree proposals}
@@ -126,43 +126,37 @@ In phylogenetic trees, which display evolutionary relationships, internal nodes 
 Software packages for reconstructing those trees from data such as RNA, DNA, or protein sequences rely on a parameterisation of trees where internal nodes are equipped with times.
 Popular tree inference software used for this purpose are based on Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp, Tamura2011-ky} or Bayesian methods \autocite{Bouckaert2014-ir,Suchard2018-tw, Ronquist2003-eq}.
 They rely on tree search algorithms, where in every step a new tree is proposed and accepted if the proposed tree fulfils certain requirements.
-For tree proposals under the molecular clock assumptions a parameterisation of trees taking the times of internal nodes into account is needed.
-Furthermore, a similarity measure for these trees is required, to propose trees that are similar to the current tree.
+For tree proposals under the molecular clock assumption a parameterisation of trees taking the times of internal nodes into account is required.
+Furthermore, a similarity measure for these trees is necessary, to propose trees that are measurably similar to the running tree.
 
 \summary{Coalescent as a popular class of evolutionary generating models}
-Under the assumption of a molecular clock, the coalescent model is a popular choice when reconstructing trees.
-This model is used to generate evolutionary histories \autocite{Kingman1982-df} where divergence events are equipped with times.
-It for example popular for inferring relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}, or for analysing population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
-The coalescent model can also be used for inferring cancer phylogenies \autocite{Posada2020-aa, Ohtsuki2017-su}, where the timing of divergence events can be essential for finding the best treatment.
-Under the coalescent model evolution is considered backwards in time, two lineages coalesce after a waiting time, which is to be estimated.
+Coalescent theory is a popular framework to reconstruct and analyse timed evolutionary (species) trees \autocite{Kingman1982-df} using the molecular clock assumption on gene trees.
+For example, coalescent is widely employed for inferring relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}, or for analysing population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
+A recent striking application of coalescent theory is cancer phylogenetics \autocite{Posada2020-aa, Ohtsuki2017-su}, where accurate estimates of divergence times are essential for targeted treatment strategies.
+Under a coalescent model evolution is considered backwards in time, and two lineages coalesce after a waiting time, which is to be estimated.
 In the resulting trees all internal nodes, which correspond to coalescence events, are assigned unique times.
-A tree space parameterising trees such that internal nodes are assigned unique times is hence necessary when using the coalescent as underlying model for reconstructing trees, for example by using MCMC \autocite{Bouckaert2014-ir,Suchard2018-tw} or Maximum Likelihood methods \autocite{Kozlov2019-cf, Nguyen2015-sp}.
 
 \summary{Known tree spaces -- BHV, $t$-space and $\tau$-space}
-There are a few tree spaces that take branch lengths of trees into account, including the BHV-space \autocite{Billera2001-rj}.
-This space allows branch lengths, but is not a suitable model for coalescent trees, because changing the times of an evolutionary event in the tree changes the time of all preceding events as well.
-Examples of more suitable tree spaces where internal nodes of trees are equipped with times are $t$-space and $\tau$-space \autocite{Gavryushkin2016-uu}, which parameterise trees in different ways.
-The problem of the $\tau$-space is that trees often are connected by unique geodesics that pass the star tree \autocite{Gavryushkin2016-uu}.
-Summarising tree samples then often results in star trees, which do not contain any biological information.
-For the $t$-space no algorithms for computing distances or shortest paths between trees are known, which are needed for applications such as summarising trees or estimating convergence.
+Tree spaces that take branch lengths of trees into account exist in the literature.
+For example, the BHV-space \autocite{Billera2001-rj} models trees as points in a cubical complex.
+However, this parameterisation is not suitable for coalescent trees because changing the times of an evolutionary event in the tree implies that all preceding events change their times as well.
+Hence two trees can be close to each other in this space even though the timing of many internal nodes is different in the two trees.
+Examples of more suitable tree spaces where internal nodes of trees are equipped with times are $t$-space and $\tau$-space \autocite{Gavryushkin2016-uu}.
+It has been observed, however, that in the $\tau$-space, similarly to the BHV-space, shortest paths between trees often contain the star tree \autocite{Gavryushkin2016-uu}, a property that can be problematic in applications.
+Although the $t$-space is free from these properties, no algorithm for computing distances or shortest paths between trees in this space is known yet, so applications are limited.
 
 \summary{Why we want to investigate geometrical properties of $\dtt_m$ and $\rnni$}
-In applications the goal is often to infer a single tree that fits the given data best.
-This however can be problematic, as data often contain a lot of noise, and different reconstruction methods return different results, for example described for bulk sequencing data of cancer cells by \autocite{Miura2020-im}.
-Therefore, it is important to provide a measure of accuracy of a computed tree, or its parameters, e.g. dates on the tree.
-For such statistically analyses of reconstructed trees, knowledge about the geometry of the tree space is essential.
-\textcite{Billera2001-rj} for example introduced the BHV-space and established geometric properties as a basis for such analyses for trees with branch lengths.
-The BHV-space is however not suitable for coalescent trees, as two trees can be very close in this space even though the timing of most internal nodes differs.
-Geometrical properties of tree spaces have also been used for analysing behaviour of rogue taxa in a tree \autocite{Cueto2011-bh}, or computing summary trees \autocite{Miller2015-rk}, pointing out the importance of studying the geometry of tree spaces.
+Enabling statistical analysis over the space of phylogenetic trees was an important motivation for \textcite{Billera2001-rj} to introduce the BHV-space and study its geometric properties.
+Tree space geometry has also played an important role in studies of rogue taxa in a tree \autocite{Cueto2011-bh} and also summary trees \autocite{Miller2015-rk}.
+Here, driven by the same motivation, we propose to study coalescent trees.
 
 \summary{Structure of the paper.}
-In this paper we consider the space $\dtt_m$ of discrete coalescent trees, where internal nodes are assigned unique discrete times.
-This tree space can be interpreted a discrete version of the $t$-space.
-It also can be seen as a generalisation of the ranked nearest neighbour interchange ($\rnni$) space, which has been introduced by \textcite{Collienne2020-iu}.
-We show in this paper that the space $\dtt_m$ as well as $\rnni$ has the desired properties mentioned above, including efficiently computable shortest paths that preserve biological information shared between trees.
+In this paper we introduce the space $\dtt_m$ of discrete coalescent trees, where internal nodes are assigned unique discrete times.
+This tree space is a discrete version of the $t$-space.
+$\dtt_m$ is also a generalisation of the ranked nearest neighbour interchange ($\rnni$) space \autocite{Collienne2020-iu}.
+Here we show that the space $\dtt_m$ as well as $\rnni$ has the desired properties mentioned above, including efficiently computable shortest paths that preserve biological information shared between trees.
 After introducing notations used throughout this paper (\autoref{section:technical_introduction}), we discuss how the algorithm $\findpath$ \autocite{Collienne2020-iu} can be generalise from $\rnni$ to be applied to discrete coalescent trees, computing shortest paths in polynomial time (\autoref{section:fp_dtt}).
-We then analyse some geometrical properties of both tree spaces $\dtt_m$ and $\rnni$ (\autoref{section:geometry}).
-We do so by first discuss the cluster property in \autoref{section:cluster_property} and then considering a subset of trees (caterpillar trees) for which we are able to compute $\rnni$ distances even more efficiently than with $\findpath$ (\autoref{section:caterpillar_convex}).
+We then analyse some geometrical properties of both tree spaces $\dtt_m$ and $\rnni$ (\autoref{section:geometry}) -- first, we discuss the cluster property in \autoref{section:cluster_property} and then considering a subset of trees (caterpillar trees) for which we are able to compute $\rnni$ distances more efficiently than with $\findpath$ (\autoref{section:caterpillar_convex}).
 Following that, we establish the diameter of $\dtt_m$ and $\rnni$ and briefly discuss the radius for each space.
 We finish this paper with a section providing a connection between the $\rnni$ space and partition lattices, and propose directions for further research (\autoref{section:open_problems}).
 
@@ -786,7 +780,6 @@ This work was partially supported by the Ministry of Business, Innovation, and E
 
 MF thanks the joint research project \textit{DIG-IT!} supported by the European Social Fund (ESF), reference: ESF/14-BM-A55-0017/19, and the Ministry of Education, Science, and Culture of Mecklenburg-Vorpommern, Germany, for funding parts of this work.
 
-Part of this work was done while AG, LC, and MF were visiting Max Plank Institute for Evolutionary Biology, we appreciate their support.
 
 \printbibliography
 \end{document}
