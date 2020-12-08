@@ -94,16 +94,18 @@
 \begin{document}
 
 \begin{abstract}
-	A popular assumption in phylogenetic tree inference if the molecular clock hypothesis.
-	Using a molecular clock model allows estimating times of evolutionary events.
-	A class of models using this assumption are coalescent models, which are used in a variety of applications including cancer and virus evolution.
-	Software for reconstructing evolutionary histories under the coalescent model exists, but analyse the results, especially uncertainties of the output, statistical measures are required.
-	Therefore, a tree space for coalescent trees and knowledge about its geometry is essential for analysing coalescent trees.
+Computational inference of dated evolutionary histories relies upon various hypotheses about DNA and protein sequence mutations rates.
+These phylogenetic techniques are collectively termed a molecular clock.
+Coalescent theory is a popular class of evolutionary models that implements the molecular clock hypothesis to facilitate computational inference of dated phylogenies.
+Cancer and virus evolution are two areas where these methods are particularly important.
 
-	We present a discrete parameterisation of coalescent trees and establish geometrical properties of the corresponding tree space.
-	This tree space is discretisation of the $t$-space of time trees, and our results can hence be transferred to the $t$-space for a fine enough resolution.
-	We furthermore discuss the ranked nearest neighbour interchange space as a special case of discrete coalescent trees, and generalise some results that are already known in the space of ranked trees.
-	We will find that these two tree spaces have properties promising for statistical analyses of time trees.
+Methodologically, phylogenetic inference methods require a tree space over which the inference is performed, and geometry of this space plays an important role in statistical and computational aspects of tree inference algorithms.
+It has recently been shown that molecular clock, and hence coalescent, trees possess a unique geometry, different from that of classical phylogenetic tree spaces which do not model mutation rates.
+
+Here we introduce and study a space of discrete coalescent trees, that is, we assume that time is discrete, which is inevitable in many computational formalisations.
+We establish several geometrical properties of the space and show how those properties impact various algorithms used in phylogenetic analyses.
+Our tree space is a discretisation of a known time tree space, called $t$-space, and hence our results can be used to approximate solutions to various open problems in $t$-space.
+Our trees space is also a generalisation of another known trees space, called the ranked nearest neighbour interchange space, hence our advances in this paper imply new and generalise existing results about ranked trees.
 \end{abstract}
 
 \maketitle
