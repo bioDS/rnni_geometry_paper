@@ -113,6 +113,7 @@ Our tree space is also a generalisation of another known trees space, called the
 
 \section{Introduction}
 
+\todo{David (on first three paragraphs): important things in intro: (i) the idea of tree space, (ii) ranked trees and discrete coalescent trees, no need to discuss molecular clock in great detail. Mention ultrametric trees.}
 \summary{Molecular clock and divergence dating}
 A commonly used hypothesis in various applications in evolutionary biology is the molecular clock.
 For example, a strict molecular clock is the assumption that the mutation rate of a gene is approximately constant over time.
@@ -165,13 +166,14 @@ We finish this paper with a section providing a connection between the $\rnni$ s
 \label{section:technical_introduction}
 
 \summary{Introducing discrete coalescent trees and ranked trees}
-A \emph{rooted binary phylogenetic tree} is a binary tree on a fixed number $n$ of leaves, which are uniquely labelled by elements of the set $\{a_1, \ldots, a_n\}$.
-The main object of study in this paper are \emph{discrete coalescent trees}, binary rooted phylogenetic trees with positive integer-valued \emph{times} assigned to nodes.
+A \emph{rooted binary phylogenetic tree} is a binary tree with $n$ leaves uniquely labelled by elements of a set $\{a_1, \ldots, a_n\}$.
+The main object of study in this paper are \emph{discrete coalescent trees}, binary rooted phylogenetic trees with a positive integer-valued \emph{time} assigned to each node.
 More specifically, all $n$ leaves $a_1, \ldots, a_n$ are assigned time $0$, and every internal node is assigned a unique time less or equal to an integer $m$, such that it always has time greater than its children.
 Note that this implies $m \geq n-1$.
 We denote the time of an internal node $v$ by $\ntime(v)$.
 If not stated otherwise, we refer to discrete coalescent trees simply as \emph{trees}.
 We furthermore call two trees (not necessarily binary) \emph{identical} if there is a graph isomorphism between them preserving leaf labels and times.
+\todo{This formula seems to be wrong. It should be: $\frac{(n-1)!n!}{2^{n-1}}{m \choose n-1}$}
 The number of discrete coalescent trees with root time at most $m$ is $\frac{(n-1)!n!m^{n-1}}{2^{n-1}}$ \autocite{Gavryushkin2018-ol}.
 
 \begin{figure}[ht]
@@ -181,15 +183,16 @@ The number of discrete coalescent trees with root time at most $m$ is $\frac{(n-
 	\label{fig:dtt_tree}
 \end{figure}
 
-As special case of discrete coalescent trees we consider \emph{ranked trees} with root time $n-1$.
-In these trees internal nodes are uniquely labelled by times in $\{1, \ldots, n-1\}$.
+As a special case of discrete coalescent trees we consider \emph{ranked trees} with root time $n-1$.
+In these trees internal nodes have distinct times ranging from $1$ to $n-1$.
 This definition of ranked trees coincides with the one of \textcite{Collienne2020-iu}.
 In the case of ranked trees we say \emph{rank} of a node $v$ to mean its time ($\rank(v) = \ntime(v)$) to be consistent with notations used in \autocite{Collienne2020-iu}.
 
 Every internal node $v$ of a tree $T$ can be referred to by the set $C$ of leaves that are descending from this node.
 We call such a set $C$ \emph{cluster} and say that the cluster $C$ is \emph{induced} by $v$.
-A list of clusters $[C_1, \ldots, C_{n-1}]$ uniquely defines a ranked tree \autocite{Collienne2020-iu}, where cluster $C_i$ is induced by the internal node with rank $i$ for $i \in \{1, \ldots, n-1\}$.
+A list of clusters $[C_1, \ldots, C_{n-1}]$ determines at most one ranked tree \autocite{Collienne2020-iu}, where cluster $C_i$ is induced by the internal node with rank $i$ for $i \in \{1, \ldots, n-1\}$.
 For discrete coalescent trees however, times of nodes also need to be provided to uniquely identify a tree.
+\todo{Maybe somewhere here refer to traditional notation and why we use our notation -- it's more intuitive, especially for coding}
 For a subset $S \subseteq \{a_1, \ldots, a_n\}$ we call the internal node of a tree $T$ with lowest time among those ancestral to all elements of $S$ the \emph{most recent common ancestor} of $S$ and denote it by $(S)_T$.
 We furthermore denote the parent of a leaf $a_i$ in $T$ by $(a_i)_T$, and the cluster induced by the node with time $i$ in $T$ by $(T)_i$.
 The node highlighted in \autoref{fig:dtt_tree} for example can be referred to as $(a_5)_T$, the parent of $a_5$, or $(\{a_1, a_5\})_T$, the most common ancestor of $\{a_1, a_5\}$, or $(T)_3$, the node with time three in $T$.
@@ -233,10 +236,9 @@ In this section we present a generalisation of $\findpath$ that computes distanc
 Before introducing the version of $\findpath$ for $\dtt_m$, we introduce a way to convert trees in $\dtt_m$ on $n$ leaves into ranked trees on $m+2$ leaves, such that the $\rnni$ distance between those ranked trees equals their distance in $\dtt_m$ (\autoref{thm:dtt_findpath}).
 
 \summary{How to add leaves to a $\dtt_m$ tree to transform it into a ranked tree}
-A tree $T$ in $\dtt_m$ on $n$ leaves can be converted into a ranked tree in $\rnni$ on $m+2$ leaves in the following way (\autoref{alg:ranked_tree}).
+A tree $T$ in $\dtt_m$ on $n$ leaves can be converted into a ranked tree in $\rnni$ with $m+2$ leaves in the following way (\autoref{alg:ranked_tree}).
 First add a new root with time $m + 1$ that becomes parent of the root of $T$.
-The other child of this new root is the root of a caterpillar tree ${T_r}^c$ on leaf set $\{a_{n+1}, a_{n+2}, \ldots, a_{m+2}\}$, such that $\ntime(a_{n+1})_{{T_r}^c} = \ntime(a_{n+2})_{{T_r}^c} < \ntime(a_{n+3})_{{T_r}^c} < \ldots < \ntime(a_{m+2})_{{T_r}^c} < m+1$.
-The resulting tree $T_r$ is hence a uniquely defined ranked tree with $m+2$ leaves.
+The other child of this new root becomes the root of a caterpillar tree ${T_r}^c$ on leaf set $\{a_{n+1}, a_{n+2}, \ldots, a_{m+2}\}$, such that $\ntime(a_{n+1})_{{T_r}^c} = \ntime(a_{n+2})_{{T_r}^c} < \ntime(a_{n+3})_{{T_r}^c} < \ldots < \ntime(a_{m+2})_{{T_r}^c} < m+1$.
 An example of this extension of a tree $T$ to a ranked tree $T_r$ is depicted in \autoref{fig:dtt_to_ranked_tree}.
 
 Throughout this paper we denote this extended ranked version of a tree $T$ by $T_r$.
@@ -267,7 +269,7 @@ Moreover, we denote the subtree of $T_r$ that is identical to $T$ by $T_r^d$ ($d
 
 \summary{Moves on the extended ranked versions of trees -- $\rnni$ vs length moves}
 In the following we distinguish two different types of rank moves.
-Rank moves between one node of $T_r^c$ and one node of $T_r^d$ correspond to length moves when considering $T_r^d$ in $\dtt_m$ (\autoref{fig:dtt_to_ranked_tree}).
+Rank moves between one node of $T_r^c$ and one node of $T_r^d$ induce length moves on the subtree $T_r^d$ in $\dtt_m$ (\autoref{fig:dtt_to_ranked_tree}).
 Therefore, we will refer to such rank moves as \emph{rank moves corresponding to length moves}.
 All remaining rank moves will still be called rank moves.
 Note that the correspondence of rank moves between $T_r^c$ and $T_r^d$ to length moves in $T$ shows that any path between $T$ and $R$ in $\dtt_m$ can be interpreted as a path between $T_r$ and $R_r$ in $\rnni$.
@@ -302,7 +304,7 @@ Instead, we modify $\findpath$ for trees in $\dtt_m$ (\autoref{alg:fp_dtt}).
 Iterations of $\findpath$ that consider clusters in the added caterpillar trees are replaced by length moves increasing the time of internal nodes as described in the \textbf{for} loop in Line~\ref{line:length_move} of \autoref{alg:fp_dtt}.
 The benefit of this modified version of the algorithm, compared to using $\findpath$ on the extended ranked versions of the trees, is a reduced use of memory, which is especially of practical relevance for $m \gg n$, which is typical in applications.
 
-Note that we do not need the parameter $m$ in practice, as the distance between any two trees in $\dtt_{m'}$ is the same as their distance in $\dtt_m$ for $m' < m$.
+Note that we do not need the parameter $m$ in practice, as the distance between any two trees in $\dtt_{m'}$ is the same as their distance in $\dtt_m$ for any $m > m'$.
 Therefore, if the distance between two trees is to be computed, we can simply choose $m$ to be the maximum root height of the given trees and compute their distance in $\dtt_m$.
 
 \begin{algorithm}[h]
@@ -339,7 +341,7 @@ Therefore, if the distance between two trees is to be computed, we can simply ch
 \subsection{Cluster Property}
 \label{section:cluster_property}
 \summary{Definition of Cluster Property and why it is relevant (a bit of bio).}
-A tree space has the \emph{cluster property}, if all trees on every shortest path between two trees sharing a cluster $C$ also contain this cluster.
+A tree space has the \emph{cluster property}, if all trees on every shortest path between two trees sharing a cluster $C$ also contain $C$.
 This is a desirable property in evolutionary biology applications as trees sharing a cluster or subtree are expected to be closer to each other than to a tree not sharing a cluster with them.
 This property is also desirable in centroid-based tree sample summary methods.
 For a given sample of trees containing a common subtree, it is expected that their summary tree also contains this subtree.
@@ -347,7 +349,7 @@ It is therefore desirable to have a tree space that has the cluster property.
 
 \summary{Cluster property in $\nni$ and its connection to the complexity result.}
 A mathematical motivation for investigating the cluster property in $\rnni$ is its importance in a similar tree space, the nearest neighbour interchange graph ($\nni$).
-In the $\nni$ graph trees have no times and $\nni$ moves are allowed on every edge.
+In the $\nni$ graph, trees have no times and $\nni$ moves are allowed on every edge.
 Computing distances in $\nni$ is $\np$-hard \autocite{Dasgupta2000-xa}, and the proof relies on the fact that this tree space does not have the cluster property \autocite{Li1996-zw}.
 In the $\rnni$ graph, however, distances can be computed in polynomial time using $\findpath$ \autocite{Collienne2020-iu}, which preserves common clusters.
 The question whether $\rnni$ has the cluster property is hence natural, and will be settled in \autoref{thm:cluster_property_rnni}.
@@ -360,7 +362,7 @@ The question whether $\rnni$ has the cluster property is hence natural, and will
 
 \begin{proof}
 	We assume to the contrary that there are two ranked trees $T$ and $R$ sharing a cluster $C$ and a shortest path $p$ between these trees where $C$ is not present in every tree.
-	We furthermore assume that there is no pair of trees with a shortest path not containing a shared cluster and distance less than $d(T,R)$, meaning that $T$ and $R$ give a minimum counterexample.
+	We furthermore assume that there is no pair of trees with a shorter path not containing a shared cluster and distance less than $d(T,R)$, meaning that $T$ and $R$ give a minimum counterexample.
 	Because of this minimality assumption on the length of $p$, the first tree $T'$ following $T$ on $p$ does not contain $C$.
 	Since $C$ must be the only cluster changed by the $\nni$ move between $T$ and $T'$, all nodes with rank below $(C)_T$ induce the same clusters in $T$ and $T'$ (\autoref{fig:nni_neighbours_clusters}).
 	We now compare distances $d(T,R)$ and $d(T',R)$ by using properties of $\findpath$.
@@ -372,7 +374,7 @@ The question whether $\rnni$ has the cluster property is hence natural, and will
 	\end{figure}
 
 	First we compare $\fp(R,T)$ and $\fp(R,T')$.
-	All trees on these two paths coincide until the point is reached where the cluster considered on $\fp(R,T)$ is $C$.
+	All trees on these two paths coincide up to iteration $i = \rank((C)_T)$, in which the cluster considered on $\fp(R,T)$ is $C$.
 	Let $R'$ denote the tree at this point of the path, meaning that $\fp(R,T)$ and $\fp(R,T')$ coincide up to this tree $R'$.
 	It follows $d(T,R) = d(R,R') + d(R', T)$ and $d(T',R) = d(R,R') + d(R', T')$.
 
@@ -402,8 +404,7 @@ Indeed, the cluster property in $\dtt_m$ follows from \autoref{thm:cluster_prope
 
 \summary{Defining Caterpillar trees. Why are they interesting?}
 In this subsection we focus on the set of caterpillar trees and establish some properties of shortest paths between those trees in both $\rnni$ and $\dtt_m$.
-A path between two caterpillar trees only consisting of caterpillar trees is a \emph{caterpillar path}.
-In \autoref{thm:caterpillar_convex_dtt} we will see that, in both $\dtt_m$ and $\rnni$, any two caterpillar trees are connected by a shortest path that is a caterpillar path.
+In \autoref{thm:caterpillar_convex_dtt} we will see that, in both $\dtt_m$ and $\rnni$, any two caterpillar trees are connected by a shortest path consisting only of caterpillar trees.
 We say that a set of trees is \emph{convex} in a tree space, if there is a shortest path between any two trees in this set that stays within the set.
 The set of caterpillar trees is hence convex in $\rnni$.
 The $\nni$ space of unranked trees however does not have this property \autocite{Gavryushkin2018-ol}.
@@ -421,7 +422,7 @@ Whether this complexity can be achieved in $\dtt_m$ is an open question.
 	The existence of a shortest path consisting only of caterpillar trees between $T$ and $R$ follows inductively.
 	Throughout this proof we consider the extended ranked versions $T_r$ and $R_r$ of $T$ and $R$.
 
-	Let $a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_{R_r} \ |\  \rank(a_i)_{R_r} \neq \rank(a_i)_{T_r}\}$ be the leaf with parent with maximum rank in $R_r$ among those that are not in the same position in $T_r$ and $R_r$.
+	Let $a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_{R_r} \ |\  \rank(a_i)_{R_r} \neq \rank(a_i)_{T_r}\}$ be the leaf with parent with maximum rank in $R_r$ among those whose parents do not have equal rank in $T_r$ and $R_r$.
 	Let furthermore $a_j \in \{a_1, \ldots, a_{m+2}\}$ be a leaf with $\rank(a_j)_{T_r} = \rank(a_k)_{T_r} + 1$.
 	We define $T'_r$ to be the caterpillar tree resulting from $T_r$ by an $\nni$ move or rank move exchanging the ranks of $(a_k)_{T_r}$ and $(a_j)_{T_r}$.
 	An $\nni$ move is necessary if these two nodes are connected by an edge, otherwise a rank move corresponding to a length move is performed on $T_r$ to obtain $T'_r$ (\autoref{fig:caterpillar_convex}).
@@ -462,40 +463,40 @@ Whether this complexity can be achieved in $\dtt_m$ is an open question.
 Note that it follows that the  set of caterpillar trees is convex in $\rnni$.
 This convexity property implies that the distance between caterpillar trees can be computed more efficiently than by $\findpath$.
 We prove this in the rest of this section.
-To do so, we first establish that the problem of computing a shortest caterpillar path can be interpreted in a few different ways.
+To do so, we first establish that the problem of computing a shortest path consisting only of caterpillar trees can be interpreted in a few different ways.
 
-One problem analogous to the shortest path problem for caterpillar trees in $\rnni$ is the \emph{Token Swapping Problem} (TSP) \autocite{Kawahara2017-ey} on a special class of graphs, so-called lollipop graphs.
-An instance of TSP is a simple graph where every vertex is assigned a token.
+One problem analogous to the shortest path problem for caterpillar trees in $\rnni$ is the \emph{Token Swapping Problem} \autocite{Kawahara2017-ey} on a special class of graphs, so-called lollipop graphs.
+An instance of the token swapping problem is a simple graph where every vertex is assigned a token.
 Two tokens are allowed to swap positions if they are on vertices that are connected by an edge.
 Each token is assigned a unique goal vertex, and the aim is to find the minimum number of token swaps for all tokens to reach their goal vertex.
 
-The problems of computing distances between caterpillar trees can be seen as an instance of TSP on lollipop graphs.
+The problems of computing distances between caterpillar trees can be seen as an instance of the token swapping problem on lollipop graphs.
 A lollipop graph is a graph consisting of a complete graph that is connected to a path by one edge.
-An instance of TSP that corresponding to the distance problem for caterpillar trees is described in the following.
+An instance of the token swapping problem that corresponding to the distance problem for caterpillar trees is described in the following.
 An example is illustrated in \autoref{fig:tsp_caterpillar}.
 Let $T$ and $R$ be caterpillar trees with
 \[\rank(a_1)_R = \rank(a_2)_R < \rank(a_3)_R < \ldots < \rank(a_n)_R \text{ and}\]
 \[\rank(b_1)_T = \rank(b_2)_T < \rank(b_3)_T < \ldots < \rank(b_n)_T\]
 such that $[b_1, \ldots, b_n]$ is a permutation of $[a_1, \ldots, a_n]$.
-The corresponding instance of TSP consists of a lollipop graph consisting of a complete graph on three leaves, connected to a path of length $n-3$ by an edge.
+The corresponding instance of the token swapping problem consists of a lollipop graph consisting of a complete graph on three leaves, connected to a path of length $n-3$ by an edge.
 The vertex in the complete graph incident to the edge connecting complete graph and path is labelled by $a_3$, the other ones in the complete graph are labelled by $a_1$ and $a_2$.
 The vertices on the paths are then labelled inductively, starting at the neighbour of $a_3$, such that the neighbour of the last already labelled node with label $a_{i-1}$ is labelled by $a_i$.
 The token on vertex $a_i$ has $b_i$ as goal vertex.
-Since the only moves between two caterpillar trees in $\rnni$ are $\nni$ moves, which simply swap two leaves, they correspond to swapping two tokens in the above described instance of TSP.
+Since the only moves between two caterpillar trees in $\rnni$ are $\nni$ moves, which simply swap two leaves, they correspond to swapping two tokens in the above described instance of the token swapping problem.
 
 \begin{figure}[ht]
 	\includegraphics[width=0.45\textwidth]{tsp_caterpillar.eps}
-	\caption{Two caterpillar trees $T$ and $R$ and the corresponding instance of TSP.
+	\caption{Two caterpillar trees $T$ and $R$ and the corresponding instance of the token swapping problem.
 	Vertex labels are in circles and token goal vertices in rectangles.}
 	\label{fig:tsp_caterpillar}
 \end{figure}
 
-Therefore, the algorithm described by \textcite{Kawahara2017-ey} to solve the TSP on lollipop graphs can be used for computing distances between caterpillar trees.
+Therefore, the algorithm described by \textcite{Kawahara2017-ey} to solve the token swapping problem on lollipop graphs can be used for computing distances between caterpillar trees.
 It however has worst-case time complexity $\O(n^2)$, the same as $\findpath$.
 
 In the following we present an algorithm for computing distances between caterpillar trees with better worst-case time complexity, $\O(n \sqrt{\log n})$, for $\rnni$ (\autoref{cor:caterpillar_distance_rnni_nlogn}).
 To do so, we first establish a formula to express distances between two caterpillar trees in $\rnni$ (\autoref{thm:caterpillar_distance_formula}).
-This algorithm can also be used to solve TSP on lollipop graphs, improving the worst-case running time of the known algorithm \autocite{Kawahara2017-ey}.
+This algorithm can also be used to solve the token swapping problem on lollipop graphs, improving the worst-case running time of the known algorithm \autocite{Kawahara2017-ey}.
 
 \begin{theorem}
 	Let $T$ and $R$ be caterpillar trees in $\rnni$ such that \[1 = \rank(a_1)_R = \rank(a_2)_R < \rank(a_3)_R < \ldots < \rank(a_n)_R = n-1\]
