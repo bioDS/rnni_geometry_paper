@@ -113,29 +113,22 @@ Our tree space is also a generalisation of another known trees space, called the
 
 \section{Introduction}
 
-\todo{David (on first three paragraphs): important things in intro: (i) the idea of tree space, (ii) ranked trees and discrete coalescent trees, no need to discuss molecular clock in great detail. Mention ultrametric trees.}
-\summary{Molecular clock and divergence dating}
+\summary{Molecular clock, divergence dating, and coalescent -- biological motivation}
 A commonly used hypothesis in various applications in evolutionary biology is the molecular clock.
 For example, a strict molecular clock is the assumption that the mutation rate of a gene is approximately constant over time.
 After this phenomenon had first been observed by \textcite{zuckerkandl1965evolutionary}, the molecular clock became a popular hypothesis, and various relaxations were developed \autocite{Kumar2016-eu}.
-Relaxed versions of a molecular clock allow rates to vary across different lineages \autocite{Li2012-hf, Thorne1998-ev, Rambaut1998-kq}.
-Fields in which the (relaxed) molecular clock assumption is frequently used are cancer \autocite{Alves2019-eo, Naxerova2015-qg} or virus evolution \autocite{Korber2000-sp}.
-The advantage of this assumption is that is makes it possible to time evolutionary events, if some knowledge of calibration times exists, for example to date speciation events \autocite{Yoder2000-ks}.
+A popular framework for reconstructing and analysing timed evolutionary (species) trees \autocite{Kingman1982-df} that uses the molecular clock assumption on gene trees is coalescent theory.
+For example, coalescent is widely employed for inferring relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}, or for analysing population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
+A recent striking application of coalescent theory is cancer phylogenetics \autocite{Posada2020-aa, Ohtsuki2017-su}, where accurate estimates of divergence times are essential for targeted treatment strategies.
+Under a coalescent model evolution is considered backwards in time, and two lineages coalesce after a waiting time, which is to be estimated.
 
 \summary{Software needs to deal with clock trees, tree proposals}
 In phylogenetic trees, which display evolutionary relationships, internal nodes can hence be equipped with times, when assuming a molecular clock.
 Software packages for reconstructing those trees from data such as RNA, DNA, or protein sequences rely on a parameterisation of trees where internal nodes are equipped with times.
-Popular tree inference software used for this purpose are based on Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp, Tamura2011-ky} or Bayesian methods \autocite{Bouckaert2014-ir,Suchard2018-tw, Ronquist2003-eq}.
+Popular tree inference software used for this purpose and implement coalescent models are based on Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp, Tamura2011-ky} or Bayesian methods \autocite{Bouckaert2014-ir,Suchard2018-tw, Ronquist2003-eq}.
 They rely on tree search algorithms, where in every step a new tree is proposed and accepted if the proposed tree fulfils certain requirements.
 For tree proposals under the molecular clock assumption a parameterisation of trees taking the times of internal nodes into account is required.
 Furthermore, a similarity measure for these trees is necessary, to propose trees that are measurably similar to the running tree.
-
-\summary{Coalescent as a popular class of evolutionary generating models}
-Coalescent theory is a popular framework to reconstruct and analyse timed evolutionary (species) trees \autocite{Kingman1982-df} using the molecular clock assumption on gene trees.
-For example, coalescent is widely employed for inferring relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}, or for analysing population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
-A recent striking application of coalescent theory is cancer phylogenetics \autocite{Posada2020-aa, Ohtsuki2017-su}, where accurate estimates of divergence times are essential for targeted treatment strategies.
-Under a coalescent model evolution is considered backwards in time, and two lineages coalesce after a waiting time, which is to be estimated.
-In the resulting trees all internal nodes, which correspond to coalescence events, are assigned unique times.
 
 \summary{Known tree spaces -- BHV, $t$-space and $\tau$-space}
 Tree spaces that take branch lengths of trees into account exist in the literature.
@@ -155,7 +148,7 @@ Here, driven by the same motivation, we propose to study coalescent trees.
 In this paper we introduce the space $\dtt_m$ of discrete coalescent trees, where internal nodes are assigned unique discrete times.
 This tree space is a discrete version of the $t$-space.
 $\dtt_m$ is also a generalisation of the ranked nearest neighbour interchange ($\rnni$) space \autocite{Collienne2020-iu}.
-Here we show that the space $\dtt_m$ as well as $\rnni$ has the desired properties mentioned above, including efficiently computable shortest paths that preserve biological information shared between trees.
+Here we show that the space $\dtt_m$ as well as $\rnni$ have the desired properties mentioned above, including efficiently computable shortest paths that preserve biological information shared between trees.
 After introducing notations used throughout this paper (\autoref{section:technical_introduction}), we discuss how the algorithm $\findpath$ \autocite{Collienne2020-iu} can be generalise from $\rnni$ to be applied to discrete coalescent trees, computing shortest paths in polynomial time (\autoref{section:fp_dtt}).
 We then analyse some geometrical properties of both tree spaces $\dtt_m$ and $\rnni$ (\autoref{section:geometry}) -- first, we discuss the cluster property in \autoref{section:cluster_property} and then consider a subset of trees (caterpillar trees) for which we are able to compute $\rnni$ distances more efficiently than with $\findpath$ (\autoref{section:caterpillar_convex}).
 Following that, we establish the diameter of $\dtt_m$ and $\rnni$ and briefly discuss the radius for each space.
