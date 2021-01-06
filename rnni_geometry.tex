@@ -185,11 +185,11 @@ Every internal node $v$ of a tree $T$ can be referred to by the set $C$ of leave
 We call such a set $C$ \emph{cluster} and say that the cluster $C$ is \emph{induced} by $v$.
 A list of clusters $[C_1, \ldots, C_{n-1}]$ determines at most one ranked tree \autocite{Collienne2020-iu}, where cluster $C_i$ is induced by the internal node with rank $i$ for $i \in \{1, \ldots, n-1\}$.
 For discrete coalescent trees however, times of nodes also need to be provided to uniquely identify a tree.
-\todo{Maybe somewhere here refer to traditional notation and why we use our notation -- it's more intuitive, especially for coding}
 For a subset $S \subseteq \{a_1, \ldots, a_n\}$ we call the internal node of a tree $T$ with lowest time among those ancestral to all elements of $S$ the \emph{most recent common ancestor} of $S$ and denote it by $(S)_T$.
 We furthermore denote the parent of a leaf $a_i$ in $T$ by $(a_i)_T$, and the cluster induced by the node with time $i$ in $T$ by $(T)_i$.
 The node highlighted in \autoref{fig:dtt_tree} for example can be referred to as $(a_5)_T$, the parent of $a_5$, or $(\{a_1, a_5\})_T$, the most common ancestor of $\{a_1, a_5\}$, or $(T)_3$, the node with time three in $T$.
 Note that we will simply write $\rank(a_i)_T$ or $\ntime(a_i)_T$ to mean $\rank((a_i)_T)$ or $\ntime((a_i)_T)$, respectively.
+Although differing from traditional notations, our definition of brackets referring to internal nodes is intuitive, shortens nested formulas, and is consistent with notations used in \autocite{Collienne2020-iu}.
 A type of trees that will be of importance throughout the whole paper are \emph{caterpillar trees}, which are trees where every internal nodes has at least one child that is a leaf.
 
 \summary{Defining the tree space $\dtt_m$ and $\rnni = \dtt_{n-1}$}
