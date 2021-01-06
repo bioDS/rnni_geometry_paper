@@ -679,15 +679,55 @@ There is no tree in $\dtt_4$ that has distance $\frac{(n-1)(n-2)}{2} + (m-n+1)(n
 \end{figure}
 
 
-\section{Related problems and future research questions}
+\section{Conclusion and future research questions}
 \label{section:open_problems}
 
+\summary{Brief summary of results of the paper}
 In this paper we introduced and analysed properties of the space of discrete coalescent trees $\dtt_m$.
 An important tool for establishing these characteristics of the tree space is the algorithm $\findpath$, which has been introduced by \textcite{Collienne2020-iu} for $\rnni$.
 We generalised this algorithm and showed in \autoref{thm:dtt_findpath} that it solves the shortest path problem in $\dtt_m$ as well.
 Afterwards, we established properties of $\dtt_m$ and $\rnni$ such as the cluster property (\autoref{section:cluster_property}), the convexity of the set of caterpillar trees (\autoref{section:caterpillar_convex}), diameter, and radius (\autoref{section:diameter}).
-
 With the convexity of the set of caterpillar trees in $\rnni$ we also found a more efficient way of computing distances between such trees, using the correspondence between caterpillar trees and permutations.
+
+\summary{More efficient algorithm for computing distances (not shortest paths)}
+The worst-case time complexity of $\findpath$ for computing a shortest path is $\O(mn)$ in $\dtt_m$.
+In \autoref{section:diameter} we have seen that there is no algorithm with better worst-case running time for computing shortest paths.
+However, it might be possible to compute distances more efficiently.
+In fact, we established in \autoref{section:caterpillar_convex} a way for computing distances between caterpillar trees in $\O(n \sqrt{\log n})$.
+This raises the question whether there is an algorithm that computes the distance between any two trees in $\dtt_m$ with better running time than $\findpath$.
+\todo{Add David's result about mapping to $L_1$ here?
+Yes, unless it's already somewhere.}
+
+\summary{$\rnni(rho)$ and parameter $\rho$ for discrete coalescent trees}
+Throughout this paper we consider $\dtt_m$ as a generalisation of $\rnni$ by allowing internal nodes to have integer-valued time differences.
+We therefore introduced the parameter $m$ to bound the height of a tree in the space of discrete coalescent trees in order to get a finite space.
+A different parameter $\rho$ has previously been introduced in \textcite{Collienne2020-iu} for generalising $\rnni$ to a space $\rnni(\rho)$ of ranked trees, where rank and $\nni$ moves have weights $\rho$ and one, respectively.
+Combining these two approaches of generalising $\rnni$ gives a space of discrete coalescent trees where different moves have different weights.
+This tree space is relevant for practical applications, where for example some knowledge about the tree topology exists, but the uncertainty of the timing of internal nodes remains high.
+Investigating such a tree space could therefore be a next step for further studies.
+
+\summary{t-space}
+Another tree space, of which $\dtt_m$ is a discretisation, is the $t$-space \autocite{Gavryushkin2016-uu}, where internal nodes are assigned real-valued times.
+For this space on time-trees no algorithm for computing shortest paths or distances is known yet.
+Our results for $\dtt_m$, however, can be transferred to this space, as discrete coalescent trees can be interpreted as discrete time-trees.
+Distances in $\dtt_m$ can therefore be used to approximate those in $t$-space.
+For this it is important to notice that the parameter $m$ is not relevant in applications, as distances between two trees in $\dtt_{m'}$ coincide with those in $\dtt_m$ if $m' < m$.
+Since choice of $m$, and therefore the choice on how to discretise time-trees, drives the complexity of computing shortest paths (\autoref{section:diameter}), finding a way to discretise time-trees to use our results on $\dtt_m$ can be subject of further research.
+
+\section*{Acknowledgements}
+We thank Charles Semple for useful discussions about the Cluster Property, and Mike Steel for his useful comments that improved this paper.
+
+We acknowledge support from the Royal Society Te Ap\=arangi through a Rutherford Discovery Fellowship (RDF-UOO1702).
+This work was partially supported by Ministry of Business, Innovation, and Employment of New Zealand through an Endeavour Smart Ideas grant (UOOX1912), a Data Science Programmes grant (UOAX1932).
+
+MF thanks the joint research project \textit{DIG-IT!} supported by the European Social Fund (ESF), reference: ESF/14-BM-A55-0017/19, and the Ministry of Education, Science, and Culture of Mecklenburg-Vorpommern, Germany, for funding parts of this work.
+
+
+\printbibliography
+
+
+\section{Supplement}
+
 In the following we discuss a connection of the $\rnni$ graph to a well-known algebraic structure, the partition lattice.
 Following that, we discuss further open problems providing new ideas for future research.
 
@@ -734,54 +774,4 @@ The leftmost chain corresponds to the caterpillar tree $[\{1, 2\}, \{1, 2, 3\}, 
 First, the partition $\{1, 2, 3\} \{4\}$ is replaced with $\{1, 2\} \{3, 4\}$ and we get the chain corresponding to the tree $[\{1, 2\}, \{3, 4\}, \{1, 2, 3, 4\}]$, which is one $\rnni$ move away from the caterpillar tree.
 Second, the partition $\{1, 2\} \{3\} \{4\}$ is replaced with $\{1\} \{2\} \{3, 4\}$, which corresponds to the rank swap on the previous tree.
 Third, the partition $\{1, 2\} \{3, 4\}$ is replaced with $\{1\} \{2, 3, 4\}$ and we reach the caterpillar tree $[\{3,4\}, \{2, 3, 4\}, \{1, 2, 3, 4\}]$.
-
-\subsection{Further Open Problems}
-
-\summary{Radius $\dtt_m$}
-A question left open in this paper is the radius of $\dtt_m$.
-We established the radius of $\rnni$ and found an example showing that this result cannot be generalised to $\dtt_m$.
-Finding the radius of $\dtt_m$ is therefore one of the natural next steps for further analyses of the geometry of $\dtt_m$.
-
-\summary{More efficient algorithm for computing distances (not shortest paths)}
-The worst-case time complexity of $\findpath$ for computing a shortest path is $\O(mn)$ in $\dtt_m$.
-And in \autoref{section:diameter} we have seen that there is no algorithm with better worst-case running time for computing shortest paths.
-It might however be possible to compute distances more efficiently.
-In fact, we established in \autoref{section:caterpillar_convex} a way for computing distances between caterpillar trees in $\O(n \sqrt{\log n})$.
-This raises the question whether there is an algorithm that computes the distance between any two trees in $\dtt_m$ with better running time than $\findpath$.
-\todo{Add David's result about mapping to $L_1$ here?
-Yes, unless it's already somewhere.}
-
-\summary{$\rnni(rho)$ and parameter $\rho$ for discrete coalescent trees}
-Throughout this paper we consider $\dtt_m$ as a generalisation of $\rnni$ by allowing internal nodes to have integer-valued time differences.
-We therefore introduced the parameter $m$ to bound the height of a tree in the space of discrete coalescent trees in order to get a finite space.
-A different parameter $\rho$ has previously been introduced in \textcite{Collienne2020-iu} for generalising $\rnni$ to a space $\rnni(\rho)$ of ranked trees, where rank and $\nni$ moves have weights $\rho$ and one, respectively.
-Combining these two approaches of generalising $\rnni$ gives a space of discrete coalescent trees where different moves have different weights.
-This tree space is relevant for practical applications, where for example some knowledge about the tree topology exists, but the uncertainty of the timing of internal nodes remains high.
-Investigating such a tree space could therefore be a next step for further studies.
-
-\summary{t-space}
-Another tree space, of which $\dtt_m$ is a discretisation, is the $t$-space \autocite{Gavryushkin2016-uu}, where internal nodes are assigned real-valued times.
-For this space on time-trees no algorithm for computing shortest paths or distances is known yet.
-Our results for $\dtt_m$, however, can be transferred to this space, as discrete coalescent trees can be interpreted as discrete time-trees.
-Distances in $\dtt_m$ can therefore be used to approximate those in $t$-space.
-For this it is important to notice that the parameter $m$ is not relevant in applications, as distances between two trees in $\dtt_{m'}$ coincide with those in $\dtt_m$ if $m' < m$.
-Since choice of $m$, and therefore the choice on how to discretise time-trees, drives the complexity of computing shortest paths (\autoref{section:diameter}), finding a way to discretise time-trees to use our results on $\dtt_m$ can be subject of further research.
-
-\summary{scaling-free tree space}
-The tree space $\dtt_m$ discussed in this paper is also a promising starting point for establishing a scaling-free tree space, where distances between trees stay the same if all branch lengths are multiplied by the same factor.
-Such a tree space is necessary for studies aiming to compare trees on different data sets.
-The goal of such analyses is to compare branching processes through time, without taking leaf labels into account.
-This can for example be the case when comparing the evolutionary history of different viruses.
-As the tree spaces $\rnni$ and $\dtt_m$ have shortest paths computable in polynomial time, they might be a good starting point for finding a scaling-free tree space where distances can be computed efficiently.
-
-\section*{Acknowledgements}
-We thank Charles Semple for useful discussions about the Cluster Property, and Mike Steel for his useful comments that improved this paper.
-
-We acknowledge support from the Royal Society Te Ap\=arangi through a Rutherford Discovery Fellowship (RDF-UOO1702).
-This work was partially supported by Ministry of Business, Innovation, and Employment of New Zealand through an Endeavour Smart Ideas grant (UOOX1912), a Data Science Programmes grant (UOAX1932).
-
-MF thanks the joint research project \textit{DIG-IT!} supported by the European Social Fund (ESF), reference: ESF/14-BM-A55-0017/19, and the Ministry of Education, Science, and Culture of Mecklenburg-Vorpommern, Germany, for funding parts of this work.
-
-
-\printbibliography
 \end{document}
