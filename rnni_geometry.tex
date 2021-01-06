@@ -166,8 +166,6 @@ Note that this implies $m \geq n-1$.
 We denote the time of an internal node $v$ by $\ntime(v)$.
 If not stated otherwise, we refer to discrete coalescent trees simply as \emph{trees}.
 We furthermore call two trees (not necessarily binary) \emph{identical} if there is a graph isomorphism between them preserving leaf labels and times.
-\todo{This formula seems to be wrong. It should be: $\frac{(n-1)!n!}{2^{n-1}}{m \choose n-1}$}
-The number of discrete coalescent trees with root time at most $m$ is $\frac{(n-1)!n!m^{n-1}}{2^{n-1}}$ \autocite{Gavryushkin2018-ol}.
 
 \begin{figure}[ht]
 	\includegraphics[width=0.25\textwidth]{dtt_tree.eps}
@@ -180,6 +178,8 @@ As a special case of discrete coalescent trees we consider \emph{ranked trees} w
 In these trees internal nodes have distinct times ranging from $1$ to $n-1$.
 This definition of ranked trees coincides with the one of \textcite{Collienne2020-iu}.
 In the case of ranked trees we say \emph{rank} of a node $v$ to mean its time ($\rank(v) = \ntime(v)$) to be consistent with notations used in \autocite{Collienne2020-iu}.
+There are $\frac{(n-1)!n!}{2^{n-1}}$ ranked trees \autocite{Semple2003-nj}.
+Every ranked tree gives ${m \choose n-1}$ discrete coalescent trees, as every $(n-1)$-element subset of $\{1, \ldots, m\}$ can be the set of times assigned to the internal nodes of a ranked tree.
 
 Every internal node $v$ of a tree $T$ can be referred to by the set $C$ of leaves that are descending from this node.
 We call such a set $C$ \emph{cluster} and say that the cluster $C$ is \emph{induced} by $v$.
