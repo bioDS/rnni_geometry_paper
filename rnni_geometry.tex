@@ -65,6 +65,8 @@
 
 \newcommand{\todefine}[1]{{\color{blue}{We need to define:#1}}} % Print summaries to .pdf
 
+\setlength{\belowcaptionskip}{-8pt}
+
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
 
@@ -504,6 +506,7 @@ This algorithm can also be used to solve the token swapping problem on lollipop 
 	\[d(T,R) = p_T - m_T.\]
 	\label{thm:caterpillar_distance_formula}
 \end{theorem}
+\vspace{-.5cm}
 
 We refer to pairs $(a_i,a_j) \in P_T$, as defined in \autoref{thm:caterpillar_distance_formula}, as transpositions.
 The reason for this is that caterpillar trees can be seen as permutations of the set $\{a_1, \ldots, a_n\}$, ordered by the ranks of their parents.
@@ -571,6 +574,7 @@ Therefore, the two pairs of leaves sharing their parent in $T$ and $R$, respecti
 	The distance between two caterpillar trees can be computed in $\O(n \sqrt{\log n})$ in $\rnni$.
 	\label{cor:caterpillar_distance_rnni_nlogn}
 \end{corollary}
+\vspace{-0.66cm}
 
 \begin{proof}
 	By \autoref{thm:caterpillar_distance_formula} the distance between two caterpillar trees in $\rnni$ is the number of transpositions between two sequences of length $n$ minus $m_T$ as defined in \autoref{thm:caterpillar_distance_formula}.
@@ -622,12 +626,13 @@ Afterwards, we generalise this result to $\dtt_m$.
 	\[m-n-1 = \rank(a_1)_T = \rank(a_2)_T < \rank(a_3)_T < \ldots < \rank(a_n)_T = m\]
 	and
 	\[1 = \rank(a_1)_R = \rank(a_n)_R < \rank(a_{n-1})_R < \ldots < \rank(a_1)_R = n-1.\]
-	\begin{figure}[ht]
-		\includegraphics[width=0.65\textwidth]{cat_max_dist_dtt.eps}
-		\caption{Trees $T$ and $R$ with distance $\frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$ as described in the proof of \autoref{thm:dtt_diameter}.}
-		\label{fig:cat_max_dist_dtt}
-	\end{figure}
 \end{proof}
+
+\begin{figure}[ht]
+	\includegraphics[width=0.65\textwidth]{cat_max_dist_dtt.eps}
+	\caption{Trees $T$ and $R$ with distance $\frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$ as described in the proof of \autoref{thm:dtt_diameter}.}
+	\label{fig:cat_max_dist_dtt}
+\end{figure}
 
 Note that the worst-case running time of $\findpath$ is $\O(n^2)$ in $\rnni$ and $\O(nm)$ in $\dtt_m$ and depends on the diameter of the corresponding tree spaces.
 For computing a shortest path, there is no algorithm with better worst-case running time than this, as the running time for algorithms computing shortest paths is bounded from below by the diameter of the corresponding space.
@@ -695,7 +700,7 @@ In \autoref{section:diameter} we have seen that there is no algorithm with bette
 However, it might be possible to compute distances more efficiently.
 In fact, we established in \autoref{section:caterpillar_convex} a way for computing distances between caterpillar trees in $\O(n \sqrt{\log n})$.
 This raises the question whether there is an algorithm that computes the distance between any two trees in $\dtt_m$ with better running time than $\findpath$.
-\todo{Add David's result about mapping to $L_1$ here?
+\todo[inline]{Add David's result about mapping to $L_1$ here?
 Yes, unless it's already somewhere.}
 
 \summary{$\rnni(rho)$ and parameter $\rho$ for discrete coalescent trees}
