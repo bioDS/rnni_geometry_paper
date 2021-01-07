@@ -127,7 +127,7 @@ Under a coalescent model evolution is considered backwards in time, and two line
 \summary{Software needs to deal with clock trees, tree proposals}
 In phylogenetic trees, which display evolutionary relationships, internal nodes can hence be equipped with times, when assuming a molecular clock.
 Software packages for reconstructing those trees from data such as RNA, DNA, or protein sequences rely on a parameterisation of trees where internal nodes are equipped with times.
-Popular tree inference software used for this purpose and implement coalescent models are based on Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp, Tamura2011-ky} or Bayesian methods \autocite{Bouckaert2014-ir,Suchard2018-tw, Ronquist2003-eq}.
+Popular tree inference software used for this purpose are based on Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp, Tamura2011-ky} or Bayesian methods \autocite{Bouckaert2014-ir,Suchard2018-tw, Ronquist2003-eq}.
 They rely on tree search algorithms, where in every step a new tree is proposed and accepted if the proposed tree fulfils certain requirements.
 For tree proposals under the molecular clock assumption a parameterisation of trees taking the times of internal nodes into account is required.
 Furthermore, a similarity measure for these trees is necessary, to propose trees that are measurably similar to the running tree.
