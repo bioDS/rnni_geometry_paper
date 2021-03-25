@@ -250,8 +250,8 @@ Moreover, we denote the subtree of $T_r$ that is identical to $T$ by $T_r^d$ ($d
 		\STATE $T_r^c =$ tree consisting of just one internal node $v_1$ with rank $i_1$ and children $a_{n+1}, a_{n+2}$
 		\FOR {$k = 2, \dots, m-n+1$}
 			\STATE Add internal node $v_k$ with with time $i_k$ and children $v_{k-1}$ and $a_{n+1+k}$ to $T_r^c$
-		\STATE $T_r = $ tree with root with time $m+1$ and children of root are roots of $T_r^d$ and $T_r^c$.
 		\ENDFOR
+		\STATE $T_r = $ tree with root with time $m+1$ and children of root are roots of $T_r^d$ and $T_r^c$.
 		\RETURN $T_r$
 	\end{algorithmic}
 \end{algorithm}
