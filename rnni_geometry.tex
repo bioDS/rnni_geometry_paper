@@ -100,16 +100,18 @@
 \begin{document}
 
 \begin{abstract}
-Computational inference of dated evolutionary histories relies upon various hypotheses about RNA, DNA, and protein sequence mutation rates.
+Computational inference of dated evolutionary histories relies upon models of RNA, DNA, and protein sequence mutation rates.
+\todo[inline]{. DB: This is not quite right. Coalescent theory states assumptions about the genealogies. It does not make assumptions about variations in evolutionary rates}
 Coalescent theory is a popular class of evolutionary models that implements the molecular clock hypothesis, under which times are inferred from mutation rates, to facilitate computational inference of dated phylogenies.
 Methodologically, phylogenetic inference methods require a tree space over which the inference is performed, and the geometry of this space plays an important role in statistical and computational aspects of tree inference algorithms.
-It has recently been shown that molecular clock, and hence coalescent, trees possess a unique geometry, different from that of classical phylogenetic tree spaces which do not model mutation rates.
+It has recently been shown that molecular clock, and hence coalescent, trees possess a unique geometry, different from that of classical phylogenetic tree spaces.
 
-Here we introduce and study a space of discrete coalescent trees, that is, we assume that time is discrete, which is inevitable in many computational applications.
-This tree space is a generalisation of another known trees space, called the ranked nearest neighbour interchange space, and is built upon tree-rearrangement operations.
-Our advances in this paper do not only generalise existing results about ranked trees, including an algorithm for computing distances in polynomial time, but in particular provide new results for both the space of discrete coalescent tree and the space of ranked trees.
+Here we introduce and study a space of discrete coalescent trees.
+They assume that time is discrete, which is natural in many computational applications.
+This tree space is a generalisation of the previously studied ranked nearest neighbour interchange space, and is built upon tree-rearrangement operations.
+We generalise existing results about ranked trees, including an algorithm for computing distances in polynomial time, and in particular provide new results for both the space of discrete coalescent trees and the space of ranked trees.
 We establish several geometrical properties of these spaces and show how these properties impact various algorithms used in phylogenetic analyses.
-Our tree space is a discretisation of a known time tree space, called $t$-space, and hence our results can be used to approximate solutions to various open problems in $t$-space.
+Our tree space is a discretisation of a previously introduced time tree space, called $t$-space, and hence our results can be used to approximate solutions to various open problems in $t$-space.
 \end{abstract}
 
 \maketitle
@@ -119,16 +121,18 @@ Our tree space is a discretisation of a known time tree space, called $t$-space,
 
 \summary{Molecular clock, divergence dating, and coalescent -- biological motivation}
 A commonly used hypothesis in various applications in evolutionary biology is the molecular clock.
-For example, a strict molecular clock is the assumption that the mutation rate of a gene is approximately constant over time.
-After this phenomenon had first been observed by \textcite{zuckerkandl1965evolutionary}, the molecular clock became a popular hypothesis, and various relaxations were developed \autocite{Kumar2016-eu}.
+The strict molecular clock is the assumption that the mutation rate of a gene is approximately constant over time.
+This phenomenon is a prediction of neutral theory, and was first famously confirmed experimentally by \textcite{zuckerkandl1965evolutionary}.
+Afterwards, the molecular clock became a popular hypothesis, and various relaxations were developed \autocite{Kumar2016-eu}.
 A popular framework for reconstructing and analysing timed evolutionary (species) trees \autocite{Kingman1982-df} that uses the molecular clock assumption on gene trees is coalescent theory.
 For example, coalescent is widely employed for inferring relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}, or for analysing population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
 A recent striking application of coalescent theory is cancer phylogenetics \autocite{Posada2020-aa, Ohtsuki2017-su}, where accurate estimates of divergence times are essential for targeted treatment strategies.
 Under a coalescent model, evolution is considered backwards in time, and two lineages coalesce after a waiting time, which is to be estimated.
 The resulting trees are referred to as coalescent trees, which are ultrametric trees where internal nodes are assigned unique times.
+\todo[inline]{DB: Even when the molecular clock is rejected, the UNDERLYING phylogeny, with branch lengths given by durations, has to be clocklike (assuming all taxa sampled at the same time). This separation is seen clearly with coalescent theory. The theory models the genealogy for a single gene sampled from multiple genomes. The genealogy is clock-like when branch lengths are proportional to time or generation or count, but may appear non-clocklike if branch lengths are represented proportional to mutations. }
 
 \summary{Software needs to deal with clock trees, tree proposals}
-In phylogenetic trees, which display evolutionary relationships, internal nodes can hence be equipped with times, when assuming a molecular clock.
+In phylogenetic trees, which display evolutionary relationships, internal nodes can be labelled with times, inferred assuming a molecular clock.
 Software packages for reconstructing those trees from data such as RNA, DNA, or protein sequences rely on a parameterisation of trees where internal nodes are equipped with times.
 Popular tree inference software used for this purpose are based on Maximum Likelihood \autocite{Kozlov2019-cf, Nguyen2015-sp, Tamura2011-ky} or Bayesian methods \autocite{Bouckaert2014-ir,Suchard2018-tw, Ronquist2003-eq}.
 They rely on tree search algorithms, where in every step a new tree is proposed and accepted if the proposed tree fulfils certain requirements.
@@ -136,16 +140,17 @@ For tree proposals under the molecular clock assumption a parameterisation of tr
 Furthermore, a similarity measure for these trees is necessary, to propose trees that are are measurably similar to a given tree in tree search algorithms.
 
 \summary{Known tree spaces -- BHV, $t$-space and $\tau$-space}
-Tree spaces that take branch lengths of trees into account exist in the literature.
-For example, the BHV-space \autocite{Billera2001-rj} consists of orthants, which represent tree topologies, and trees are parametrised by their branch lengths.
+Tree spaces that take branch lengths of trees into account have already been explored in the literature.
+One important example, the BHV-space \autocite{Billera2001-rj}, consists of orthants, representing tree topologies.
+Trees are parametrised by their branch lengths.
 However, this parameterisation is not suitable for coalescent trees because changing the times of an evolutionary event in the tree implies that all preceding events change their times as well.
 Hence two trees can be close to each other in this space even though the timing of many internal nodes is different in the two trees.
 Examples of more suitable tree spaces where internal nodes of trees are equipped with times are $t$-space and $\tau$-space \autocite{Gavryushkin2016-uu}.
 
 The $t$-space is a simplical complex, where each simplex corresponds to a ranked tree topology and trees are parametrised by the actual time assigned to internal nodes.
 The $\tau$-space is made out of orthants that correspond to ranked tree topologies and time differences between consecutive nodes are used as parameterisation.
-It has been observed, that in the $\tau$-space, similarly to the BHV-space, shortest paths between trees often contain the star tree \autocite{Gavryushkin2016-uu}.
-This can be problematic in applications, when for example a pair of trees share some evolutionary information in form of a subtree, but this information is not preserved on a shortest path between them.
+It has been observed, that in the $\tau$-space, like the BHV-space, shortest paths between trees often contain the star tree \autocite{Gavryushkin2016-uu}.
+This can be problematic in applications, for example when a pair of trees share some evolutionary information in form of a subtree, but this information is not preserved on a shortest path between them.
 For summary trees based on distance measures, this might result in losing such information shared between trees in the summary tree.
 Because of this, BHV- and $\tau$-space are not suitable for most applications, even though shortest paths can be computed efficiently.
 Although the $t$-space is free from these properties, no algorithm for computing distances or shortest paths between trees in this space is known yet, so applications are limited.
@@ -154,7 +159,7 @@ Although the $t$-space is free from these properties, no algorithm for computing
 Enabling statistical analysis over the space of phylogenetic trees was an important motivation for \textcite{Billera2001-rj} to introduce the BHV-space and study its geometric properties.
 Tree space geometry has also played an important role in studies of rogue taxa in a tree \autocite{Cueto2011-bh} and also summary trees \autocite{Miller2015-rk}.
 Here, driven by the same motivation, we propose to study coalescent trees.
-This includes in particular the cluster property, which a tree space has if all shortest paths between two trees sharing a cluster preserve this cluster.
+The geometric properties we study include a cluster property, which a tree space has if all shortest paths between two trees sharing a cluster preserve this cluster.
 A tree space with this property is desirable for constructing summary trees, as summaries for a set of trees sharing a cluster should also contain that cluster, a property that BHV-space and $\tau$-space do not have, as summary trees often end up being start trees.
 Clusters have also shown to play an important role in the development of algorithms for computing distances between trees \autocite{Bordewich2005-nx}, as well as in constructing phylogenetic networks from trees \autocite{Baroni2006-cv}.
 
@@ -164,10 +169,11 @@ This tree space is a discrete version of the $t$-space.
 $\dct_m$ is also a generalisation of the ranked nearest neighbour interchange ($\rnni$) space \autocite{Collienne2021}.
 Here we show that the space $\dct_m$ as well as $\rnni$ have the desired properties mentioned above, including efficiently computable shortest paths that preserve biological information shared between trees.
 After introducing notations used throughout this paper (\autoref{section:technical_introduction}), we discuss how the algorithm $\findpath$ \autocite{Collienne2021}, originally designed for trees in $\rnni$, can be generalised for the discrete coalescent tree space to compute shortest paths in polynomial time (\autoref{section:fp_dtt}).
-We then analyse some geometrical properties of both tree spaces $\dct_m$ and $\rnni$ (\autoref{section:geometry}) -- first, we discuss the cluster property in \autoref{section:cluster_property} and then consider a subset of trees (caterpillar trees) for which we are able to compute $\rnni$ distances more efficiently than with $\findpath$ (\autoref{section:caterpillar_convex}).
+We then analyse some geometrical properties of both tree spaces $\dct_m$ and $\rnni$ (\autoref{section:geometry}).
+First, we discuss the cluster property in \autoref{section:cluster_property} and then consider a subset of trees (caterpillar trees) for which we are able to compute $\rnni$ distances more efficiently than with $\findpath$ (\autoref{section:caterpillar_convex}).
 Following that, we establish the diameter of $\dct_m$ and $\rnni$ and briefly discuss the radius for each space.
 We finish this paper with a conclusion and propose directions for further research (\autoref{section:open_problems}).
-In the supplement we provide a connection between the $\rnni$ space and partition lattices.
+In the appendix we provide a connection between the $\rnni$ space and partition lattices.
 
 \section{Technical Introduction}
 \label{section:technical_introduction}
@@ -176,9 +182,10 @@ In the supplement we provide a connection between the $\rnni$ space and partitio
 A \emph{rooted binary phylogenetic tree} is a binary tree with $n$ leaves uniquely labelled by elements of a set $\{a_1, \ldots, a_n\}$.
 The main object of study in this paper are \emph{discrete coalescent trees}, binary rooted phylogenetic trees with a positive integer-valued \emph{time} assigned to each node.
 More specifically, all $n$ leaves $a_1, \ldots, a_n$ are assigned time $0$, and every internal node is assigned a unique time less or equal to an integer $m$, such that it always has time greater than its children.
+We hence consider time going backwards from the leaves towards the root.
 Note that this implies $m \geq n-1$.
 We denote the time of an internal node $v$ by $\ntime(v)$.
-The \emph{length} of an edge $(u,v)$ in a discrete coalescent tree is the time difference of the nodes bounding the edge: $\ntime(u) - \ntime(v)$.
+The \emph{length} of an edge $(u,v)$in a discrete coalescent tree, where $u$ is parent of $v$, is the time difference of the nodes bounding the edge: $\ntime(u) - \ntime(v)$.
 If not stated otherwise, we refer to discrete coalescent trees simply as \emph{trees}.
 We furthermore call two trees (not necessarily binary) \emph{identical} if there is a graph isomorphism between them preserving leaf labels and times.
 
@@ -203,12 +210,12 @@ A list of clusters $[C_1, \ldots, C_{n-1}]$ determines at most one ranked tree \
 For discrete coalescent trees however, times of nodes also need to be provided to uniquely identify a tree.
 For a subset $S \subseteq \{a_1, \ldots, a_n\}$ we call the internal node of a tree $T$ with lowest time among those ancestral to all elements of $S$ the \emph{most recent common ancestor} of $S$ and denote it by $(S)_T$.
 We furthermore denote the parent of a leaf $a_i$ in $T$ by $(a_i)_T$, and the cluster induced by the node with time $i$ in $T$ by $(T)_i$.
-The node highlighted in \autoref{fig:dtt_tree} for example can be referred to as $(a_5)_T$, the parent of $a_5$, or $(\{a_1, a_5\})_T$, the most common ancestor of $\{a_1, a_5\}$, or $(T)_3$, the node with time three in $T$.
+The node highlighted in \autoref{fig:dtt_tree} for example can be referred to as $(a_5)_T$, the parent of $a_5$, or $(\{a_1, a_5\})_T$, the most recent common ancestor of $\{a_1, a_5\}$, or of $(T)_3$, the cluster induced by the node with time three in $T$.
 Note that we will simply write $\rank(a_i)_T$ or $\ntime(a_i)_T$ to mean $\rank((a_i)_T)$ or $\ntime((a_i)_T)$, respectively.
-Although differing from traditional notations, our notation with brackets referring to internal nodes is intuitive, shortens nested formulas, and is consistent with notations used in \autocite{Collienne2021}.
+Although differing from traditional notation, this notation is intuitive, shortens nested formulas, and is consistent with notations used in \autocite{Collienne2021}.
 A type of trees that will be of importance throughout the whole paper are \emph{caterpillar trees}, which are trees where every internal node has at least one child that is a leaf.
 This implies that caterpillar trees have only one internal node that has two children that are leaves.
-We call such a subtree with two leaves sharing a parent a \emph{cherry}.
+In any tree, we call such a subtree with two leaves sharing a parent a \emph{cherry}.
 
 \summary{Defining the tree space $\dct_m$ and $\rnni = \dct_{n-1}$}
 We are now ready to introduce the central object of study of this paper, the graph (or space) of discrete coalescent trees.
@@ -224,7 +231,7 @@ Trees $T$ and $R$ are connected by an edge ($T$ and $R$ are \emph{neighbours}) i
 A length move can only change the time of a node to become $t$ if there is no node with time $t$ already.
 Furthermore, the time of the root of a tree in $\dct_m$ cannot be changed by a length move to become greater than $m$ in $\dct_m$.
 Note that our definition of $\dct_m$ differs from the definition of the space on discrete time-trees of \textcite{Gavryushkin2018-ol}.
-In contrast to their definition, length moves in $\dct_m$ do not change the height of a tree, unless it is performed on the root, which makes our definition appropriate for coalescent trees.
+In contrast to their definition, length moves in $\dct_m$ do not change the height of a tree, unless it is performed on the root.
 
 \begin{figure}[ht]
 	\includegraphics[width=0.85\textwidth]{dtt.eps}
@@ -253,7 +260,7 @@ The algorithm $\findpath$ (\autoref{alg:findpath}) constructs a path between two
 This path is constructed iteratively from the initial path $p$ only consisting of the tree $T_1 = T$ by adding new trees to the end of the path in every step.
 In each iteration $i = 1, \ldots, n-2$ (line~\ref{alg:findpath:line:for_loop} in \autoref{alg:findpath}), the cluster $C_i$ induced by node of rank $i$ in $R$ is considered, and the rank of its most recent common ancestor in $T_1$ is decreased by one.
 This is either done by an $\nni$ move (line~\ref{alg:nni_step}), or a rank move (line~\ref{alg:rank_step}), depending on the length of the edge below the most recent common ancestor (line~\ref{alg:if_edge_length}).
-It has been shown that thi move decreasing the rank of the most recent common ancestor is unique in every step \autocite[Proposition 1]{Collienne2021}.
+It has been shown that this move decreasing the rank of the most recent common ancestor is unique in every step \autocite[Proposition 1]{Collienne2021}.
 After every such move, $T_1$ is updated to be the tree resulting from this move and $p$ is extended by $T_1$.
 The tree at the end of iteration $i$ contains the clusters $C_1, \ldots, C_i$, induced by nodes with rank up to (and including) $i$ in $R$, and hence $p$ is a path connecting $T$ and $R$.
 The proofs that $\findpath$ is a deterministic algorithm and computes shortest paths in $\rnni$ in $\O(n^2)$ can be found in \autocite{Collienne2021}.
@@ -314,6 +321,9 @@ For two trees $T$ and $R$ and a cluster $C$ that is present in both $T$ and $R$,
 	This however means that the cluster $C = A \cup B$ is not present in $R$, which contradicts our assumptions.
 	We can therefore conclude that there cannot be a ranked tree $T'$ on $\fp(T,R)$ that does not contain $C$.
 \end{proof}
+
+Note that \autoref{lemma:fp_cluster} does not imply that every shortest path in $\rnni$ preserves clusters.
+In \autoref{thm:cluster_property_rnni} we will however see that this more general statement is actually true in $\rnni$.
 
 \summary{How to add leaves to a $\dct_m$ tree to transform it into a ranked tree}
 Before we show how $\findpath$ works for discrete coalescent trees, we introduce a way to extend a tree $T$ in $\dct_m$ on $n$ leaves into a ranked tree in $\rnni$ with $m+2$ leaves (\autoref{alg:ranked_tree}).
@@ -493,7 +503,7 @@ A mathematical motivation for investigating the cluster property in $\rnni$ is i
 In the $\nni$ graph, trees have no times and $\nni$ moves are allowed on every edge, while rank moves and length moves are not possible as no times are assigned to internal nodes.
 Computing distances in $\nni$ is $\np$-hard \autocite{Dasgupta2000-xa}, and the proof relies on the fact that this tree space does not have the cluster property \autocite{Li1996-zw}.
 In the $\rnni$ graph, however, distances can be computed in polynomial time using $\findpath$ \autocite{Collienne2021}, which preserves common clusters (\autoref{lemma:fp_cluster}).
-The question whether $\rnni$ has the cluster property is hence natural, and will be settled in \autoref{thm:cluster_property_rnni}.
+The question whether $\rnni$ has the cluster property is hence natural, and will be settled by \autoref{thm:cluster_property_rnni}.
 
 
 \summary{$\rnni$ has the cluster property.}
@@ -537,6 +547,7 @@ Indeed, the cluster property in $\dct_m$ follows from \autoref{thm:cluster_prope
 
 \begin{corollary}
 	The graph $\dct_m$ has the cluster property.
+	\label{cor:cluster_property_dct}
 \end{corollary}
 
 \begin{proof}
@@ -876,10 +887,10 @@ Therefore, time-trees first need to be discretised to become discrete coalescent
 For this it is important to notice that the parameter $m$ is not relevant in applications, as distances between two trees in $\dct_{m'}$ coincide with those in $\dct_m$ if $m' < m$.
 Since the choice of $m$, and therefore the choice on how to discretise time-trees, drives the complexity of computing shortest paths (\autoref{section:diameter}), finding a way to discretise time-trees to use our results on $\dct_m$ can be subject of further research.
 
-\summary{partition lattice -- can be found in supplement}
+\summary{partition lattice -- can be found in appendix}
 In \autoref{section:caterpillar_convex} we established a connection between the shortest path problem for caterpillar trees in $\rnni$ and the token swapping problem on lollipop graphs.
 We can furthermore provide a connection between the $\rnni$ graph and a well-known algebraic structure, the partition lattice.
-We provide a detailed description of this relation in the supplementary material.
+We provide a detailed description of this relation in the appendix.
 
 
 \section*{Acknowledgements}
@@ -894,7 +905,7 @@ MF thanks the joint research project \textit{DIG-IT!} supported by the European 
 \printbibliography
 
 
-\section{Supplement}
+\section{Appendix}
 
 In the following we discuss a connection of the $\rnni$ graph to a well-known algebraic structure, the partition lattice.
 
