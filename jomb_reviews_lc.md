@@ -165,7 +165,7 @@ Bordewich, M., & Semple, C. (2004). On the computational complexity of the roote
     - We changed this
 
 - p8 l42: $T_r^d'$ looks strange. Please reconsider the notation.
-    - TODO
+    - We agree that the notation might look a bit strange. We do however not want to simplify this notation, as we cannot think of a simpler way to denote these subtrees without loosing important information.
 
 - p9 l57: What is meant by "analogous". What should be mentioned here is that an instance of computing d(R,T) where R and T are caterpillars can be translated into an instance of the Token Swapping Problem such that the number of swaps equals d(R,T).
     - We decided to clarify this: "A problem related to the shortest path problem for caterpillar trees in RNNI is the Token Swapping Problem [11] on a special class of graphs, so-called lollipop graphs.
