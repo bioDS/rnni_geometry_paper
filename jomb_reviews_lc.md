@@ -1,27 +1,30 @@
-Dear Mark,
+Dear Prof Lewis,
 
-First, we would like to thank you and the referees for reading our manuscript and providing comments and suggestions. The comments are very useful and we found that by addressing them we were able to improve our paper. We carefully went through every question and comment and addressed them in the revised submission. We provide a point-by-point response below.
+First, we would like to thank you, the Associate Editor, and the referees for reading our manuscript and providing comments and suggestions. The comments are very useful and we feel that the revision has improved our paper. We have carefully gone through every question and comment and addressed them in the revised submission. We provide a point-by-point response below.
 
 
 ### Reviewer 2
 
 - The title is misleading as to the contents of the paper. Geometry of a space suggests a focus on the angles, sizes and dimensions of things.  When restricting to a discrete space, the geometry focuses on characterizing the structure of the space.  The focus of this paper is not on the underlying structure of this space or how it relates to other spaces, instead, it looks at computing distances and bounding the diameter of the underlying graph induced by the metric.  Choosing a title to match the strongest contributions of the paper would be helpful.
-    - TODO
+    - We have changed the title to "Discrete Coalescent Trees"
 
 - p 2, l 10: Characterizing the BHV space of trees as modeling tree as "points in a cubical complex" is correct but uninformative to your narrative.  If you want to frame it in terms of complexes, explain the terms.
     - We simplified this by changing it to: "For example, trees in the BHV-space [1] are parametrised by their branch lengths."
 
 - p 2, l 12: Justify the (correct) claim that BHV space is not suitable for coalescent trees.  As it reads now, it consists of several disjointed and not well-defined terms that weakens your claim.  Define or sketch what coalescent trees are before using and explain about the importance of timing on internal nodes and concisely explain why these previous models fail to capture this.
+
+TODO: Lena, our paper with Alexei (t- tau-spaces) discuss in detail why BHV doesn't work for time trees -- just summarize what we said there and add something like "see [GD] for a detailed discussion"
+
     - We added at the end of paragraph one, where we explain the coalescent: "The resulting trees are referred to as coalescent trees, which are ultrametric trees where internal nodes are assigned unique times." With this our explanation that changing internal branch lengths results in changing times of multiple internal nodes makes it clear that BHV-space is not suitable for coalescent trees.
 
 - p 2, l 20: As written, this suggests that none of the spaces mentioned in this paragraph have polynomial algorithms to compute distances. Is that really true? 
-    - We have clarified that there are algorithms for BHV and tau-space: "For summary trees based on distance measures, this might result in losing such information shared between trees in the summary tree. Because of this, BHV- and τ-space are not suitable for most applications, even though shortest paths can be computed efficiently."
+    - We have clarified that algorithms for BHV and tau-space are known: "For summary trees based on distance measures, this might result in losing such information shared between trees in the summary tree. Because of this, BHV- and tau-space are not suitable for most applications, even though shortest paths can be computed efficiently."
 
 - p 6, l 14:  Provide a proof, not just intuition, that this is true.
-    - We have updated the proof and added more detail
+    - We have added a proof
 
 - p 6, l 25: The statement immediately following the proof that the theorem proves running time needs more justification. If the theorem holds, it does follow, but you need to say why.
-    - We changed our wording here: "The worst-case running time of FindPath^+ on discrete coalescent trees is O(mn), which we will explain in detail in Section 4.3.". We do not want go into too much detail about the running time at this point, because it is closely related to the diameter, which is proven in Section 4.3.
+    - We changed our wording here: "The worst-case running time of FindPath^+ on discrete coalescent trees is O(mn), which we will explain in detail in Section 4.3.". We would prefer to avoid going into too much detail here about the running time because this topic is closely related to the diameter discussion, which is done in Section 4.3.
 
 - p 7, l 50:  Before the "It follows…", explain why the conclusion holds.
     - We have added to clarify: "Since R' is on the shortest paths FP(R,T) and FP(R,T'), the length of these paths is the sum of the length of the path up to R' plus the length of the remaining part of the path, respectively.
@@ -34,8 +37,7 @@ First, we would like to thank you and the referees for reading our manuscript an
     - We have updated the definition and added a small description, see the previous comment.
 
 - p 13, l 42:  Replace "he" with "the".
-    - We have done that
-
+    - Done
 
 
 ### Reviewer 3
@@ -52,10 +54,10 @@ First, we would like to thank you and the referees for reading our manuscript an
     - We added a description of FindPath and the Pseudocode for RNNI (Second paragraph Section 3, Algorithm 1), and also a description for FindPath^+.
 
 - p7 l58: I don't know why it is correct to conclude here that d(R,T)=d(R',T')-1. Please clarify.
-    - we have added to clarify: "Therefore, T is the first tree following T' on FP(T',R'), resulting in |FP(T',R')| = |FP(T',T)| + |FP(T,R')| and hence d(T',R') = 1 + d(T,R'). With the observations d(T,R) = d(R,R') + d(R',T) and d(T',R) = d(R,R') + d(R',T') it follows d(T',R) = d(R,R') + d(R',T') = d(R,R') + d(T,R') + 1 = d(T,R) + 1. From the assumption that T' is the first tree on a shortest path from T to R we can however follow d(T',R) = d(T,R) - 1, which leads to a contradiction.
+    - we have added to clarify: "Therefore, T is the first tree following T' on FP(T',R'), resulting in |FP(T',R')| = |FP(T',T)| + |FP(T,R')| and hence d(T',R') = 1 + d(T,R'). With the observations d(T,R) = d(R,R') + d(R',T) and d(T',R) = d(R,R') + d(R',T') it follows d(T',R) = d(R,R') + d(R',T') = d(R,R') + d(T,R') + 1 = d(T,R) + 1. From the assumption that T' is the first tree on a shortest path from T to R we can however follow d(T',R) = d(T,R) - 1, which leads to a contradiction."
 
 - Theorem 3: To show that the space of caterpillar trees is convex under RNNI, the proof of Theorem 3 makes use of R_r and T_r which are not caterpillars. Can you please explain why this is not causing any issue (a reference to Theorem 1 may help).
-    - We added for clarification: "Let T and R be two caterpillar trees in DCT_m.  We prove the theorem by showing that there is a caterpillar tree T' that is a neighbour of T and closer to R than T.  The existence of a shortest path consisting only of caterpillar trees between T and R follows inductively.  In the proof of Theorem 1 we have seen that all paths in DCT_m can be transformed to paths in RNNI between the extended ranked versions of trees, and vice versa, such that these two paths are of equal length.  It is therefore sufficient to show that all shortest paths between T_r and R_r,  the extended ranked versions of T and R, consist only of trees T' such that T'_r^d is a caterpillar tree."
+    - We have added a clarification: "Let T and R be two caterpillar trees in DCT_m. We prove the theorem by showing that there is a caterpillar tree T' that is a neighbour of T and closer to R than T. The existence of a shortest path consisting only of caterpillar trees between T and R follows inductively. In the proof of Theorem 1 we have seen that all paths in DCT_m can be transformed to paths in RNNI between the extended ranked versions of trees, and vice versa, such that these two paths are of equal length. It is therefore sufficient to show that all shortest paths between T_r and R_r, the extended ranked versions of T and R, consist only of trees T' such that T'_r^d is a caterpillar tree."
 
 - p10: Consider the two trees R=(((1,2),3),4) and R=T=(((2,1),3),4). Then d(R,T)=0. However, depending on how exactly the triangle of the lollipop graph is constructed, you may need one swap. Please add more details on how the lollipop graph is constructed for two trees R and T that have the same cherry so that the issue can be resolved.
     - We have added: "On a_1 and a_2, which represent the cherry of the caterpillar tree, we place the tokens with goal vertices b_1 and b_2 so that if a_i = b_j for some i,j in {1,2}, the token with goal vertex b_j=a_i is placed on the node labelled a_i=b_j."
@@ -73,7 +75,7 @@ First, we would like to thank you and the referees for reading our manuscript an
 #### MINOR COMMENTS
 
 - p1 l22: and geometry --> and the geometry
-    - We changed this
+    - Done
 
 - p1 l25 "computational formalisms": What is meant here? What is formalised?
     - To clarify, we changed this to "computational applications"
@@ -89,19 +91,19 @@ First, we would like to thank you and the referees for reading our manuscript an
     - To clarify, we changed this to :"In this paper we introduce the space DCT_m of discrete coalescent trees, where internal nodes are assigned unique discrete times, and the time of the root is bounded from above by the integer $m$."
 
 - p2 l34: generalise --> generalised
-    - We changed this
+    - Done
 
 - p2 l40-42: the connection between RNNI and partition lattices is not part of Section 5 but part of the Appendix. Please revise.
     - We updates this to: "We finish this paper with a conclusion and propose directions for further research (Section 5). In the supplement we provide a connection between the RNNI space and partition lattices."
 
 - p2 l59: we say rank of --> we say the rank of
-    - We changed this
+    - Done
 
 - p3 l18: referred to as (a_5)_T, ({a_1,a_5})_T --> referred to as (a_5)_T or ({a_1,a_5})_T
-    - We changed this
+    - Done
 
 - p3 l40: every internal nodes --> every internal node
-    - We changed this
+    - Done
 
 - p3 l42: The current definition of the vertex set of DCT_m is missing that all trees have a fixed number of leaves. It is mentioned further down the page, so either move it up or include it in the definition of the vertex set of DCT_m.
     - We added a comment on the number of leaves: "The vertex set of DCT_m is the set of trees on $n$ leaves with root time less or equal to $m$. Note that we assume the number of leaves $n$ of the trees in the graph DCT_m to be fixed throughout this paper."
