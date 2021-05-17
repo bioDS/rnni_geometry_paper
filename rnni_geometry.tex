@@ -100,11 +100,11 @@
 \begin{document}
 
 \begin{abstract}
-Computational inference of dated evolutionary histories relies upon models of RNA, DNA, and protein sequence mutation rates.
-\todo[inline]{. DB: This is not quite right. Coalescent theory states assumptions about the genealogies. It does not make assumptions about variations in evolutionary rates}
-Coalescent theory is a popular class of evolutionary models that implements the molecular clock hypothesis, under which times are inferred from mutation rates, to facilitate computational inference of dated phylogenies.
+In many phylogenetic applications, such as cancer and virus evolution, time trees, evolutionary histories where speciation events are timed, are inferred.
+Of particular interest are clock-like trees, where all leaves are sampled at the same time and have equal distance to the root.
+One popular approach to model clock-like trees is coalescent theory, which is used in various tree inference software packages.
 Methodologically, phylogenetic inference methods require a tree space over which the inference is performed, and the geometry of this space plays an important role in statistical and computational aspects of tree inference algorithms.
-It has recently been shown that molecular clock, and hence coalescent, trees possess a unique geometry, different from that of classical phylogenetic tree spaces.
+It has recently been shown that coalescent tree spaces possess a unique geometry, different from that of classical phylogenetic tree spaces.
 
 Here we introduce and study a space of discrete coalescent trees.
 They assume that time is discrete, which is natural in many computational applications.
@@ -120,16 +120,17 @@ Our tree space is a discretisation of a previously introduced time tree space, c
 \section{Introduction}
 
 \summary{Molecular clock, divergence dating, and coalescent -- biological motivation}
-A commonly used hypothesis in various applications in evolutionary biology is the molecular clock.
-The strict molecular clock is the assumption that the mutation rate of a gene is approximately constant over time.
-This phenomenon is a prediction of neutral theory, and was first famously confirmed experimentally by \textcite{zuckerkandl1965evolutionary}.
-Afterwards, the molecular clock became a popular hypothesis, and various relaxations were developed \autocite{Kumar2016-eu}.
-A popular framework for reconstructing and analysing timed evolutionary (species) trees \autocite{Kingman1982-df} that uses the molecular clock assumption on gene trees is coalescent theory.
-For example, coalescent is widely employed for inferring relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}, or for analysing population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
+Most tree inference methods aim to reconstruct phylogenies with branch lengths representing times, so-called time trees.
+A popular assumption that is used for inferring clock-like time trees, where all leaves are sampled at the same time, is coalescent theory \autocite{Kingman1982-df}.
+The coalescent is widely employed for inferring relationships of a sample of genes \autocite{Hudson1990-ki, Kuhner2009-jb}, or for analysing population dynamics \autocite{Kuhner1998-eh,Drummond2005-ak}.
 A recent striking application of coalescent theory is cancer phylogenetics \autocite{Posada2020-aa, Ohtsuki2017-su}, where accurate estimates of divergence times are essential for targeted treatment strategies.
 Under a coalescent model, evolution is considered backwards in time, and two lineages coalesce after a waiting time, which is to be estimated.
 The resulting trees are referred to as coalescent trees, which are ultrametric trees where internal nodes are assigned unique times.
-\todo[inline]{DB: Even when the molecular clock is rejected, the UNDERLYING phylogeny, with branch lengths given by durations, has to be clocklike (assuming all taxa sampled at the same time). This separation is seen clearly with coalescent theory. The theory models the genealogy for a single gene sampled from multiple genomes. The genealogy is clock-like when branch lengths are proportional to time or generation or count, but may appear non-clocklike if branch lengths are represented proportional to mutations. }
+The coalescent is often used together with assuming a molecular clock to infer times.
+The strict molecular clock is the assumption that the mutation rate of a gene is approximately constant over time.
+This phenomenon is a prediction of neutral theory, and was first famously confirmed experimentally by \textcite{zuckerkandl1965evolutionary}.
+Afterwards, the molecular clock became a popular hypothesis, and various relaxations were developed \autocite{Kumar2016-eu}.
+Independent on how branch lengths are inferred, if samples are taken at the same time, the underlying phylogeny is clock-like when branch lengths are proportional to time, which makes the coalescent a reasonable assumption for inferring clock-like genealogies.
 
 \summary{Software needs to deal with clock trees, tree proposals}
 In phylogenetic trees, which display evolutionary relationships, internal nodes can be labelled with times, inferred assuming a molecular clock.
