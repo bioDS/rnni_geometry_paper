@@ -144,9 +144,11 @@ Furthermore, a similarity measure for these trees is necessary, to propose trees
 Tree spaces that take branch lengths of trees into account have already been explored in the literature.
 One important example, the BHV-space \autocite{Billera2001-rj}, consists of orthants, representing tree topologies.
 Trees are parametrised by their branch lengths.
-However, this parameterisation is not suitable for coalescent trees because changing the times of an evolutionary event in the tree implies that all preceding events change their times as well.
+This parameterisation is however not suitable for time trees because changing the times of an evolutionary event in the tree implies that all preceding events change their times as well.
 Hence two trees can be close to each other in this space even though the timing of many internal nodes is different in the two trees.
-Examples of more suitable tree spaces where internal nodes of trees are equipped with times are $t$-space and $\tau$-space \autocite{Gavryushkin2016-uu}.
+Furthermore, subspaces of BHV-space associated with different ranked topologies have different volumes, which makes analysing distributions in this tree space difficult.
+For a more detailed discussion on this we refer the reader to \autocite{Gavryushkin2016-uu}.
+The same paper introduces more suitable tree spaces where internal nodes of trees are equipped with times, $t$-space and $\tau$-space.
 
 The $t$-space is a simplical complex, where each simplex corresponds to a ranked tree topology and trees are parametrised by the actual time assigned to internal nodes.
 The $\tau$-space is made out of orthants that correspond to ranked tree topologies and time differences between consecutive nodes are used as parameterisation.
