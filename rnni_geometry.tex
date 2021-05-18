@@ -146,12 +146,11 @@ One important example, the BHV-space \autocite{Billera2001-rj}, consists of orth
 Trees are parametrised by their branch lengths.
 This parameterisation is however not suitable for time trees because changing the times of an evolutionary event in the tree implies that all preceding events change their times as well.
 Hence two trees can be close to each other in this space even though the timing of many internal nodes is different in the two trees.
-Furthermore, subspaces of BHV-space associated with different ranked topologies have different volumes, which makes analysing distributions in this tree space difficult.
-For a more detailed discussion on this we refer the reader to \autocite{Gavryushkin2016-uu}.
-The same paper introduces more suitable tree spaces where internal nodes of trees are equipped with times, $t$-space and $\tau$-space.
+Furthermore, subspaces of the BHV-space associated with different ranked topologies have different volumes, which makes it hard to introduce a probability distribution over such space without biasing towards certain ranked topologies.
+A detailed discussion of this topic can be found in \autocite{Gavryushkin2016-uu}, where more suitable spaces for time trees, the $t$-space and $\tau$-space, are introduced and studied.
 
-The $t$-space is a simplical complex, where each simplex corresponds to a ranked tree topology and trees are parametrised by the actual time assigned to internal nodes.
-The $\tau$-space is made out of orthants that correspond to ranked tree topologies and time differences between consecutive nodes are used as parameterisation.
+The $t$-space is a simplicial complex, where each simplex corresponds to a ranked tree topology and trees are parametrised by the actual time assigned to internal nodes.
+The $\tau$-space is made out of orthants that correspond to ranked tree topologies and time differences between consecutive nodes are used to parameterise trees.
 It has been observed, that in the $\tau$-space, like the BHV-space, shortest paths between trees often contain the star tree \autocite{Gavryushkin2016-uu}.
 This can be problematic in applications, for example when a pair of trees share some evolutionary information in form of a subtree, but this information is not preserved on a shortest path between them.
 For summary trees based on distance measures, this might result in losing such information shared between trees in the summary tree.
