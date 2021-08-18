@@ -54,7 +54,7 @@
 \newcommand{\tbr}{\mathrm{TBR}}
 \newcommand{\fp}{\mathrm{FP}}
 \newcommand{\dct}{\mathrm{DCT}}
-\newcommand{\np}{\mathbf{NP}}
+\newcommand{\np}{\mathcal{NP}}
 \newcommand{\decprob}[1]{\rnni(#1)\text{-}\mathrm{SP}}
 \newcommand{\rad}{\mathit{rad}}
 \renewcommand{\O}{\mathcal O}
@@ -441,7 +441,7 @@ We therefore refer to these rank moves in $T'_r$ that induce length moves in $T'
 
 We now introduce a modified version of $\findpath$, to be used for discrete coalescent trees in $\dct_m$, without requiring the input trees to be transformed into ranked trees.
 This algorithm is called $\findpath^+$ (\autoref{alg:fp_dtt}) and computes a path $\fp^+(T,R)$ between two input trees $T$ and $R$.
-We will see that this path is identical to the restricting all trees on the path $\fp(T_r,R_r)$, computed by $\findpath$ between the extended ranked versions $T_r$ and $R_r$ of the input trees, to the subtrees induced by $\{a_1, \ldots, a_n\}$.
+We will see that this path is identical to the path resulting from restricting all trees on the path $\fp(T_r,R_r)$, computed by $\findpath$ between the extended ranked versions $T_r$ and $R_r$ of the input trees, to the subtrees induced by $\{a_1, \ldots, a_n\}$.
 
 $\findpath^+$ iterates through all times $k = 1, \ldots, m$ that internal nodes could have in $R$ to construct a path $p$, initially starting with $p = [T]$.
 If in iteration $k$, $R$ has an internal node with time $k$ that induces a cluster $C$, the most recent common ancestor of $C$ in the currently last tree $T_1$ on $p$ is decreased by $\nni$, rank, or length moves, until it reaches rank $k$.
@@ -474,7 +474,7 @@ If the distance between two trees is to be computed, we can simply choose $m$ to
 				\STATE $i := \min\{l \ |\  l>k \text{ and no node in } T_1 \text{ has time }l\}$ \label{line:min_free_time}
 				\FOR {$j = i-1, \dots, k$} \label{alg:fp_dtt:nested_for}
 					\label{line:length_move}
-					\STATE $T_2$ is $T_1$ where the time of $(T_1)_j$ is increased by one (length move)
+					\STATE $T_2$ is $T_1$ where the time of $(T_1)_j$ is increased by a length move
 					\STATE $T_1 = T_2$
 					\STATE $p = p+T_1$
 				\ENDFOR
@@ -503,7 +503,7 @@ Related to the cluster property is the idea to split the computation of distance
 \summary{Cluster property in $\nni$ and its connection to the complexity result.}
 A mathematical motivation for investigating the cluster property in $\rnni$ is its importance in a similar tree space, the nearest neighbour interchange graph ($\nni$).
 In the $\nni$ graph, trees have no times and $\nni$ moves are allowed on every edge, while rank moves and length moves are not possible as no times are assigned to internal nodes.
-Computing distances in $\nni$ is $\np$-hard \autocite{Dasgupta2000-xa}, and the proof relies on the fact that this tree space does not have the cluster property \autocite{Li1996-zw}.
+Computing the $\nni$ distance between two trees is $\np$-hard \autocite{Dasgupta2000-xa}, and the proof relies on the fact that this tree space does not have the cluster property \autocite{Li1996-zw}.
 In the $\rnni$ graph, however, distances can be computed in polynomial time using $\findpath$ \autocite{Collienne2021}, which preserves common clusters (\autoref{lemma:fp_cluster}).
 The question whether $\rnni$ has the cluster property is hence natural, and will be settled by \autoref{thm:cluster_property_rnni}.
 
@@ -666,7 +666,7 @@ This algorithm can also be used to solve the token swapping problem on lollipop 
 
 For improving on the time-complexity of computing distances between caterpillar trees, we use a representation of caterpillar trees as a list of leaves, ordered according to increasing rank of their parents.
 The caterpillar tree on the left of \autoref{fig:tsp_caterpillar} for example can be represented as 
-\[[a_4,a_5,a_3,a_2,a_2] \text{ or }[a_5,a_4,a_3,a_2,a_1].\]
+\[[a_4,a_5,a_3,a_2,a_1] \text{ or }[a_5,a_4,a_3,a_2,a_1].\]
 There are two possible list representations of a caterpillar tree because the first two leaves ($a_4$ and $a_5$ in this example) share their parent of rank one.
 For two given caterpillar trees $T$ and $R$ we call a pair of leaves $(a_i,a_j)$ \emph{transposition} in $T$ with respect to $R$, if the rank of the parent of $a_i$ is lower than the rank of the parent of $a_j$ in $T$, and the opposite is true for $R$: $\rank(a_i)_T < \rank(a_j)_T$ and $\rank(a_i)_R > \rank(a_j)_R$.
 For two leaves $a_i$ and $a_j$ in a caterpillar tree $T$ we say that $a_i$ is \emph{below} $a_j$ and $a_j$ is \emph{above} $a_i$ in $T$ if $\rank(a_i)_T < \rank(a_j)_T$.
@@ -849,7 +849,7 @@ The maximum distance between any tree in $\dct_4$ and the tree in \autoref{fig:d
 
 \begin{figure}[ht]
 	\includegraphics[width=0.15\textwidth]{dtt_radius_counterexample.eps}
-	\caption{Tree in $\dct_4$ on three leaves for which there is not tree with distance $5 = \frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$ (diameter) from it}
+	\caption{Tree in $\dct_4$ on three leaves for which there is not tree with distance $5 = \frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$ from it}
 	\label{fig:dtt_radius_counterexample}
 \end{figure}
 
