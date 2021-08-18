@@ -258,7 +258,7 @@ For this generalisation we introduce a way to convert trees in $\dct_m$ on $n$ l
 We end this section by providing the algorithm $\findpath^+$, a version of $\findpath$ to work in the $\dct_m$ without needing to transform discrete coalescent trees into ranked trees.
 
 \summary{Explain $\findpath$ in $\rnni$}
-The algorithm $\findpath$ (\autoref{alg:findpath}) constructs a path between two ranked trees $T$ and $R$ in $\rnni$.
+The algorithm $\findpath$ (\autoref{alg:findpath}) constructs a path between two ranked trees $T$ and $R$ in $\rnni$, which we denote by $\fp(T,R)$.
 This path is constructed iteratively from the initial path $p$ only consisting of the tree $T_1 = T$ by adding new trees to the end of the path in every step.
 In each iteration $i = 1, \ldots, n-2$ (line~\ref{alg:findpath:line:for_loop} in \autoref{alg:findpath}), the cluster $C_i$ induced by node of rank $i$ in $R$ is considered, and the rank of its most recent common ancestor in $T_1$ is decreased by one.
 This is either done by an $\nni$ move (line~\ref{alg:nni_step}), or a rank move (line~\ref{alg:rank_step}), depending on the length of the edge below the most recent common ancestor (line~\ref{alg:if_edge_length}).
@@ -329,7 +329,7 @@ In \autoref{thm:cluster_property_rnni} we will however see that this more genera
 
 \summary{How to add leaves to a $\dct_m$ tree to transform it into a ranked tree}
 Before we show how $\findpath$ works for discrete coalescent trees, we introduce a way to extend a tree $T$ in $\dct_m$ on $n$ leaves into a ranked tree in $\rnni$ with $m+2$ leaves (\autoref{alg:ranked_tree}).
-First add a new root with time $m + 1$ that becomes parent of the root of $T$.
+First add a new root with time $m + 1$ that becomes the parent of the root of $T$.
 The other child of this new root becomes the root of a caterpillar tree ${T_r}^c$ on leaf set $\{a_{n+1}, a_{n+2}, \ldots, a_{m+2}\}$, such that $\ntime(a_{n+1})_{{T_r}^c} = \ntime(a_{n+2})_{{T_r}^c} < \ntime(a_{n+3})_{{T_r}^c} < \ldots < \ntime(a_{m+2})_{{T_r}^c} < m+1$.
 An example of this extension of a tree $T$ to a ranked tree $T_r$ is depicted in \autoref{fig:dtt_to_ranked_tree}.
 
