@@ -241,7 +241,7 @@ In contrast to their definition, length moves in $\dct_m$ do not change the heig
 	\label{fig:dtt}
 \end{figure}
 
-The definition of $\dct_m$ leads to a natural definition of the \emph{distance} between two trees $T$ and $R$ in this graph as the length of a shortest paths between these trees, denoted by $d(T,R)$.
+The definition of $\dct_m$ leads to a natural definition of the \emph{distance} between two trees $T$ and $R$ in this graph as the length of a shortest paths between these trees, denoted by $d_{\dct}(T,R)$.
 We write a path in $\dct_m$ as a list of trees $[T_0, T_1, \ldots, T_k]$, such that $T_i$ and $T_{i+1}$ are neighbours in $\dct_m$, and denote the length $k$ of such a path $p$ by $|p|$.
 We also consider the ranked nearest neighbour interchange ($\rnni$) graph of \textcite{Collienne2021}, which is the graph $\dct_m$ for $m=n-1$, and hence a graph of ranked trees.
 In this graph length moves are not possible, so we use the notion $\rnni$ \emph{move} to mean either a rank move or an $\nni$ move in order to distinguish these moves from length moves.
@@ -375,7 +375,7 @@ Note that for any given pair of trees $T$ and $R$, we always assume $m$ to be gr
 
 \begin{proof}
 	We prove this theorem by showing that the following two inequalities hold for two discrete coalescent trees $T$ and $R$ and a shortest path $p$ in $\dct_m$ between those trees: $|p| \geq |\fp(T_r,R_r)|$ and $|p| \leq |\fp(T_r,R_r)|$.
-	Since we know that $\findpath$ computed the $\rnni$ distance for ranked trees, it then follows $d(T,R) = |p| = |\fp(T_r,R_r)| = d(T_R,R_r)$.
+	Since we know that $\findpath$ computed the $\rnni$ distance for ranked trees, it then follows $d_{\dct}(T,R) = |p| = |\fp(T_r,R_r)| = d_{\rnni}(T_R,R_r)$.
 
 	\begin{enumerate}
 		\item $|p| \geq |\fp(T_r,R_r)|$
@@ -454,7 +454,7 @@ Since every tree on $\fp^+(T,R)$ is the same as the tree at the same position on
 
 Note that we do not need the parameter $m$ in practice, as the distance between any two trees in $\dct_{m'}$ is the same as their distance in $\dct_m$ for any $m > m'$.
 This follows from $\findpath$ applied to extended ranked versions of trees $T$ and $R$, where for $m>m'$ all clusters induced by nodes with rank greater than $m'$ are the same in $T$ and $R$, meaning that they are preserved on $\fp(T_r,R_r)$.
-And since $d(T,R) = |\fp(T_r,R_r)|$ (\autoref{thm:dtt_findpath}), it follows that the distances between $T$ and $R$ are the same for all $m > m'$.
+And since $d_{\dct}(T,R) = |\fp(T_r,R_r)|$ (\autoref{thm:dtt_findpath}), it follows that the distances between $T$ and $R$ are the same for all $m > m'$.
 If the distance between two trees is to be computed, we can simply choose $m$ to be the maximum root height of the given trees and compute their distance in $\dct_m$.
 
 \begin{algorithm}[h]
@@ -516,11 +516,11 @@ The question whether $\rnni$ has the cluster property is hence natural, and will
 
 \begin{proof}
 	We assume to the contrary that there are two ranked trees $T$ and $R$ sharing a cluster $C$ and a shortest path $p$ between these trees where $C$ is not present in every tree.
-	We furthermore assume that there is no pair of trees $T',R'$ with $d(T',R') < d(T,R)$ that shares a cluster $C'$ and is connected by a shortest path $p'$ that does not preserve $C'$.
+	We furthermore assume that there is no pair of trees $T',R'$ with $d_{\rnni}(T',R') < d_{\rnni}(T,R)$ that shares a cluster $C'$ and is connected by a shortest path $p'$ that does not preserve $C'$.
 	We hence say that $T$ and $R$ give a minimum counterexample.
 	Because of this minimality assumption on the length of $p$, the first tree $T'$ following $T$ on $p$ does not contain $C$.
 	Since $\nni$ moves only change one cluster, $C$ is the only cluster changed in $T'$ compared to $T$, and all nodes with rank below $(C)_T$ induce the same clusters in $T$ and $T'$ (\autoref{fig:nni_neighbours_clusters}).
-	We now compare distances $d(T,R)$ and $d(T',R)$ by using properties of $\findpath$.
+	We now compare distances $d_{\rnni}(T,R)$ and $d_{\rnni}(T',R)$ by using properties of $\findpath$.
 
 	\begin{figure}[ht]
 		\includegraphics[width=0.33\textwidth]{nni_neighbours_clusters.eps}
@@ -532,15 +532,15 @@ The question whether $\rnni$ has the cluster property is hence natural, and will
 	All trees on these two paths coincide up to iteration $i = \rank((C)_T)$, in which the cluster considered on $\fp(R,T)$ is $C$.
 	Let $R'$ denote the tree at this point of the path, meaning that $\fp(R,T)$ and $\fp(R,T')$ coincide up to this tree $R'$.
 	Since $R'$ is on the shortest paths $\fp(R,T)$ and $\fp(R,T')$, the length of these paths is the sum of the length of the path up to $R'$ plus the length of the remaining part of the path, respectively.
-	It follows $d(T,R) = d(R,T) = |\fp(R,T)| = |\fp(R,R')| + |\fp(R',T)| = d(R,R') + d(R', T)$ and $d(T',R) = d(R,T') = |\fp(R,T')| = |\fp(R,R')| + |\fp(R',T')| =  d(R,R') + d(R', T')$.
+	It follows $d_{\rnni}(T,R) = d_{\rnni}(R,T) = |\fp(R,T)| = |\fp(R,R')| + |\fp(R',T)| = d_{\rnni}(R,R') + d_{\rnni}(R', T)$ and $d_{\rnni}(T',R) = d_{\rnni}(R,T') = |\fp(R,T')| = |\fp(R,R')| + |\fp(R',T')| =  d_{\rnni}(R,R') + d_{\rnni}(R', T')$.
 
-	Now consider $\fp(T', R')$ to evaluate $d(R', T')$.
+	Now consider $\fp(T', R')$ to evaluate $d_{\rnni}(R', T')$.
 	As $\findpath$ preserves clusters (\autoref{lemma:fp_cluster}), $C$ is present in every tree on $\fp(T,R)$ up to and including $R'$.
 	The first iteration of $\findpath$ applied to the pair of trees $(T',R')$ hence considers the cluster $C$, as all cluster induced by nodes below $(C)_{T'}$ coincide in $R'$ and $T'$.
 	To construct the cluster $C$ in $T'$, there is just one $\nni$ move needed, which results in the tree $T$, as $T$ and $T'$ are $\nni$ neighbours such that $T$ contains $C$ and $T'$ does not (\autoref{fig:nni_neighbours_clusters}).
-	Therefore, $T$ is the first tree following $T'$ on $\fp(T',R')$, resulting in $|\fp(T',R')| = |\fp(T',T)| + |\fp(T,R')|$ and hence $d(T',R') = 1 + d(T,R')$.
-	With the observations $d(T,R) = d(R,R') + d(R',T)$ and $d(T',R) = d(R,R') + d(R',T')$ it follows $d(T',R) = d(R,R') + d(R',T') = d(R,R') + d(T,R') + 1 = d(T,R) + 1$.
-	From the assumption that $T'$ is the first tree on a shortest path from $T$ to $R$ we can however follow $d(T',R) = d(T,R) - 1$, which leads to a contradiction.
+	Therefore, $T$ is the first tree following $T'$ on $\fp(T',R')$, resulting in $|\fp(T',R')| = |\fp(T',T)| + |\fp(T,R')|$ and hence $d_{\rnni}(T',R') = 1 + d_{\rnni}(T,R')$.
+	With the observations $d_{\rnni}(T,R) = d_{\rnni}(R,R') + d_{\rnni}(R',T)$ and $d_{\rnni}(T',R) = d_{\rnni}(R,R') + d_{\rnni}(R',T')$ it follows $d_{\rnni}(T',R) = d_{\rnni}(R,R') + d_{\rnni}(R',T') = d_{\rnni}(R,R') + d_{\rnni}(T,R') + 1 = d_{\rnni}(T,R) + 1$.
+	From the assumption that $T'$ is the first tree on a shortest path from $T$ to $R$ we can however follow $d_{\rnni}(T',R) = d_{\rnni}(T,R) - 1$, which leads to a contradiction.
 	There is hence no shortest path between $T$ and $R$ that does not preserve $C$, which proves the cluster property for $\rnni$.
 \end{proof}
 
@@ -622,7 +622,7 @@ Whether this complexity can be achieved in $\dct_m$ for pairs of caterpillar tre
 
 	The only difference in the trees after iteration $l+1$ on the two different paths is the order of ranks of the parents of $a_j$ and $a_k$.
 	Since the rest of $T_r$ and $T'_r$ coincide, the remaining parts of $\fp(R_r, T_r)$ and $\fp(R_r, T'_r)$ consist of the same moves.
-	With our previous observation we can follow $d(R_r,T_r) = d(R_r,T'_r) + 1$, and hence $T'_r$ is on a shortest path from $T_r$ to $R_r$.
+	With our previous observation we can follow $d_{\rnni}(R_r,T_r) = d_{\rnni}(R_r,T'_r) + 1$, and hence $T'_r$ is on a shortest path from $T_r$ to $R_r$.
 \end{proof}
 
 Note that with $\rnni = \dct_{n-1}$ it follows that the set of caterpillar trees is convex in $\rnni$.
@@ -681,7 +681,7 @@ For two leaves $a_i$ and $a_j$ in a caterpillar tree $T$ we say that $a_i$ is \e
 		& \cap \{a_i \ |\  \rank(a_i)_T < \min\{\rank(a_1)_T, \rank(a_2)_T\}\}
 	\end{align*}
 	Then for ${m(T,R) = |M(T,R)|}$ and ${p(T,R) = |P(T,R)|}$:
-	\[d(T,R) = p(T,R) - m(T,R).\]
+	\[d_{\rnni}(T,R) = p(T,R) - m(T,R).\]
 \end{theorem}
 
 The set $P(T,R)$ in \autoref{thm:caterpillar_distance_formula} is the set of transpositions for the caterpillar tree $T$ with respect to $R$.
@@ -689,13 +689,13 @@ $M(T,R)$ contains the leaves $a_i$ in $T$ for which in the representation of $T$
 
 \begin{proof}
 	Let $T$ and $R$ be caterpillar trees in $\rnni$ as described above and let $\widehat d(T,R) := p(T,R) - m(T,R)$.
-	For proving $\widehat d(T,R) = d(T,R)$ it is sufficient to show that there is a caterpillar tree $T'$ that is neighbour of $T$ such that $\widehat d(T',R) = \widehat d(T,R) - 1$.
-	Then it follows inductively that $\widehat d(T,R) = d(T,R)$, because the sets $P(T,T)$ and $M(T,T)$ are empty.
+	For proving $\widehat d(T,R) = d_{\rnni}(T,R)$ it is sufficient to show that there is a caterpillar tree $T'$ that is neighbour of $T$ such that $\widehat d(T',R) = \widehat d(T,R) - 1$.
+	Then it follows inductively that $\widehat d(T,R) = d_{\rnni}(T,R)$, because the sets $P(T,T)$ and $M(T,T)$ are empty.
 
 	We assume, similar to the proof of \autoref{thm:caterpillar_convex_dtt} that $T$ and $R$ are caterpillar trees such that $a_k$ is the leaf with parent of highest rank in $R$ that is not at the same position in $T$:
 	$a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_{R} \ |\  \rank(a_i)_{R} \neq \rank(a_i)_{T}\}$.
 	Let $T'$ be the tree that results from an $\nni$ move on $T$ swapping the leaves $a_k$ and $a_i$ with $\rank(a_i)_T = \rank(a_k)_T + 1$.
-	In the proof of \autoref{thm:caterpillar_convex_dtt} we saw that it follows $d(T',R) = d(T,R) - 1$.	
+	In the proof of \autoref{thm:caterpillar_convex_dtt} we saw that it follows $d_{\rnni}(T',R) = d_{\rnni}(T,R) - 1$.	
 	We now prove $\widehat d(T',R) = \widehat d(T,R) - 1$.
 
 	Therefore, we distinguish two cases: (i) $\rank(a_i)_T>1$ and (ii) $\rank(a_i)_T = 1$, meaning that $a_i$ is in the cherry of $T$.
@@ -833,7 +833,7 @@ In the following we see that the radius of $\rnni$ equals its diameter, which is
 	Altogether, there are $n-1$ $\rnni$ moves needed in the first iteration, as the rank of the parent of $x$ decreases by one within every move, starting at the root with rank $n$ and ending at the internal node of rank one.
 	The tree at the end of this first iteration on $\fp(R,T)$ is identical to $R_n$ when removing the leaf $x$ and suppressing its parent (the node of rank one).
 	Since the cluster $\{x,y\}$ is not considered again in $\findpath$, the remaining part of $\fp(R,T)$ contains the same moves as $\fp(R_n,T_n)$, and hence $|\fp(R,T)| = |\fp(R_n,R_n)| + n-1$.
-	Therefore it is $d(T,R) = \frac{(n-1)(n-2)}{2} + n-1 = \frac{n(n-1)}{2}$, which proves the lemma.
+	Therefore it is $d_{\rnni}(T,R) = \frac{(n-1)(n-2)}{2} + n-1 = \frac{n(n-1)}{2}$, which proves the lemma.
 	\begin{figure}[ht]
 		\includegraphics[width=0.8\textwidth]{max_dist_ctree.eps}
 		\caption{Initial $n - 1$ $\rnni$ moves of $\fp(R,T)$ as described in the proof of \autoref{thm:radius_rnni}.
