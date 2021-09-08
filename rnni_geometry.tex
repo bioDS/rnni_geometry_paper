@@ -531,18 +531,20 @@ The question whether $\rnni$ has the cluster property is hence natural, and will
 	Therefore, we first show that all nodes with rank less than $i$ induce the same clusters in $T$ and $R$.
 	If this was not the case, then all trees on $\fp(R,T)$ and $\fp(R,T')$ coincide up to iteration $i = \rank((C)_T)$, in which the cluster considered on $\fp(R,T)$ is $C$.
 	Let $R'$ denote the tree at this point of the path, meaning that $\fp(R,T)$ and $\fp(R,T')$ coincide up to this tree $R'$.
-	Since $\findpath$ preserves clusters (\autoref{lemma:fp_cluster}), $R'$ has the cluster $C$ and the tree $T'$, which does not have the cluster $C$, is on a shortest path from $T$ to $R$.
+	Since $\findpath$ preserves clusters (\autoref{lemma:fp_cluster}), $R'$ has the cluster $C$.
+	Furthermore, the tree $T'$, which does not have the cluster $C$, is on a shortest path from $T$ to $R$.
 	This is a contradiction to the minimality assumption on $T$ and $R$, so we can assume that all clusters induced by nodes with rank less than $i$ coincide in $R$ and $T$.
 
-	We now show that by the minimality assumption of $T$ and $R$, we can assume that $C$ is induced by the node of rank $i$ in $R$.
+	We now show that by the minimality assumption of $T$ and $R$, $C$ is induced by the node of rank $i$ in $R$.
 	We therefore assume to the contrary that $C$ is induced by a node of rank greater than $i$ in $R$.
-	Then the first cluster considered on $\fp(T,R)$ and $\fp(T',R)$ is a cluster $D$ of $R$ that does not intersect $C = A_1 \cup A_2$.
-	By the definition of $\mrca$s, both subtrees rooted in the children of $\mrca(D)$ must contain elements of $D$.
-	Therefore, $\mrca(D)$ has rank higher than $i+1$ in both $T$ and $T'$ (see \autoref{fig:nni_neighbours_clusters}).
-	If $\rank(\mrca(D)_T) > i+2$, then the first move on $\fp(T,R)$ and $\fp(T',R)$ applies the same changes to clusters in $T$ and $T'$, resulting in tree $T_1$ and $T'_1$, respectively.
+	Then the first cluster considered on $\fp(T,R)$ and $\fp(T',R)$ is a cluster $D$ induced by $(R)_i$ that does not intersect $C$.
+	By the definition of most recent common ancestors, both subtrees rooted in the children of the most recent common ancestor of $D$ must contain elements of $D$.
+	Therefore, the most recent common ancestor of $D$ has rank greater than $i+1$ in both $T$ and $T'$, as $D$ would intersect $C$ if $(D)_T$ or $(D)_{T'}$ had rank $i$ or $i+1$ (see \autoref{fig:nni_neighbours_clusters}).
+	If $\rank(D)_T > i+2$, then the first move on $\fp(T,R)$ and $\fp(T',R)$ applies the same changes to clusters in $T$ and $T'$, resulting in trees $T_1$ and $T'_1$, respectively.
 	Since $T_1$ has the cluster $C$, but $T'_1$ does not, this contradicts our assumption that $T$ and $R$ give a minimum counterexample.
-	If $\rank(\mrca(D)_T) = i+2$, then $\mrca(D)$ decreases from $i+2$ to $i$ in the first two steps of $\fp(T,R)$ and $\fp(T',R)$, which result in trees $T_2$ and $T'_2$ that are $\nni$ neighbours connected by the same move as $T$ and $T'$.
-	This again contradicts the minimality assumption on $T$ and $R$, so $C$ is induced by the node of rank $i$ in $R$.
+	If $\rank(D)_T = i+2$, then the rank of the most recent common ancestor of $D$ decreases from $i+2$ to $i$ in the first two steps of $\fp(T,R)$ and $\fp(T',R)$, which result in trees $T_2$ and $T'_2$ that are $\nni$ neighbours connected by the same move as $T$ and $T'$.
+	This again contradicts the minimality assumption on $T$ and $R$.
+	There can hence not be such a cluster $D$ in $R$ and we can conclude that $C$ is induced by the node of rank $i$ in $R$.
 
 	The first iteration of $\findpath$ applied to the pair of trees $(T',R)$ hence considers the cluster $C$.
 	To construct the cluster $C$ in $T'$, there is just one $\nni$ move needed, which results in the tree $T$, as $T$ and $T'$ are $\nni$ neighbours such that $T$ contains $C$ and $T'$ does not (\autoref{fig:nni_neighbours_clusters}).
