@@ -680,12 +680,12 @@ For two leaves $a_i$ and $a_j$ in a caterpillar tree $T$ we say that $a_i$ is \e
 
 \begin{theorem}
 	\label{thm:caterpillar_distance_formula}
-	Let $T$ and $R$ be caterpillar trees in $\rnni$ such that \[1 = \rank(a_1)_R = \rank(a_2)_R < \rank(a_3)_R < \ldots < \rank(a_n)_R = n-1\]
-	and
+	Let $T$ and $R$ be caterpillar trees in $\rnni$ such that \[1 = \rank(a_1)_R = \rank(a_2)_R < \rank(a_3)_R < \ldots < \rank(a_n)_R = n-1.\]
+	Define
 	\[P(T,R) = \{(a_i,a_j)\ |\  \rank(a_i)_T < \rank(a_j)_T \text{ and } \rank(a_i)_R > \rank(a_j)_R\},\]
 	\begin{align*}
 		M(T,R) = &\{a_i\ |\  \textnormal{for all } l \textnormal{ with } \rank(a_l)_T \leq \rank(a_i)_T \textnormal{ it is } \rank(a_l)_R > \rank(a_i)_R\} \\
-		& \cap \{a_i \ |\  \rank(a_i)_T < \min\{\rank(a_1)_T, \rank(a_2)_T\}\}
+		& \cap \{a_i \ |\  \rank(a_i)_T < \min\{\rank(a_1)_T, \rank(a_2)_T\}\}.
 	\end{align*}
 	Then for ${m(T,R) = |M(T,R)|}$ and ${p(T,R) = |P(T,R)|}$:
 	\[d_{\rnni}(T,R) = p(T,R) - m(T,R).\]
@@ -693,6 +693,7 @@ For two leaves $a_i$ and $a_j$ in a caterpillar tree $T$ we say that $a_i$ is \e
 
 The set $P(T,R)$ in \autoref{thm:caterpillar_distance_formula} is the set of transpositions for the caterpillar tree $T$ with respect to $R$.
 $M(T,R)$ contains the leaves $a_i$ in $T$ for which in the representation of $T$ as a list (i) every leaf that is below $a_i$ in $T$ (if $a_i$ is in the cherry, this includes the other cherry leaf) is strictly above $a_i$ in $R$ and (ii) no cherry leaf of $R$ is below $a_i$ in $T$.
+The caterpillar trees $T$ and $R$ in \autoref{fig:tsp_caterpillar} for example have $P(T,R) = \{(a_1,a_3),(a_1,a_4),(a_1,a_5),(a_2,a_3),(a_2,a_4),(a_2,a_5),(a_3,a_4),(a_3,a_5)\}$ and $M(T,R) = \{a_3,a_4\}$.
 
 \begin{proof}
 	Let $T$ and $R$ be caterpillar trees in $\rnni$ as described above and let $\widehat d(T,R) := p(T,R) - m(T,R)$.
