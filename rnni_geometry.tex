@@ -597,8 +597,8 @@ Whether this complexity can be achieved in $\dct_m$ for pairs of caterpillar tre
 	Let $a_k$ be the leaf with parent of highest rank in $R_r$ that is not at the same position in $R_r$ as in $T_r$: $a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_{R_r} \ |\  \rank(a_i)_{R_r} \neq \rank(a_i)_{T_r}\}$.
 	You could also think of comparing the trees $T_r$ and $R_r$ in a top-down approach, starting at the root, and finding the first node that does not induce the same cluster in these two trees.
 	Since all subtrees ${T_r}^d, {T_r}^c, {R_r}^d$ and ${R_r}^c$ are caterpillar trees, this node has a child that is a leaf, which is $a_k$.
-	Let furthermore $a_j \in \{a_1, \ldots, a_{m+2}\}$ be the leaf directly 'above' $a_k$ in $T_r$, i.e.\ $\rank(a_j)_{T_r} = \rank(a_k)_{T_r} + 1$.
-	Note that with the definition of $a_k$ it immediately follows that $a_j$ is 'below' $a_k$ in $R_r$ ($\rank(a_j)_{R_r} < \rank(a_k)_{R_r}$).
+	Let furthermore $a_j \in \{a_1, \ldots, a_{m+2}\}$ be the leaf directly `above' $a_k$ in $T_r$, i.e.\ $\rank(a_j)_{T_r} = \rank(a_k)_{T_r} + 1$.
+	Note that with the definition of $a_k$ it immediately follows that $a_j$ is `below' $a_k$ in $R_r$ ($\rank(a_j)_{R_r} < \rank(a_k)_{R_r}$).
 	If otherwise it was $\rank(a_j)_{R_r} > \rank(a_k)_{R_r}$, the parent of $a_j$ would have the same rank in $T_r$ as in $R_r$ and $\rank(a_j)_{T_r} > \rank(a_k)_{T_r}$ would follow, which contradict our choice of $a_j$.
  
 	Let $T'_r$ be the tree resulting from $T_r$ by an $\nni$ move or rank move exchanging the ranks of $(a_k)_{T_r}$ and $(a_j)_{T_r}$.
