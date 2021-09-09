@@ -1,7 +1,7 @@
 \documentclass[11pt]{amsart}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL rnni_geometry_v_1_1.tex   Thu Sep  9 11:23:03 2021
-%DIF ADD rnni_geometry.tex         Thu Sep  9 11:23:17 2021
+%DIF ADD rnni_geometry.tex         Thu Sep  9 11:59:50 2021
 
 
 \usepackage[ibidtracker=false,uniquename=false,giveninits=true,terseinits=true,backend=biber, sortcites=true]{biblatex}
@@ -264,6 +264,7 @@ Following that, we establish the diameter of $\dct_m$ and $\rnni$ and briefly di
 We finish this paper with a conclusion and propose directions for further research (\autoref{section:open_problems}).
 In the appendix we provide a connection between the $\rnni$ space and partition lattices.
 
+
 \section{Technical Introduction}
 \label{section:technical_introduction}
 
@@ -391,7 +392,7 @@ For two trees $T$ and $R$ and a cluster $C$ that is present in both $T$ and $R$,
 	We assume that $T$ and $R$ are ranked trees that share a cluster $C$ and prove the lemma by contradiction.
 	We therefore assume that there is a ranked tree on $\fp(T,R)$ that does not contain $C$.
 	Let $T'$ be the first ranked tree on $\fp(T,R)$ that does not have $C$ as a cluster.
-	Since rank \DIFdelbegin \DIFdel{move }\DIFdelend \DIFaddbegin \DIFadd{moves }\DIFaddend only change the ranks of internal \DIFdelbegin \DIFdel{node}\DIFdelend \DIFaddbegin \DIFadd{nodes}\DIFaddend , i.e. the order of clusters in the cluster representation of a ranked tree, only $\nni$ moves can actually change clusters.
+	Since rank \DIFdelbegin \DIFdel{move }\DIFdelend \DIFaddbegin \DIFadd{moves }\DIFaddend only change the ranks of internal \DIFdelbegin \DIFdel{node}\DIFdelend \DIFaddbegin \DIFadd{nodes}\DIFaddend , i.e.\DIFaddbegin \DIFadd{\ }\DIFaddend the order of clusters in the cluster representation of a ranked tree, only $\nni$ moves can actually change clusters.
 	There must hence be an $\nni$ move on $\fp(T,R)$ connecting a tree $\hat T$ that contains the cluster $C$ with $T'$.
 	Let $A$ and $B$ be the clusters induced by the children of the node inducing $C$ in $\hat T$, meaning that $A \cup B = C$.
 	Let furthermore $D$ be the cluster induced by the node in $\hat T$ that shares its parent with the node inducing $C$.
@@ -576,6 +577,7 @@ If the distance between two trees is to be computed, we can simply choose $m$ to
 Note that the uniqueness of the moves that decrease or increases the time of internal nodes follows from the uniqueness of moves on $\findpath$ of ranked trees (\autocite[Proposition 1]{Collienne2021}).
 The worst-case running time of $\findpath^+$ on discrete coalescent trees is $\O(mn)$, which we will explain in detail in \autoref{section:diameter}.
 
+
 \section{Geometrical Properties of $\dct_m$}
 \label{section:geometry}
 
@@ -632,7 +634,7 @@ The question whether $\rnni$ has the cluster property is hence natural, and will
 	This is a contradiction to the minimality assumption on $T$ and $R$, so we can assume that all clusters induced by nodes with rank less than $i$ coincide in $R$ and $T$.
 }
 
-	\DIFadd{We now show that by the minimality assumption of $T$ and $R$, $C$ is induced by the node of rank $i$ in $R$.
+	\DIFadd{We now show that by the minimality assumption on $T$ and $R$, $C$ is induced by the node of rank $i$ in $R$.
 	We therefore assume to the contrary that $C$ is induced by a node of rank greater than $i$ in $R$.
 	Then the first cluster considered on }\DIFaddend $\fp(T,R)$ \DIFdelbegin \DIFdel{up to and including $R'$.
 	}\DIFdelend \DIFaddbegin \DIFadd{and $\fp(T',R)$ is a cluster $D$ induced by $(R)_i$ that does not intersect $C$.
@@ -642,7 +644,7 @@ The question whether $\rnni$ has the cluster property is hence natural, and will
 	Since $T_1$ has the cluster $C$, but $T'_1$ does not, this contradicts our assumption that $T$ and $R$ give a minimum counterexample.
 	If $\rank(D)_T = i+2$, then the rank of the most recent common ancestor of $D$ decreases from $i+2$ to $i$ in the first two steps of $\fp(T,R)$ and $\fp(T',R)$, which result in trees $T_2$ and $T'_2$ that are $\nni$ neighbours connected by the same move as $T$ and $T'$.
 	This again contradicts the minimality assumption on $T$ and $R$.
-	There can hence not be such a cluster $D$ in $R$ and we can conclude that $C$ is induced by the node of rank $i$ in $R$.
+	Hence there can be no such a cluster $D$ in $R$ and we can conclude that $C$ is induced by the node of rank $i$ in $R$.
 }
 
 	\DIFaddend The first iteration of $\findpath$ applied to the pair of trees \DIFdelbegin \DIFdel{$(T',R')$ }\DIFdelend \DIFaddbegin \DIFadd{$(T',R)$ }\DIFaddend hence considers the cluster $C$\DIFdelbegin \DIFdel{, as all cluster induced by nodes below $(C)_{T'}$ coincide in $R'$ and $T'$}\DIFdelend .
@@ -670,7 +672,8 @@ Indeed, the cluster property in $\dct_m$ follows from \autoref{thm:cluster_prope
 \subsection{Caterpillar Trees}
 \label{section:caterpillar_convex}
 
-\summary{Defining Caterpillar trees. Why are they interesting?}
+\summary{Defining Caterpillar trees.
+Why are they interesting?}
 In this subsection we focus on the set of caterpillar trees and establish some properties of shortest paths between those trees in both $\rnni$ and $\dct_m$.
 In \autoref{thm:caterpillar_convex_dtt} we will see that, in both $\dct_m$ and $\rnni$, any two caterpillar trees are connected by a shortest path consisting only of caterpillar trees.
 We say that a set of trees is \emph{convex} in a tree space, if there is a shortest path between any two trees in this set that stays within the set.
@@ -686,16 +689,16 @@ Whether this complexity can be achieved in $\dct_m$ for pairs of caterpillar tre
 
 \begin{proof}
 	Let $T$ and $R$ be two caterpillar trees in $\dct_m$.
-	We prove the theorem by showing that there is a caterpillar tree $T'$ that is a neighbour of $T$ and closer to $R$ than $T$.
-	The existence of a shortest path consisting only of caterpillar trees between $T$ and $R$ follows inductively.
+	We prove the theorem by showing that there is a caterpillar tree $T'$ that is a neighbour of $T$ and closer to $R$ than $T$\DIFaddbegin \DIFadd{, that is, $d_{\dct_m}(T', R) = d_{\dct_m}(T, R) - 1$}\DIFaddend .
+	The existence of a shortest path consisting only of caterpillar trees between $T$ and $R$ follows \DIFaddbegin \DIFadd{from this property }\DIFaddend inductively.
 	In the proof of \autoref{thm:dtt_findpath} we have seen that all paths in $\dct_m$ can be transformed to paths in $\rnni$ between the extended ranked versions of trees, and vice versa, such that these two paths are of equal length.
 	It is therefore sufficient to show that for trees $T_r$ and $R_r$, the extended ranked versions of $T$ and $R$, there is a tree $T'$ that is a neighbour of $T$ with extended ranked version $T'_r$ such that ${T'_r}^d$ is a caterpillar tree.
 
 	Let $a_k$ be the leaf with parent of highest rank in $R_r$ that is not at the same position in $R_r$ as in $T_r$: $a_k := \argmax_{a_1, \ldots, a_n}\{\rank(a_i)_{R_r} \ |\  \rank(a_i)_{R_r} \neq \rank(a_i)_{T_r}\}$.
 	You could also think of comparing the trees $T_r$ and $R_r$ in a top-down approach, starting at the root, and finding the first node that does not induce the same cluster in these two trees.
 	Since all subtrees ${T_r}^d, {T_r}^c, {R_r}^d$ and ${R_r}^c$ are caterpillar trees, this node has a child that is a leaf, which is $a_k$.
-	Let furthermore $a_j \in \{a_1, \ldots, a_{m+2}\}$ be the leaf directly 'above' $a_k$ in $T_r$, i.e. $\rank(a_j)_{T_r} = \rank(a_k)_{T_r} + 1$.
-	Note that with the definition of $a_k$ it immediately follows that $a_j$ is 'below' $a_k$ in $R_r$ ($\rank(a_j)_{R_r} < \rank(a_k)_{R_r}$).
+	Let furthermore $a_j \in \{a_1, \ldots, a_{m+2}\}$ be the leaf directly \DIFdelbegin \DIFdel{'}\DIFdelend \DIFaddbegin \DIFadd{`}\DIFaddend above' $a_k$ in $T_r$, i.e.\DIFaddbegin \DIFadd{\ }\DIFaddend $\rank(a_j)_{T_r} = \rank(a_k)_{T_r} + 1$.
+	Note that with the definition of $a_k$ it immediately follows that $a_j$ is \DIFdelbegin \DIFdel{'}\DIFdelend \DIFaddbegin \DIFadd{`}\DIFaddend below' $a_k$ in $R_r$ ($\rank(a_j)_{R_r} < \rank(a_k)_{R_r}$).
 	If otherwise it was $\rank(a_j)_{R_r} > \rank(a_k)_{R_r}$, the parent of $a_j$ would have the same rank in $T_r$ as in $R_r$ and $\rank(a_j)_{T_r} > \rank(a_k)_{T_r}$ would follow, which contradict our choice of $a_j$.
 
 	Let $T'_r$ be the tree resulting from $T_r$ by an $\nni$ move or rank move exchanging the ranks of $(a_k)_{T_r}$ and $(a_j)_{T_r}$.
@@ -758,7 +761,7 @@ The corresponding instance of the token swapping problem consists of a lollipop 
 The vertex in the complete graph incident to the edge connecting the complete graph with the path is labelled by $a_3$, the other ones in the complete graph are labelled by $a_1$ and $a_2$.
 The vertices on the paths are then labelled inductively, starting at the neighbour of $a_3$, such that the unique unlabelled neighbour of the last already labelled node with label $a_{i-1}$ is labelled by $a_i$.
 We place the token on vertex $a_i$ that has $b_i$ as goal vertex for all $i \geq 3$.
-On $a_1$ and $a_2$, which represent the cherry of the caterpillar tree, we place the tokens with goal vertices $b_1$ and $b_2$ so that if $a_i = b_j$ for some $i,j \in \{1,2\}$, the token with goal vertex $b_j=a_i$ is placed on the node labelled $a_i=b_j$. 
+On $a_1$ and $a_2$, which represent the cherry of the caterpillar tree, we place the tokens with goal vertices $b_1$ and $b_2$ so that if $a_i = b_j$ for some $i,j \in \{1,2\}$, the token with goal vertex $b_j=a_i$ is placed on the node labelled $a_i=b_j$.
 Since the only moves between two caterpillar trees in $\rnni$ are $\nni$ moves, which simply swap two leaves, they correspond to swapping two tokens in the above described instance of the token swapping problem.
 \begin{figure}[ht]
 	\includegraphics[width=0.45\textwidth]{tsp_caterpillar.eps}
@@ -831,7 +834,8 @@ $M(T,R)$ contains the leaves $a_i$ in $T$ for which in the representation of $T$
 			We now distinguish the case (a) that $(x,a_i)$ is not a transposition in $T$ from the case (b) that $(x,a_i)$ is a transposition in $T$ with respect to $R$.
 			\begin{figure}[ht]
 				\includegraphics[width=0.45\textwidth]{caterpillar_efficient_distance.eps}
-				\caption{The caterpillar trees $T,T'$, and $R$ as described in the proof of \autoref{thm:caterpillar_distance_formula}. $T$ and $T'$ are neighbours and the dashed part of these trees coincide.}
+				\caption{The caterpillar trees $T,T'$, and $R$ as described in the proof of \autoref{thm:caterpillar_distance_formula}.
+				$T$ and $T'$ are neighbours and the dashed part of these trees coincide.}
 				\label{fig:caterpillar_efficient_distance}
 			\end{figure}
 
@@ -870,7 +874,7 @@ $M(T,R)$ contains the leaves $a_i$ in $T$ for which in the representation of $T$
 
 \label{section:diameter}
 \summary{Definition of Diameter.}
-In this section we  investigate the \emph{diameter} of $\rnni$ and $\dct_m$, which is the greatest distance between any pair of trees in each of these graphs, respectively, i.e. $\max\limits_{\text{trees }T,R}d(T,R)$.
+In this section we  investigate the \emph{diameter} of $\rnni$ and $\dct_m$, which is the greatest distance between any pair of trees in each of these graphs, respectively, i.e.\DIFaddbegin \DIFadd{\ }\DIFaddend $\max\limits_{\text{trees }T,R}d(T,R)$.
 We first establish the exact diameter of $\rnni$, improving the upper bound $n^2 - 3n - \frac{5}{8}$ given by \textcite{Gavryushkin2018-ol}.
 Afterwards, we generalise this result to $\dct_m$.
 
@@ -896,7 +900,7 @@ Afterwards, we generalise this result to $\dct_m$.
 \begin{proof}
 	In order to prove the diameter of $\dct_m$, we consider the maximum number of moves that $\findpath$ can perform on the extended ranked versions $T_r$ and $R_r$ of any two trees $T$ and $R$.
 	With \autoref{thm:dtt_findpath} it follows that this is the diameter of $\dct_m$, indeed.
-	Therefore, we distinguish $\rnni$ moves in the subtrees on the leaf set $\{a_1, \ldots, a_n\}$ from the rank moves corresponding to length moves, i.e. rank moves between one node of each of the subtrees on leaf subsets $\{a_1, \ldots, a_n\}$ and $\{a_{n+1}, \ldots a_{m+2}\}$.
+	Therefore, we distinguish $\rnni$ moves in the subtrees on the leaf set $\{a_1, \ldots, a_n\}$ from the rank moves corresponding to length moves, i.e.\DIFaddbegin \DIFadd{\ }\DIFaddend rank moves between one node of each of the subtrees on leaf subsets $\{a_1, \ldots, a_n\}$ and $\{a_{n+1}, \ldots a_{m+2}\}$.
 
 	The maximum number of $\rnni$ moves (excluding rank moves corresponding to length moves) on $\fp(T_r,R_r)$ follows from \autoref{thm:diameter_rnni} and is $\frac{(n-1)(n-2)}{2}$.
 	The maximum number of rank moves corresponding to length moves on a shortest path between $T_r$ and $R_r$ is reached when every internal node of the subtree $T_r^c$ of $T_r$ swaps rank with every internal node of the subtree $T_r^d$.
@@ -962,7 +966,7 @@ The maximum distance between any tree in $\dct_4$ and the tree in \autoref{fig:d
 
 \begin{figure}[ht]
 	\includegraphics[width=0.15\textwidth]{dtt_radius_counterexample.eps}
-	\caption{Tree in $\dct_4$ on three leaves for which there is not tree with \DIFaddbeginFL \DIFaddFL{diameter }\DIFaddendFL distance $5 = \frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$ \DIFdelbeginFL \DIFdelFL{(diameter) }\DIFdelendFL from it}
+	\caption{Tree in $\dct_4$ on three leaves for which there is \DIFdelbeginFL \DIFdelFL{not }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{no }\DIFaddendFL tree \DIFdelbeginFL \DIFdelFL{with }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{at the diameter }\DIFaddendFL distance $5 = \frac{(n-1)(n-2)}{2} + (m-n+1)(n-1)$ \DIFdelbeginFL \DIFdelFL{(diameter) }\DIFdelendFL from it\DIFaddbeginFL \DIFaddFL{.}\DIFaddendFL }
 	\label{fig:dtt_radius_counterexample}
 \end{figure}
 
