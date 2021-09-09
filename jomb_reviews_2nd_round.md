@@ -29,7 +29,7 @@ Please note that we introduced some further minor changes to the paper, which we
     - We modified this sentence to: "We will see that this path is identical to the path resulting from restricting all trees on the path FP(T_r,R_r), [...]"
 
 - p10 l22: "by one (length move): Are the parentheses necessary?
-    - No. We deleted the paranthesis.
+    - No. We deleted the parentheses.
   
 - p10 l50: computing distances in NNI --> computing the NNI distance between two trees; also remove boldface in the same line
     - Done.
@@ -44,9 +44,13 @@ Please note that we introduced some further minor changes to the paper, which we
     - We changed the caption to: "Tree in DCT_4 on three leaves for which there is no tree at the diameter distance 5 =(n−1)(n−2)/2+ (m−n+1)(n−1) from it."
 
 The following comments did not need to be addressed as we decided to omit the appendix as suggested by reviewer 1.
+
 - p22 l10: one-to-one relation --> bijection
+
 - p22 l16: X_{n-2} --> X_{n-1}
+
 - p22 l17: i=0,...,n-3 --> i=0,...,n-2
+
 - p22 l27: maximal chain --> maximum chain
 
 
