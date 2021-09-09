@@ -2,7 +2,7 @@ Dear Prof Lewis,
 
 we would like to thank you and the referees for reading our manuscript and providing further useful comments to improve it.
 We have carefully gone through the comments and addressed them in the revised submission. We provide a point-by-point response below.
-Please note that we introduced some further changes to the paper, which we mention after our response to the reviewers' comments.
+Please note that we introduced some further minor changes to the paper, which we mention after our response to the reviewers' comments.
 
 
 ### Reviewer 2
@@ -23,10 +23,10 @@ Please note that we introduced some further changes to the paper, which we menti
     - We added indices DCT and RNNI throughout the manuscript.
 
 - p7 l60: d(.) please clarify which distance is meant here
-    - We added indices RNNI and DCT to the distances
+    - We added indices RNNI and DCT to the distance notations
 
 - p9 l34: "identical to the restricting" is not correct. Replace with something like "identical to the restriction of all trees on".
-    - we modified this sentence to: "We will see that this path is identical to the path resulting from restricting all trees on the path FP(T_r,R_r), [...]"
+    - We modified this sentence to: "We will see that this path is identical to the path resulting from restricting all trees on the path FP(T_r,R_r), [...]"
 
 - p10 l22: "by one (length move): Are the parentheses necessary?
     - No. We deleted the paranthesis.
@@ -52,4 +52,4 @@ The following comments did not need to be addressed as we decided to omit the ap
 
 ## Further changes
 - We updated the proof of Theorem 2 to add a more detailed explanation why the cluster C is induced by the node with rank i in R.
-- some minor wording changes
+- A few minor wording changes as per the diff file
