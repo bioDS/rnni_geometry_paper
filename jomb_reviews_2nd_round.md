@@ -55,6 +55,7 @@ The following comments did not need to be addressed as we decided to omit the ap
 - p22 l27: maximal chain --> maximum chain
 
 
-## Further changes
+### Further changes
+
 - We updated the proof of Theorem 2 to add a more detailed explanation why the cluster C is induced by the node with rank i in R.
 - A few minor wording changes as per the diff file
