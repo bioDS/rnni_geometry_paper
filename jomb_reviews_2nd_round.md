@@ -1,8 +1,9 @@
 Dear Prof Lewis,
 
-we would like to thank you and the referees for reading our manuscript and providing further useful comments to improve it.
-We have carefully gone through the comments and addressed them in the revised submission. We provide a point-by-point response below.
-Please note that we introduced some further minor changes to the paper, which we mention after our response to the reviewers' comments.
+We would like to thank you, the editor, and the referees for reading our manuscript and providing further useful comments to improve it.
+We have carefully gone through all the comments and addressed them in the revised submission.
+We provide a point-by-point response below.
+Please note that we introduced some further minor changes to the paper, which we mention at the end of this letter.
 
 
 ### Reviewer 2
